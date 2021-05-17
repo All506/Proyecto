@@ -1,0 +1,60 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 13-may-2021, 21:18:56
+    Author     : Alán
+*/
+
+
+/*
+Colors Pallete:
+COLOR VERDE: #8ab85
+COLOR GRIS OSCURO: #545454
+COLOR GIRS CLARO: #adadad*/
+
+.root{
+    -fx-background-color: #545454;    
+}
+
+.border-pane{
+    -fx-background-color: #545454;
+}
+
+.anchor-pane{
+    -fx-background-color: #545454;
+    -fx-text-fill: #CECECE;
+}
+
+.text-field:focused {
+    -fx-background-color: #adadad;
+    -fx-text-fill: black;
+    -fx-pref-height: 0px;
+    -fx-translate-y: 0px;    
+}
+
+
+.text-field{
+    -fx-background-color: white;
+    -fx-text-fill: black;
+    -fx-pref-height: 0px;
+    -fx-translate-y: 0px;   
+
+}
+
+.button{
+    -fx-background-color: #8ab85f;
+    -fx-text-fill: black;
+
+}
+
+.label{
+    -fx-text-fill: #CECECE;
+}
+
+.combo-box-base{
+    -fx-pref-height: 0px;
+    -fx-translate-y: 0px;  
+}

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" prefHeight="186.0" prefWidth="462.0" stylesheets="@../Style/general.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.AlertController">
+   <children>
+      <ImageView fx:id="imgView" fitHeight="116.0" fitWidth="131.0" layoutX="22.0" layoutY="35.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../Resources/check.png" />
+         </image>
+      </ImageView>
+      <Label fx:id="txtHeader" layoutX="268.0" layoutY="13.0" text="HEADER" textFill="#9dff5c">
+         <font>
+            <Font name="System Bold" size="20.0" />
+         </font>
+      </Label>
+      <Label fx:id="txtBody" layoutX="176.0" layoutY="43.0" prefHeight="116.0" prefWidth="277.0" text="Label" textAlignment="CENTER" textFill="WHITE">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>

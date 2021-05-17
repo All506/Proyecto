@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.effect.Blend?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" stylesheets="@../Style/general.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.MenuController">
+   <children>
+      <MenuBar layoutY="-3.0" prefHeight="38.0" prefWidth="746.0" stylesheets="@../Style/menuBar.css">
+        <menus>
+          <Menu mnemonicParsing="false" text="Student">
+            <items>
+              <MenuItem fx:id="mnNewStudent" mnemonicParsing="false" onAction="#mnNewStudent" text="New Student" />
+                  <MenuItem fx:id="btnModifyStudent" mnemonicParsing="false" onAction="#btnModifyStudent" text="Modify Student" />
+                  <MenuItem fx:id="btnDeleteStudent" mnemonicParsing="false" onAction="#btnDeleteStudent" text="Delete Student" />
+                  <MenuItem fx:id="btnShowStudents" mnemonicParsing="false" onAction="#btnShowStudents" text="Show Students" />
+            </items>
+          </Menu>
+          <Menu mnemonicParsing="false" text="Edit">
+            <items>
+              <MenuItem mnemonicParsing="false" text="Delete" />
+            </items>
+          </Menu>
+          <Menu mnemonicParsing="false" text="Help">
+            <items>
+              <MenuItem mnemonicParsing="false" text="About" />
+            </items>
+          </Menu>
+        </menus>
+         <effect>
+            <Blend />
+         </effect>
+      </MenuBar>
+      <BorderPane fx:id="bpMenu" layoutX="72.0" layoutY="35.0" prefHeight="372.0" prefWidth="571.0" />
+   </children>
+</AnchorPane>
