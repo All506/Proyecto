@@ -7,10 +7,12 @@ package Util;
 
 import Controller.AlertController;
 import Controller.LogInController;
+import Domain.CircularLinkList;
 import Objects.Career;
 import Domain.DoublyLinkList;
 import Domain.ListException;
 import Domain.SinglyLinkList;
+import Objects.Course;
 import Objects.Student;
 import java.io.IOException;
 import java.text.DecimalFormat;
@@ -29,7 +31,8 @@ public class Utility {
     //Constructores de las listas
     private static SinglyLinkList lStudent = new SinglyLinkList();
     private static DoublyLinkList lCareer = new DoublyLinkList();
-
+    private static CircularLinkList lCourse = new CircularLinkList();
+    
     //GETS DE LAS LISTAS 
     public static SinglyLinkList getListStudents() {
         return lStudent;
@@ -38,8 +41,12 @@ public class Utility {
     public static DoublyLinkList getListCareer() {
         return lCareer;
     }
+    
+    public static CircularLinkList getListCourse(){
+        return lCourse;
+    }
 
-    //DELETE NODES DE LAS LISTAS
+    //DELETE NODES DE LAS LISTA
     public static void deleteNodeLStudent(Student std){
         try {
             if (lStudent.contains(std)){
@@ -83,6 +90,21 @@ public class Utility {
         return flag;
     }
     
+     public static boolean setListCourse(Course cou) throws ListException {
+        boolean flag = false;
+        if (Utility.lCourse.isEmpty()) {
+            Utility.lCourse.add(cou);
+            flag = true;
+        } else {
+            if (!lCourse.contains(cou)) {
+                lCourse.add(cou);
+                flag = true;
+            } else {
+                flag = false;
+            }
+        }
+        return flag;
+    }
     
     //UTILIDAD 
     

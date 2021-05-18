@@ -100,8 +100,10 @@ public class EditStudentController implements Initializable {
             Student std = new Student(Integer.parseInt(txtId.getText()),this.cmbCareerID.getValue(),
                     String.valueOf(this.cmbId.getValue()), this.txtLastname.getText(),this.txtFirstname.getText(),
                     this.txtPhoneNumber.getText(),this.txtEmail.getText(),this.txtAddress.getText(),d);
-            Util.Utility.deleteNodeLStudent(std);
+            Util.Utility.getListCareer().remove(std);
             Util.Utility.setListStudent(std);
+            System.out.println("Lista Util " + Util.Utility.getListCareer().toString());
+            
             
     }
 

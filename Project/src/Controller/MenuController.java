@@ -65,6 +65,8 @@ public class MenuController implements Initializable {
     private MenuItem btnDeleteCourse;
     @FXML
     private MenuItem btnShowCourse;
+    @FXML
+    private Menu btnNewSchedule;
 
     /**
      * Initializes the controller class.
@@ -158,24 +160,53 @@ public class MenuController implements Initializable {
 
     public void saveData() throws ListException {
         lStudents = Util.Utility.getListStudents(); //Se carga la lista de estudiantes al XML
+        lCareers = Util.Utility.getListCareer();
+
         FileXML fXML = new FileXML();
+
+        //Guardar datos de los estudiantes
         if (!fXML.exist("Students.xml")) { //Si el archivo no existe
             fXML.createXML("StudentsXML", "Students");
             writeStudents();
         } else {
             fXML.deleteFile("Students");
             fXML.createXML("StudentsXML", "Students");
+            writeCareers();
+        }
+
+        //Guardar datos de las carreras
+        if (!fXML.exist("Careers.xml")) { //Si el archivo no existe
+            fXML.createXML("CareersXML", "Careers");
             writeStudents();
+        } else {
+            fXML.deleteFile("Careers");
+            fXML.createXML("CareersXML", "Careers");
+            writeCareers();
         }
     }
 
     public void writeStudents() throws ListException {
-        System.out.println("Entro a escribir estudiantes");
         FileXML fXML = new FileXML();
         for (int i = 1; i <= lStudents.size(); i++) {
             Student std = (Student) lStudents.getNode(i).data;
             try {
                 fXML.writeXML("Students.xml", "Students", std.dataName(), std.data());
+            } catch (TransformerException ex) {
+                Logger.getLogger(MenuController.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (SAXException ex) {
+                Logger.getLogger(MenuController.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (IOException ex) {
+                Logger.getLogger(MenuController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+    }
+
+    public void writeCareers() throws ListException {
+        FileXML fXML = new FileXML();
+        for (int i = 1; i <= lCareers.size(); i++) {
+            Career car = (Career) lCareers.getNode(i).data;
+            try {
+                fXML.writeXML("Careers.xml", "Careers", car.dataName(), car.data());
             } catch (TransformerException ex) {
                 Logger.getLogger(MenuController.class.getName()).log(Level.SEVERE, null, ex);
             } catch (SAXException ex) {
@@ -208,11 +239,17 @@ public class MenuController implements Initializable {
 
     @FXML
     private void btnDeleteCourse(ActionEvent event) {
+        loadPage("/UI/deleteCourse");
     }
 
     @FXML
     private void btnShowCourse(ActionEvent event) {
+        loadPage("/UI/showCourse");
     }
 
-    
+    @FXML
+    private void btnNewSchedule(ActionEvent event) {
+        loadPage("/UI/newTimeTable");
+    }
+
 }
