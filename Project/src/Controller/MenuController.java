@@ -198,10 +198,12 @@ public class MenuController implements Initializable {
 
     @FXML
     private void mnNewCourse(ActionEvent event) {
+        loadPage("/UI/newCourse");
     }
 
     @FXML
     private void btnModifyCourse(ActionEvent event) {
+        loadPage("/UI/modifyCourse");
     }
 
     @FXML
