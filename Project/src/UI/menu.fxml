@@ -26,11 +26,14 @@
                   <MenuItem fx:id="btnShowCareers" mnemonicParsing="false" onAction="#btnShowCareers" text="Show Careers" />
             </items>
           </Menu>
-          <Menu mnemonicParsing="false" text="Help">
-            <items>
-              <MenuItem mnemonicParsing="false" text="About" />
-            </items>
-          </Menu>
+            <Menu mnemonicParsing="false" text="Course">
+               <items>
+                  <MenuItem fx:id="mnNewCourse" mnemonicParsing="false" onAction="#mnNewCourse" text="New Course" />
+                  <MenuItem fx:id="btnModifyCourse" mnemonicParsing="false" onAction="#btnModifyCourse" text="Modify Course" />
+                  <MenuItem fx:id="btnDeleteCourse" mnemonicParsing="false" onAction="#btnDeleteCourse" text="Delete Course" />
+                  <MenuItem fx:id="btnShowCourse" mnemonicParsing="false" onAction="#btnShowCourse" text="Show Course" />
+               </items>
+            </Menu>
         </menus>
          <effect>
             <Blend />

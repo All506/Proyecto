@@ -53,6 +53,14 @@ public class MenuController implements Initializable {
     private MenuItem btnShowCareers;
     @FXML
     private MenuItem btnDeleteOrEditCareer;
+    @FXML
+    private MenuItem mnNewCourse;
+    @FXML
+    private MenuItem btnModifyCourse;
+    @FXML
+    private MenuItem btnDeleteCourse;
+    @FXML
+    private MenuItem btnShowCourse;
 
     /**
      * Initializes the controller class.
@@ -151,5 +159,23 @@ public class MenuController implements Initializable {
             fXML.createXML("StudentsXML", "Students");
             
         }
+    }
+
+    @FXML
+    private void mnNewCourse(ActionEvent event) {
+         loadPage("/UI/newCourse");
+    }
+
+    @FXML
+    private void btnModifyCourse(ActionEvent event) {
+         loadPage("/UI/modifyCourse");
+    }
+
+    @FXML
+    private void btnDeleteCourse(ActionEvent event) {
+    }
+
+    @FXML
+    private void btnShowCourse(ActionEvent event) {
     }
 }
