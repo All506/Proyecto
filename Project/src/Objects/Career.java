@@ -11,8 +11,8 @@ package Objects;
  */
 public class Career {
     
-    int id;
-    String description;
+    private int id;
+    private String description;
 
     public Career(int id, String description) {
         this.id = id;
