@@ -12,10 +12,14 @@ import Objects.Student;
 import java.io.File;
 import java.io.IOException;
 import static java.lang.String.format;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.text.DateFormat;
 import java.util.Date;
 import java.text.SimpleDateFormat;  
 import java.util.Locale;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
@@ -64,6 +68,15 @@ public class FileXML {
         }
     }
 
+    public void deleteFile(String fileName){ //Se encarga de eliminar un archivo
+        try {
+            Files.delete(Paths.get(fileName+".xml"));
+        } catch (IOException ex) {
+            Logger.getLogger(FileXML.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+    }
+    
     public void writeXML(String FileName, String elementType, String[] dataName, String[] data) throws TransformerException, org.xml.sax.SAXException, IOException {
 
         try {
@@ -130,6 +143,7 @@ public class FileXML {
             DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
             Document doc = dBuilder.parse(inputFile);
             doc.getDocumentElement().normalize();
+            
 
             NodeList nList = doc.getElementsByTagName(elementType);
 
@@ -152,7 +166,6 @@ public class FileXML {
                     std.setBirthday(date);
                    // std.setBirthday(SimpleDateFormat("dd/MM/yyyy").parse(eElement.getElementsByTagName("birthday").item(0).getTextContent()));
                 }
-                System.out.println("Nodo " + "i: " + std.toString());
                 sList.add(std);
             }
         } catch (Exception e) {

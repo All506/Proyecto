@@ -1,5 +1,7 @@
 package Objects;
 
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.util.Date;
 
 
@@ -117,7 +119,8 @@ public class Student {
     }
 
     public String[] data() {
-        String[] data = {studentID,Integer.toString(id), Integer.toString(careerID), lastname, firstname, phoneNumber, email, address, birthday.toString()};
+        LocalDate date = LocalDate.parse( new SimpleDateFormat("yyyy-MM-dd").format(this.getBirthday()));
+        String[] data = {studentID,Integer.toString(id), Integer.toString(careerID), lastname, firstname, phoneNumber, email, address, date.toString()};
         return data;
     }
 }

@@ -25,6 +25,8 @@ import javafx.scene.control.Menu;
 import javafx.scene.control.MenuItem;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
+import javax.xml.transform.TransformerException;
+import org.xml.sax.SAXException;
 
 /**
  * FXML Controller class
@@ -53,6 +55,8 @@ public class MenuController implements Initializable {
     private MenuItem btnShowCareers;
     @FXML
     private MenuItem btnDeleteOrEditCareer;
+    @FXML
+    private MenuItem btnLogOut;
     @FXML
     private MenuItem mnNewCourse;
     @FXML
@@ -151,24 +155,53 @@ public class MenuController implements Initializable {
             System.out.println("Lista en util \n " + Util.Utility.getListCareer().toString());
         }
     }
-    
-    public void SaveData(){
+
+    public void saveData() throws ListException {
         lStudents = Util.Utility.getListStudents(); //Se carga la lista de estudiantes al XML
         FileXML fXML = new FileXML();
-        if (!fXML.exist("Students.xml")){ //Si el archivo no existe
+        if (!fXML.exist("Students.xml")) { //Si el archivo no existe
             fXML.createXML("StudentsXML", "Students");
-            
+            writeStudents();
+        } else {
+            fXML.deleteFile("Students");
+            fXML.createXML("StudentsXML", "Students");
+            writeStudents();
+        }
+    }
+
+    public void writeStudents() throws ListException {
+        System.out.println("Entro a escribir estudiantes");
+        FileXML fXML = new FileXML();
+        for (int i = 1; i <= lStudents.size(); i++) {
+            Student std = (Student) lStudents.getNode(i).data;
+            try {
+                fXML.writeXML("Students.xml", "Students", std.dataName(), std.data());
+            } catch (TransformerException ex) {
+                Logger.getLogger(MenuController.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (SAXException ex) {
+                Logger.getLogger(MenuController.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (IOException ex) {
+                Logger.getLogger(MenuController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+    }
+
+    @FXML
+    private void btnLogOut(ActionEvent event) {
+        System.out.println("Clic en logout");
+        try {
+            saveData(); //Se almacena la información de las listas en XMLs
+        } catch (ListException ex) {
+            Logger.getLogger(MenuController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
     @FXML
     private void mnNewCourse(ActionEvent event) {
-         loadPage("/UI/newCourse");
     }
 
     @FXML
     private void btnModifyCourse(ActionEvent event) {
-         loadPage("/UI/modifyCourse");
     }
 
     @FXML
@@ -178,4 +211,6 @@ public class MenuController implements Initializable {
     @FXML
     private void btnShowCourse(ActionEvent event) {
     }
+
+    
 }

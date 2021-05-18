@@ -34,6 +34,11 @@
                   <MenuItem fx:id="btnShowCourse" mnemonicParsing="false" onAction="#btnShowCourse" text="Show Course" />
                </items>
             </Menu>
+            <Menu mnemonicParsing="false" text="User">
+              <items>
+                <MenuItem fx:id="btnLogOut" mnemonicParsing="false" onAction="#btnLogOut" text="Log Out" />
+              </items>
+            </Menu>
         </menus>
          <effect>
             <Blend />
