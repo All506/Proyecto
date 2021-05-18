@@ -159,9 +159,11 @@ public class MenuController implements Initializable {
     }
 
     public void saveData() throws ListException {
+        
         lStudents = Util.Utility.getListStudents(); //Se carga la lista de estudiantes al XML
         lCareers = Util.Utility.getListCareer();
 
+        System.out.println("Lista estudiantes a imprimir= \n" + lStudents.toString());
         FileXML fXML = new FileXML();
 
         //Guardar datos de los estudiantes
@@ -171,13 +173,13 @@ public class MenuController implements Initializable {
         } else {
             fXML.deleteFile("Students");
             fXML.createXML("StudentsXML", "Students");
-            writeCareers();
+            writeStudents();
         }
 
         //Guardar datos de las carreras
         if (!fXML.exist("Careers.xml")) { //Si el archivo no existe
             fXML.createXML("CareersXML", "Careers");
-            writeStudents();
+            writeCareers();
         } else {
             fXML.deleteFile("Careers");
             fXML.createXML("CareersXML", "Careers");
@@ -188,9 +190,10 @@ public class MenuController implements Initializable {
     public void writeStudents() throws ListException {
         FileXML fXML = new FileXML();
         for (int i = 1; i <= lStudents.size(); i++) {
-            Student std = (Student) lStudents.getNode(i).data;
+            Student tempStd = (Student) lStudents.getNode(i).data;
             try {
-                fXML.writeXML("Students.xml", "Students", std.dataName(), std.data());
+                
+                fXML.writeXML("Students.xml", "Students", tempStd.dataName(), tempStd.data());
             } catch (TransformerException ex) {
                 Logger.getLogger(MenuController.class.getName()).log(Level.SEVERE, null, ex);
             } catch (SAXException ex) {

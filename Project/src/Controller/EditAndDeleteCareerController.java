@@ -75,12 +75,9 @@ public class EditAndDeleteCareerController implements Initializable {
     private void btnEdit(ActionEvent event) throws ListException {
         String[] valueSelected = cmbCareers.getValue().split("-");
         Career career = new Career(Integer.parseInt(valueSelected[0]), txtDescription.getText());
-        System.out.println("Carrera a editar " + career.toString());
         Util.Utility.getListCareer().remove(career); //Se elimina el nodo de la lista
         Util.Utility.getListCareer().add(career); //Se vuelve a añadir el nodo en la lista con la nueva información
         callAlert("notification", "Career Edited", "Career has been edited sucessfully");
-        System.out.println("Lista en util \n" + Util.Utility.getListCareer().toString());
-        //loadComboBoxCareers(); //Arreglar el metodo
     }
 
     @FXML
