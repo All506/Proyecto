@@ -34,8 +34,8 @@ import javafx.scene.layout.BorderPane;
 public class MenuController implements Initializable {
 
     //Se definen las listas
-    private SinglyLinkList students;
-    private DoublyLinkList careers;
+    private SinglyLinkList lStudents;
+    private DoublyLinkList lCareers;
 
     @FXML
     private BorderPane bpMenu;
@@ -120,10 +120,10 @@ public class MenuController implements Initializable {
         //Se rellena la lista de estudiantes segun el xml Students.xml
         FileXML fXML = new FileXML();
         if (fXML.exist("Students.xml")) {
-            students = fXML.readXMLtoStudentList("Students");
+            lStudents = fXML.readXMLtoStudentList("Students");
             try {
-                for (int i = 1; i <= students.size(); i++) {
-                    Util.Utility.setListStudent((Student) students.getNode(i).data);
+                for (int i = 1; i <= lStudents.size(); i++) {
+                    Util.Utility.setListStudent((Student) lStudents.getNode(i).data);
                 }
             } catch (ListException ex) {
                 Logger.getLogger(MenuController.class.getName()).log(Level.SEVERE, null, ex);
@@ -132,15 +132,24 @@ public class MenuController implements Initializable {
 
         //Se carga la lista de carreras
         if (fXML.exist("Careers.xml")) {
-            careers = fXML.readXMLtoCareertList();
+            lCareers = fXML.readXMLtoCareertList();
             try {
-                for (int i = 1; i <= careers.size(); i++) { //Se añaden los objetos del xml a util
-                    Util.Utility.setListCareer((Career) careers.getNode(i).data);
+                for (int i = 1; i <= lCareers.size(); i++) { //Se añaden los objetos del xml a util
+                    Util.Utility.setListCareer((Career) lCareers.getNode(i).data);
                 }
             } catch (ListException ex) {
                 Logger.getLogger(MenuController.class.getName()).log(Level.SEVERE, null, ex);
             }
             System.out.println("Lista en util \n " + Util.Utility.getListCareer().toString());
+        }
+    }
+    
+    public void SaveData(){
+        lStudents = Util.Utility.getListStudents(); //Se carga la lista de estudiantes al XML
+        FileXML fXML = new FileXML();
+        if (!fXML.exist("Students.xml")){ //Si el archivo no existe
+            fXML.createXML("StudentsXML", "Students");
+            
         }
     }
 }
