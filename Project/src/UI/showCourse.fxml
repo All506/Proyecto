@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.net.URL?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" styleClass="mainFxmlClass" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/16" fx:controller="Controller.ShowCourseController">
+    <stylesheets>
+        <URL value="@/Style/general.css" />
+    </stylesheets>
+   <children>
+      <Text layoutX="264.0" layoutY="69.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Show courses" />
+   </children>
+</AnchorPane>
