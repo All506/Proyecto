@@ -16,15 +16,19 @@ import Objects.Course;
 import Objects.Student;
 import java.io.IOException;
 import java.text.DecimalFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import javax.swing.text.MaskFormatter;
 
 public class Utility {
 
@@ -176,5 +180,41 @@ public class Utility {
         return new SimpleDateFormat("dd-MM-yyyy")
                 .format(date);
     }
+    
+     public MaskFormatter chooseMask(String option) throws ParseException{
+         
+      /**Simbology in case u want to create a new one > ? = Letters,# = Numbers,* = Anything 
+      PlaceHolder places a "_" in the place u r suppossed to write something
+      Careful! The uppercases in the masks appear in the textField
+      To implement masks use > JFormattedTextField Name = new JFormattedTextField(Util.utility.chooseMask(theMaskUwant));
+      */
+      
+      
+         switch(option){
+             case "studentId":
+                 MaskFormatter mask = new MaskFormatter("?######");
+                 return mask;
+             case "id":
+                 MaskFormatter mask2 = new MaskFormatter("#-####-####");
+                 mask2.setPlaceholder("_");
+                 return mask2;
+             case "phoneNumber":
+                 MaskFormatter mask3 = new MaskFormatter("####-####");
+                 mask3.setPlaceholder("_");
+                 return mask3;
+                 
+         }
+         return null;
+     }
+     
+     public boolean emailChecker(String email){
+         //Just send the email and return a boolean if it matches the mail format
+         //Nobody knows how the hell the pattern works but it works so...
+         
+         //Patrón del correo      
+         Pattern pattern = Pattern.compile("^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@" + "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$");
+         Matcher coincidence = pattern.matcher(email);          
+         return coincidence.find();
+     }
 
 }
