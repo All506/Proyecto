@@ -19,9 +19,11 @@
                   <MenuItem fx:id="btnShowStudents" mnemonicParsing="false" onAction="#btnShowStudents" text="Show Students" />
             </items>
           </Menu>
-          <Menu mnemonicParsing="false" text="Edit">
+          <Menu mnemonicParsing="false" text="Career">
             <items>
-              <MenuItem mnemonicParsing="false" text="Delete" />
+              <MenuItem fx:id="newCareer" mnemonicParsing="false" onAction="#newCareer" text="New Career" />
+                  <MenuItem fx:id="btnDeleteOrEditCareer" mnemonicParsing="false" onAction="#btnDeleteOrEditCareer" text="Edit or Delete Career" />
+                  <MenuItem fx:id="btnShowCareers" mnemonicParsing="false" onAction="#btnShowCareers" text="Show Careers" />
             </items>
           </Menu>
           <Menu mnemonicParsing="false" text="Help">

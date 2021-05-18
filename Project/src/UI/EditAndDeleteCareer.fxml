@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.net.URL?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" styleClass="mainFxmlClass" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/16" fx:controller="Controller.EditAndDeleteCareerController">
+    <stylesheets>
+        <URL value="@/Style/general.css" />
+    </stylesheets>
+   <children>
+      <Line endX="499.0" layoutX="101.0" layoutY="46.0" startX="-100.0" stroke="WHITE" />
+      <Text fill="#00bb2d" layoutX="200.0" layoutY="36.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Delete And Edit Career">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Text>
+      <Label layoutX="57.0" layoutY="67.0" text="CareerID">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Label>
+      <ComboBox fx:id="cmbCareers" layoutX="135.0" layoutY="65.0" onAction="#cmbCareers" prefHeight="25.0" prefWidth="409.0" />
+      <Label layoutX="263.0" layoutY="100.0" text="Description">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Label>
+      <TextArea fx:id="txtDescription" layoutX="57.0" layoutY="134.0" prefHeight="133.0" prefWidth="488.0" />
+      <Button fx:id="btnDelete" layoutX="176.0" layoutY="308.0" mnemonicParsing="false" onAction="#btnDelete" text="DELETE">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Button>
+      <Button fx:id="btnEdit" layoutX="351.0" layoutY="308.0" mnemonicParsing="false" onAction="#btnEdit" text="EDIT">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Button>
+      <Button fx:id="btnClean" layoutX="263.0" layoutY="308.0" mnemonicParsing="false" onAction="#btnClean" text="CLEAN">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Button>
+   </children>
+</AnchorPane>

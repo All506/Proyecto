@@ -5,6 +5,8 @@
  */
 package XML;
 
+import Domain.Career;
+import Domain.DoublyLinkList;
 import Domain.SinglyLinkList;
 import Domain.Student;
 import java.io.File;
@@ -228,4 +230,40 @@ public class FileXML {
 
         System.out.println("Registro Modificado");
     }
+    
+    //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! Career !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+    
+     public DoublyLinkList readXMLtoCareertList() {
+
+        DoublyLinkList lCareer = new DoublyLinkList();
+
+        try {
+            File inputFile = new File("Careers.xml");
+            DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
+            DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
+            Document doc = dBuilder.parse(inputFile);
+            doc.getDocumentElement().normalize();
+
+            NodeList nList = doc.getElementsByTagName("Careers");
+
+            for (int indice = 0; indice < nList.getLength(); indice++) {
+                Career car = new Career(0, "");
+                Node nNode = nList.item(indice);
+                if (nNode.getNodeType() == Node.ELEMENT_NODE) {
+                    Element eElement = (Element) nNode;
+                    car.setId(Integer.parseInt(eElement.getAttribute("id")));
+                    car.setDescription(eElement.getElementsByTagName("description").item(0).getTextContent());
+
+                    
+                }
+                System.out.println("Nodo " + "i: " + car.toString());
+                lCareer.add(car);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return lCareer;
+    }
+
 }

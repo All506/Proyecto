@@ -47,7 +47,7 @@ COLOR GIRS CLARO: #adadad*/
 .button{
     -fx-background-color: #8ab85f;
     -fx-text-fill: black;
-
+    -fx-font-size:15;
 }
 
 .label{
@@ -57,4 +57,16 @@ COLOR GIRS CLARO: #adadad*/
 .combo-box-base{
     -fx-pref-height: 0px;
     -fx-translate-y: 0px;  
+}
+
+.text-area.content{
+    -fx-background-color: white;
+    -fx-text-fill: black;
+    -fx-translate-y: 0px;   
+}
+
+.text-area:focused .content {
+    -fx-background-color: #adadad;
+    -fx-text-fill: black;
+    -fx-translate-y: 0px;    
 }

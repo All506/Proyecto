@@ -60,6 +60,7 @@ public class ShowStudentController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         //Carga la lista de estudiantes
         students = Util.Utility.getListStudents();
+        
         //Reinicia valores de la tabla
         for (int i = 0; i <= this.tableStudents.getItems().size(); i++) {
             this.tableStudents.getItems().clear();

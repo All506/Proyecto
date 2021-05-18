@@ -5,6 +5,8 @@
  */
 package Controller;
 
+import Domain.Career;
+import Domain.DoublyLinkList;
 import Domain.ListException;
 import Domain.SinglyLinkList;
 import Domain.Student;
@@ -19,6 +21,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
+import javafx.scene.control.Menu;
 import javafx.scene.control.MenuItem;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
@@ -32,6 +35,7 @@ public class MenuController implements Initializable {
 
     //Se definen las listas
     private SinglyLinkList students;
+    private DoublyLinkList careers;
 
     @FXML
     private BorderPane bpMenu;
@@ -43,6 +47,12 @@ public class MenuController implements Initializable {
     private MenuItem btnShowStudents;
     @FXML
     private MenuItem btnDeleteStudent;
+    @FXML
+    private MenuItem newCareer;
+    @FXML
+    private MenuItem btnShowCareers;
+    @FXML
+    private MenuItem btnDeleteOrEditCareer;
 
     /**
      * Initializes the controller class.
@@ -79,7 +89,10 @@ public class MenuController implements Initializable {
 
     public void loadLists() {
         SinglyLinkList temp = new SinglyLinkList();
+        DoublyLinkList tempCareer = new DoublyLinkList();
+        
         //Se encarga de rellenar las listas desde los XML
+        //Se rellena la lista de estudiantes segun el xml Students.xml
         FileXML fXML = new FileXML();
         if (fXML.exist("Students.xml")) {
             students = fXML.readXMLtoStudentList("Students");
@@ -90,7 +103,19 @@ public class MenuController implements Initializable {
             } catch (ListException ex) {
                 Logger.getLogger(MenuController.class.getName()).log(Level.SEVERE, null, ex);
             }
-            System.out.println("Lista en util \n " + Util.Utility.getListStudents().toString());
+        }
+        
+        //Se carga la lista de carreras
+        if (fXML.exist("Careers.xml")) {
+            careers = fXML.readXMLtoCareertList();
+            try {
+                for (int i = 1; i <= careers.size(); i++) {
+                    Util.Utility.setListCareer((Career)careers.getNode(i).data);
+                }
+            } catch (ListException ex) {
+                Logger.getLogger(MenuController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            System.out.println("Lista en util \n " + Util.Utility.getListCareer().toString());
         }
     }
 
@@ -105,5 +130,23 @@ public class MenuController implements Initializable {
     private void btnDeleteStudent(ActionEvent event) {
         loadLists();
         loadPage("/UI/deleteStudent");
+    }
+
+    @FXML
+    private void newCareer(ActionEvent event) {
+        loadLists();
+        loadPage("/UI/NewCareer");
+    }
+
+    @FXML
+    private void btnShowCareers(ActionEvent event) {
+        loadLists();
+        loadPage("/UI/showCareers");
+    }
+
+    @FXML
+    private void btnDeleteOrEditCareer(ActionEvent event) {
+        loadLists();
+        loadPage("/UI/EditAndDeleteCareer");
     }
 }

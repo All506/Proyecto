@@ -7,6 +7,8 @@ package Util;
 
 import Controller.AlertController;
 import Controller.LogInController;
+import Domain.Career;
+import Domain.DoublyLinkList;
 import Domain.ListException;
 import Domain.SinglyLinkList;
 import Domain.Student;
@@ -26,11 +28,18 @@ public class Utility {
 
     //Constructores de las listas
     private static SinglyLinkList lStudent = new SinglyLinkList();
+    private static DoublyLinkList lCareer = new DoublyLinkList();
 
+    //GETS DE LAS LISTAS 
     public static SinglyLinkList getListStudents() {
         return lStudent;
     }
+    
+    public static DoublyLinkList getListCareer() {
+        return lCareer;
+    }
 
+    //DELETE NODES DE LAS LISTAS
     public static void deleteNodeLStudent(Student std){
         try {
             if (lStudent.contains(std)){
@@ -41,6 +50,18 @@ public class Utility {
         }
     }
     
+    public static void deleteNodeLCareer(Career car){
+        try {
+            if (lStudent.contains(car)){
+                lStudent.remove(car);
+            }
+        } catch (ListException ex) {
+            Logger.getLogger(Utility.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    
+    //SETLIST DE LAS LISTAS
     public static boolean setListStudent(Student std) throws ListException {
         boolean flag = false;
         if (Utility.lStudent.isEmpty()) {
@@ -56,7 +77,26 @@ public class Utility {
         }
         return flag;
     }
-
+    
+     public static boolean setListCareer(Career car) throws ListException {
+        boolean flag = false;
+        if (Utility.lCareer.isEmpty()) {
+            Utility.lCareer.add(car);
+            flag = true;
+        } else {
+            if (!lCareer.contains(car)) {
+                lCareer.add(car);
+                flag = true;
+            } else {
+                flag = false;
+            }
+        }
+        return flag;
+    }
+    
+    
+    //UTILIDAD 
+    
     public static int random() {
         return 1 + (int) Math.floor(Math.random() * 99);
     }
@@ -96,6 +136,10 @@ public class Utility {
                 Student std1 = (Student) a;
                 Student std2 = (Student) b;
                 return std1.getStudentID().equalsIgnoreCase(std2.getStudentID());
+            case "career":
+                Career car1 = (Career) a;
+                Career car2 = (Career) b;
+                return car1.getId() == car2.getId();
         }
         return false; //En cualquier otro caso retorna un false
     }
@@ -109,6 +153,9 @@ public class Utility {
         }
         if (a instanceof Student && b instanceof Student) {
             return "student";
+        }
+        if (a instanceof Career && b instanceof Career) {
+            return "career";
         }
 
         return "unknown";

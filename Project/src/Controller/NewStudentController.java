@@ -5,6 +5,8 @@
  */
 package Controller;
 
+import Domain.Career;
+import Domain.DoublyLinkList;
 import Domain.ListException;
 import Domain.SinglyLinkList;
 import Domain.Student;
@@ -54,7 +56,7 @@ public class NewStudentController implements Initializable {
     @FXML
     private TextField txtAddress;
     @FXML
-    private ComboBox<Integer> cmbCareerID;
+    private ComboBox<String> cmbCareerID;
     @FXML
     private DatePicker dpBirthday;
     @FXML
@@ -73,10 +75,9 @@ public class NewStudentController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         students = new SinglyLinkList();
+        String temporal = "";
         //Para cargar un combobox
-        cmbCareerID.setItems(FXCollections.observableArrayList(
-                1));
-        cmbCareerID.setValue(1);
+        this.loadComboBoxCareers();
 
     }
 
@@ -90,7 +91,8 @@ public class NewStudentController implements Initializable {
 
             java.util.Date d = java.sql.Date.valueOf(dpBirthday.getValue());
 
-            Student std = new Student(id, (Integer) cmbCareerID.getValue(), txtStudentID.getText(), txtLastname.getText(), txtFirstname.getText(),
+            String[] temporal = cmbCareerID.getValue().split("-"); //Hace split del combobox y pasa el resultado del id de carrera seleccionado
+            Student std = new Student(id, Integer.parseInt(temporal[0]), txtStudentID.getText(), txtLastname.getText(), txtFirstname.getText(),
                      txtPhoneNumber.getText(), txtEmail.getText(), txtAddress.getText(), d);
             try {
                 if (Util.Utility.setListStudent(std)) {
@@ -111,13 +113,14 @@ public class NewStudentController implements Initializable {
     @FXML
     private void btnClean(ActionEvent event) {
         txtID.setText("");
-        cmbCareerID.setValue(0);
+        cmbCareerID.setValue("");
         txtStudentID.setText("");
         txtLastname.setText("");
         txtFirstname.setText("");
         txtPhoneNumber.setText("");
         txtEmail.setText("");
         txtAddress.setText("");
+        loadComboBoxCareers();
     }
 
     private void callAlert(String fxmlName, String title, String text) {
@@ -138,6 +141,24 @@ public class NewStudentController implements Initializable {
         } catch (IOException ex) {
             Logger.getLogger(LogInController.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }
+    
+    public void loadComboBoxCareers(){
+        //Para cargar un combobox
+        DoublyLinkList tempCareers = new DoublyLinkList();
+        tempCareers = Util.Utility.getListCareer();
+        String temporal = "";
+        
+        try {
+            for (int i = 1; i <= tempCareers.size(); i++) {
+                Career c = (Career)tempCareers.getNode(i).getData(); 
+                temporal = c.getId()+"-"+c.getDescription();
+                this.cmbCareerID.getItems().add(temporal);
+                        }
+        } catch (ListException ex) {
+            Logger.getLogger(NewStudentController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        cmbCareerID.setValue(temporal);
     }
 
 }
