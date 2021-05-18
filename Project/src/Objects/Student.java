@@ -5,9 +5,9 @@ import java.util.Date;
 
 public class Student {
     //ATRIBUTOS DE LA CLASE
-    int id, careerID;
-    String studentID, lastname, firstname, phoneNumber, email, address;
-    java.util.Date birthday;
+    private int id, careerID;
+    private String studentID, lastname, firstname, phoneNumber, email, address;
+    private java.util.Date birthday;
 
     public Student(int id, int careerID, String studentID, String lastname, String firstname, String phoneNumber, String email, String address, Date birthday) {
         this.id = id;
