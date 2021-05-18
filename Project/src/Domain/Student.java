@@ -4,10 +4,10 @@ import java.util.Date;
 
 /**
  *
- * @author bryan
+ * @author Allan
  */
 public class Student {
-
+    //ATRIBUTOS DE LA CLASE
     int id, careerID;
     String studentID, lastname, firstname, phoneNumber, email, address;
     java.util.Date birthday;
