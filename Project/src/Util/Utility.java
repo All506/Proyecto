@@ -7,11 +7,11 @@ package Util;
 
 import Controller.AlertController;
 import Controller.LogInController;
-import Domain.Career;
+import Objects.Career;
 import Domain.DoublyLinkList;
 import Domain.ListException;
 import Domain.SinglyLinkList;
-import Domain.Student;
+import Objects.Student;
 import java.io.IOException;
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
@@ -49,17 +49,6 @@ public class Utility {
             Logger.getLogger(Utility.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
-    public static void deleteNodeLCareer(Career car){
-        try {
-            if (lStudent.contains(car)){
-                lStudent.remove(car);
-            }
-        } catch (ListException ex) {
-            Logger.getLogger(Utility.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
-    
     
     //SETLIST DE LAS LISTAS
     public static boolean setListStudent(Student std) throws ListException {

@@ -5,10 +5,10 @@
  */
 package XML;
 
-import Domain.Career;
+import Objects.Career;
 import Domain.DoublyLinkList;
 import Domain.SinglyLinkList;
-import Domain.Student;
+import Objects.Student;
 import java.io.File;
 import java.io.IOException;
 import static java.lang.String.format;
@@ -162,75 +162,6 @@ public class FileXML {
         return sList;
     }
 
-    //Se debe de probar
-    public void deleteStudent(Student student) throws ParserConfigurationException, SAXException, IOException, TransformerConfigurationException, TransformerException {
-        File inputFile = new File("Students.xml");
-        DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
-        DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
-        Document doc = dBuilder.parse(inputFile);
-
-        NodeList nodes = doc.getElementsByTagName("Students");
-
-        //Busca por la persona de acuerdo al nodo Usuario
-        for (int indice = 0; indice < nodes.getLength(); indice++) {
-            Element std = (Element) nodes.item(indice);
-
-            String studentId = std.getAttribute("studentId");
-            System.out.println("nodo " + indice + "=" + studentId);
-            if (studentId.equalsIgnoreCase(student.getStudentID())) {
-                std.getParentNode().removeChild(std);
-            }
-
-            TransformerFactory transformerFactory = TransformerFactory.newInstance();
-            Transformer transformer = transformerFactory.newTransformer();
-
-            DOMSource source = new DOMSource(doc);
-
-            StreamResult result = new StreamResult(inputFile);
-            transformer.transform(source, result);
-
-        }
-    }
-
-    public void editStudent(Student std) throws ParserConfigurationException, SAXException, IOException, TransformerException {
-        File inputFile = new File("Students.xml");
-        DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
-        DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
-
-        Document doc = dBuilder.parse(inputFile);
-        NodeList nodes = doc.getElementsByTagName("Students");
-        Element student = null;
-
-        for (int i = 0; i < nodes.getLength(); i++) {
-            
-            student = (Element) nodes.item(i);
-            
-            String studendId = student.getAttribute("studentId");
-            if (studendId.equals(std.getStudentID())) {
-                    Element eElement = (Element) student;
-                    student.setAttribute("studentId",std.getStudentID());
-                    student.setAttribute("id",String.valueOf(std.getId()));
-                    student.setAttribute("carrerId", String.valueOf(std.getCareerID()));
-                    student.setAttribute("lastName",std.getLastname());
-                    student.setAttribute("firstName",std.getFirstname());
-                    student.setAttribute("phoneNumber",std.getPhoneNumber());
-                    student.setAttribute("email",std.getEmail());
-                    student.setAttribute("address",std.getAddress());
-                    student.setAttribute("birthday","");
-            }
-        }
-
-        TransformerFactory transformerFactory = TransformerFactory.newInstance();
-        Transformer transformer = transformerFactory.newTransformer();
-
-        DOMSource source = new DOMSource(doc);
-
-        StreamResult result = new StreamResult(inputFile);
-        transformer.transform(source, result);
-
-        System.out.println("Registro Modificado");
-    }
-    
     //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! Career !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
     
      public DoublyLinkList readXMLtoCareertList() {

@@ -8,7 +8,7 @@ package Controller;
 import Domain.ListException;
 import Domain.Node;
 import Domain.SinglyLinkList;
-import Domain.Student;
+import Objects.Student;
 import XML.FileXML;
 import java.io.IOException;
 import java.net.URL;
@@ -117,11 +117,7 @@ public class DeleteStudentController implements Initializable {
 
     @FXML
     private void btnDelete(ActionEvent event) throws ListException {
-        /*if (checkBlankSpaces()==true){
-            callAlert("alert", "Error", "All spaces are required");
-        } else {*/
 
-        try {
             FileXML fXML = new FileXML();
             //Convertir Date a LocalDate
             java.util.Date d = java.sql.Date.valueOf(dpBirthday.getValue());
@@ -131,21 +127,10 @@ public class DeleteStudentController implements Initializable {
                     String.valueOf(this.cmbId.getValue()), this.txtLastName.getText(), this.txtFirstName.getText(),
                     this.txtPhoneNumber.getText(), this.txtEmail.getText(), this.txtAddress.getText(), d);
             Util.Utility.deleteNodeLStudent(std);
-            fXML.deleteStudent(std);
             callAlert("notification", "Notification", "Student has been deleted");
             btnClean(event);
             reloadCombo();
-        } catch (ParserConfigurationException ex) {
-            Logger.getLogger(EditStudentController.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (SAXException ex) {
-            Logger.getLogger(EditStudentController.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (IOException ex) {
-            Logger.getLogger(EditStudentController.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (TransformerException ex) {
-            Logger.getLogger(EditStudentController.class.getName()).log(Level.SEVERE, null, ex);
-        }
 
-        //} 
     }
 
     private Student look4student(Student temp) throws ListException {
@@ -187,6 +172,7 @@ public class DeleteStudentController implements Initializable {
     }
 
     private void reloadCombo() throws ListException {
+        students = Util.Utility.getListStudents(); //Se recarga la lista de estudiantes
         for (int i = 1; i <= students.size(); i++) {
             Student s = (Student) students.getNode(i).getData();
             cmbId.getItems().add(s.getStudentID());

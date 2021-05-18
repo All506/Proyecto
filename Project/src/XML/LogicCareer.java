@@ -5,8 +5,8 @@
  */
 package XML;
 
-import Domain.Career;
-import Domain.Student;
+import Objects.Career;
+import Objects.Student;
 import java.io.File;
 import java.io.IOException;
 import java.util.logging.Level;

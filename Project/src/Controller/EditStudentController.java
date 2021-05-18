@@ -8,7 +8,7 @@ package Controller;
 import Domain.ListException;
 import Domain.Node;
 import Domain.SinglyLinkList;
-import Domain.Student;
+import Objects.Student;
 import XML.FileXML;
 import XML.LogicStudent;
 import java.io.IOException;
@@ -92,12 +92,7 @@ public class EditStudentController implements Initializable {
 
     @FXML
     private void btnModify(ActionEvent event) throws ListException, ParseException {
-        /*if (checkBlankSpaces()==true){
-            callAlert("alert", "Error", "All spaces are required");
-        } else {*/
         
-            try {
-             FileXML fXML = new FileXML();
             //Convertir Date a LocalDate
             java.util.Date d = java.sql.Date.valueOf(dpBirthday.getValue());
             //Se elmina y luego se anhade
@@ -107,19 +102,7 @@ public class EditStudentController implements Initializable {
                     this.txtPhoneNumber.getText(),this.txtEmail.getText(),this.txtAddress.getText(),d);
             Util.Utility.deleteNodeLStudent(std);
             Util.Utility.setListStudent(std);
-            fXML.deleteStudent(std);
-            fXML.writeXML("Students.xml", "Students", std.dataName(), std.data());
-        } catch (ParserConfigurationException ex) {
-            Logger.getLogger(EditStudentController.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (SAXException ex) {
-            Logger.getLogger(EditStudentController.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (IOException ex) {
-            Logger.getLogger(EditStudentController.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (TransformerException ex) {
-            Logger.getLogger(EditStudentController.class.getName()).log(Level.SEVERE, null, ex);
-        }
             
-        //}  
     }
 
     @FXML

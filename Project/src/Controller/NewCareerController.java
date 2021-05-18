@@ -5,7 +5,7 @@
  */
 package Controller;
 
-import Domain.Career;
+import Objects.Career;
 import Domain.ListException;
 import XML.LogicCareer;
 import java.io.IOException;
@@ -55,7 +55,6 @@ public class NewCareerController implements Initializable {
         if (Util.Utility.setListCareer(car)){
             callAlert("notification","Notification","Career has been saved");
             System.out.println(Util.Utility.getListCareer().toString());
-            logCareer.writeCareer(car); //cambiar al menu principal al cerrar sesion
         } else {
             callAlert("alert","Error","Id is already in registered");
         }

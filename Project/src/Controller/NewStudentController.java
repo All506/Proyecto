@@ -5,11 +5,11 @@
  */
 package Controller;
 
-import Domain.Career;
+import Objects.Career;
 import Domain.DoublyLinkList;
 import Domain.ListException;
 import Domain.SinglyLinkList;
-import Domain.Student;
+import Objects.Student;
 import XML.LogicStudent;
 import java.io.IOException;
 import static java.lang.Double.parseDouble;
@@ -83,7 +83,7 @@ public class NewStudentController implements Initializable {
 
     @FXML
     private void btnAdd(ActionEvent event) {
-        LogicStudent logStudent = new LogicStudent();
+ 
         try {
             id = Integer.parseInt(txtID.getText());
             phoneNumber = parseDouble(txtPhoneNumber.getText());
@@ -97,7 +97,7 @@ public class NewStudentController implements Initializable {
             try {
                 if (Util.Utility.setListStudent(std)) {
                     callAlert("notification", "Notification", "User has been registered");
-                    logStudent.writeStudent(std);
+                    System.out.println("La lista en util \n" + Util.Utility.getListStudents().toString());
                     btnClean(event);
                 } else {
                     callAlert("alert", "Error", "User already exist");

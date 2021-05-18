@@ -1,11 +1,8 @@
-package Domain;
+package Objects;
 
 import java.util.Date;
 
-/**
- *
- * @author Allan
- */
+
 public class Student {
     //ATRIBUTOS DE LA CLASE
     int id, careerID;

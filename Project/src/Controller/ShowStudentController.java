@@ -7,7 +7,7 @@ package Controller;
 
 import Domain.ListException;
 import Domain.SinglyLinkList;
-import Domain.Student;
+import Objects.Student;
 import java.io.IOException;
 import java.net.URL;
 import java.util.Date;

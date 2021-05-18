@@ -5,7 +5,7 @@
  */
 package Controller;
 
-import Domain.Career;
+import Objects.Career;
 import Domain.DoublyLinkList;
 import Domain.ListException;
 import XML.FileXML;
@@ -48,7 +48,7 @@ public class EditAndDeleteCareerController implements Initializable {
     private ComboBox<String> cmbCareers;
     @FXML
     private TextArea txtDescription;
-    
+
     private LogicCareer logCareer = new LogicCareer();
 
     /**
@@ -62,47 +62,25 @@ public class EditAndDeleteCareerController implements Initializable {
     }
 
     @FXML
-    private void btnDelete(ActionEvent event) {
+    private void btnDelete(ActionEvent event) throws ListException {
         String[] valueSelected = cmbCareers.getValue().split("-");
-        Career c = new Career(Integer.parseInt(valueSelected[0]), valueSelected[1]);
-        Util.Utility.deleteNodeLCareer(c);
-        try {
-            logCareer.deleteCareer(c); //Se elimina del txt !!HACERLO EN EL CIERRE DE SESION
-            callAlert("notification","Career Deleted","Career has been deleted");
-            loadComboBoxCareers();
-        } catch (ParserConfigurationException ex) {
-            Logger.getLogger(EditAndDeleteCareerController.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (SAXException ex) {
-            Logger.getLogger(EditAndDeleteCareerController.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (IOException ex) {
-            Logger.getLogger(EditAndDeleteCareerController.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (TransformerException ex) {
-            Logger.getLogger(EditAndDeleteCareerController.class.getName()).log(Level.SEVERE, null, ex);
-        }
-
+        Career c = new Career(Integer.parseInt(valueSelected[0]), "");
+        Util.Utility.getListCareer().remove(c); //Se elimina la carrera de la correspondiente lista
+        callAlert("notification", "Career Deleted", "Career has been deleted");
+        System.out.println(Util.Utility.getListCareer().toString());
+        //loadComboBoxCareers();
     }
 
     @FXML
     private void btnEdit(ActionEvent event) throws ListException {
-        try {
-            String[] valueSelected = cmbCareers.getValue().split("-");
-            Career careerToDelete = new Career(Integer.parseInt(valueSelected[0]), valueSelected[1]);
-            Career careerToAdd = new Career(Integer.parseInt(valueSelected[0]),txtDescription.getText());
-            Util.Utility.deleteNodeLCareer(careerToDelete);
-            logCareer.deleteCareer(careerToDelete); //Se elimina del txt
-            logCareer.writeCareer(careerToAdd); //!! CERRAR SESION
-            Util.Utility.setListCareer(careerToAdd);
-            callAlert("notification","Career Edited","Career has been edited sucessfully");
-            loadComboBoxCareers();
-        } catch (ParserConfigurationException ex) {
-            Logger.getLogger(EditAndDeleteCareerController.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (SAXException ex) {
-            Logger.getLogger(EditAndDeleteCareerController.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (IOException ex) {
-            Logger.getLogger(EditAndDeleteCareerController.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (TransformerException ex) {
-            Logger.getLogger(EditAndDeleteCareerController.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        String[] valueSelected = cmbCareers.getValue().split("-");
+        Career career = new Career(Integer.parseInt(valueSelected[0]), txtDescription.getText());
+        System.out.println("Carrera a editar " + career.toString());
+        Util.Utility.getListCareer().remove(career); //Se elimina el nodo de la lista
+        Util.Utility.getListCareer().add(career); //Se vuelve a añadir el nodo en la lista con la nueva información
+        callAlert("notification", "Career Edited", "Career has been edited sucessfully");
+        System.out.println("Lista en util \n" + Util.Utility.getListCareer().toString());
+        //loadComboBoxCareers(); //Arreglar el metodo
     }
 
     @FXML
@@ -115,17 +93,15 @@ public class EditAndDeleteCareerController implements Initializable {
     public void loadComboBoxCareers() {
         //Para cargar un combobox
         DoublyLinkList tempCareers = new DoublyLinkList();
-        FileXML fXML = new FileXML();
-        tempCareers = fXML.readXMLtoCareertList(); //TOMAR LA LISTA DE UTIL PARA MOSTRARLO
-        
+        tempCareers = Util.Utility.getListCareer();
+
         //tempCareers = Util.Utility.getListCareer();
-        
         String temporal = "";
         //LIMPIA EL COMBOBOX
         for (int i = 1; i <= this.cmbCareers.getItems().size(); i++) {
-                cmbCareers.getItems().clear();
-            }
-        
+            cmbCareers.getItems().clear();
+        }
+
         //LO RELLENA
         try {
             for (int i = 1; i <= tempCareers.size(); i++) {
@@ -137,13 +113,12 @@ public class EditAndDeleteCareerController implements Initializable {
         } catch (ListException ex) {
             Logger.getLogger(NewStudentController.class.getName()).log(Level.SEVERE, null, ex);
         }
-        cmbCareers.setValue(temporal);
     }
 
     @FXML
     private void cmbCareers(ActionEvent event) throws ListException {
         String[] valueSelected = cmbCareers.getValue().split("-");
-        System.out.println("0 " + valueSelected[0] + "1 " + valueSelected[1]);
+        System.out.println("valorseleccionado id " + valueSelected[0]);
         Career c = new Career(Integer.parseInt(valueSelected[0]), valueSelected[1]);
         int temp = Util.Utility.getListCareer().indexOf(c); //Se obtiene el nodo de la carrera en la lista
         c = (Career) Util.Utility.getListCareer().getNode(temp).data;

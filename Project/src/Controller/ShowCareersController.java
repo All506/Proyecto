@@ -5,7 +5,7 @@
  */
 package Controller;
 
-import Domain.Career;
+import Objects.Career;
 import Domain.DoublyLinkList;
 import Domain.ListException;
 import java.io.IOException;
