@@ -7,30 +7,32 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" styleClass="mainFxmlClass" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/16" fx:controller="Controller.NewTimeTableController">
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.NewTimeTableController">
     <stylesheets>
         <URL value="@/Style/general.css" />
     </stylesheets>
    <children>
-      <Text layoutX="262.0" layoutY="59.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Add schedules" />
-      <ComboBox layoutX="297.0" layoutY="97.0" prefWidth="150.0" />
-      <Spinner layoutX="152.0" layoutY="189.0" />
-      <Spinner layoutX="474.0" layoutY="261.0" prefHeight="26.0" prefWidth="100.0" />
-      <Spinner layoutX="348.0" layoutY="260.0" prefHeight="26.0" prefWidth="100.0" />
-      <Spinner layoutX="152.0" layoutY="261.0" />
-      <Spinner layoutX="348.0" layoutY="188.0" prefHeight="26.0" prefWidth="100.0" />
-      <Spinner layoutX="474.0" layoutY="188.0" prefHeight="26.0" prefWidth="100.0" />
-      <Text layoutX="51.0" layoutY="278.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Schedule two" />
-      <Text layoutX="51.0" layoutY="205.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Schedule one" />
-      <Text layoutX="195.0" layoutY="114.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Select a course" />
-      <Button layoutX="480.0" layoutY="342.0" mnemonicParsing="false" text="Clean" />
-      <Button layoutX="339.0" layoutY="342.0" mnemonicParsing="false" text="Validate and save" />
-      <Button layoutX="51.0" layoutY="342.0" mnemonicParsing="false" text="Back" />
-      <Text layoutX="488.0" layoutY="257.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Ending time" />
-      <Text layoutX="362.0" layoutY="257.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Start time" />
-      <Text layoutX="191.0" layoutY="257.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Day" />
-      <Text layoutX="488.0" layoutY="184.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Ending time" />
-      <Text layoutX="357.0" layoutY="184.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Start time" />
-      <Text layoutX="191.0" layoutY="184.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Day" />
+      <Text layoutX="262.0" layoutY="35.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Add schedules" />
+      <ComboBox fx:id="cmbCourses" layoutX="297.0" layoutY="73.0" prefWidth="150.0" />
+      <Spinner fx:id="spnDay1" layoutX="173.0" layoutY="191.0" prefHeight="26.0" prefWidth="122.0" />
+      <Spinner fx:id="spnEnd2" layoutX="474.0" layoutY="264.0" prefHeight="26.0" prefWidth="100.0" />
+      <Spinner fx:id="spnStart2" layoutX="348.0" layoutY="263.0" prefHeight="26.0" prefWidth="100.0" />
+      <Spinner fx:id="spnDay2" layoutX="173.0" layoutY="264.0" prefHeight="26.0" prefWidth="122.0" />
+      <Spinner fx:id="spnStart1" layoutX="348.0" layoutY="191.0" prefHeight="26.0" prefWidth="100.0" />
+      <Spinner fx:id="spnEnd1" layoutX="474.0" layoutY="191.0" prefHeight="26.0" prefWidth="100.0" />
+      <Text layoutX="51.0" layoutY="281.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Schedule two" />
+      <Text layoutX="51.0" layoutY="208.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Schedule one" />
+      <Text layoutX="195.0" layoutY="90.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Select a course" />
+      <Button fx:id="btnClean" layoutX="487.0" layoutY="324.0" mnemonicParsing="false" onAction="#btnClean" text="Clean" />
+      <Button fx:id="btnValidSave" layoutX="346.0" layoutY="324.0" mnemonicParsing="false" onAction="#btnValidSave" text="Validate and save" />
+      <Button fx:id="btnBack" layoutX="58.0" layoutY="324.0" mnemonicParsing="false" onAction="#btnBack" text="Back" />
+      <Text layoutX="488.0" layoutY="260.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Ending time" />
+      <Text layoutX="362.0" layoutY="260.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Start time" />
+      <Text layoutX="191.0" layoutY="260.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Day" />
+      <Text layoutX="488.0" layoutY="187.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Ending time" />
+      <Text layoutX="357.0" layoutY="187.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Start time" />
+      <Text layoutX="191.0" layoutY="187.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Day" />
+      <ComboBox fx:id="cmbPeriod" layoutX="173.0" layoutY="125.0" prefWidth="150.0" />
+      <Text layoutX="52.0" layoutY="142.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Period" wrappingWidth="79.025390625" />
    </children>
 </AnchorPane>
