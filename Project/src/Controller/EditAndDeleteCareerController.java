@@ -9,7 +9,6 @@ import Objects.Career;
 import Domain.DoublyLinkList;
 import Domain.ListException;
 import XML.FileXML;
-import XML.LogicCareer;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -36,6 +35,7 @@ import org.xml.sax.SAXException;
  *
  * @author Alán
  */
+
 public class EditAndDeleteCareerController implements Initializable {
 
     @FXML
@@ -49,7 +49,6 @@ public class EditAndDeleteCareerController implements Initializable {
     @FXML
     private TextArea txtDescription;
 
-    private LogicCareer logCareer = new LogicCareer();
 
     /**
      * Initializes the controller class.

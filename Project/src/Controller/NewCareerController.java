@@ -7,7 +7,6 @@ package Controller;
 
 import Objects.Career;
 import Domain.ListException;
-import XML.LogicCareer;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -41,7 +40,6 @@ public class NewCareerController implements Initializable {
     @FXML
     private TextArea txtDescription;
     
-    LogicCareer logCareer = new LogicCareer();
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {

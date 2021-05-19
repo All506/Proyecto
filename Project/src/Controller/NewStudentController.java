@@ -10,7 +10,6 @@ import Domain.DoublyLinkList;
 import Domain.ListException;
 import Domain.SinglyLinkList;
 import Objects.Student;
-import XML.LogicStudent;
 import java.io.IOException;
 import static java.lang.Double.parseDouble;
 import java.net.URL;
