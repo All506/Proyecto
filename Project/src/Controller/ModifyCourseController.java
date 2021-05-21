@@ -24,8 +24,6 @@ public class ModifyCourseController implements Initializable {
     @FXML
     private ComboBox<?> cmbCarrers;
     @FXML
-    private Button btnBack;
-    @FXML
     private Button btnClean;
     @FXML
     private TextField txtID;
@@ -44,9 +42,6 @@ public class ModifyCourseController implements Initializable {
         // TODO
     }    
 
-    @FXML
-    private void btnBack(ActionEvent event) {
-    }
 
     @FXML
     private void btnClean(ActionEvent event) {

@@ -50,8 +50,6 @@ public class NewTimeTableController implements Initializable {
     @FXML
     private Button btnValidSave;
     @FXML
-    private Button btnBack;
-    @FXML
     private ComboBox<String> cmbPeriod;
 
     /**
@@ -141,8 +139,5 @@ public class NewTimeTableController implements Initializable {
     private void btnValidSave(ActionEvent event) {
     }
 
-    @FXML
-    private void btnBack(ActionEvent event) {
-    }
     
 }

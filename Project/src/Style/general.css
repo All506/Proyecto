@@ -70,3 +70,9 @@ COLOR GIRS CLARO: #adadad*/
     -fx-text-fill: black;
     -fx-translate-y: 0px;    
 }
+
+.text{
+    -fx-font-size:15;
+    -fx-text-fill: #adadad;
+    
+}

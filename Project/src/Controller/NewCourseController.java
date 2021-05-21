@@ -22,19 +22,17 @@ import javafx.scene.control.TextField;
 public class NewCourseController implements Initializable {
 
     @FXML
-    private ComboBox<?> cmbCarrers;
-    @FXML
-    private Button btnBack;
-    @FXML
     private Button btnClean;
     @FXML
     private Button btnAdd;
     @FXML
-    private TextField txtID;
-    @FXML
     private TextField txtName;
     @FXML
     private TextField txtCredits;
+    @FXML
+    private ComboBox<?> cmbCarrerId;
+    @FXML
+    private TextField txtId;
 
     /**
      * Initializes the controller class.
@@ -44,9 +42,6 @@ public class NewCourseController implements Initializable {
         // TODO
     }    
 
-    @FXML
-    private void btnBack(ActionEvent event) {
-    }
 
     @FXML
     private void btnClean(ActionEvent event) {
