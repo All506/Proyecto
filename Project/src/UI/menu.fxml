@@ -11,7 +11,7 @@
    <children>
       <MenuBar layoutY="-3.0" prefHeight="38.0" prefWidth="746.0" stylesheets="@../Style/menuBar.css">
         <menus>
-          <Menu mnemonicParsing="false" text="Student">
+          <Menu fx:id="menuStudent" mnemonicParsing="false" text="Student">
             <items>
               <MenuItem fx:id="mnNewStudent" mnemonicParsing="false" onAction="#mnNewStudent" text="New Student" />
                   <MenuItem fx:id="btnModifyStudent" mnemonicParsing="false" onAction="#btnModifyStudent" text="Modify Student" />
@@ -19,14 +19,14 @@
                   <MenuItem fx:id="btnShowStudents" mnemonicParsing="false" onAction="#btnShowStudents" text="Show Students" />
             </items>
           </Menu>
-          <Menu mnemonicParsing="false" text="Career">
+          <Menu fx:id="menuCareer" mnemonicParsing="false" text="Career">
             <items>
               <MenuItem fx:id="newCareer" mnemonicParsing="false" onAction="#newCareer" text="New Career" />
                   <MenuItem fx:id="btnDeleteOrEditCareer" mnemonicParsing="false" onAction="#btnDeleteOrEditCareer" text="Edit or Delete Career" />
                   <MenuItem fx:id="btnShowCareers" mnemonicParsing="false" onAction="#btnShowCareers" text="Show Careers" />
             </items>
           </Menu>
-            <Menu mnemonicParsing="false" text="Course">
+            <Menu fx:id="menuCourse" mnemonicParsing="false" text="Course">
                <items>
                   <MenuItem fx:id="mnNewCourse" mnemonicParsing="false" onAction="#mnNewCourse" text="New Course" />
                   <MenuItem fx:id="btnModifyCourse" mnemonicParsing="false" onAction="#btnModifyCourse" text="Modify Course" />
@@ -34,13 +34,14 @@
                   <MenuItem fx:id="btnShowCourse" mnemonicParsing="false" onAction="#btnShowCourse" text="Show Course" />
                </items>
             </Menu>
-            <Menu fx:id="btnNewSchedule" mnemonicParsing="false" onAction="#btnNewSchedule" text="Schedules">
+            <Menu fx:id="menuSchedules" mnemonicParsing="false" text="Schedules">
               <items>
-                <MenuItem mnemonicParsing="false" text="Add Schedule" />
+                <MenuItem fx:id="btnNewSchedule" mnemonicParsing="false" onAction="#btnNewSchedule" text="Add Schedule" />
               </items>
             </Menu>
-            <Menu mnemonicParsing="false" text="User">
+            <Menu fx:id="menuUser" mnemonicParsing="false" text="User">
               <items>
+                  <MenuItem fx:id="btnNewUser" mnemonicParsing="false" onAction="#btnNewUser" text="New User" />
                 <MenuItem fx:id="btnLogOut" mnemonicParsing="false" onAction="#btnLogOut" text="Log Out" />
               </items>
             </Menu>

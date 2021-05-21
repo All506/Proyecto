@@ -5,10 +5,13 @@
  */
 package XML;
 
+import Domain.CircularLinkList;
 import Objects.Career;
 import Domain.DoublyLinkList;
 import Domain.SinglyLinkList;
+import Objects.Security;
 import Objects.Student;
+import Security.AES;
 import java.io.File;
 import java.io.IOException;
 import static java.lang.String.format;
@@ -210,4 +213,37 @@ public class FileXML {
         return lCareer;
     }
 
+     public CircularLinkList readXMLtoSecurityList() {
+
+        CircularLinkList lSecurity = new CircularLinkList();
+
+        try {
+            File inputFile = new File("Security.xml");
+            DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
+            DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
+            Document doc = dBuilder.parse(inputFile);
+            doc.getDocumentElement().normalize();
+
+            NodeList nList = doc.getElementsByTagName("User");
+
+            for (int indice = 0; indice < nList.getLength(); indice++) {
+                Security sec = new Security("","");
+                Node nNode = nList.item(indice);
+                if (nNode.getNodeType() == Node.ELEMENT_NODE) {
+                    Element eElement = (Element) nNode;
+                    sec.setUser(eElement.getAttribute("user"));
+                    sec.setPassword(eElement.getElementsByTagName("password").item(0).getTextContent());
+
+                    
+                }
+                AES deEnc = new AES();
+                Security desUser = new Security(deEnc.deCrypt(sec.getUser(), "Proyecto"),deEnc.deCrypt(sec.getPassword(), "Proyecto"));
+                lSecurity.add(desUser);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return lSecurity;
+    }
 }

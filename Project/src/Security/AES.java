@@ -12,8 +12,9 @@ import javax.crypto.spec.SecretKeySpec;
  */
 //Para encriptar y desencriptar se utilizará la misma llave, que será enviada tanto antes de guardar en XML como después
 //El sistema de encriptación utilizado será el "Advance Encryption System" de 1998
-
 public class AES {
+
+    private String key = "proyecto";
 
     public SecretKeySpec createKey(String key) {
 

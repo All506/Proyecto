@@ -13,7 +13,9 @@ import Domain.DoublyLinkList;
 import Domain.ListException;
 import Domain.SinglyLinkList;
 import Objects.Course;
+import Objects.Security;
 import Objects.Student;
+import Security.AES;
 import java.io.IOException;
 import java.text.DecimalFormat;
 import java.text.ParseException;
@@ -36,31 +38,46 @@ public class Utility {
     private static SinglyLinkList lStudent = new SinglyLinkList();
     private static DoublyLinkList lCareer = new DoublyLinkList();
     private static CircularLinkList lCourse = new CircularLinkList();
-    
+    private static CircularLinkList lSecurity = new CircularLinkList();
+    private static boolean kindUser = false; //True if user, false if Student
+
     //GETS DE LAS LISTAS 
     public static SinglyLinkList getListStudents() {
         return lStudent;
     }
-    
+
     public static DoublyLinkList getListCareer() {
         return lCareer;
     }
-    
-    public static CircularLinkList getListCourse(){
+
+    public static CircularLinkList getListCourse() {
         return lCourse;
     }
 
+    public static CircularLinkList getListSecurity() {
+        return lSecurity;
+    }
+
+    public static boolean isKindUser() {
+        return kindUser;
+    }
+
+    public static void setKindUser(boolean kindUser) {
+        Utility.kindUser = kindUser;
+    }
+
+    
     //DELETE NODES DE LAS LISTA
-    public static void deleteNodeLStudent(Student std){
+    public static void deleteNodeLStudent(Student std) {
         try {
-            if (lStudent.contains(std)){
+            if (lStudent.contains(std)) {
                 lStudent.remove(std);
             }
         } catch (ListException ex) {
             Logger.getLogger(Utility.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
+
     //SETLIST DE LAS LISTAS
     public static boolean setListStudent(Student std) throws ListException {
         boolean flag = false;
@@ -77,8 +94,8 @@ public class Utility {
         }
         return flag;
     }
-    
-     public static boolean setListCareer(Career car) throws ListException {
+
+    public static boolean setListCareer(Career car) throws ListException {
         boolean flag = false;
         if (Utility.lCareer.isEmpty()) {
             Utility.lCareer.add(car);
@@ -93,8 +110,8 @@ public class Utility {
         }
         return flag;
     }
-    
-     public static boolean setListCourse(Course cou) throws ListException {
+
+    public static boolean setListCourse(Course cou) throws ListException {
         boolean flag = false;
         if (Utility.lCourse.isEmpty()) {
             Utility.lCourse.add(cou);
@@ -109,9 +126,24 @@ public class Utility {
         }
         return flag;
     }
-    
+
+    public static boolean setListSecurity(Security sec) throws ListException {
+        boolean flag = false;
+        if (Utility.lSecurity.isEmpty()) {
+            Utility.lSecurity.add(sec);
+            flag = true;
+        } else {
+            if (!lSecurity.contains(sec)) {
+                lSecurity.add(sec);
+                flag = true;
+            } else {
+                flag = false;
+            }
+        }
+        return flag;
+    }
     //UTILIDAD 
-    
+
     public static int random() {
         return 1 + (int) Math.floor(Math.random() * 99);
     }
@@ -155,6 +187,10 @@ public class Utility {
                 Career car1 = (Career) a;
                 Career car2 = (Career) b;
                 return car1.getId() == car2.getId();
+            case "security":
+                Security sec1 = (Security) a;
+                Security sec2 = (Security) b;
+                return sec1.getUser().equalsIgnoreCase(sec2.getUser()) && sec1.getPassword().equalsIgnoreCase(sec2.getPassword());
         }
         return false; //En cualquier otro caso retorna un false
     }
@@ -172,6 +208,9 @@ public class Utility {
         if (a instanceof Career && b instanceof Career) {
             return "career";
         }
+        if (a instanceof Security && b instanceof Security) {
+            return "security";
+        }
 
         return "unknown";
     }
@@ -180,41 +219,42 @@ public class Utility {
         return new SimpleDateFormat("dd-MM-yyyy")
                 .format(date);
     }
-    
-     public MaskFormatter chooseMask(String option) throws ParseException{
-         
-      /**Simbology in case u want to create a new one > ? = Letters,# = Numbers,* = Anything 
-      PlaceHolder places a "_" in the place u r suppossed to write something
-      Careful! The uppercases in the masks appear in the textField
-      To implement masks use > JFormattedTextField Name = new JFormattedTextField(Util.utility.chooseMask(theMaskUwant));
-      */
-      
-      
-         switch(option){
-             case "studentId":
-                 MaskFormatter mask = new MaskFormatter("?######");
-                 return mask;
-             case "id":
-                 MaskFormatter mask2 = new MaskFormatter("#-####-####");
-                 mask2.setPlaceholder("_");
-                 return mask2;
-             case "phoneNumber":
-                 MaskFormatter mask3 = new MaskFormatter("####-####");
-                 mask3.setPlaceholder("_");
-                 return mask3;
-                 
-         }
-         return null;
-     }
-     
-     public boolean emailChecker(String email){
-         //Just send the email and return a boolean if it matches the mail format
-         //Nobody knows how the hell the pattern works but it works so...
-         
-         //Patrón del correo      
-         Pattern pattern = Pattern.compile("^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@" + "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$");
-         Matcher coincidence = pattern.matcher(email);          
-         return coincidence.find();
-     }
+
+    public MaskFormatter chooseMask(String option) throws ParseException {
+
+        /**
+         * Simbology in case u want to create a new one > ? = Letters,# =
+         * Numbers,* = Anything PlaceHolder places a "_" in the place u r
+         * suppossed to write something Careful! The uppercases in the masks
+         * appear in the textField To implement masks use > JFormattedTextField
+         * Name = new
+         * JFormattedTextField(Util.utility.chooseMask(theMaskUwant));
+         */
+        switch (option) {
+            case "studentId":
+                MaskFormatter mask = new MaskFormatter("?######");
+                return mask;
+            case "id":
+                MaskFormatter mask2 = new MaskFormatter("#-####-####");
+                mask2.setPlaceholder("_");
+                return mask2;
+            case "phoneNumber":
+                MaskFormatter mask3 = new MaskFormatter("####-####");
+                mask3.setPlaceholder("_");
+                return mask3;
+
+        }
+        return null;
+    }
+
+    public boolean emailChecker(String email) {
+        //Just send the email and return a boolean if it matches the mail format
+        //Nobody knows how the hell the pattern works but it works so...
+
+        //Patrón del correo      
+        Pattern pattern = Pattern.compile("^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@" + "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$");
+        Matcher coincidence = pattern.matcher(email);
+        return coincidence.find();
+    }
 
 }

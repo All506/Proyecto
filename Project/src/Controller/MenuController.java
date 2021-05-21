@@ -5,11 +5,14 @@
  */
 package Controller;
 
+import Domain.CircularLinkList;
 import Objects.Career;
 import Domain.DoublyLinkList;
 import Domain.ListException;
 import Domain.SinglyLinkList;
+import Objects.Security;
 import Objects.Student;
+import Security.AES;
 import XML.FileXML;
 import java.io.IOException;
 import java.net.URL;
@@ -38,6 +41,7 @@ public class MenuController implements Initializable {
     //Se definen las listas
     private SinglyLinkList lStudents;
     private DoublyLinkList lCareers;
+    private CircularLinkList lSecurity;
 
     @FXML
     private BorderPane bpMenu;
@@ -66,11 +70,25 @@ public class MenuController implements Initializable {
     @FXML
     private MenuItem btnShowCourse;
     @FXML
-    private Menu btnNewSchedule;
+    private MenuItem btnNewSchedule;
+    @FXML
+    private MenuItem btnNewUser;
+    @FXML
+    private Menu menuStudent;
+    @FXML
+    private Menu menuCareer;
+    @FXML
+    private Menu menuCourse;
+    @FXML
+    private Menu menuSchedules;
+    @FXML
+    private Menu menuUser;
 
     /**
      * Initializes the controller class.
      */
+    
+    //CONTRASEÑA PARA DESENCRIPTACION: Proyecto
     private void loadPage(String pageName) {
         Parent root = null;
         try {
@@ -84,6 +102,7 @@ public class MenuController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        configMenu();
         SinglyLinkList students = new SinglyLinkList();
         //Se llama al metodo que carga a las listas desde el xml
         loadLists();
@@ -156,14 +175,28 @@ public class MenuController implements Initializable {
             }
             System.out.println("Lista en util \n " + Util.Utility.getListCareer().toString());
         }
+        
+        //Carga y desencripta los usuarios
+        
+        if (fXML.exist("Security.xml")) {
+            lSecurity = fXML.readXMLtoSecurityList();
+            try {
+                for (int i = 1; i <= lSecurity.size(); i++) { //Se añaden los objetos del xml a util
+                    Util.Utility.setListSecurity((Security) lSecurity.getNode(i).data);
+                }
+            } catch (ListException ex) {
+                Logger.getLogger(MenuController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            System.out.println("Lista en util \n " + Util.Utility.getListSecurity().toString());
+        }
     }
 
     public void saveData() throws ListException {
-        
+
         lStudents = Util.Utility.getListStudents(); //Se carga la lista de estudiantes al XML
         lCareers = Util.Utility.getListCareer();
+        lSecurity = Util.Utility.getListSecurity();
 
-        System.out.println("Lista estudiantes a imprimir= \n" + lStudents.toString());
         FileXML fXML = new FileXML();
 
         //Guardar datos de los estudiantes
@@ -185,6 +218,17 @@ public class MenuController implements Initializable {
             fXML.createXML("CareersXML", "Careers");
             writeCareers();
         }
+
+        //Guardar datos encriptados en XML de User
+        if (!fXML.exist("Security.xml")) { //Si el archivo no existe
+            fXML.createXML("SecurityXML", "Security");
+            writeSecurity();
+        } else {
+            fXML.deleteFile("Security");
+            fXML.createXML("SecurityXML", "Security");
+            writeSecurity();
+        }
+
     }
 
     public void writeStudents() throws ListException {
@@ -192,7 +236,7 @@ public class MenuController implements Initializable {
         for (int i = 1; i <= lStudents.size(); i++) {
             Student tempStd = (Student) lStudents.getNode(i).data;
             try {
-                
+
                 fXML.writeXML("Students.xml", "Students", tempStd.dataName(), tempStd.data());
             } catch (TransformerException ex) {
                 Logger.getLogger(MenuController.class.getName()).log(Level.SEVERE, null, ex);
@@ -220,6 +264,26 @@ public class MenuController implements Initializable {
         }
     }
 
+    public void writeSecurity() throws ListException {
+        FileXML fXML = new FileXML();
+        AES encrypt = new AES();
+        for (int i = 1; i <= lSecurity.size(); i++) {
+            Security sec = (Security)lSecurity.getNode(i).data;
+            //Se encripta la información y se guarda
+            Security encSec = new Security(encrypt.encrypt(sec.getUser(),"Proyecto"),encrypt.encrypt(sec.getPassword(),"Proyecto"));
+            System.out.println("Encriptado: " + encSec.toString());
+            try {
+                fXML.writeXML("Security.xml", "User", encSec.dataName(), encSec.data());
+            } catch (TransformerException ex) {
+                Logger.getLogger(MenuController.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (SAXException ex) {
+                Logger.getLogger(MenuController.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (IOException ex) {
+                Logger.getLogger(MenuController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+    }
+
     @FXML
     private void btnLogOut(ActionEvent event) {
         System.out.println("Clic en logout");
@@ -230,6 +294,16 @@ public class MenuController implements Initializable {
         }
     }
 
+    private  void configMenu(){
+        if (!Util.Utility.isKindUser()){
+            this.menuCareer.setDisable(true);
+            this.menuStudent.setDisable(true);
+            this.menuUser.setDisable(true);
+            this.menuCourse.setDisable(true);
+            this.menuSchedules.setDisable(true);
+        }
+    }
+    
     @FXML
     private void mnNewCourse(ActionEvent event) {
         loadPage("/UI/newCourse");
@@ -253,6 +327,11 @@ public class MenuController implements Initializable {
     @FXML
     private void btnNewSchedule(ActionEvent event) {
         loadPage("/UI/newTimeTable");
+    }
+
+    @FXML
+    private void btnNewUser(ActionEvent event) {
+        loadPage("/UI/newUser");
     }
 
 }
