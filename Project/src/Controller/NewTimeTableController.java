@@ -10,6 +10,7 @@ import Domain.DoublyLinkList;
 import Domain.ListException;
 import Objects.Career;
 import Objects.Course;
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
@@ -18,12 +19,19 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Spinner;
 import javafx.scene.control.SpinnerValueFactory;
 import javafx.scene.input.MouseEvent;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
 
 /**
  * FXML Controller class
@@ -193,9 +201,15 @@ public class NewTimeTableController implements Initializable {
         
         
         if(spnDay1.getValue().equals(spnDay2.getValue())&& scheduleClash(i1,f1,i2,f2)){
-            System.out.println("NO entro");
+//            Alert scheduleClash = new Alert(AlertType.WARNING);
+//            scheduleClash.setTitle("Error");
+//            scheduleClash.setHeaderText("¡Schedule Clash!");
+//            scheduleClash.setContentText("Course schedules cannot collide.");
+//            scheduleClash.showAndWait();
+//            scheduleClash.initStyle();
+            callAlert("alert", "¡Schedule Clash!", "Course schedules cannot collide.");
         }else{
-            System.out.println("Entro");
+            
         }
         
     }
@@ -211,23 +225,37 @@ public class NewTimeTableController implements Initializable {
     }
 
     private Boolean scheduleClash(int i1, int f1, int i2, int f2) {
-        
-        System.out.println(i1+" "+f1+" "+i2+" "+f2+"Inicios y finales");
-        String h1="";
-                
+        String h1="";      
         for (int j = i1; j < f1; j++) {
             h1+=j;
-           System.out.println("j"+j);
         }
+        
         for (int k = i2; k < f2; k++) {
-            System.out.println("k"+k);
-            if(h1.contains(""+k)){
-                System.out.println("true");
+            if(h1.contains(""+k)){  
                 return true;
             }
         }
         return false;
     }
 
+    private void callAlert(String fxmlName, String title, String text) {
+        //Se llama la alerta
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/UI/" + fxmlName + ".fxml"));
+            Parent root1;
+            root1 = (Parent) loader.load();
+            //Se llama al controller de la nueva ventana abierta
+            AlertController controller = loader.getController();
+            Stage stage = new Stage();
+            stage.initModality(Modality.APPLICATION_MODAL);
+            stage.setTitle("Alerta");
+            //Se le asigna la información a la controladora
+            controller.setText(title, text);
+            stage.setScene(new Scene(root1));
+            stage.show();
+        } catch (IOException ex) {
+            Logger.getLogger(LogInController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
     
 }
