@@ -220,34 +220,7 @@ public class Utility {
                 .format(date);
     }
 
-    public MaskFormatter chooseMask(String option) throws ParseException {
-
-        /**
-         * Simbology in case u want to create a new one > ? = Letters,# =
-         * Numbers,* = Anything PlaceHolder places a "_" in the place u r
-         * suppossed to write something Careful! The uppercases in the masks
-         * appear in the textField To implement masks use > JFormattedTextField
-         * Name = new
-         * JFormattedTextField(Util.utility.chooseMask(theMaskUwant));
-         */
-        switch (option) {
-            case "studentId":
-                MaskFormatter mask = new MaskFormatter("?######");
-                return mask;
-            case "id":
-                MaskFormatter mask2 = new MaskFormatter("#-####-####");
-                mask2.setPlaceholder("_");
-                return mask2;
-            case "phoneNumber":
-                MaskFormatter mask3 = new MaskFormatter("####-####");
-                mask3.setPlaceholder("_");
-                return mask3;
-
-        }
-        return null;
-    }
-
-    public boolean emailChecker(String email) {
+    public static boolean emailChecker(String email) {
         //Just send the email and return a boolean if it matches the mail format
         //Nobody knows how the hell the pattern works but it works so...
 
