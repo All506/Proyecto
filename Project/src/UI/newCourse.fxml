@@ -22,7 +22,7 @@
          <font>
             <Font size="15.0" />
          </font></Text>
-      <ComboBox fx:id="cmbCarrerId" layoutX="263.0" layoutY="251.0" prefHeight="29.0" prefWidth="149.0" />
+      <ComboBox fx:id="cmbCarrerId" layoutX="263.0" layoutY="251.0" prefHeight="29.0" prefWidth="149.0" promptText="Carrera" />
       <Button fx:id="btnClean" layoutX="314.0" layoutY="327.0" mnemonicParsing="false" onAction="#btnClean" prefHeight="31.0" prefWidth="77.0" text="CLEAN">
          <font>
             <Font size="15.0" />
@@ -31,9 +31,9 @@
          <font>
             <Font size="15.0" />
          </font></Button>
-      <TextField fx:id="txtId" layoutX="263.0" layoutY="121.0" />
-      <TextField fx:id="txtName" layoutX="263.0" layoutY="167.0" />
-      <TextField fx:id="txtCredits" layoutX="263.0" layoutY="208.0" />
+      <TextField fx:id="txtId" layoutX="263.0" layoutY="121.0" onKeyReleased="#keyPressed" />
+      <TextField fx:id="txtName" layoutX="263.0" layoutY="167.0" onKeyReleased="#keyPressed" />
+      <TextField fx:id="txtCredits" layoutX="263.0" layoutY="208.0" onKeyReleased="#keyPressed" />
       <Text fill="WHITE" layoutX="190.0" layoutY="272.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Carrer ID">
          <font>
             <Font size="15.0" />
