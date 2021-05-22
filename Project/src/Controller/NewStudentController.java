@@ -19,8 +19,11 @@ import java.util.Date;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
+import javafx.event.EventType;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -30,8 +33,11 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import javax.swing.text.MaskFormatter;
 
 /**
  * FXML Controller class
@@ -78,11 +84,84 @@ public class NewStudentController implements Initializable {
         //Para cargar un combobox
         this.loadComboBoxCareers();
 
+        //Mask for ID
+        maskID(txtID);
+
+        //Mask for PhoneNumber
+        maskPhoneNumber(txtPhoneNumber);
+
+        //Mask for StudentID
+        maskStudentID(txtStudentID);
+    }
+
+    public static void maskStudentID(TextField txtStudentID) {
+        String mask = "";
+        txtStudentID.setOnKeyTyped((KeyEvent event) -> {
+            if (event.getCharacter().trim().length() == 0) {
+                if (txtStudentID.getText().length() == 6) {
+                    txtStudentID.setText(txtStudentID.getText().substring(0, 5));
+                    txtStudentID.positionCaret(txtStudentID.getText().length());
+                }
+            } else {
+                if (txtStudentID.getText().length() == 6) {
+                    event.consume();
+                }
+
+            }
+        });
+    }
+
+    public static void maskID(TextField txtID) {
+        String mask = "";
+        txtID.setOnKeyTyped((KeyEvent event) -> {
+            if ("0123456789".contains(event.getCharacter()) == false) {
+                event.consume();
+            }
+            if (event.getCharacter().trim().length() == 0) {
+                if (txtID.getText().length() == 6) {
+                    txtID.setText(txtID.getText().substring(0, 5));
+                    txtID.positionCaret(txtID.getText().length());
+                }
+            } else {
+                if (txtID.getText().length() == 12) {
+                    event.consume();
+                }
+                if (txtID.getText().length() == 2 || txtID.getText().length() == 7) {
+                    txtID.setText(txtID.getText() + "-");
+                    txtID.positionCaret(txtID.getText().length());
+                }
+
+            }
+        });
+    }
+
+    public static void maskPhoneNumber(TextField txtPhoneNumber) {
+        String mask = "";
+        txtPhoneNumber.setOnKeyTyped((KeyEvent event) -> {
+            if ("0123456789".contains(event.getCharacter()) == false) {
+                event.consume();
+            }
+            if (event.getCharacter().trim().length() == 0) {
+                if (txtPhoneNumber.getText().length() == 6) {
+                    txtPhoneNumber.setText(txtPhoneNumber.getText().substring(0, 5));
+                    txtPhoneNumber.positionCaret(txtPhoneNumber.getText().length());
+                }
+            } else {
+                if (txtPhoneNumber.getText().length() == 9) {
+                    event.consume();
+                }
+                if (txtPhoneNumber.getText().length() == 4) {
+                    txtPhoneNumber.setText(txtPhoneNumber.getText() + "-");
+                    txtPhoneNumber.positionCaret(txtPhoneNumber.getText().length());
+                }
+
+            }
+        });
     }
 
     @FXML
     private void btnAdd(ActionEvent event) {
- 
+
         try {
             id = Integer.parseInt(txtID.getText());
             phoneNumber = parseDouble(txtPhoneNumber.getText());
@@ -92,7 +171,7 @@ public class NewStudentController implements Initializable {
 
             String[] temporal = cmbCareerID.getValue().split("-"); //Hace split del combobox y pasa el resultado del id de carrera seleccionado
             Student std = new Student(id, Integer.parseInt(temporal[0]), txtStudentID.getText(), txtLastname.getText(), txtFirstname.getText(),
-                     txtPhoneNumber.getText(), txtEmail.getText(), txtAddress.getText(), d);
+                    txtPhoneNumber.getText(), txtEmail.getText(), txtAddress.getText(), d);
             try {
                 if (Util.Utility.setListStudent(std)) {
                     callAlert("notification", "Notification", "User has been registered");
@@ -141,19 +220,19 @@ public class NewStudentController implements Initializable {
             Logger.getLogger(LogInController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
-    public void loadComboBoxCareers(){
+
+    public void loadComboBoxCareers() {
         //Para cargar un combobox
         DoublyLinkList tempCareers = new DoublyLinkList();
         tempCareers = Util.Utility.getListCareer();
         String temporal = "";
-        
+
         try {
             for (int i = 1; i <= tempCareers.size(); i++) {
-                Career c = (Career)tempCareers.getNode(i).getData(); 
-                temporal = c.getId()+"-"+c.getDescription();
+                Career c = (Career) tempCareers.getNode(i).getData();
+                temporal = c.getId() + "-" + c.getDescription();
                 this.cmbCareerID.getItems().add(temporal);
-                        }
+            }
         } catch (ListException ex) {
             Logger.getLogger(NewStudentController.class.getName()).log(Level.SEVERE, null, ex);
         }
