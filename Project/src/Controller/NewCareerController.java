@@ -43,7 +43,8 @@ public class NewCareerController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
+        txtCareerId.setEditable(false);
+        txtCareerId.setText(String.valueOf(Objects.Career.consecutivo));
     }    
 
     @FXML

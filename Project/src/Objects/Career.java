@@ -22,6 +22,10 @@ public class Career {
         this.description = description;
     }
     
+    public int getConsecutivo(){
+        return consecutivo;
+    }
+    
     public Career(Career car){
         this.id = car.getId();
         this.description = car.getDescription();
