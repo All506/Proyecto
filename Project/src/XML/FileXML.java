@@ -77,8 +77,7 @@ public class FileXML {
         } catch (IOException ex) {
             Logger.getLogger(FileXML.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
-    }
+    } 
     
     public void writeXML(String FileName, String elementType, String[] dataName, String[] data) throws TransformerException, org.xml.sax.SAXException, IOException {
 

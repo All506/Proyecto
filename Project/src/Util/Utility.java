@@ -190,7 +190,7 @@ public class Utility {
             case "security":
                 Security sec1 = (Security) a;
                 Security sec2 = (Security) b;
-                return sec1.getUser().equalsIgnoreCase(sec2.getUser()) && sec1.getPassword().equalsIgnoreCase(sec2.getPassword());
+                return sec1.getUser().equals(sec2.getUser()) && sec1.getPassword().equals(sec2.getPassword());
         }
         return false; //En cualquier otro caso retorna un false
     }
