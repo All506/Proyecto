@@ -17,9 +17,9 @@
       <ComboBox fx:id="cmbCourses" layoutX="305.0" layoutY="69.0" prefWidth="150.0" />
       <Spinner fx:id="spnDay1" layoutX="183.0" layoutY="191.0" prefHeight="26.0" prefWidth="122.0" />
       <Spinner fx:id="spnEnd2" layoutX="474.0" layoutY="264.0" prefHeight="26.0" prefWidth="100.0" />
-      <Spinner fx:id="spnStart2" layoutX="348.0" layoutY="263.0" prefHeight="26.0" prefWidth="100.0" />
+      <Spinner fx:id="spnStart2" layoutX="348.0" layoutY="263.0" onMouseClicked="#spn2MouseClicked" prefHeight="26.0" prefWidth="100.0" />
       <Spinner fx:id="spnDay2" layoutX="183.0" layoutY="264.0" prefHeight="26.0" prefWidth="122.0" />
-      <Spinner fx:id="spnStart1" layoutX="348.0" layoutY="191.0" prefHeight="26.0" prefWidth="100.0" />
+      <Spinner fx:id="spnStart1" layoutX="348.0" layoutY="191.0" onMouseClicked="#spn1MouseClicked" prefHeight="26.0" prefWidth="100.0" />
       <Spinner fx:id="spnEnd1" layoutX="474.0" layoutY="191.0" prefHeight="26.0" prefWidth="100.0" />
       <Text fill="#adadad" layoutX="65.0" layoutY="282.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Schedule two">
          <font>

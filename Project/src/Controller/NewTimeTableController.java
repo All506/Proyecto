@@ -23,6 +23,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Spinner;
 import javafx.scene.control.SpinnerValueFactory;
+import javafx.scene.input.MouseEvent;
 
 /**
  * FXML Controller class
@@ -36,7 +37,7 @@ public class NewTimeTableController implements Initializable {
     @FXML
     private Spinner<String> spnDay1;
     @FXML
-    private Spinner<?> spnEnd2;
+    private Spinner<Integer> spnEnd2;
     @FXML
     private Spinner<Integer> spnStart2;
     @FXML
@@ -44,7 +45,7 @@ public class NewTimeTableController implements Initializable {
     @FXML
     private Spinner<Integer> spnStart1;
     @FXML
-    private Spinner<?> spnEnd1;
+    private Spinner<Integer> spnEnd1;
     @FXML
     private Button btnClean;
     @FXML
@@ -57,13 +58,16 @@ public class NewTimeTableController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        this.loadComboBoxCareers();
+        this.loadComboBoxCourses();
         this.loadSpinnerDays();
         this.loadComboBoxPeriod();
         this.loadSpinnerStart();
+       
     }    
+    
+    
 
-       public void loadComboBoxCareers(){
+       public void loadComboBoxCourses(){
         //Para cargar un combobox
         CircularLinkList tempCourses = new CircularLinkList();
         tempCourses = Util.Utility.getListCourse();
@@ -104,8 +108,8 @@ public class NewTimeTableController implements Initializable {
       public void loadSpinnerStart(){
       
       ObservableList<Integer> start = FXCollections.observableArrayList(
-            7,8,9,10,11,12,13,14,15,16,17,18,19,20,21);
-      
+            7,8,9,10,11,12,13,14,15,16,17,18,19,20);
+
       // Value factory.
        SpinnerValueFactory<Integer> valueFactory = //
                new SpinnerValueFactory.ListSpinnerValueFactory<Integer>(start);
@@ -118,8 +122,48 @@ public class NewTimeTableController implements Initializable {
  
        spnStart1.setValueFactory(valueFactory);
        spnStart2.setValueFactory(valueFactory2);
+       
+       ObservableList<Integer> end = FXCollections.observableArrayList(
+            8,9,10,11,12,13,14,15,16,17,18,19,20,21);
+
+      // Value factory.
+       SpinnerValueFactory<Integer> valueFactory3 = //
+               new SpinnerValueFactory.ListSpinnerValueFactory<Integer>(end);
+       SpinnerValueFactory<Integer> valueFactory4 = //
+               new SpinnerValueFactory.ListSpinnerValueFactory<Integer>(end);
+       
+       valueFactory3.setValue(8);
+       valueFactory4.setValue(8);
+    
+ 
+       spnEnd1.setValueFactory(valueFactory3);
+       spnEnd2.setValueFactory(valueFactory4);
       
       }
+      //-------------------------------------------------------------------
+      public void loadSpinnerEnding(){
+      
+      ObservableList<Integer> ending = FXCollections.observableArrayList();
+          for (int i = (Integer)spnStart1.getValue(); i < 21; i++) {
+             ending.add(i+1); 
+          }
+       SpinnerValueFactory<Integer> valueFactory = //
+               new SpinnerValueFactory.ListSpinnerValueFactory<Integer>(ending);
+       spnEnd1.setValueFactory(valueFactory);
+      }
+      
+      
+      public void loadSpinnerEnding2(){
+      
+      ObservableList<Integer> ending = FXCollections.observableArrayList();
+          for (int i = (Integer)spnStart2.getValue(); i < 21; i++) {
+             ending.add(i+1); 
+          }
+       SpinnerValueFactory<Integer> valueFactory = //
+               new SpinnerValueFactory.ListSpinnerValueFactory<Integer>(ending);
+       spnEnd2.setValueFactory(valueFactory);
+      }
+      //--------------------------------------------------
       
       public void loadComboBoxPeriod(){
         //Para cargar un combobox
@@ -133,10 +177,56 @@ public class NewTimeTableController implements Initializable {
 
     @FXML
     private void btnClean(ActionEvent event) {
+        this.loadComboBoxCourses();
+        this.loadSpinnerDays();
+        this.loadComboBoxPeriod();
+        this.loadSpinnerStart(); 
     }
 
     @FXML
     private void btnValidSave(ActionEvent event) {
+        
+        int i1=spnStart1.getValue();
+        int i2=spnStart2.getValue();
+        int f1=spnEnd1.getValue();
+        int f2=spnEnd2.getValue();
+        
+        
+        if(spnDay1.getValue().equals(spnDay2.getValue())&& scheduleClash(i1,f1,i2,f2)){
+            System.out.println("NO entro");
+        }else{
+            System.out.println("Entro");
+        }
+        
+    }
+
+    @FXML
+    private void spn2MouseClicked(MouseEvent event) {
+        loadSpinnerEnding2();
+    }
+
+    @FXML
+    private void spn1MouseClicked(MouseEvent event) {
+        loadSpinnerEnding();
+    }
+
+    private Boolean scheduleClash(int i1, int f1, int i2, int f2) {
+        
+        System.out.println(i1+" "+f1+" "+i2+" "+f2+"Inicios y finales");
+        String h1="";
+                
+        for (int j = i1; j < f1; j++) {
+            h1+=j;
+           System.out.println("j"+j);
+        }
+        for (int k = i2; k < f2; k++) {
+            System.out.println("k"+k);
+            if(h1.contains(""+k)){
+                System.out.println("true");
+                return true;
+            }
+        }
+        return false;
     }
 
     
