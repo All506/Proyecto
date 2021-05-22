@@ -17,15 +17,18 @@ public class Career {
     public static int consecutivo;
     
     public Career(int id, String description) {
+        this.description = description;
+    }
+    
+    public void setIDConsecutivo(){
         this.id = consecutivo;
         consecutivo++;
-        this.description = description;
     }
     
     public int getConsecutivo(){
         return consecutivo;
     }
-    
+        
     public Career(Career car){
         this.id = car.getId();
         this.description = car.getDescription();

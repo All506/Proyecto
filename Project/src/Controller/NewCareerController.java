@@ -55,8 +55,13 @@ public class NewCareerController implements Initializable {
             callAlert("notification","Notification","Career has been saved");
             System.out.println(Util.Utility.getListCareer().toString());
         } else {
-            callAlert("alert","Error","Id is already in registered");
+            callAlert("alert","Error","Description is already in registered");
         }
+        
+        //Update the txtCareerID
+        txtCareerId.setEditable(false);
+        txtCareerId.setText(String.valueOf(Objects.Career.consecutivo));
+        txtDescription.setText("");
     }
 
     @FXML

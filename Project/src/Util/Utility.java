@@ -66,7 +66,6 @@ public class Utility {
         Utility.kindUser = kindUser;
     }
 
-    
     //DELETE NODES DE LAS LISTA
     public static void deleteNodeLStudent(Student std) {
         try {
@@ -98,10 +97,12 @@ public class Utility {
     public static boolean setListCareer(Career car) throws ListException {
         boolean flag = false;
         if (Utility.lCareer.isEmpty()) {
+            car.setIDConsecutivo();
             Utility.lCareer.add(car);
             flag = true;
         } else {
             if (!lCareer.contains(car)) {
+                car.setIDConsecutivo();
                 lCareer.add(car);
                 flag = true;
             } else {
@@ -186,7 +187,7 @@ public class Utility {
             case "career":
                 Career car1 = (Career) a;
                 Career car2 = (Career) b;
-                return car1.getId() == car2.getId();
+                return car1.getDescription().compareTo(car2.getDescription()) == 0;
             case "security":
                 Security sec1 = (Security) a;
                 Security sec2 = (Security) b;
