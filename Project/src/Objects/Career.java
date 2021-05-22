@@ -14,8 +14,11 @@ public class Career {
     private int id;
     private String description;
 
+    public static int consecutivo;
+    
     public Career(int id, String description) {
-        this.id = id;
+        this.id = consecutivo;
+        consecutivo++;
         this.description = description;
     }
     
