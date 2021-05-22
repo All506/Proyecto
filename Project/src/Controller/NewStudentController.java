@@ -45,7 +45,7 @@ import javax.swing.text.MaskFormatter;
  * @author Alán
  */
 public class NewStudentController implements Initializable {
-
+    
     @FXML
     private TextField txtID;
     @FXML
@@ -76,7 +76,7 @@ public class NewStudentController implements Initializable {
     Date d = null;
     @FXML
     private Button btnClean;
-
+    
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         students = new SinglyLinkList();
@@ -93,7 +93,7 @@ public class NewStudentController implements Initializable {
         //Mask for StudentID
         maskStudentID(txtStudentID);
     }
-
+    
     public static void maskStudentID(TextField txtStudentID) {
         String mask = "";
         txtStudentID.setOnKeyTyped((KeyEvent event) -> {
@@ -106,11 +106,11 @@ public class NewStudentController implements Initializable {
                 if (txtStudentID.getText().length() == 6) {
                     event.consume();
                 }
-
+                
             }
         });
     }
-
+    
     public static void maskID(TextField txtID) {
         String mask = "";
         txtID.setOnKeyTyped((KeyEvent event) -> {
@@ -123,18 +123,15 @@ public class NewStudentController implements Initializable {
                     txtID.positionCaret(txtID.getText().length());
                 }
             } else {
-                if (txtID.getText().length() == 12) {
+                if (txtID.getText().length() == 10) {
                     event.consume();
                 }
-                if (txtID.getText().length() == 2 || txtID.getText().length() == 7) {
-                    txtID.setText(txtID.getText() + "-");
-                    txtID.positionCaret(txtID.getText().length());
-                }
-
+                
+                
             }
         });
     }
-
+    
     public static void maskPhoneNumber(TextField txtPhoneNumber) {
         String mask = "";
         txtPhoneNumber.setOnKeyTyped((KeyEvent event) -> {
@@ -147,31 +144,30 @@ public class NewStudentController implements Initializable {
                     txtPhoneNumber.positionCaret(txtPhoneNumber.getText().length());
                 }
             } else {
-                if (txtPhoneNumber.getText().length() == 9) {
+                if (txtPhoneNumber.getText().length() == 8) {
                     event.consume();
                 }
                 if (txtPhoneNumber.getText().length() == 4) {
-                    txtPhoneNumber.setText(txtPhoneNumber.getText() + "-");
                     txtPhoneNumber.positionCaret(txtPhoneNumber.getText().length());
                 }
-
+                
             }
         });
     }
-
+    
     @FXML
     private void btnAdd(ActionEvent event) {
-
+        
         try {
             id = Integer.parseInt(txtID.getText());
             phoneNumber = parseDouble(txtPhoneNumber.getText());
             //VERIFICAR SI HAY ESPACIOS VACIOS
 
             java.util.Date d = java.sql.Date.valueOf(dpBirthday.getValue());
-
+            
             String[] temporal = cmbCareerID.getValue().split("-"); //Hace split del combobox y pasa el resultado del id de carrera seleccionado
             Student std = new Student(id, Integer.parseInt(temporal[0]), txtStudentID.getText(), txtLastname.getText(), txtFirstname.getText(),
-                    txtPhoneNumber.getText(), txtEmail.getText(), txtAddress.getText(), d);
+                        txtPhoneNumber.getText(), txtEmail.getText(), txtAddress.getText(), d);
             try {
                 if (Util.Utility.setListStudent(std)) {
                     callAlert("notification", "Notification", "User has been registered");
@@ -187,7 +183,7 @@ public class NewStudentController implements Initializable {
             callAlert("alert", "Error", "Only numerical numbers can be written. \n Please check the spaces");
         }
     }
-
+    
     @FXML
     private void btnClean(ActionEvent event) {
         txtID.setText("");
@@ -200,7 +196,7 @@ public class NewStudentController implements Initializable {
         txtAddress.setText("");
         loadComboBoxCareers();
     }
-
+    
     private void callAlert(String fxmlName, String title, String text) {
         //Se llama la alerta
         try {
@@ -220,13 +216,13 @@ public class NewStudentController implements Initializable {
             Logger.getLogger(LogInController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-
+    
     public void loadComboBoxCareers() {
         //Para cargar un combobox
         DoublyLinkList tempCareers = new DoublyLinkList();
         tempCareers = Util.Utility.getListCareer();
         String temporal = "";
-
+        
         try {
             for (int i = 1; i <= tempCareers.size(); i++) {
                 Career c = (Career) tempCareers.getNode(i).getData();
@@ -238,5 +234,5 @@ public class NewStudentController implements Initializable {
         }
         cmbCareerID.setValue(temporal);
     }
-
+    
 }

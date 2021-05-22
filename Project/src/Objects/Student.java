@@ -4,8 +4,8 @@ import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.util.Date;
 
-
 public class Student {
+
     //ATRIBUTOS DE LA CLASE
     private int id, careerID;
     private String studentID, lastname, firstname, phoneNumber, email, address;
@@ -100,6 +100,10 @@ public class Student {
         this.address = address;
     }
 
+    public Date getBirthday2() {//Se para que en la tabla ponga bien la fecha y la ponga
+        return new Date(birthday.getYear(), birthday.getMonth(), birthday.getDate());
+    }
+
     public Date getBirthday() {
         return birthday;
     }
@@ -114,13 +118,13 @@ public class Student {
     }
 
     public String[] dataName() {
-        String[] dataName = {"studentId","id", "carrerId", "lastName", "firstName", "phoneNumber", "email", "address", "birthday"};
+        String[] dataName = {"studentId", "id", "carrerId", "lastName", "firstName", "phoneNumber", "email", "address", "birthday"};
         return dataName;
     }
 
     public String[] data() {
-        LocalDate date = LocalDate.parse( new SimpleDateFormat("yyyy-MM-dd").format(this.getBirthday()));
-        String[] data = {studentID,Integer.toString(id), Integer.toString(careerID), lastname, firstname, phoneNumber, email, address, date.toString()};
+        LocalDate date = LocalDate.parse(new SimpleDateFormat("yyyy-MM-dd").format(this.getBirthday()));
+        String[] data = {studentID, Integer.toString(id), Integer.toString(careerID), lastname, firstname, phoneNumber, email, address, date.toString()};
         return data;
     }
 }
