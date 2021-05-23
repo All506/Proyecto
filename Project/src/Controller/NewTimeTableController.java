@@ -8,6 +8,7 @@ package Controller;
 import Domain.CircularLinkList;
 import Domain.DoublyLinkList;
 import Domain.ListException;
+import Domain.SinglyLinkList;
 import Objects.Career;
 import Objects.Course;
 import Objects.TimeTable;
@@ -91,7 +92,9 @@ public class NewTimeTableController implements Initializable {
         } catch (ListException ex) {
             Logger.getLogger(NewStudentController.class.getName()).log(Level.SEVERE, null, ex);
         }
+        
         cmbCourses.setValue(temporal);
+        cmbCourses.getSelectionModel().select("Courses");
     }
 
       public void loadSpinnerDays(){
@@ -182,13 +185,14 @@ public class NewTimeTableController implements Initializable {
                 this.cmbPeriod.getItems().add("3-"+i);
             }
         cmbPeriod.setValue("1-2020");
+        cmbPeriod.getSelectionModel().select("Period");
     }
 
     @FXML
     private void btnClean(ActionEvent event) {
-        this.loadComboBoxCourses();
+        cmbCourses.getSelectionModel().select("Courses");
         this.loadSpinnerDays();
-        this.loadComboBoxPeriod();
+        cmbPeriod.getSelectionModel().select("Period");
         this.loadSpinnerStart(); 
     }
 
@@ -210,10 +214,9 @@ public class NewTimeTableController implements Initializable {
                   cmbPeriod.getValue(),
                   spnDay1.getValue().substring(0, 3)+" "+Util.Utility.hourFormat(spnStart1.getValue())+"-"+Util.Utility.hourFormat(spnEnd1.getValue()), 
                   spnDay2.getValue().substring(0, 3)+" "+Util.Utility.hourFormat(spnStart2.getValue())+"-"+Util.Utility.hourFormat(spnEnd2.getValue()));
-            
-          System.out.println(t.toString());
+      
           Util.Utility.setListSchedule(t);
-                
+            System.out.println(t.toString());      
           btnClean(event);
         }
         
@@ -264,7 +267,36 @@ public class NewTimeTableController implements Initializable {
     }
 
     @FXML
-    private void cmbPeriodAction(ActionEvent event) {
+    private void cmbPeriodAction(ActionEvent event) throws ListException {
+        CircularLinkList s = Util.Utility.getListCourse();
+        SinglyLinkList sch = Util.Utility.getListSchedule();
+        Course find=null;
+        if(!s.isEmpty()&&!sch.isEmpty()&&!cmbCourses.getValue().equals("Courses")&&!cmbPeriod.getValue().equals("Period")){
+        for (int i = 1; i <=s.size() ; i++) {
+            Course c = (Course)s.getNode(i).data;
+            System.out.println(c.getId()+"------"+Util.Utility.getIDofString(cmbCourses.getValue()));
+            if(c.getId().equals(Util.Utility.getIDofString(cmbCourses.getValue()))){ 
+                find=(Course)s.getNode(i).data;;
+                i=  s.size()+1;
+             
+            }
+            }
+            for (int j = 1; j <= sch.size(); j++) {
+                TimeTable t = (TimeTable)sch.getNode(j).data;
+                System.out.println(find.getId()+"++++++"+t.getID());
+                System.out.println(t.getPeriod()+"+++"+cmbPeriod.getValue());
+                if(find.getId().equals(t.getID())&&t.getPeriod().equals(cmbPeriod.getValue())){
+
+            System.out.println("ya tiene horario");
+            }
+           } 
+        
+     }
+   
     }
+
+   
+
+    
     
 }

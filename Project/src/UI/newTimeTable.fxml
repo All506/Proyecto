@@ -14,7 +14,7 @@
          <font>
             <Font name="System Bold" size="25.0" />
          </font></Text>
-      <ComboBox fx:id="cmbCourses" layoutX="305.0" layoutY="69.0" prefWidth="150.0" />
+      <ComboBox fx:id="cmbCourses" layoutX="305.0" layoutY="69.0" onAction="#cmbPeriodAction" prefWidth="150.0" />
       <Spinner fx:id="spnDay1" layoutX="183.0" layoutY="191.0" prefHeight="26.0" prefWidth="122.0" />
       <Spinner fx:id="spnEnd2" layoutX="474.0" layoutY="264.0" prefHeight="26.0" prefWidth="100.0" />
       <Spinner fx:id="spnStart2" layoutX="348.0" layoutY="263.0" onMouseClicked="#spn2MouseClicked" prefHeight="26.0" prefWidth="100.0" />
