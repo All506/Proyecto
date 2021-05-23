@@ -21,6 +21,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.input.KeyEvent;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
@@ -45,8 +46,32 @@ public class NewCareerController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         txtCareerId.setEditable(false);
         txtCareerId.setText(String.valueOf(Objects.Career.consecutivo));
+        
+        //Mask for Description
+        maskText(txtDescription);
+        
     }    
 
+    public void maskText(TextArea txtArea) {
+        txtArea.setOnKeyTyped((KeyEvent event) -> {
+            if (!"0123456789".contains(event.getCharacter()) == false) {
+                event.consume();
+            }
+            if (event.getCharacter().trim().length() == 0) {
+                if (txtArea.getText().length() == 6) {
+                    txtArea.setText(txtArea.getText().substring(0, 5));
+                    txtArea.positionCaret(txtArea.getText().length());
+                }
+            } else {
+
+                if (txtArea.getText().length() == 4) {
+                    txtArea.positionCaret(txtArea.getText().length());
+                }
+
+            }
+        });
+    }
+    
     @FXML
     private void btnAdd(ActionEvent event) throws ListException {
         //Verificar si han sido ingresados valores numéricos
