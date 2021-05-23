@@ -73,7 +73,7 @@ public class NewCourseController implements Initializable {
         DoublyLinkList tempCareers = new DoublyLinkList();
         tempCareers = Util.Utility.getListCareer();
         String temporal = "";
-        
+        this.cmbCarrerId.setValue(null);
         try {
             for (int i = 1; i <= tempCareers.size(); i++) {
                 Career c = (Career)tempCareers.getNode(i).getData(); 
@@ -83,7 +83,6 @@ public class NewCourseController implements Initializable {
         } catch (ListException ex) {
             Logger.getLogger(NewStudentController.class.getName()).log(Level.SEVERE, null, ex);
         }
-        this.cmbCarrerId.setValue(temporal);
     }
 
     @FXML
@@ -100,6 +99,7 @@ public class NewCourseController implements Initializable {
              callAlert("alert", "Error", "The data of the new course matches \n with an already existent course \n Please check your entries");
         }else{
             this.btnClean(event);
+            this.btnAdd.setDisable(true);
         }  
     }   
 

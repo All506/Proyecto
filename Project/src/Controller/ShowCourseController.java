@@ -108,9 +108,6 @@ public class ShowCourseController implements Initializable {
 
     @FXML
     private void btnSearch(ActionEvent event) {
-        if(Util.Utility.getListCourse().isEmpty()){
-           callAlert("alert", "Sorry!", "There are no courses to show"); 
-        }else{
             cursos = FXCollections.observableArrayList();
             // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
             this.colCourseId.setCellValueFactory(new PropertyValueFactory("id"));
@@ -125,12 +122,12 @@ public class ShowCourseController implements Initializable {
                    if(x.getCareerId()==Integer.parseInt(idCareerCut)){
                        cursos.add(x);
                        this.tblCoursesDisplay.setItems(cursos);
-                   }  
+                   }else{
+                       //this.tblCoursesDisplay.setItems(null);
+                   }
                 }
-            
             } catch (ListException ex) {
-                System.out.println("Problemas en las listas en ShowCourseController");
-            }
-        }
+                callAlert("alert", "Error 404", "There are no courses to show"); 
+            }  
     }
 }
