@@ -56,8 +56,84 @@ public class NewCourseController implements Initializable {
         // TODO
         loadComboBoxCourse();
         this.btnAdd.setDisable(true);
-    }    
 
+        //Mask ID
+        maskID(txtId);
+
+        //Mask Name
+        maskText(txtName);
+
+        //Mask Credits
+        maskCredits(txtCredits);
+    }
+
+    public void maskID(TextField txtId) {
+        txtId.setOnKeyTyped((KeyEvent event) -> {
+            if (event.getCharacter().trim().length() == 0) {
+                if (txtId.getText().length() == 6) {
+                    txtId.setText(txtId.getText().substring(0, 5));
+                    txtId.positionCaret(txtId.getText().length());
+                }
+            } else {
+                if (txtId.getText().length() == 0 || txtId.getText().length() == 1) {
+                    if (!"0123456789".contains(event.getCharacter()) == false) {
+                        event.consume();
+                    }
+                }
+                if (txtId.getText().length() >= 2) {
+                    if ("0123456789".contains(event.getCharacter()) == false) {
+                        event.consume();
+                    }
+                }
+                if(txtId.getText().length() == 6){
+                        event.consume();
+                    txtId.positionCaret(txtId.getText().length());
+                }
+                
+            }
+        });
+    }
+
+    public void maskCredits(TextField txtCredits) {
+        txtCredits.setOnKeyTyped((KeyEvent event) -> {
+            if ("0123456789".contains(event.getCharacter()) == false) {
+                event.consume();
+            }
+            if (event.getCharacter().trim().length() == 0) {
+                if (txtCredits.getText().length() == 6) {
+                    txtCredits.setText(txtCredits.getText().substring(0, 5));
+                    txtCredits.positionCaret(txtCredits.getText().length());
+                }
+            } else {
+
+                if (txtCredits.getText().length() == 2) {
+                    event.consume();
+                    txtCredits.positionCaret(txtCredits.getText().length());
+                }
+
+            }
+        });
+    }
+
+    public void maskText(TextField txtField) {
+        txtField.setOnKeyTyped((KeyEvent event) -> {
+            if (!"0123456789".contains(event.getCharacter()) == false) {
+                event.consume();
+            }
+            if (event.getCharacter().trim().length() == 0) {
+                if (txtField.getText().length() == 6) {
+                    txtField.setText(txtField.getText().substring(0, 5));
+                    txtField.positionCaret(txtField.getText().length());
+                }
+            } else {
+
+                if (txtField.getText().length() == 4) {
+                    txtField.positionCaret(txtField.getText().length());
+                }
+
+            }
+        });
+    }
 
     @FXML
     private void btnClean(ActionEvent event) {
@@ -65,10 +141,10 @@ public class NewCourseController implements Initializable {
         this.txtId.setText("");
         this.txtCredits.setText("");
         this.cmbCarrerId.setValue(null);
-        
+
     }
-    
-    public void loadComboBoxCourse(){
+
+    public void loadComboBoxCourse() {
         //Para cargar un combobox
         DoublyLinkList tempCareers = new DoublyLinkList();
         tempCareers = Util.Utility.getListCareer();
@@ -76,34 +152,34 @@ public class NewCourseController implements Initializable {
         this.cmbCarrerId.setValue(null);
         try {
             for (int i = 1; i <= tempCareers.size(); i++) {
-                Career c = (Career)tempCareers.getNode(i).getData(); 
-                temporal = c.getId()+"-"+c.getDescription();
+                Career c = (Career) tempCareers.getNode(i).getData();
+                temporal = c.getId() + "-" + c.getDescription();
                 this.cmbCarrerId.getItems().add(temporal);
-                        }
+            }
         } catch (ListException ex) {
             Logger.getLogger(NewStudentController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
     @FXML
-    private void btnAdd(ActionEvent event) throws ListException {      
+    private void btnAdd(ActionEvent event) throws ListException {
         int i = 0;
         String x = "";
-        while(!("-").contains(""+this.cmbCarrerId.getValue().charAt(i))){
-                    x += this.cmbCarrerId.getValue().charAt(i);
-                    i++;
-        }        
-        Course crse = new Course(this.txtId.getText(),this.txtName.getText(),Integer.parseInt(this.txtCredits.getText()),Integer.parseInt(x));
+        while (!("-").contains("" + this.cmbCarrerId.getValue().charAt(i))) {
+            x += this.cmbCarrerId.getValue().charAt(i);
+            i++;
+        }
+        Course crse = new Course(this.txtId.getText(), this.txtName.getText(), Integer.parseInt(this.txtCredits.getText()), Integer.parseInt(x));
 
-        if(!Util.Utility.setListCourse(crse)){
-             callAlert("alert", "Error", "The data of the new course matches \n with an already existent course \n Please check your entries");
-        }else{
+        if (!Util.Utility.setListCourse(crse)) {
+            callAlert("alert", "Error", "The data of the new course matches \n with an already existent course \n Please check your entries");
+        } else {
             this.btnClean(event);
             this.btnAdd.setDisable(true);
-        }  
-    }   
+        }
+    }
 
-  private void callAlert(String fxmlName, String title, String text) {
+    private void callAlert(String fxmlName, String title, String text) {
         //Se llama la alerta
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/UI/" + fxmlName + ".fxml"));
@@ -121,14 +197,14 @@ public class NewCourseController implements Initializable {
         } catch (IOException ex) {
             Logger.getLogger(LogInController.class.getName()).log(Level.SEVERE, null, ex);
         }
-    }  
-    
+    }
+
     @FXML
     private void keyPressed(KeyEvent event) { //Es key Released pero por conveniencia el nombre es keyPressed
-        if(this.txtName.getText().length()!=0 && this.txtId.getText().length()!=0 && this.txtCredits.getText().length()!=0){
-                this.btnAdd.setDisable(false);
-    }else{
-          this.btnAdd.setDisable(true);
+        if (this.txtName.getText().length() != 0 && this.txtId.getText().length() != 0 && this.txtCredits.getText().length() != 0) {
+            this.btnAdd.setDisable(false);
+        } else {
+            this.btnAdd.setDisable(true);
         }
-}
+    }
 }
