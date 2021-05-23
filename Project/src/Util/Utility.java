@@ -7,12 +7,14 @@ package Util;
 
 import Controller.AlertController;
 import Controller.LogInController;
+import Domain.CircularDoublyLinkList;
 import Domain.CircularLinkList;
 import Objects.Career;
 import Domain.DoublyLinkList;
 import Domain.ListException;
 import Domain.SinglyLinkList;
 import Objects.Course;
+import Objects.Enrollment;
 import Objects.Security;
 import Objects.Student;
 import Objects.TimeTable;
@@ -41,6 +43,7 @@ public class Utility {
     private static DoublyLinkList lCareer = new DoublyLinkList();
     private static CircularLinkList lCourse = new CircularLinkList();
     private static CircularLinkList lSecurity = new CircularLinkList();
+    private static CircularDoublyLinkList lEnrollment = new CircularDoublyLinkList();
     private static boolean kindUser = false; //True if user, false if Student
 
     //GETS DE LAS LISTAS 
@@ -62,6 +65,10 @@ public class Utility {
 
     public static CircularLinkList getListSecurity() {
         return lSecurity;
+    }
+    
+    public static CircularDoublyLinkList getListEnrollment() {
+        return lEnrollment;
     }
 
     public static boolean isKindUser() {
@@ -165,6 +172,23 @@ public class Utility {
         }
         return flag;
     }
+    
+    public static boolean setListEnrollment(Enrollment enr) throws ListException {
+        boolean flag = false;
+        if (Utility.lEnrollment.isEmpty()) {
+            Utility.lEnrollment.add(enr);
+            flag = true;
+        } else {
+            if (!lEnrollment.contains(enr)) {
+                lEnrollment.add(enr);
+                flag = true;
+            } else {
+                flag = false;
+            }
+        }
+        return flag;
+    }
+    
     //UTILIDAD 
 
     public static int random() {
