@@ -32,6 +32,10 @@ public class Course {
         this.credits = crse.credits;
         this.careerId = crse.careerId; 
     }
+
+    public Course() {
+        
+    }
     
     //Getters and setters
     public String getId() {

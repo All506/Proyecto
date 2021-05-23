@@ -149,7 +149,7 @@ public class MenuController implements Initializable {
     }
 
     //Se podría llamar al inicio y final
-    public void loadLists() {
+    public void loadLists() { //Modificarlo para que no se caiga cuando no hay documentos
         SinglyLinkList temp = new SinglyLinkList();
         DoublyLinkList tempCareer = new DoublyLinkList();
 

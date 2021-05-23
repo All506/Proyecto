@@ -44,7 +44,7 @@ public class ShowCourseController implements Initializable {
     @FXML
     private TableView<Course> tblCoursesDisplay;
     @FXML
-    private TableColumn<Course, Integer> colCourseId;
+    private TableColumn<Course, String> colCourseId;
     @FXML
     private TableColumn<Course, String> colCourseName;
     @FXML

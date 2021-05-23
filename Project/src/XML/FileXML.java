@@ -258,20 +258,19 @@ public class FileXML {
             Document doc = dBuilder.parse(inputFile);
             doc.getDocumentElement().normalize();
 
-            NodeList nList = doc.getElementsByTagName("CoursesXML");
+            NodeList nList = doc.getElementsByTagName("Courses");
 
             for (int indice = 0; indice < nList.getLength(); indice++) {
-                Course tempCourse = new Course("", "", 0, 0);
+                Course cou = new Course();
                 Node nNode = nList.item(indice);
                 if (nNode.getNodeType() == Node.ELEMENT_NODE) {
                     Element eElement = (Element) nNode;
-                    tempCourse.setId(eElement.getAttribute("id")); //NO CARGA EL IpruebaD
-                    System.out.println("IDS de Cursos: " + eElement.getAttribute("id"));
-                    tempCourse.setName(eElement.getElementsByTagName("name").item(0).getTextContent());
-                    tempCourse.setCareerId(Integer.valueOf(eElement.getElementsByTagName("careerId").item(0).getTextContent()));
-                    tempCourse.setCredits(Integer.valueOf(eElement.getElementsByTagName("credits").item(0).getTextContent()));
+                    cou.setId(eElement.getAttribute("id"));
+                    cou.setCareerId(Integer.valueOf(eElement.getElementsByTagName("careerId").item(0).getTextContent()));
+                    cou.setName(eElement.getElementsByTagName("name").item(0).getTextContent());
+                    cou.setCredits(Integer.valueOf(eElement.getElementsByTagName("credits").item(0).getTextContent()));
                 }
-                lCourse.add(tempCourse);
+                lCourse.add(cou);
             }
         } catch (Exception e) {
             e.printStackTrace();
