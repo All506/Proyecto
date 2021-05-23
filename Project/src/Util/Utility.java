@@ -300,5 +300,9 @@ public class Utility {
     
     return x;
     }
+
+    public static void replaceListCourse(CircularLinkList listToSend) {
+        lCourse = listToSend;
+    }
     
 }

@@ -9,17 +9,26 @@ import Domain.CircularLinkList;
 import Domain.DoublyLinkList;
 import Domain.ListException;
 import Objects.Career;
+import Objects.Course;
+import Objects.Student;
+import XML.FileXML;
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.text.Text;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
 
 /**
  * FXML Controller class
@@ -33,7 +42,7 @@ public class DeleteCourseController implements Initializable {
     @FXML
     private Text txtCareer;
     @FXML
-    private ComboBox<?> cmbAvailableCourses;
+    private ComboBox<String> cmbAvailableCourses;
     @FXML
     private Text txtCourse;
     @FXML
@@ -42,26 +51,29 @@ public class DeleteCourseController implements Initializable {
     private Button btnDelete;
     @FXML
     private Button btnConfirm;
+    @FXML
+    private Button btnShowCourses;
 
+    String sendablecourseID = "";
+    @FXML
+    private Button btnCancelThat;
+    
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
+        loadComboBoxCareers();
+        
     }    
 
     @FXML
     private void cmbAvailableCourses(MouseEvent event) {
+        this.btnShowCourses.setDisable(false);
     }
 
-    @FXML
-    private void btnDelete(ActionEvent event) {
-    }
-
-    @FXML
-    private void btnConfirm(ActionEvent event) {
-    }
+    
     
     public void clean(){
         this.txtCareer.setVisible(false);
@@ -71,6 +83,8 @@ public class DeleteCourseController implements Initializable {
         this.cmbCareer.setVisible(false);
         this.btnConfirm.setVisible(false);
         this.btnDelete.setVisible(false);
+        this.btnShowCourses.setVisible(false);
+        this.btnCancelThat.setVisible(false);
     }
     
     public void loadComboBoxCareers(){
@@ -88,26 +102,114 @@ public class DeleteCourseController implements Initializable {
         } catch (ListException ex) {
             Logger.getLogger(NewStudentController.class.getName()).log(Level.SEVERE, null, ex);
         }
-        this.cmbCareer.setValue(temporal);
         this.cmbCareer.setValue(null);
     }
     
-    public void loadComboBoxCourses(String career){
-        //Para cargar un combobox
+    public void loadComboBoxCourses(int careerID){
         CircularLinkList tempCourses = new CircularLinkList();
         tempCourses = Util.Utility.getListCourse();
         String temporal = "";
         
         try {
             for (int i = 1; i <= tempCourses.size(); i++) {
-                Career c = (Career)tempCourses.getNode(i).getData(); 
-                temporal = c.getId()+"-"+c.getDescription();
-                this.cmbCareer.getItems().add(temporal);
+                Course c = (Course)tempCourses.getNode(i).getData();
+                System.out.println(c.getCareerId() + "/" + careerID);
+                if(c.getCareerId()==careerID){
+                    temporal = c.getId()+"-"+c.getName();
+                    System.out.println(temporal);
+                    this.cmbAvailableCourses.getItems().add(temporal);
+                }
                         }
         } catch (ListException ex) {
             Logger.getLogger(NewStudentController.class.getName()).log(Level.SEVERE, null, ex);
         }
-        this.cmbCareer.setValue(temporal);
+    }
+
+    @FXML
+    private void btnShowCourses(ActionEvent event) {
+        int x = Integer.parseInt(Util.Utility.getIDofString(this.cmbCareer.getValue()));
+        System.out.println(x);
+        this.cmbAvailableCourses.getItems().clear();
+        loadComboBoxCourses(x);
+        this.cmbAvailableCourses.setVisible(true);
+        this.txtCourse.setVisible(true); 
+        this.btnDelete.setDisable(true);
+        this.btnDelete.setVisible(true);
+        this.btnShowCourses.setDisable(true);
+    }
+    
+    @FXML
+    private void btnDelete(ActionEvent event) {
+        try{
+        this.sendablecourseID = Util.Utility.getIDofString(this.cmbAvailableCourses.getValue());
+        clean();
+        this.txtConfirmation.setVisible(true);
+        this.txtConfirmation.setText("Do you want to delete the course '" + this.cmbAvailableCourses.getValue() + "'?");
+        this.btnConfirm.setVisible(true);
+        this.btnCancelThat.setVisible(true);
+        }catch(NullPointerException npe){
+            callAlert("alert", "No courses selected", "Choose a course to delete!");
+        }
+    }
+    
+     @FXML
+    private void btnConfirm(ActionEvent event) {
+         CircularLinkList listTodelete = Util.Utility.getListCourse();
+         CircularLinkList listToSend = new CircularLinkList();
+        try {
+            for (int i = 1; i < listTodelete.size(); i++) {
+                Course f = (Course)listTodelete.getNode(i).data;
+                System.out.println("Sendable course: " + sendablecourseID);
+                if(!sendablecourseID.equals(f.getId())){
+                    System.out.println(f);
+                    listToSend.add(f);
+                }
+            }
+            Util.Utility.replaceListCourse(listToSend);
+        } catch (ListException ex) {
+            callAlert("alert", "Error", "We couldn't delete the course");
+        }
+         
+         callAlert("alert", "The course has been deleted", "The course selected \n has been deleted from the files");
+         clean();
+         this.txtCareer.setVisible(true);
+         this.cmbCareer.setValue(null);
+         this.cmbAvailableCourses.setValue(null);
+         this.btnShowCourses.setVisible(true);
+         this.cmbCareer.setVisible(true);          
+    }
+    
+    private void callAlert(String fxmlName, String title, String text) {
+        //Se llama la alerta
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/UI/" + fxmlName + ".fxml"));
+            Parent root1;
+            root1 = (Parent) loader.load();
+            //Se llama al controller de la nueva ventana abierta
+            AlertController controller = loader.getController();
+            Stage stage = new Stage();
+            stage.initModality(Modality.APPLICATION_MODAL);
+            stage.setTitle("Alerta");
+            //Se le asigna la información a la controladora
+            controller.setText(title, text);
+            stage.setScene(new Scene(root1));
+            stage.show();
+        } catch (IOException ex) {
+            Logger.getLogger(LogInController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }   
+
+    @FXML
+    private void btnCancelThat(ActionEvent event) {
+        clean();
+        this.txtCareer.setVisible(true);
         this.cmbCareer.setValue(null);
+        this.cmbCareer.setVisible(true);
+        this.btnShowCourses.setVisible(true);
+    }
+
+    @FXML
+    private void AvailableCoursesOnMouseClicked(MouseEvent event) {
+        this.btnDelete.setDisable(false);
     }
 }
