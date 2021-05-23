@@ -11,6 +11,12 @@
    <children>
       <MenuBar layoutY="-3.0" prefHeight="38.0" prefWidth="746.0" stylesheets="@../Style/menuBar.css">
         <menus>
+            <Menu mnemonicParsing="false" text="Enrollment">
+              <items>
+                <MenuItem fx:id="mnEnrollment" mnemonicParsing="false" onAction="#mnEnrollment" text="Enrollment" />
+                  <MenuItem fx:id="mnDeEnrollment" mnemonicParsing="false" onAction="#mnDeEnrollment" text="De-enrollment" />
+              </items>
+            </Menu>
           <Menu fx:id="menuStudent" mnemonicParsing="false" text="Student">
             <items>
               <MenuItem fx:id="mnNewStudent" mnemonicParsing="false" onAction="#mnNewStudent" text="New Student" />

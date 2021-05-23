@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.net.URL?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane id="AnchorPane" prefHeight="360.0" prefWidth="571.0" styleClass="mainFxmlClass" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/16" fx:controller="Controller.EnrollmentController">
+    <stylesheets>
+        <URL value="@/Style/general.css" />
+    </stylesheets>
+   <children>
+      <TableView layoutX="15.0" layoutY="56.0" prefHeight="286.0" prefWidth="538.0">
+        <columns>
+          <TableColumn prefWidth="93.60003471374512" text="Student ID" />
+            <TableColumn prefWidth="161.59998321533203" text="Last Name" />
+            <TableColumn prefWidth="151.2000732421875" text="Name" />
+          <TableColumn prefWidth="132.79995727539062" text="Personal ID" />
+        </columns>
+      </TableView>
+      <Text layoutX="214.0" layoutY="19.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Enrollment menu" textAlignment="CENTER" wrappingWidth="140.5367431640625" />
+      <Text layoutX="179.0" layoutY="44.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Selecione un estudiante para matricular" textAlignment="CENTER" />
+   </children>
+</AnchorPane>

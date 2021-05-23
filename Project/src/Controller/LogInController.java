@@ -112,11 +112,11 @@ public class LogInController implements Initializable {
             Security logUser = new Security(txtUser.getText(), txtPassword.getText());
             if (lSecurity.contains(logUser)) { //La persona registrada es un Usuario
                 Util.Utility.setKindUser(true);
-                callMenu();
+                callMenu("menu");
             } else {
                 if (this.lStudentsPass.contains(logUser)) {
                     Util.Utility.setKindUser(false);
-                    callMenu();
+                    callMenu("menu");
                 } else {
                     callAlert("alert", "Error", "User and Password is not registered. \n Try with something else");
                 }
@@ -126,15 +126,15 @@ public class LogInController implements Initializable {
         }
     }
 
-    private void callMenu() throws IOException {
+    private void callMenu(String fxmlName) throws IOException {
         Stage stage = (Stage) this.txtUser.getScene().getWindow();
         stage.close();
         //Se abre el nuevo stage
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/UI/menu.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/UI/"+fxmlName+".fxml"));
         Parent root1;
         root1 = (Parent) loader.load();
         //Se llama al controller de la nueva ventana abierta
-        Parent root = FXMLLoader.load(getClass().getResource("/UI/menu.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("/UI/"+fxmlName+".fxml"));
         Scene scene = new Scene(root);
         stage.setScene(scene);
         stage.setTitle("Main Menu");

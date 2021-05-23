@@ -87,6 +87,10 @@ public class MenuController implements Initializable {
     private Menu menuSchedules;
     @FXML
     private Menu menuUser;
+    @FXML
+    private MenuItem mnEnrollment;
+    @FXML
+    private MenuItem mnDeEnrollment;
 
     /**
      * Initializes the controller class.
@@ -423,6 +427,15 @@ public class MenuController implements Initializable {
     @FXML
     private void btnNewUser(ActionEvent event) {
         loadPage("/UI/newUser");
+    }
+
+    @FXML
+    private void mnEnrollment(ActionEvent event) {
+        loadPage("/UI/enrollment");
+    }
+
+    @FXML
+    private void mnDeEnrollment(ActionEvent event) {
     }
 
 }
