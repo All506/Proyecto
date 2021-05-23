@@ -14,7 +14,7 @@
          <font>
             <Font name="System Bold" size="25.0" />
          </font></Text>
-      <ComboBox fx:id="cmbCourses" layoutX="305.0" layoutY="69.0" onAction="#cmbPeriodAction" prefWidth="150.0" />
+      <ComboBox fx:id="cmbCourses" layoutX="247.0" layoutY="69.0" onAction="#cmbPeriodAction" prefHeight="30.0" prefWidth="208.0" />
       <Spinner fx:id="spnDay1" layoutX="183.0" layoutY="191.0" prefHeight="26.0" prefWidth="122.0" />
       <Spinner fx:id="spnEnd2" layoutX="474.0" layoutY="264.0" prefHeight="26.0" prefWidth="100.0" />
       <Spinner fx:id="spnStart2" layoutX="348.0" layoutY="263.0" onMouseClicked="#spn2MouseClicked" prefHeight="26.0" prefWidth="100.0" />
@@ -29,11 +29,11 @@
          <font>
             <Font size="15.0" />
          </font></Text>
-      <Text fill="#adadad" layoutX="195.0" layoutY="90.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Select a course">
+      <Text fill="#adadad" layoutX="123.0" layoutY="89.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Select a course">
          <font>
             <Font size="15.0" />
          </font></Text>
-      <Button fx:id="btnClean" layoutX="362.0" layoutY="323.0" mnemonicParsing="false" onAction="#btnClean" text="Clean" />
+      <Button fx:id="btnClean" layoutX="415.0" layoutY="322.0" mnemonicParsing="false" onAction="#btnClean" text="Clean" />
       <Button fx:id="btnValidSave" layoutX="220.0" layoutY="323.0" mnemonicParsing="false" onAction="#btnValidSave" text="Validate and save" />
       <Text fill="#adadad" layoutX="484.0" layoutY="258.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Ending time">
          <font>
@@ -59,8 +59,8 @@
          <font>
             <Font size="15.0" />
          </font></Text>
-      <ComboBox fx:id="cmbPeriod" layoutX="204.0" layoutY="130.0" onAction="#cmbPeriodAction" prefHeight="29.0" prefWidth="323.0" />
-      <Text fill="#adadad" layoutX="133.0" layoutY="151.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Period" wrappingWidth="79.025390625">
+      <ComboBox fx:id="cmbPeriod" layoutX="245.0" layoutY="130.0" onAction="#cmbPeriodAction" prefHeight="30.0" prefWidth="208.0" />
+      <Text fill="#adadad" layoutX="143.0" layoutY="150.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Period" textAlignment="RIGHT" wrappingWidth="79.025390625">
          <font>
             <Font size="15.0" />
          </font></Text>

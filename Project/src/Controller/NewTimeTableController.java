@@ -210,14 +210,20 @@ public class NewTimeTableController implements Initializable {
             callAlert("alert", "¡Schedule Clash!", "Course schedules cannot collide.");
         }else{
  
-          TimeTable t = new TimeTable(Util.Utility.getIDofString(cmbCourses.getValue()),
-                  cmbPeriod.getValue(),
-                  spnDay1.getValue().substring(0, 3)+" "+Util.Utility.hourFormat(spnStart1.getValue())+"-"+Util.Utility.hourFormat(spnEnd1.getValue()), 
-                  spnDay2.getValue().substring(0, 3)+" "+Util.Utility.hourFormat(spnStart2.getValue())+"-"+Util.Utility.hourFormat(spnEnd2.getValue()));
-      
-          Util.Utility.setListSchedule(t);
-            System.out.println(t.toString());      
-          btnClean(event);
+            if(cmbCourses.getValue().equalsIgnoreCase("Courses")||cmbPeriod.getValue().equalsIgnoreCase("Period")){
+            
+                callAlert("alert", "¡Incomplete data!", "You must select a course and a period");
+                
+            }else{
+                TimeTable t = new TimeTable(Util.Utility.getIDofString(cmbCourses.getValue()),
+                        cmbPeriod.getValue(),
+                        spnDay1.getValue().substring(0, 3)+" "+Util.Utility.hourFormat(spnStart1.getValue())+"-"+Util.Utility.hourFormat(spnEnd1.getValue()), 
+                        spnDay2.getValue().substring(0, 3)+" "+Util.Utility.hourFormat(spnStart2.getValue())+"-"+Util.Utility.hourFormat(spnEnd2.getValue()));
+
+                Util.Utility.setListSchedule(t);
+                  System.out.println(t.toString());      
+                btnClean(event);
+            }
         }
         
     }
@@ -266,7 +272,7 @@ public class NewTimeTableController implements Initializable {
         }
     }
 
-    @FXML
+    @FXML//Valida que el horario no tenga un horario ya definido.
     private void cmbPeriodAction(ActionEvent event) throws ListException {
         CircularLinkList s = Util.Utility.getListCourse();
         SinglyLinkList sch = Util.Utility.getListSchedule();
@@ -274,7 +280,7 @@ public class NewTimeTableController implements Initializable {
         if(!s.isEmpty()&&!sch.isEmpty()&&!cmbCourses.getValue().equals("Courses")&&!cmbPeriod.getValue().equals("Period")){
         for (int i = 1; i <=s.size() ; i++) {
             Course c = (Course)s.getNode(i).data;
-            System.out.println(c.getId()+"------"+Util.Utility.getIDofString(cmbCourses.getValue()));
+//            System.out.println(c.getId()+"------"+Util.Utility.getIDofString(cmbCourses.getValue()));
             if(c.getId().equals(Util.Utility.getIDofString(cmbCourses.getValue()))){ 
                 find=(Course)s.getNode(i).data;;
                 i=  s.size()+1;
@@ -283,14 +289,18 @@ public class NewTimeTableController implements Initializable {
             }
             for (int j = 1; j <= sch.size(); j++) {
                 TimeTable t = (TimeTable)sch.getNode(j).data;
-                System.out.println(find.getId()+"++++++"+t.getID());
-                System.out.println(t.getPeriod()+"+++"+cmbPeriod.getValue());
+//                System.out.println(find.getId()+"++++++"+t.getID());
+//                System.out.println(t.getPeriod()+"+++"+cmbPeriod.getValue());
                 if(find.getId().equals(t.getID())&&t.getPeriod().equals(cmbPeriod.getValue())){
 
-            System.out.println("ya tiene horario");
+            //"ya tiene horario"
+            callAlert("alert", "¡schedule already exists!", "The selected course already has \n schedule. Continue to update it.");
+            btnValidSave.setText("Validate and update");
             }
            } 
         
+     }else{
+     btnValidSave.setText("Validate and save");   
      }
    
     }
