@@ -49,7 +49,7 @@ public class CircularLinkList implements List {
         if (isEmpty()) {
             throw new ListException("CircularLinkedList: Vacia");
         }
-        Node aux = first;//El aux es para moverme por la lita hasta el ultimo elemento
+        Node aux = first;//El aux es para moverme por la lista hasta el ultimo elemento
         while (aux != last) {
             if (Util.Utility.equals(aux.data, element)) {
                 return true;
