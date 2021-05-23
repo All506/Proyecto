@@ -10,8 +10,10 @@ import Objects.Career;
 import Domain.DoublyLinkList;
 import Domain.ListException;
 import Domain.SinglyLinkList;
+import Objects.Course;
 import Objects.Security;
 import Objects.Student;
+import Objects.TimeTable;
 import Security.AES;
 import XML.FileXML;
 import java.io.IOException;
@@ -42,6 +44,8 @@ public class MenuController implements Initializable {
     private SinglyLinkList lStudents;
     private DoublyLinkList lCareers;
     private CircularLinkList lSecurity;
+    private CircularLinkList lCourse;
+    private SinglyLinkList lSchedules;
 
     @FXML
     private BorderPane bpMenu;
@@ -176,18 +180,46 @@ public class MenuController implements Initializable {
             System.out.println("Lista en util \n " + Util.Utility.getListCareer().toString());
         }
         
-        //Carga y desencripta los usuarios
+         //Carga y desencripta los cursos
         
-        if (fXML.exist("Security.xml")) {
-            lSecurity = fXML.readXMLtoSecurityList();
+        if (fXML.exist("Courses.xml")) {
+            lCourse = fXML.readXMLtoCourseList();
             try {
-                for (int i = 1; i <= lSecurity.size(); i++) { //Se añaden los objetos del xml a util
-                    Util.Utility.setListSecurity((Security) lSecurity.getNode(i).data);
+                for (int i = 1; i <= lCourse.size(); i++) { //Se añaden los objetos del xml a util
+                    Util.Utility.setListCourse((Course) lCourse.getNode(i).data);
                 }
             } catch (ListException ex) {
                 Logger.getLogger(MenuController.class.getName()).log(Level.SEVERE, null, ex);
             }
-            System.out.println("Lista en util \n " + Util.Utility.getListSecurity().toString());
+            System.out.println("Lista en util \n " + Util.Utility.getListCourse().toString());
+        }
+        
+         //Carga y desencripta los cursos
+        
+        if (fXML.exist("Schedules.xml")) {
+            lSchedules = fXML.readXMLtoScheduleList();
+            try {
+                for (int i = 1; i <= lSchedules.size(); i++) { //Se añaden los objetos del xml a util
+                    Util.Utility.setListSchedule((TimeTable) lSchedules.getNode(i).data);
+                }
+            } catch (ListException ex) {
+                Logger.getLogger(MenuController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            System.out.println("Lista en util \n " + Util.Utility.getListSchedule().toString());
+        }
+        
+         //Carga y desencripta los cursos
+        
+        if (fXML.exist("Courses.xml")) {
+            lCourse = fXML.readXMLtoCourseList();
+            try {
+                for (int i = 1; i <= lCourse.size(); i++) { //Se añaden los objetos del xml a util
+                    Util.Utility.setListCourse((Course) lCourse.getNode(i).data);
+                }
+            } catch (ListException ex) {
+                Logger.getLogger(MenuController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            System.out.println("Lista en util \n " + Util.Utility.getListCourse().toString());
         }
     }
 
@@ -196,6 +228,8 @@ public class MenuController implements Initializable {
         lStudents = Util.Utility.getListStudents(); //Se carga la lista de estudiantes al XML
         lCareers = Util.Utility.getListCareer();
         lSecurity = Util.Utility.getListSecurity();
+        lCourse = Util.Utility.getListCourse();
+        lSchedules = Util.Utility.getListSchedule();
 
         FileXML fXML = new FileXML();
 
@@ -228,7 +262,30 @@ public class MenuController implements Initializable {
             fXML.createXML("SecurityXML", "Security");
             writeSecurity();
         }
-
+        
+        //Guarda datos de la lista de cursos en XML
+        
+        if (!fXML.exist("Courses.xml")) { //Si el archivo no existe
+            fXML.createXML("CoursesXML", "Courses");
+            writeCourses();
+        } else {
+            fXML.deleteFile("Courses");
+            fXML.createXML("CoursesXML", "Courses");
+            writeCourses();
+        }
+        
+        //Guarda datos de la lista Horarios en XML
+        
+        //Guarda datos de la lista de cursos en XML
+        
+        if (!fXML.exist("Schedules.xml")) { //Si el archivo no existe
+            fXML.createXML("SchedulesXML", "Schedules");
+            writeSchedules();
+        } else {
+            fXML.deleteFile("Schedules");
+            fXML.createXML("SchedulesXML", "Schedules");
+            writeSchedules();
+        }
     }
 
     public void writeStudents() throws ListException {
@@ -283,6 +340,40 @@ public class MenuController implements Initializable {
             }
         }
     }
+    
+    public void writeCourses() throws ListException {
+        FileXML fXML = new FileXML();
+        for (int i = 1; i <= lCourse.size(); i++) {
+            Course tempCourse = (Course) lCourse.getNode(i).data;
+            try {
+
+                fXML.writeXML("Courses.xml", "Courses", tempCourse.dataName(), tempCourse.data());
+            } catch (TransformerException ex) {
+                Logger.getLogger(MenuController.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (SAXException ex) {
+                Logger.getLogger(MenuController.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (IOException ex) {
+                Logger.getLogger(MenuController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+    }
+    
+        public void writeSchedules() throws ListException {
+        FileXML fXML = new FileXML();
+        for (int i = 1; i <= lSchedules.size(); i++) {
+            TimeTable schedule = (TimeTable) lSchedules.getNode(i).data;
+            try {
+                fXML.writeXML("Schedules.xml", "Schedules", schedule.dataName(), schedule.data());
+            } catch (TransformerException ex) {
+                Logger.getLogger(MenuController.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (SAXException ex) {
+                Logger.getLogger(MenuController.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (IOException ex) {
+                Logger.getLogger(MenuController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+    }
+    
 
     @FXML
     private void btnLogOut(ActionEvent event) {

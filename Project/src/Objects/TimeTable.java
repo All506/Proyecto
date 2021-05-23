@@ -74,6 +74,16 @@ public class TimeTable {
     }
     
     
+    public String[] dataName(){
+        String[] dataName = {"id","period","schedule1","schedule2"};
+        return dataName;
+    }
+    
+    public String[] data(){
+        String [] data = {this.getID(),this.getPeriod(),this.schedule1,this.schedule2};
+        return data;
+    }
+    
 }
 
 

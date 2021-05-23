@@ -9,8 +9,10 @@ import Domain.CircularLinkList;
 import Objects.Career;
 import Domain.DoublyLinkList;
 import Domain.SinglyLinkList;
+import Objects.Course;
 import Objects.Security;
 import Objects.Student;
+import Objects.TimeTable;
 import Security.AES;
 import java.io.File;
 import java.io.IOException;
@@ -19,7 +21,7 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.text.DateFormat;
 import java.util.Date;
-import java.text.SimpleDateFormat;  
+import java.text.SimpleDateFormat;
 import java.util.Locale;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -71,14 +73,14 @@ public class FileXML {
         }
     }
 
-    public void deleteFile(String fileName){ //Se encarga de eliminar un archivo
+    public void deleteFile(String fileName) { //Se encarga de eliminar un archivo
         try {
-            Files.delete(Paths.get(fileName+".xml"));
+            Files.delete(Paths.get(fileName + ".xml"));
         } catch (IOException ex) {
             Logger.getLogger(FileXML.class.getName()).log(Level.SEVERE, null, ex);
         }
-    } 
-    
+    }
+
     public void writeXML(String FileName, String elementType, String[] dataName, String[] data) throws TransformerException, org.xml.sax.SAXException, IOException {
 
         try {
@@ -145,7 +147,6 @@ public class FileXML {
             DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
             Document doc = dBuilder.parse(inputFile);
             doc.getDocumentElement().normalize();
-            
 
             NodeList nList = doc.getElementsByTagName(elementType);
 
@@ -166,7 +167,7 @@ public class FileXML {
                     DateFormat format = new SimpleDateFormat("yyyy-MM-dd");
                     Date date = format.parse(eElement.getElementsByTagName("birthday").item(0).getTextContent());
                     std.setBirthday(date);
-                   // std.setBirthday(SimpleDateFormat("dd/MM/yyyy").parse(eElement.getElementsByTagName("birthday").item(0).getTextContent()));
+                    // std.setBirthday(SimpleDateFormat("dd/MM/yyyy").parse(eElement.getElementsByTagName("birthday").item(0).getTextContent()));
                 }
                 sList.add(std);
             }
@@ -178,8 +179,7 @@ public class FileXML {
     }
 
     //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! Career !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-    
-     public DoublyLinkList readXMLtoCareertList() {
+    public DoublyLinkList readXMLtoCareertList() {
 
         DoublyLinkList lCareer = new DoublyLinkList();
 
@@ -200,7 +200,6 @@ public class FileXML {
                     car.setId(Integer.parseInt(eElement.getAttribute("id")));
                     car.setDescription(eElement.getElementsByTagName("description").item(0).getTextContent());
 
-                    
                 }
                 System.out.println("Nodo " + "i: " + car.toString());
                 lCareer.add(car);
@@ -212,7 +211,8 @@ public class FileXML {
         return lCareer;
     }
 
-     public CircularLinkList readXMLtoSecurityList() {
+    //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! Security  !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+    public CircularLinkList readXMLtoSecurityList() {
 
         CircularLinkList lSecurity = new CircularLinkList();
 
@@ -226,17 +226,16 @@ public class FileXML {
             NodeList nList = doc.getElementsByTagName("User");
 
             for (int indice = 0; indice < nList.getLength(); indice++) {
-                Security sec = new Security("","");
+                Security sec = new Security("", "");
                 Node nNode = nList.item(indice);
                 if (nNode.getNodeType() == Node.ELEMENT_NODE) {
                     Element eElement = (Element) nNode;
                     sec.setUser(eElement.getAttribute("user"));
                     sec.setPassword(eElement.getElementsByTagName("password").item(0).getTextContent());
 
-                    
                 }
                 AES deEnc = new AES();
-                Security desUser = new Security(deEnc.deCrypt(sec.getUser(), "Proyecto"),deEnc.deCrypt(sec.getPassword(), "Proyecto"));
+                Security desUser = new Security(deEnc.deCrypt(sec.getUser(), "Proyecto"), deEnc.deCrypt(sec.getPassword(), "Proyecto"));
                 lSecurity.add(desUser);
             }
         } catch (Exception e) {
@@ -244,5 +243,74 @@ public class FileXML {
         }
 
         return lSecurity;
+    }
+
+    //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! Course  !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+    
+    public CircularLinkList readXMLtoCourseList() {
+
+        CircularLinkList lCourse = new CircularLinkList();
+
+        try {
+            File inputFile = new File("Courses.xml");
+            DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
+            DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
+            Document doc = dBuilder.parse(inputFile);
+            doc.getDocumentElement().normalize();
+
+            NodeList nList = doc.getElementsByTagName("CoursesXML");
+
+            for (int indice = 0; indice < nList.getLength(); indice++) {
+                Course tempCourse = new Course("", "", 0, 0);
+                Node nNode = nList.item(indice);
+                if (nNode.getNodeType() == Node.ELEMENT_NODE) {
+                    Element eElement = (Element) nNode;
+                    tempCourse.setId(eElement.getAttribute("id")); //NO CARGA EL IpruebaD
+                    System.out.println("IDS de Cursos: " + eElement.getAttribute("id"));
+                    tempCourse.setName(eElement.getElementsByTagName("name").item(0).getTextContent());
+                    tempCourse.setCareerId(Integer.valueOf(eElement.getElementsByTagName("careerId").item(0).getTextContent()));
+                    tempCourse.setCredits(Integer.valueOf(eElement.getElementsByTagName("credits").item(0).getTextContent()));
+                }
+                lCourse.add(tempCourse);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return lCourse;
+    }
+    
+     //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! Schedules  !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+    
+    public SinglyLinkList readXMLtoScheduleList() {
+
+        SinglyLinkList lSchedule = new SinglyLinkList();
+
+        try {
+            File inputFile = new File("Schedules.xml");
+            DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
+            DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
+            Document doc = dBuilder.parse(inputFile);
+            doc.getDocumentElement().normalize();
+
+            NodeList nList = doc.getElementsByTagName("SchedulesXML");
+
+            for (int indice = 0; indice < nList.getLength(); indice++) {
+                TimeTable schedule = new TimeTable("", "", "", "");
+                Node nNode = nList.item(indice);
+                if (nNode.getNodeType() == Node.ELEMENT_NODE) {
+                    Element eElement = (Element) nNode;
+                    schedule.setID(eElement.getAttribute("id"));
+                    schedule.setPeriod(eElement.getElementsByTagName("period").item(0).getTextContent());
+                    schedule.setSchedule1(eElement.getElementsByTagName("schedule1").item(0).getTextContent());
+                    schedule.setSchedule2(eElement.getElementsByTagName("schedule2").item(0).getTextContent());
+                }
+                lSchedule.add(schedule);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return lSchedule;
     }
 }
