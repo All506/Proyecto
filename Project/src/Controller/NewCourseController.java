@@ -10,17 +10,23 @@ import Domain.DoublyLinkList;
 import Domain.ListException;
 import Objects.Career;
 import Objects.Course;
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyEvent;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
 
 /**
  * FXML Controller class
@@ -82,19 +88,41 @@ public class NewCourseController implements Initializable {
 
     @FXML
     private void btnAdd(ActionEvent event) throws ListException {      
-            
-            //Add the course
-            int i = 0;
-            String x = "";
-            while(!("-").contains(""+this.cmbCarrerId.getValue().charAt(i))){
-                x += this.cmbCarrerId.getValue().charAt(i);
-                i++;
-            }
-            Course crse = new Course(this.txtId.getText(),this.txtName.getText(),Integer.parseInt(this.txtCredits.getText()),Integer.parseInt(x));
-            Util.Utility.setListCourse(crse);
-            System.out.println(Util.Utility.getListCourse());
+        int i = 0;
+        String x = "";
+        while(!("-").contains(""+this.cmbCarrerId.getValue().charAt(i))){
+                    x += this.cmbCarrerId.getValue().charAt(i);
+                    i++;
+        }        
+        Course crse = new Course(this.txtId.getText(),this.txtName.getText(),Integer.parseInt(this.txtCredits.getText()),Integer.parseInt(x));
+
+        if(!Util.Utility.setListCourse(crse)){
+             callAlert("alert", "Error", "The data of the new course matches \n with an already existent course \n Please check your entries");
+        }else{
+            this.btnClean(event);
+        }  
     }   
 
+  private void callAlert(String fxmlName, String title, String text) {
+        //Se llama la alerta
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/UI/" + fxmlName + ".fxml"));
+            Parent root1;
+            root1 = (Parent) loader.load();
+            //Se llama al controller de la nueva ventana abierta
+            AlertController controller = loader.getController();
+            Stage stage = new Stage();
+            stage.initModality(Modality.APPLICATION_MODAL);
+            stage.setTitle("Alerta");
+            //Se le asigna la información a la controladora
+            controller.setText(title, text);
+            stage.setScene(new Scene(root1));
+            stage.show();
+        } catch (IOException ex) {
+            Logger.getLogger(LogInController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }  
+    
     @FXML
     private void keyPressed(KeyEvent event) { //Es key Released pero por conveniencia el nombre es keyPressed
         if(this.txtName.getText().length()!=0 && this.txtId.getText().length()!=0 && this.txtCredits.getText().length()!=0){

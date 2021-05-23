@@ -188,6 +188,10 @@ public class Utility {
                 Career car1 = (Career) a;
                 Career car2 = (Career) b;
                 return car1.getDescription().compareTo(car2.getDescription()) == 0;
+            case "course":
+                Course cour1 = (Course) a;
+                Course cour2 = (Course) b;
+                return cour1.getId().equalsIgnoreCase(cour2.getId()) && cour1.getName().equalsIgnoreCase(cour2.getName()) ;
             case "security":
                 Security sec1 = (Security) a;
                 Security sec2 = (Security) b;
@@ -211,6 +215,9 @@ public class Utility {
         }
         if (a instanceof Security && b instanceof Security) {
             return "security";
+        }
+        if (a instanceof Course && b instanceof Course) {
+            return "course";
         }
 
         return "unknown";
