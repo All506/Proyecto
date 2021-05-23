@@ -67,6 +67,13 @@ public class TimeTable {
     }
 
     //- - - - - - - - - - - -- - - - - - - -- - -- - - - -- - -
+
+    @Override
+    public String toString() {
+        return "TimeTable{" + "ID=" + ID + ", period=" + period + ", schedule1=" + schedule1 + ", schedule2=" + schedule2 + '}';
+    }
+    
+    
 }
 
 

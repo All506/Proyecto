@@ -59,7 +59,7 @@
          <font>
             <Font size="15.0" />
          </font></Text>
-      <ComboBox fx:id="cmbPeriod" layoutX="204.0" layoutY="130.0" prefHeight="29.0" prefWidth="323.0" />
+      <ComboBox fx:id="cmbPeriod" layoutX="204.0" layoutY="130.0" onAction="#cmbPeriodAction" prefHeight="29.0" prefWidth="323.0" />
       <Text fill="#adadad" layoutX="133.0" layoutY="151.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Period" wrappingWidth="79.025390625">
          <font>
             <Font size="15.0" />

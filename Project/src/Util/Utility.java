@@ -15,6 +15,7 @@ import Domain.SinglyLinkList;
 import Objects.Course;
 import Objects.Security;
 import Objects.Student;
+import Objects.TimeTable;
 import Security.AES;
 import java.io.IOException;
 import java.text.DecimalFormat;
@@ -36,6 +37,7 @@ public class Utility {
 
     //Constructores de las listas
     private static SinglyLinkList lStudent = new SinglyLinkList();
+    private static SinglyLinkList lSchedule = new SinglyLinkList();
     private static DoublyLinkList lCareer = new DoublyLinkList();
     private static CircularLinkList lCourse = new CircularLinkList();
     private static CircularLinkList lSecurity = new CircularLinkList();
@@ -44,6 +46,10 @@ public class Utility {
     //GETS DE LAS LISTAS 
     public static SinglyLinkList getListStudents() {
         return lStudent;
+    }
+    
+    public static SinglyLinkList getListSchedule() {
+        return lSchedule;
     }
 
     public static DoublyLinkList getListCareer() {
@@ -94,6 +100,22 @@ public class Utility {
         return flag;
     }
 
+    public static boolean setListSchedule(TimeTable sch) throws ListException {
+        boolean flag = false;
+        if (Utility.lSchedule.isEmpty()) {
+            Utility.lSchedule.add(sch);
+            flag = true;
+        } else {
+            if (!lSchedule.contains(sch)) {
+                lSchedule.add(sch);
+                flag = true;
+            } else {
+                flag = false;
+            }
+        }
+        return flag;
+    }
+    
     public static boolean setListCareer(Career car) throws ListException {
         boolean flag = false;
         if (Utility.lCareer.isEmpty()) {
@@ -156,6 +178,11 @@ public class Utility {
 
     public static String format(double value) {
         return new DecimalFormat("###,###,###,###.##")
+                .format(value);
+    }
+    
+    public static String hourFormat(int value) {
+        return new DecimalFormat("00")
                 .format(value);
     }
 
@@ -231,4 +258,16 @@ public class Utility {
         return coincidence.find();
     }
 
+    public static String getIDofString(String s){
+    
+    int i = 0;
+        String x = "";
+        while(!("-").contains(""+s.charAt(i))){
+                    x += s.charAt(i);
+                    i++;
+        }
+    
+    return x;
+    }
+    
 }

@@ -10,6 +10,7 @@ import Domain.DoublyLinkList;
 import Domain.ListException;
 import Objects.Career;
 import Objects.Course;
+import Objects.TimeTable;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -192,7 +193,7 @@ public class NewTimeTableController implements Initializable {
     }
 
     @FXML
-    private void btnValidSave(ActionEvent event) {
+    private void btnValidSave(ActionEvent event) throws ListException {
         
         int i1=spnStart1.getValue();
         int i2=spnStart2.getValue();
@@ -201,15 +202,19 @@ public class NewTimeTableController implements Initializable {
         
         
         if(spnDay1.getValue().equals(spnDay2.getValue())&& scheduleClash(i1,f1,i2,f2)){
-//            Alert scheduleClash = new Alert(AlertType.WARNING);
-//            scheduleClash.setTitle("Error");
-//            scheduleClash.setHeaderText("¡Schedule Clash!");
-//            scheduleClash.setContentText("Course schedules cannot collide.");
-//            scheduleClash.showAndWait();
-//            scheduleClash.initStyle();
+
             callAlert("alert", "¡Schedule Clash!", "Course schedules cannot collide.");
         }else{
+ 
+          TimeTable t = new TimeTable(Util.Utility.getIDofString(cmbCourses.getValue()),
+                  cmbPeriod.getValue(),
+                  spnDay1.getValue().substring(0, 3)+" "+Util.Utility.hourFormat(spnStart1.getValue())+"-"+Util.Utility.hourFormat(spnEnd1.getValue()), 
+                  spnDay2.getValue().substring(0, 3)+" "+Util.Utility.hourFormat(spnStart2.getValue())+"-"+Util.Utility.hourFormat(spnEnd2.getValue()));
             
+          System.out.println(t.toString());
+          Util.Utility.setListSchedule(t);
+                
+          btnClean(event);
         }
         
     }
@@ -256,6 +261,10 @@ public class NewTimeTableController implements Initializable {
         } catch (IOException ex) {
             Logger.getLogger(LogInController.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }
+
+    @FXML
+    private void cmbPeriodAction(ActionEvent event) {
     }
     
 }
