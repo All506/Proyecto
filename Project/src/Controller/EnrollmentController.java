@@ -9,6 +9,7 @@ import Domain.CircularLinkList;
 import Domain.ListException;
 import Objects.Course;
 import Objects.Student;
+import Objects.TimeTable;
 import java.net.URL;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
@@ -51,7 +52,7 @@ public class EnrollmentController implements Initializable {
     @FXML
     private TextField txfCarrer;
     @FXML
-    private ComboBox<?> cmbPeriod;
+    private ComboBox<String> cmbPeriod;
     @FXML
     private ComboBox<String> cmbCourse;
     @FXML
@@ -76,8 +77,11 @@ public class EnrollmentController implements Initializable {
             txfBirthday.setText(Util.Utility.dateFormat(s.getBirthday2()));
             txfEmail.setText(s.getEmail());
             txfPhoneNumber.setText(s.getPhoneNumber());
+            
             loadComboBoxCourses(""+s.getCareerID());
             txfCarrer.setText(Util.Utility.getCarrerByID(""+s.getCareerID()).getDescription());
+            loadComboBoxPeriod();
+//            loadComboBoxSchedule(Util.Utility.getIDofString(cmbCourse.getValue()), cmbPeriod.getValue());
             
         } catch (ListException ex) {
             Logger.getLogger(EnrollmentController.class.getName()).log(Level.SEVERE, null, ex);
@@ -89,7 +93,8 @@ public class EnrollmentController implements Initializable {
     public void loadComboBoxCourses(String id) throws ListException{
         //Para cargar un combobox
         CircularLinkList tempCourses = Util.Utility.getCoursesByCarrerID(id);
-        tempCourses = Util.Utility.getListCourse();
+        if(!tempCourses.isEmpty())
+        {
         String temporal = "";
         
         try {
@@ -104,6 +109,30 @@ public class EnrollmentController implements Initializable {
         
         cmbCourse.setValue(temporal);
         cmbCourse.getSelectionModel().select("Courses");
+    
+        }
+    }
+    
+    public void loadComboBoxSchedule(String id,String period) throws ListException{
+        //Para cargar un combobox
+        TimeTable t = Util.Utility.getScheduleByCourseID(id, period);
+                cmbPeriod.getItems().add(t.getSchedule1());
+                cmbPeriod.getItems().add(t.getSchedule2());
+                
+            
+//        cmbPeriod.setValue("1-2020");
+        cmbPeriod.getSelectionModel().select("Schedule");
+    }
+    
+    public void loadComboBoxPeriod(){
+        //Para cargar un combobox
+            for (int i = 2020; i <= 2020; i++) {
+                cmbPeriod.getItems().add("1-"+i);
+                cmbPeriod.getItems().add("2-"+i);
+                cmbPeriod.getItems().add("3-"+i);
+            }
+        cmbPeriod.setValue("1-2020");
+        cmbPeriod.getSelectionModel().select("Period");
     }
 
     @FXML

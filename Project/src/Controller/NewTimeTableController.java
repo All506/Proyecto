@@ -211,13 +211,15 @@ public class NewTimeTableController implements Initializable {
                 callAlert("alert", "¡Incomplete data!", "You must select a course and a period");
                 
             }else{
+                
                 TimeTable t = new TimeTable(Util.Utility.getIDofString(cmbCourses.getValue()),
                         cmbPeriod.getValue(),
                         spnDay1.getValue().substring(0, 3)+" "+Util.Utility.hourFormat(spnStart1.getValue())+"-"+Util.Utility.hourFormat(spnEnd1.getValue()), 
                         spnDay2.getValue().substring(0, 3)+" "+Util.Utility.hourFormat(spnStart2.getValue())+"-"+Util.Utility.hourFormat(spnEnd2.getValue()));
 
                 Util.Utility.setListSchedule(t);
-                  System.out.println(t.toString());      
+                System.out.println(t.toString());   
+                System.out.println(Util.Utility.getListSchedule().toString());
                 btnClean(event);
             }
         }

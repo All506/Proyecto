@@ -343,15 +343,19 @@ public class Utility {
     
     public static CircularLinkList getCoursesByCarrerID(String id) throws ListException {
         CircularLinkList list = new CircularLinkList();
+        if(!list.isEmpty()){   
         for (int i = 1; i <= lCourse.size(); i++) {
             Course c =(Course) lCourse.getNode(i).data;
-            if((c.getId()+"").equals(id)){
-            list.add(c);
+            if((c.getCareerId()+"").equals(id)&&(courseHasSchedule(c.getId()))){
+                
+                    list.add(c);
             
             }
         }
+    }
     return list;
     }
+    
     
     public static TimeTable getScheduleByCourseID(String id,String period) throws ListException {
         
@@ -368,6 +372,19 @@ public class Utility {
     
     public static void replaceListCourse(CircularLinkList listToSend) {
         lCourse = listToSend;
+    }
+
+    private static boolean courseHasSchedule(String id) throws ListException {
+      
+        for (int i = 1; i <= lSchedule.size(); i++) {
+            TimeTable t =(TimeTable) lSchedule.getNode(i).data;
+            if(((t.getID()+"").equals(id))){
+                    System.out.println(t.toString());
+                   return true;
+            }
+        }
+        
+    return false;    
     }
 
     
