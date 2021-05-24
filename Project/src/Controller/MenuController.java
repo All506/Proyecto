@@ -431,7 +431,11 @@ public class MenuController implements Initializable {
 
     @FXML
     private void mnEnrollment(ActionEvent event) {
-        loadPage("/UI/enrollment");
+        if(Util.Utility.isKindUser())
+        loadPage("/UI/enrollmentTable");
+        else
+        loadPage("/UI/enrollment");    
+   
     }
 
     @FXML

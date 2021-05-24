@@ -45,6 +45,7 @@ public class Utility {
     private static CircularLinkList lSecurity = new CircularLinkList();
     private static CircularDoublyLinkList lEnrollment = new CircularDoublyLinkList();
     private static boolean kindUser = false; //True if user, false if Student
+    private static Student userStudent = null;
 
     //GETS DE LAS LISTAS 
     public static SinglyLinkList getListStudents() {
@@ -77,6 +78,16 @@ public class Utility {
 
     public static void setKindUser(boolean kindUser) {
         Utility.kindUser = kindUser;
+        
+    }
+    
+    public static void setKindUser(boolean kindUser,String userID) throws ListException {
+        Utility.kindUser = kindUser;
+        Utility.userStudent=getStudentByID(userID);
+    }
+    
+    public static Student getUserStudent() {
+        return userStudent;
     }
 
     //DELETE NODES DE LAS LISTA
@@ -300,5 +311,19 @@ public class Utility {
     
     return x;
     }
+
+    private static Student getStudentByID(String id) throws ListException {
+        
+        for (int i = 1; i <= lStudent.size(); i++) {
+            Student s =(Student) lStudent.getNode(i).data;
+            if((s.getId()+"").equals(id)){
+            return s;
+            
+            }
+        }
+    return null;
+    }
+
+    
     
 }
