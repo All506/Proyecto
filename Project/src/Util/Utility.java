@@ -341,16 +341,16 @@ public class Utility {
     return null;
     }
     
-    private static Course getCourseByID(String id) throws ListException {
-        
+    private static CircularLinkList getCoursesByCarrerID(String id) throws ListException {
+        CircularLinkList list = new CircularLinkList();
         for (int i = 1; i <= lCourse.size(); i++) {
             Course c =(Course) lCourse.getNode(i).data;
             if((c.getId()+"").equals(id)){
-            return c;
+            list.add(c);
             
             }
         }
-    return null;
+    return list;
     }
 
     
