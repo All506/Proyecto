@@ -328,6 +328,30 @@ public class Utility {
         }
     return null;
     }
+    
+    private static Career getCarrerByID(String id) throws ListException {
+        
+        for (int i = 1; i <= lCareer.size(); i++) {
+            Career c =(Career) lCareer.getNode(i).data;
+            if((c.getId()+"").equals(id)){
+            return c;
+            
+            }
+        }
+    return null;
+    }
+    
+    private static Course getCourseByID(String id) throws ListException {
+        
+        for (int i = 1; i <= lCourse.size(); i++) {
+            Course c =(Course) lCourse.getNode(i).data;
+            if((c.getId()+"").equals(id)){
+            return c;
+            
+            }
+        }
+    return null;
+    }
 
     
     public static void replaceListCourse(CircularLinkList listToSend) {
