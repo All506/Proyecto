@@ -153,7 +153,7 @@ public class NewStudentController implements Initializable {
                     txtID.positionCaret(txtID.getText().length());
                 }
             } else {
-                if (txtID.getText().length() == 12) {
+                if (txtID.getText().length() == 11) {
                     event.consume();
                 }
                 
