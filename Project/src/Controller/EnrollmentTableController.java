@@ -89,22 +89,8 @@ public class EnrollmentTableController implements Initializable {
             
               Student aux=(Student)(data.getRowValue());
               Util.Utility.setUserStudent(aux);
-//              System.out.println(aux);
+
               loadPage("/UI/enrollment");  
-//              boolean flag=true;
-//              while(flag){
-//               if(aux!=null){
-//                    
-//                    flag=false;
-//                   }
-//              }
-//              Thread t = new Thread(loadPage("/UI/enrollment"));
-              
-                     
-                  
-              
-              
-              
         });
        
     } 
