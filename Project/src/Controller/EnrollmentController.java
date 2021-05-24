@@ -61,7 +61,13 @@ public class EnrollmentController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
     Student s= Util.Utility.getUserStudent();
-    
+//    System.out.println(s);
+//    while(s==null){
+//       s= Util.Utility.getUserStudent(); 
+//    }
+//    System.out.println(s);
+     try {
+         
     txfStudentID.setText(s.getStudentID());
     txfPersID.setText(""+s.getId());
     txfFirstName.setText(s.getFirstname());
@@ -70,6 +76,13 @@ public class EnrollmentController implements Initializable {
     txfBirthday.setText(Util.Utility.dateFormat(s.getBirthday2()));
     txfEmail.setText(s.getEmail());
     txfPhoneNumber.setText(s.getPhoneNumber());
+  
+        } catch (NullPointerException e) {
+            System.out.println("aqui----------------------------------");
+        }
+    
+    
+   
     
     
     }

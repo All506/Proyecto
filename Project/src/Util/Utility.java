@@ -89,6 +89,11 @@ public class Utility {
     public static Student getUserStudent() {
         return userStudent;
     }
+    
+    public static void setUserStudent(Student aUserStudent) {
+        userStudent = aUserStudent;
+    }
+    
 
     //DELETE NODES DE LAS LISTA
     public static void deleteNodeLStudent(Student std) {
@@ -328,5 +333,7 @@ public class Utility {
     public static void replaceListCourse(CircularLinkList listToSend) {
         lCourse = listToSend;
     }
+
+    
     
 }

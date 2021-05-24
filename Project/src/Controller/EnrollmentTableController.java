@@ -85,27 +85,41 @@ public class EnrollmentTableController implements Initializable {
         
         colStudID.setOnEditStart(data -> {
             
+            
+            
               Student aux=(Student)(data.getRowValue());
-              System.out.println(aux);
-              while(aux==null){
-              loadPage();
-              }
+              Util.Utility.setUserStudent(aux);
+//              System.out.println(aux);
+              loadPage("/UI/enrollment");  
+//              boolean flag=true;
+//              while(flag){
+//               if(aux!=null){
+//                    
+//                    flag=false;
+//                   }
+//              }
+//              Thread t = new Thread(loadPage("/UI/enrollment"));
+              
+                     
+                  
+              
+              
               
         });
        
     } 
    
-    private void loadPage() {
+     private void loadPage(String pageName) {
         Parent root = null;
         try {
-            root = FXMLLoader.load(getClass().getResource("/UI/enrollment"));
+            root = FXMLLoader.load(getClass().getResource(pageName + ".fxml"));
 
         } catch (IOException ex) {
-            Logger.getLogger(MenuController.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(EnrollmentTableController.class.getName()).log(Level.SEVERE, null, ex);
         }
         bpRoot.setCenter(root);
     } // Fin método Load Page
-    
+  
     private void callAlert(String fxmlName, String title, String text) {
         //Se llama la alerta
         try {
