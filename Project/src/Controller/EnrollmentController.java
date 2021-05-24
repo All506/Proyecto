@@ -56,7 +56,7 @@ public class EnrollmentController implements Initializable {
     @FXML
     private ComboBox<String> cmbCourse;
     @FXML
-    private ComboBox<?> cmbSchedule;
+    private ComboBox<String> cmbSchedule;
     @FXML
     private Button btnEnroll;
     @FXML
@@ -93,6 +93,7 @@ public class EnrollmentController implements Initializable {
     public void loadComboBoxCourses(String id) throws ListException{
         //Para cargar un combobox
         CircularLinkList tempCourses = Util.Utility.getCoursesByCarrerID(id);
+        
         if(!tempCourses.isEmpty())
         {
         String temporal = "";
@@ -116,12 +117,18 @@ public class EnrollmentController implements Initializable {
     public void loadComboBoxSchedule(String id,String period) throws ListException{
         //Para cargar un combobox
         TimeTable t = Util.Utility.getScheduleByCourseID(id, period);
-                cmbPeriod.getItems().add(t.getSchedule1());
-                cmbPeriod.getItems().add(t.getSchedule2());
+        cmbSchedule.getItems().clear();
+        if(t!=null){
+                cmbSchedule.getItems().add(t.getSchedule1());
+                cmbSchedule.getItems().add(t.getSchedule2());
                 
             
 //        cmbPeriod.setValue("1-2020");
-        cmbPeriod.getSelectionModel().select("Schedule");
+        cmbSchedule.getSelectionModel().select("Schedule");
+        }else{
+        cmbSchedule.getItems().add("Not defined");
+        cmbSchedule.getSelectionModel().select("Schedule");
+        }
     }
     
     public void loadComboBoxPeriod(){
@@ -141,6 +148,15 @@ public class EnrollmentController implements Initializable {
 
     @FXML
     private void btnCancel(ActionEvent event) {
+    }
+
+    @FXML
+    private void loadComboboxSchedules(ActionEvent event) throws ListException {
+        if(!cmbCourse.getValue().equals("Courses")&&!cmbPeriod.getValue().equals("Period")){
+//            
+                loadComboBoxSchedule(Util.Utility.getIDofString(cmbCourse.getValue()), cmbPeriod.getValue());
+        }
+            
     }
 
     

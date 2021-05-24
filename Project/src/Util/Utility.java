@@ -350,7 +350,7 @@ public class Utility {
     
     public static CircularLinkList getCoursesByCarrerID(String id) throws ListException {
         CircularLinkList list = new CircularLinkList();
-        if(!list.isEmpty()){   
+        if(!lCourse.isEmpty()){   
         for (int i = 1; i <= lCourse.size(); i++) {
             Course c =(Course) lCourse.getNode(i).data;
             if((c.getCareerId()+"").equals(id)&&(courseHasSchedule(c.getId()))){
@@ -368,6 +368,7 @@ public class Utility {
         
         for (int i = 1; i <= lSchedule.size(); i++) {
             TimeTable t =(TimeTable) lSchedule.getNode(i).data;
+            
             if(((t.getID()+"").equals(id))&&(t.getPeriod().equals(period))){
             return t;
             
@@ -381,7 +382,7 @@ public class Utility {
         lCourse = listToSend;
     }
 
-    private static boolean courseHasSchedule(String id) throws ListException {
+    public static boolean courseHasSchedule(String id) throws ListException {
       
         for (int i = 1; i <= lSchedule.size(); i++) {
             TimeTable t =(TimeTable) lSchedule.getNode(i).data;
