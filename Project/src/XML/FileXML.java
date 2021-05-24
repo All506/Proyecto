@@ -292,7 +292,7 @@ public class FileXML {
             Document doc = dBuilder.parse(inputFile);
             doc.getDocumentElement().normalize();
 
-            NodeList nList = doc.getElementsByTagName("SchedulesXML");
+            NodeList nList = doc.getElementsByTagName("Schedules");
 
             for (int indice = 0; indice < nList.getLength(); indice++) {
                 TimeTable schedule = new TimeTable("", "", "", "");

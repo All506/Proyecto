@@ -153,7 +153,7 @@ public class MenuController implements Initializable {
     }
 
     //Se podría llamar al inicio y final
-    public void loadLists() { //Modificarlo para que no se caiga cuando no hay documentos
+    public void loadLists(){ //Modificarlo para que no se caiga cuando no hay documentos
         SinglyLinkList temp = new SinglyLinkList();
         DoublyLinkList tempCareer = new DoublyLinkList();
 
@@ -202,7 +202,9 @@ public class MenuController implements Initializable {
         
         if (fXML.exist("Schedules.xml")) {
             lSchedules = fXML.readXMLtoScheduleList();
+            
             try {
+               
                 for (int i = 1; i <= lSchedules.size(); i++) { //Se añaden los objetos del xml a util
                     Util.Utility.setListSchedule((TimeTable) lSchedules.getNode(i).data);
                 }

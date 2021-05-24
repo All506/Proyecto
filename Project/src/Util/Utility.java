@@ -263,6 +263,10 @@ public class Utility {
                 Security sec1 = (Security) a;
                 Security sec2 = (Security) b;
                 return sec1.getUser().equals(sec2.getUser()) && sec1.getPassword().equals(sec2.getPassword());
+            case "period":
+                TimeTable sch1 = (TimeTable) a;
+                TimeTable sch2 = (TimeTable) b;
+                return sch1.getID().equals(sch2.getID()) && sch1.getPeriod().equals(sch2.getPeriod());
         }
         return false; //En cualquier otro caso retorna un false
     }
@@ -285,6 +289,9 @@ public class Utility {
         }
         if (a instanceof Course && b instanceof Course) {
             return "course";
+        }
+        if (a instanceof TimeTable && b instanceof TimeTable) {
+            return "period";
         }
 
         return "unknown";
