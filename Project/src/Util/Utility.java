@@ -325,5 +325,8 @@ public class Utility {
     }
 
     
+    public static void replaceListCourse(CircularLinkList listToSend) {
+        lCourse = listToSend;
+    }
     
 }
