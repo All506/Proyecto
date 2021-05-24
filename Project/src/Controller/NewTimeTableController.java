@@ -6,10 +6,8 @@
 package Controller;
 //Security{user=302740270, password=C07872}
 import Domain.CircularLinkList;
-import Domain.DoublyLinkList;
 import Domain.ListException;
 import Domain.SinglyLinkList;
-import Objects.Career;
 import Objects.Course;
 import Objects.TimeTable;
 import java.io.IOException;
@@ -25,8 +23,6 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Spinner;

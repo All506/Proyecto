@@ -317,7 +317,7 @@ public class Utility {
     return x;
     }
 
-    private static Student getStudentByID(String id) throws ListException {
+    public static Student getStudentByID(String id) throws ListException {
         
         for (int i = 1; i <= lStudent.size(); i++) {
             Student s =(Student) lStudent.getNode(i).data;
@@ -329,7 +329,7 @@ public class Utility {
     return null;
     }
     
-    private static Career getCarrerByID(String id) throws ListException {
+    public static Career getCarrerByID(String id) throws ListException {
         
         for (int i = 1; i <= lCareer.size(); i++) {
             Career c =(Career) lCareer.getNode(i).data;
@@ -341,7 +341,7 @@ public class Utility {
     return null;
     }
     
-    private static CircularLinkList getCoursesByCarrerID(String id) throws ListException {
+    public static CircularLinkList getCoursesByCarrerID(String id) throws ListException {
         CircularLinkList list = new CircularLinkList();
         for (int i = 1; i <= lCourse.size(); i++) {
             Course c =(Course) lCourse.getNode(i).data;
@@ -351,6 +351,18 @@ public class Utility {
             }
         }
     return list;
+    }
+    
+    public static TimeTable getScheduleByCourseID(String id,String period) throws ListException {
+        
+        for (int i = 1; i <= lSchedule.size(); i++) {
+            TimeTable t =(TimeTable) lSchedule.getNode(i).data;
+            if(((t.getID()+"").equals(id))&&(t.getPeriod().equals(period))){
+            return t;
+            
+            }
+        }
+    return null;
     }
 
     

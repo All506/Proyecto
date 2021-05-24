@@ -5,9 +5,14 @@
  */
 package Controller;
 
+import Domain.CircularLinkList;
+import Domain.ListException;
+import Objects.Course;
 import Objects.Student;
 import java.net.URL;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -48,7 +53,7 @@ public class EnrollmentController implements Initializable {
     @FXML
     private ComboBox<?> cmbPeriod;
     @FXML
-    private ComboBox<?> cmbCourse;
+    private ComboBox<String> cmbCourse;
     @FXML
     private ComboBox<?> cmbSchedule;
     @FXML
@@ -60,17 +65,45 @@ public class EnrollmentController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-    Student s= Util.Utility.getUserStudent();
-
-    txfStudentID.setText(s.getStudentID());
-    txfPersID.setText(""+s.getId());
-    txfFirstName.setText(s.getFirstname());
-    txfLastName.setText(s.getLastname());
-    txfAddress.setText(s.getAddress());
-    txfBirthday.setText(Util.Utility.dateFormat(s.getBirthday2()));
-    txfEmail.setText(s.getEmail());
-    txfPhoneNumber.setText(s.getPhoneNumber());
-  
+        try {
+            Student s= Util.Utility.getUserStudent();
+            
+            txfStudentID.setText(s.getStudentID());
+            txfPersID.setText(""+s.getId());
+            txfFirstName.setText(s.getFirstname());
+            txfLastName.setText(s.getLastname());
+            txfAddress.setText(s.getAddress());
+            txfBirthday.setText(Util.Utility.dateFormat(s.getBirthday2()));
+            txfEmail.setText(s.getEmail());
+            txfPhoneNumber.setText(s.getPhoneNumber());
+            loadComboBoxCourses(""+s.getCareerID());
+            txfCarrer.setText(Util.Utility.getCarrerByID(""+s.getCareerID()).getDescription());
+            
+        } catch (ListException ex) {
+            Logger.getLogger(EnrollmentController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    
+    
+    }
+    
+    public void loadComboBoxCourses(String id) throws ListException{
+        //Para cargar un combobox
+        CircularLinkList tempCourses = Util.Utility.getCoursesByCarrerID(id);
+        tempCourses = Util.Utility.getListCourse();
+        String temporal = "";
+        
+        try {
+            for (int i = 1; i <= tempCourses.size(); i++) {
+                Course c = (Course)tempCourses.getNode(i).getData(); 
+                temporal = c.getId()+"-"+c.getName();
+                this.cmbCourse.getItems().add(temporal);
+                        }
+        } catch (ListException ex) {
+            Logger.getLogger(NewStudentController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        cmbCourse.setValue(temporal);
+        cmbCourse.getSelectionModel().select("Courses");
     }
 
     @FXML
