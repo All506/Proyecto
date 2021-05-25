@@ -241,11 +241,15 @@ public class MenuController implements Initializable {
                 Logger.getLogger(MenuController.class.getName()).log(Level.SEVERE, null, ex);
             }
             System.out.println("Lista en util \n " + Util.Utility.getListEnrollment().toString());
-        }
-        
-        //Cargar el lastId de enrollments
+            
+            //Cargar el lastId de enrollments
         Util.Utility.setLastEnroll(fXML.getLastEnroll());
         System.out.println("El last id de enroll es: " + Util.Utility.getLastEnroll());
+        } else {
+            Util.Utility.setLastEnroll(0);
+        }
+        
+        
 
     }
 
