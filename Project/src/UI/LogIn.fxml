@@ -7,30 +7,40 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
-<AnchorPane id="AnchorPane" prefHeight="334.0" prefWidth="195.0" stylesheets="@../Style/general.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.LogInController">
+<AnchorPane id="AnchorPane" prefHeight="381.0" prefWidth="621.0" stylesheets="@../Style/general.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.LogInController">
        <children>
-      <Label layoutX="83.0" layoutY="175.0" text="User" textFill="WHITE">
+      <Label layoutX="296.0" layoutY="184.0" text="User" textFill="WHITE">
          <font>
-            <Font name="System Bold" size="14.0" />
+            <Font name="Franklin Gothic Book" size="12.0" />
          </font>
       </Label>
-      <Label layoutX="69.0" layoutY="237.0" text="Password" textFill="WHITE">
+      <Label layoutX="281.0" layoutY="246.0" text="Password" textFill="WHITE">
          <font>
-            <Font name="System Bold" size="14.0" />
+            <Font name="Franklin Gothic Book" size="12.0" />
          </font>
       </Label>
-      <TextField fx:id="txtUser" layoutX="9.0" layoutY="203.0" prefHeight="26.0" prefWidth="181.0" />
-      <PasswordField fx:id="txtPassword" layoutX="7.0" layoutY="266.0" prefHeight="26.0" prefWidth="181.0" />
-      <Button fx:id="btnLogIn" layoutX="71.0" layoutY="301.0" mnemonicParsing="false" onAction="#btnLogIn" text="Log In">
+      <TextField fx:id="txtUser" layoutX="221.0" layoutY="212.0" prefHeight="26.0" prefWidth="181.0" promptText="        Insert your username" />
+      <PasswordField fx:id="txtPassword" layoutX="220.0" layoutY="273.0" prefHeight="37.0" prefWidth="181.0" promptText="        Insert your password" />
+      <Button fx:id="btnLogIn" layoutX="279.0" layoutY="328.0" mnemonicParsing="false" onAction="#btnLogIn" text="Log In">
          <font>
             <Font size="14.0" />
          </font>
       </Button>
-      <ImageView fitHeight="161.0" fitWidth="197.0" layoutX="27.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="161.0" fitWidth="197.0" layoutX="230.0" layoutY="-10.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../Resources/user.png" />
+            <Image url="@../Resources/eMatriculaLogo.png" />
          </image></ImageView>
+      <Text fill="#00ae23" layoutX="163.0" layoutY="166.0" strokeType="OUTSIDE" strokeWidth="0.0" text="LOGIN TO THE WEB ENROLLMENT SYSTEM">
+         <font>
+            <Font name="Franklin Gothic Demi Cond" size="20.0" />
+         </font>
+      </Text>
+      <Line endX="162.0" layoutX="313.0" layoutY="177.0" startX="-147.0" stroke="#00ae23" />
+      <Line endX="162.0" layoutX="313.0" layoutY="317.0" startX="-147.0" stroke="#00ae23" />
+      <Line endX="162.0" layoutX="313.0" layoutY="141.0" startX="-147.0" stroke="#00ae23" />
    </children>
 </AnchorPane>
