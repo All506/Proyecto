@@ -282,7 +282,7 @@ public class MenuController implements Initializable {
             fXML.createXML("CoursesXML", "Courses");
             writeCourses();
         }
-        
+   
         //Guarda datos de la lista Horarios en XML
         
         //Guarda datos de la lista de cursos en XML
@@ -298,7 +298,15 @@ public class MenuController implements Initializable {
     }
 
     public void writeStudents() throws ListException {
+        
         FileXML fXML = new FileXML();
+        
+        if(Util.Utility.getListStudents().isEmpty()){
+           if (fXML.exist("Students.xml")){
+               fXML.deleteFile("Students");
+       }
+       }else{
+   
         for (int i = 1; i <= lStudents.size(); i++) {
             Student tempStd = (Student) lStudents.getNode(i).data;
             try {
@@ -312,10 +320,18 @@ public class MenuController implements Initializable {
                 Logger.getLogger(MenuController.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
+      }
     }
 
     public void writeCareers() throws ListException {
         FileXML fXML = new FileXML();
+        
+        if(Util.Utility.getListCareer().isEmpty()){
+           if (fXML.exist("Careers.xml")){
+               fXML.deleteFile("Careers");
+       }
+       }else{
+        
         for (int i = 1; i <= lCareers.size(); i++) {
             Career car = (Career) lCareers.getNode(i).data;
             try {
@@ -328,10 +344,17 @@ public class MenuController implements Initializable {
                 Logger.getLogger(MenuController.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
+      }
     }
 
     public void writeSecurity() throws ListException {
         FileXML fXML = new FileXML();
+        
+        if(Util.Utility.getListSecurity().isEmpty()){
+           if (fXML.exist("Security.xml")){
+               fXML.deleteFile("Security");}
+       }else{
+        
         AES encrypt = new AES();
         for (int i = 1; i <= lSecurity.size(); i++) {
             Security sec = (Security)lSecurity.getNode(i).data;
@@ -348,10 +371,18 @@ public class MenuController implements Initializable {
                 Logger.getLogger(MenuController.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
+      }
     }
     
     public void writeCourses() throws ListException {
-        FileXML fXML = new FileXML();
+       FileXML fXML = new FileXML(); 
+       
+       if(Util.Utility.getListCourse().isEmpty()){
+           if (fXML.exist("Courses.xml")){
+               fXML.deleteFile("Courses");
+       }
+       }else{
+
         for (int i = 1; i <= lCourse.size(); i++) {
             Course tempCourse = (Course) lCourse.getNode(i).data;
             try {
@@ -365,10 +396,18 @@ public class MenuController implements Initializable {
                 Logger.getLogger(MenuController.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
+       }
     }
     
         public void writeSchedules() throws ListException {
         FileXML fXML = new FileXML();
+        
+        if(Util.Utility.getListSchedule().isEmpty()){
+           if (fXML.exist("Schedules.xml")){
+               fXML.deleteFile("Schedules");
+       }
+       }else{
+        
         for (int i = 1; i <= lSchedules.size(); i++) {
             TimeTable schedule = (TimeTable) lSchedules.getNode(i).data;
             try {
@@ -381,6 +420,7 @@ public class MenuController implements Initializable {
                 Logger.getLogger(MenuController.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
+      }
     }
     
 
