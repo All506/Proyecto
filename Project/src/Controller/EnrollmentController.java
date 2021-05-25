@@ -82,7 +82,6 @@ public class EnrollmentController implements Initializable {
             txfBirthday.setText(Util.Utility.dateFormat(s.getBirthday2()));
             txfEmail.setText(s.getEmail());
             txfPhoneNumber.setText(s.getPhoneNumber());
-
             loadComboBoxCourses("" + s.getCareerID());
             txfCarrer.setText(Util.Utility.getCarrerByID("" + s.getCareerID()).getDescription());
             loadComboBoxPeriod();
@@ -148,8 +147,9 @@ public class EnrollmentController implements Initializable {
     private void btnEnroll(ActionEvent event) {
         try {
             java.util.Date d = java.sql.Date.valueOf(java.time.LocalDate.now());
+            int temp = Util.Utility.getLastEnroll();
             String[] courseId = cmbCourse.getValue().split("-");
-            Enrollment newEnroll = new Enrollment(Util.Utility.getLastEnroll(), d, this.txfStudentID.getText(), courseId[0], cmbSchedule.getValue());
+            Enrollment newEnroll = new Enrollment(temp+1, d, this.txfStudentID.getText(), courseId[0], cmbSchedule.getValue());
             System.out.println("El enroll a registrar es: " + newEnroll.toString());
             Util.Utility.setListEnrollment(newEnroll);
             System.out.println(Util.Utility.getListEnrollment().toString());

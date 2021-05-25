@@ -351,27 +351,29 @@ public class FileXML {
     }
     
     public int getLastEnroll(){
-        int contador = -1;
-        try {
+        int contador = 0;
+
             File inputFile = new File("Enrollments.xml");
             DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
-            DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
+            DocumentBuilder dBuilder;
+        try {
+            dBuilder = dbFactory.newDocumentBuilder();
             Document doc = dBuilder.parse(inputFile);
             doc.getDocumentElement().normalize();
 
-            NodeList nList = doc.getElementsByTagName("EnrollmentsXML");
-
-            for (int indice = 0; indice < nList.getLength(); indice++) {
-                Node nNode = nList.item(indice);
-                if (nNode.getNodeType() == Node.ELEMENT_NODE) {
-                    contador++;
-                }
-
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
+            NodeList nList = doc.getElementsByTagName("Enrollments");
+            
+            
+            contador = nList.getLength();
+        } catch (ParserConfigurationException ex) {
+            Logger.getLogger(FileXML.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SAXException ex) {
+            Logger.getLogger(FileXML.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(FileXML.class.getName()).log(Level.SEVERE, null, ex);
         }
-
+            
         return contador;
+        
     }
 }
