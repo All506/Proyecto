@@ -218,9 +218,8 @@ public class NewTimeTableController implements Initializable {
                         spnDay2.getValue().substring(0, 3)+" "+Util.Utility.hourFormat(spnStart2.getValue())+"-"+Util.Utility.hourFormat(spnEnd2.getValue()));
 
                 Util.Utility.setListSchedule(t);
-                System.out.println(t.toString());   
-                System.out.println(Util.Utility.getListSchedule().toString());
                 btnClean(event);
+                callAlert("notification", "Notification", "Schedule has been saved");
             }
         }
         
@@ -275,10 +274,10 @@ public class NewTimeTableController implements Initializable {
         CircularLinkList s = Util.Utility.getListCourse();
         SinglyLinkList sch = Util.Utility.getListSchedule();
         Course find=null;
+        btnValidSave.setText("Validate and save");
         if(!s.isEmpty()&&!sch.isEmpty()&&!cmbCourses.getValue().equals("Courses")&&!cmbPeriod.getValue().equals("Period")){
         for (int i = 1; i <=s.size() ; i++) {
             Course c = (Course)s.getNode(i).data;
-//            System.out.println(c.getId()+"------"+Util.Utility.getIDofString(cmbCourses.getValue()));
             if(c.getId().equals(Util.Utility.getIDofString(cmbCourses.getValue()))){ 
                 find=(Course)s.getNode(i).data;;
                 i=  s.size()+1;
@@ -287,8 +286,7 @@ public class NewTimeTableController implements Initializable {
             }
             for (int j = 1; j <= sch.size(); j++) {
                 TimeTable t = (TimeTable)sch.getNode(j).data;
-//                System.out.println(find.getId()+"++++++"+t.getID());
-//                System.out.println(t.getPeriod()+"+++"+cmbPeriod.getValue());
+
                 if(find.getId().equals(t.getID())&&t.getPeriod().equals(cmbPeriod.getValue())){
 
             //"ya tiene horario"
