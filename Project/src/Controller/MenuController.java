@@ -229,6 +229,23 @@ public class MenuController implements Initializable {
             }
             System.out.println("Lista en util \n " + Util.Utility.getListCourse().toString());
         }
+        
+        //Carga los Enrollments
+        if (fXML.exist("Enrollments.xml")) {
+            lEnrollment = fXML.readXMLtoEnrollmentList();
+            try {
+                for (int i = 1; i <= lEnrollment.size(); i++) { //Se añaden los objetos del xml a util
+                    Util.Utility.setListEnrollment((Enrollment) lEnrollment.getNode(i).data);
+                }
+            } catch (ListException ex) {
+                Logger.getLogger(MenuController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            System.out.println("Lista en util \n " + Util.Utility.getListEnrollment().toString());
+        }
+        
+        //Cargar el lastId de enrollments
+        Util.Utility.setLastEnroll(fXML.getLastEnroll());
+        System.out.println("El last id de enroll es: " + Util.Utility.getLastEnroll());
 
     }
 

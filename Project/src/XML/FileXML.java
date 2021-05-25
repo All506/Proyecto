@@ -335,8 +335,8 @@ public class FileXML {
                     enr.setId(Integer.parseInt(eElement.getAttribute("id")));
                     //Seteo de la fecha
                     DateFormat format = new SimpleDateFormat("yyyy-MM-dd");
-                    Date date = format.parse(eElement.getElementsByTagName("date").item(0).getTextContent());
-                    enr.setDate(date);
+                    java.util.Date d = java.sql.Date.valueOf(eElement.getElementsByTagName("date").item(0).getTextContent());
+                    enr.setDate(d);
                     enr.setStudentID(eElement.getElementsByTagName("studentId").item(0).getTextContent());
                     enr.setCourseID(eElement.getElementsByTagName("courseId").item(0).getTextContent());
                     enr.setSchedule(eElement.getElementsByTagName("schedule").item(0).getTextContent());
@@ -348,5 +348,30 @@ public class FileXML {
         }
 
         return lEnrollment;
+    }
+    
+    public int getLastEnroll(){
+        int contador = -1;
+        try {
+            File inputFile = new File("Enrollments.xml");
+            DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
+            DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
+            Document doc = dBuilder.parse(inputFile);
+            doc.getDocumentElement().normalize();
+
+            NodeList nList = doc.getElementsByTagName("EnrollmentsXML");
+
+            for (int indice = 0; indice < nList.getLength(); indice++) {
+                Node nNode = nList.item(indice);
+                if (nNode.getNodeType() == Node.ELEMENT_NODE) {
+                    contador++;
+                }
+
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return contador;
     }
 }

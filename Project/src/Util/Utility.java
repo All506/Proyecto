@@ -275,6 +275,10 @@ public class Utility {
                 TimeTable sch1 = (TimeTable) a;
                 TimeTable sch2 = (TimeTable) b;
                 return sch1.getID().equals(sch2.getID()) && sch1.getPeriod().equals(sch2.getPeriod());
+            case "enrollment":
+                Enrollment enr1 = (Enrollment)a;
+                Enrollment enr2 = (Enrollment)b;
+                return enr1.getStudentID().equalsIgnoreCase(enr2.getStudentID()) && enr1.getId() == enr2.getId();
         }
         return false; //En cualquier otro caso retorna un false
     }
@@ -300,6 +304,9 @@ public class Utility {
         }
         if (a instanceof TimeTable && b instanceof TimeTable) {
             return "period";
+        }
+        if (a instanceof Enrollment && b instanceof Enrollment){
+            return "enrollment";
         }
 
         return "unknown";
