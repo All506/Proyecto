@@ -5,6 +5,8 @@
  */
 package Objects;
 
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.util.Date;
 
 /**
@@ -27,6 +29,9 @@ public class Enrollment {
         this.schedule = schedule;
     }
 
+    public Enrollment() {
+    }
+
     public int getId() {
         return id;
     }
@@ -41,6 +46,10 @@ public class Enrollment {
 
     public String getCourseID() {
         return courseID;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getSchedule() {
@@ -62,7 +71,21 @@ public class Enrollment {
     public void setSchedule(String schedule) {
         this.schedule = schedule;
     }
+
+    @Override
+    public String toString() {
+        return "Enrollment{" + "id=" + id + ", date=" + date + ", studentID=" + studentID + ", courseID=" + courseID + ", schedule=" + schedule + '}';
+    }
     
+    public String[] dataName(){
+        String[] data = {"id","date","studentId","courseId","schedule"};
+        return data;
+    }
     
+    public String[] getData(){
+        LocalDate dataFormat = LocalDate.parse(new SimpleDateFormat("yyyy-MM-dd").format(this.date));
+        String[] data = {String.valueOf(id),dataFormat.toString(),this.studentID, this.courseID, this.schedule};
+        return data;
+    }
     
 }

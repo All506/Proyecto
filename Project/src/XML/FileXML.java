@@ -5,11 +5,13 @@
  */
 package XML;
 
+import Domain.CircularDoublyLinkList;
 import Domain.CircularLinkList;
 import Objects.Career;
 import Domain.DoublyLinkList;
 import Domain.SinglyLinkList;
 import Objects.Course;
+import Objects.Enrollment;
 import Objects.Security;
 import Objects.Student;
 import Objects.TimeTable;
@@ -246,7 +248,6 @@ public class FileXML {
     }
 
     //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! Course  !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-    
     public CircularLinkList readXMLtoCourseList() {
 
         CircularLinkList lCourse = new CircularLinkList();
@@ -278,9 +279,8 @@ public class FileXML {
 
         return lCourse;
     }
-    
-     //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! Schedules  !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-    
+
+    //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! Schedules  !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
     public SinglyLinkList readXMLtoScheduleList() {
 
         SinglyLinkList lSchedule = new SinglyLinkList();
@@ -311,5 +311,42 @@ public class FileXML {
         }
 
         return lSchedule;
+    }
+
+    //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! Schedules  !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+    public CircularDoublyLinkList readXMLtoEnrollmentList() {
+
+        CircularDoublyLinkList lEnrollment = new CircularDoublyLinkList();
+
+        try {
+            File inputFile = new File("Enrollments.xml");
+            DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
+            DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
+            Document doc = dBuilder.parse(inputFile);
+            doc.getDocumentElement().normalize();
+
+            NodeList nList = doc.getElementsByTagName("Enrollments");
+
+            for (int indice = 0; indice < nList.getLength(); indice++) {
+                Enrollment enr = new Enrollment();
+                Node nNode = nList.item(indice);
+                if (nNode.getNodeType() == Node.ELEMENT_NODE) {
+                    Element eElement = (Element) nNode;
+                    enr.setId(Integer.parseInt(eElement.getAttribute("id")));
+                    //Seteo de la fecha
+                    DateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+                    Date date = format.parse(eElement.getElementsByTagName("date").item(0).getTextContent());
+                    enr.setDate(date);
+                    enr.setStudentID(eElement.getElementsByTagName("studentId").item(0).getTextContent());
+                    enr.setCourseID(eElement.getElementsByTagName("courseId").item(0).getTextContent());
+                    enr.setSchedule(eElement.getElementsByTagName("schedule").item(0).getTextContent());
+                }
+                lEnrollment.add(enr);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return lEnrollment;
     }
 }

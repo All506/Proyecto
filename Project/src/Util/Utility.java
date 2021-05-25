@@ -44,6 +44,7 @@ public class Utility {
     private static CircularLinkList lCourse = new CircularLinkList();
     private static CircularLinkList lSecurity = new CircularLinkList();
     private static CircularDoublyLinkList lEnrollment = new CircularDoublyLinkList();
+    private static int lastEnroll;
     private static boolean kindUser = false; //True if user, false if Student
     private static Student userStudent = null;
 
@@ -51,7 +52,7 @@ public class Utility {
     public static SinglyLinkList getListStudents() {
         return lStudent;
     }
-    
+
     public static SinglyLinkList getListSchedule() {
         return lSchedule;
     }
@@ -67,33 +68,41 @@ public class Utility {
     public static CircularLinkList getListSecurity() {
         return lSecurity;
     }
-    
+
     public static CircularDoublyLinkList getListEnrollment() {
         return lEnrollment;
     }
 
+    public static int getLastEnroll() {
+        return lastEnroll;
+    }
+    
+
+    public static void setLastEnroll(int lastEnroll) {
+        Util.Utility.lastEnroll = lastEnroll;
+    }
+    
     public static boolean isKindUser() {
         return kindUser;
     }
 
     public static void setKindUser(boolean kindUser) {
         Utility.kindUser = kindUser;
-        
+
     }
-    
-    public static void setKindUser(boolean kindUser,String userID) throws ListException {
+
+    public static void setKindUser(boolean kindUser, String userID) throws ListException {
         Utility.kindUser = kindUser;
-        Utility.userStudent=getStudentByID(userID);
+        Utility.userStudent = getStudentByID(userID);
     }
-    
+
     public static Student getUserStudent() {
         return userStudent;
     }
-    
+
     public static void setUserStudent(Student aUserStudent) {
         userStudent = aUserStudent;
     }
-    
 
     //DELETE NODES DE LAS LISTA
     public static void deleteNodeLStudent(Student std) {
@@ -138,7 +147,7 @@ public class Utility {
         }
         return flag;
     }
-    
+
     public static boolean setListCareer(Career car) throws ListException {
         boolean flag = false;
         if (Utility.lCareer.isEmpty()) {
@@ -188,7 +197,7 @@ public class Utility {
         }
         return flag;
     }
-    
+
     public static boolean setListEnrollment(Enrollment enr) throws ListException {
         boolean flag = false;
         if (Utility.lEnrollment.isEmpty()) {
@@ -204,9 +213,8 @@ public class Utility {
         }
         return flag;
     }
-    
-    //UTILIDAD 
 
+    //UTILIDAD 
     public static int random() {
         return 1 + (int) Math.floor(Math.random() * 99);
     }
@@ -220,7 +228,7 @@ public class Utility {
         return new DecimalFormat("###,###,###,###.##")
                 .format(value);
     }
-    
+
     public static String hourFormat(int value) {
         return new DecimalFormat("00")
                 .format(value);
@@ -258,7 +266,7 @@ public class Utility {
             case "course":
                 Course cour1 = (Course) a;
                 Course cour2 = (Course) b;
-                return cour1.getId().equalsIgnoreCase(cour2.getId()) && cour1.getName().equalsIgnoreCase(cour2.getName()) ;
+                return cour1.getId().equalsIgnoreCase(cour2.getId()) && cour1.getName().equalsIgnoreCase(cour2.getName());
             case "security":
                 Security sec1 = (Security) a;
                 Security sec2 = (Security) b;
@@ -312,89 +320,85 @@ public class Utility {
         return coincidence.find();
     }
 
-    public static String getIDofString(String s){
-    
-    int i = 0;
+    public static String getIDofString(String s) {
+
+        int i = 0;
         String x = "";
-        while(!("-").contains(""+s.charAt(i))){
-                    x += s.charAt(i);
-                    i++;
+        while (!("-").contains("" + s.charAt(i))) {
+            x += s.charAt(i);
+            i++;
         }
-    
-    return x;
+
+        return x;
     }
 
     public static Student getStudentByID(String id) throws ListException {
-        
+
         for (int i = 1; i <= lStudent.size(); i++) {
-            Student s =(Student) lStudent.getNode(i).data;
-            if((s.getId()+"").equals(id)){
-            return s;
-            
+            Student s = (Student) lStudent.getNode(i).data;
+            if ((s.getId() + "").equals(id)) {
+                return s;
+
             }
         }
-    return null;
-    }
-    
-    public static Career getCarrerByID(String id) throws ListException {
-        
-        for (int i = 1; i <= lCareer.size(); i++) {
-            Career c =(Career) lCareer.getNode(i).data;
-            if((c.getId()+"").equals(id)){
-            return c;
-            
-            }
-        }
-    return null;
-    }
-    
-    public static CircularLinkList getCoursesByCarrerID(String id) throws ListException {
-        CircularLinkList list = new CircularLinkList();
-        if(!lCourse.isEmpty()){   
-        for (int i = 1; i <= lCourse.size(); i++) {
-            Course c =(Course) lCourse.getNode(i).data;
-            if((c.getCareerId()+"").equals(id)&&(courseHasSchedule(c.getId()))){
-                
-                    list.add(c);
-            
-            }
-        }
-    }
-    return list;
-    }
-    
-    
-    public static TimeTable getScheduleByCourseID(String id,String period) throws ListException {
-        
-        for (int i = 1; i <= lSchedule.size(); i++) {
-            TimeTable t =(TimeTable) lSchedule.getNode(i).data;
-            
-            if(((t.getID()+"").equals(id))&&(t.getPeriod().equals(period))){
-            return t;
-            
-            }
-        }
-    return null;
+        return null;
     }
 
-    
+    public static Career getCarrerByID(String id) throws ListException {
+
+        for (int i = 1; i <= lCareer.size(); i++) {
+            Career c = (Career) lCareer.getNode(i).data;
+            if ((c.getId() + "").equals(id)) {
+                return c;
+
+            }
+        }
+        return null;
+    }
+
+    public static CircularLinkList getCoursesByCarrerID(String id) throws ListException {
+        CircularLinkList list = new CircularLinkList();
+        if (!lCourse.isEmpty()) {
+            for (int i = 1; i <= lCourse.size(); i++) {
+                Course c = (Course) lCourse.getNode(i).data;
+                if ((c.getCareerId() + "").equals(id) && (courseHasSchedule(c.getId()))) {
+
+                    list.add(c);
+
+                }
+            }
+        }
+        return list;
+    }
+
+    public static TimeTable getScheduleByCourseID(String id, String period) throws ListException {
+
+        for (int i = 1; i <= lSchedule.size(); i++) {
+            TimeTable t = (TimeTable) lSchedule.getNode(i).data;
+
+            if (((t.getID() + "").equals(id)) && (t.getPeriod().equals(period))) {
+                return t;
+
+            }
+        }
+        return null;
+    }
+
     public static void replaceListCourse(CircularLinkList listToSend) {
         lCourse = listToSend;
     }
 
     public static boolean courseHasSchedule(String id) throws ListException {
-      
+
         for (int i = 1; i <= lSchedule.size(); i++) {
-            TimeTable t =(TimeTable) lSchedule.getNode(i).data;
-            if(((t.getID()+"").equals(id))){
-                    System.out.println(t.toString());
-                   return true;
+            TimeTable t = (TimeTable) lSchedule.getNode(i).data;
+            if (((t.getID() + "").equals(id))) {
+                System.out.println(t.toString());
+                return true;
             }
         }
-        
-    return false;    
+
+        return false;
     }
 
-    
-    
 }
