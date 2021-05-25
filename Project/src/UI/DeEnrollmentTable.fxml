@@ -7,7 +7,6 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.text.Text?>
 
-
 <BorderPane fx:id="bpRoot" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.DeEnrollmentTableController">
    <center>
       <AnchorPane id="AnchorPane" prefHeight="360.0" prefWidth="650.0" styleClass="mainFxmlClass">
@@ -23,7 +22,7 @@
                   <TableColumn fx:id="colPersID" prefWidth="143.99990844726562" text="Personal ID" />
               </columns>
             </TableView>
-            <Text layoutX="182.0" layoutY="27.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Double click on a student to enroll" textAlignment="CENTER" wrappingWidth="303.114501953125" />
+            <Text layoutX="182.0" layoutY="27.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Double click on a student to DE-ENROLL" textAlignment="CENTER" wrappingWidth="303.114501953125" />
          </children>
       </AnchorPane>
    </center>
