@@ -5,6 +5,7 @@
  */
 package Controller;
 
+import Domain.CircularLinkList;
 import Domain.ListException;
 import Domain.SinglyLinkList;
 import Objects.Student;
@@ -84,13 +85,18 @@ public class EnrollmentTableController implements Initializable {
         }
         
         colStudID.setOnEditStart(data -> {
-            
-            
-            
-              Student aux=(Student)(data.getRowValue());
-              Util.Utility.setUserStudent(aux);
-
-              loadPage("/UI/enrollment");  
+            try {
+                Student aux=(Student)(data.getRowValue());
+                Util.Utility.setUserStudent(aux);
+                
+                
+                if(Util.Utility.getCoursesByCarrerID(""+aux.getCareerID()).isEmpty()){
+                     callAlert("alert", "Attention!", "This student's career doesn't have\ncourses with defined schedules");
+                }else  
+                    loadPage("/UI/enrollment");
+            } catch (ListException ex) {
+                Logger.getLogger(EnrollmentTableController.class.getName()).log(Level.SEVERE, null, ex);
+            }
         });
        
     } 

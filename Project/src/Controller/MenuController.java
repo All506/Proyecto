@@ -26,10 +26,13 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuItem;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
 import javax.xml.transform.TransformerException;
 import org.xml.sax.SAXException;
 
@@ -432,11 +435,14 @@ public class MenuController implements Initializable {
     }
 
     @FXML
-    private void mnEnrollment(ActionEvent event) {
+    private void mnEnrollment(ActionEvent event) throws ListException {
         if(Util.Utility.isKindUser())
         loadPage("/UI/enrollmentTable");
         else
-        loadPage("/UI/enrollment");    
+         if(Util.Utility.getCoursesByCarrerID(""+(Util.Utility.getUserStudent().getCareerID())).isEmpty()){
+                     callAlert("alert", "Attention!", "Your career does not yet have courses\nwith defined schedules");
+                }else  
+                    loadPage("/UI/enrollment");    
    
     }
 
@@ -444,4 +450,23 @@ public class MenuController implements Initializable {
     private void mnDeEnrollment(ActionEvent event) {
     }
 
+    private void callAlert(String fxmlName, String title, String text) {
+        //Se llama la alerta
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/UI/" + fxmlName + ".fxml"));
+            Parent root1;
+            root1 = (Parent) loader.load();
+            //Se llama al controller de la nueva ventana abierta
+            AlertController controller = loader.getController();
+            Stage stage = new Stage();
+            stage.initModality(Modality.APPLICATION_MODAL);
+            stage.setTitle("Alerta");
+            //Se le asigna la información a la controladora
+            controller.setText(title, text);
+            stage.setScene(new Scene(root1));
+            stage.show();
+        } catch (IOException ex) {
+            Logger.getLogger(LogInController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
 }

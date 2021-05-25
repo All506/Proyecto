@@ -133,7 +133,7 @@ public class EnrollmentController implements Initializable {
     
     public void loadComboBoxPeriod(){
         //Para cargar un combobox
-            for (int i = 2020; i <= 2020; i++) {
+            for (int i = 2021; i <= 2021; i++) {
                 cmbPeriod.getItems().add("1-"+i);
                 cmbPeriod.getItems().add("2-"+i);
                 cmbPeriod.getItems().add("3-"+i);

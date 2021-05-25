@@ -175,7 +175,7 @@ public class NewTimeTableController implements Initializable {
       
       public void loadComboBoxPeriod(){
         //Para cargar un combobox
-            for (int i = 2020; i <= 2040; i++) {
+            for (int i = 2021; i <= 2021; i++) {
                 this.cmbPeriod.getItems().add("1-"+i);
                 this.cmbPeriod.getItems().add("2-"+i);
                 this.cmbPeriod.getItems().add("3-"+i);
