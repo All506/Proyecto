@@ -307,7 +307,7 @@ public class Utility {
         //Nobody knows how the hell the pattern works but it works so...
 
         //Patrón del correo      
-        Pattern pattern = Pattern.compile("^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@" + "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$");
+        Pattern pattern = Pattern.compile("^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@" + "gmail.com");
         Matcher coincidence = pattern.matcher(email);
         return coincidence.find();
     }
