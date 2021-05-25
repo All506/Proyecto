@@ -487,7 +487,14 @@ public class MenuController implements Initializable {
     }
 
     @FXML
-    private void mnDeEnrollment(ActionEvent event) {
+    private void mnDeEnrollment(ActionEvent event) throws ListException {
+         if(Util.Utility.isKindUser())
+        loadPage("/UI/DeEnrollmentTable");
+        else
+         if(Util.Utility.getCoursesByCarrerID(""+(Util.Utility.getUserStudent().getCareerID())).isEmpty()){
+                     callAlert("alert", "Attention!", "You do not have enrolled courses");
+                }else  
+                    loadPage("/UI/DeEnrollment"); 
     }
 
     private void callAlert(String fxmlName, String title, String text) {
