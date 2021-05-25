@@ -68,7 +68,6 @@ public class ShowCourseController implements Initializable {
         DoublyLinkList tempCareers = new DoublyLinkList();
         tempCareers = Util.Utility.getListCareer();
         String temporal = "";
-        
         try {
             for (int i = 1; i <= tempCareers.size(); i++) {
                 Career c = (Career)tempCareers.getNode(i).getData(); 
@@ -123,7 +122,7 @@ public class ShowCourseController implements Initializable {
                        cursos.add(x);
                        this.tblCoursesDisplay.setItems(cursos);
                    }else{
-                       //this.tblCoursesDisplay.setItems(null);
+                       this.tblCoursesDisplay.setItems(null);
                    }
                 }
             } catch (ListException ex) {

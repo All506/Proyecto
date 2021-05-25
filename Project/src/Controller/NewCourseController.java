@@ -11,6 +11,7 @@ import Domain.ListException;
 import Objects.Career;
 import Objects.Course;
 import java.io.IOException;
+import java.lang.reflect.InvocationTargetException;
 import java.net.URL;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
@@ -140,7 +141,6 @@ public class NewCourseController implements Initializable {
         this.txtName.setText("");
         this.txtId.setText("");
         this.txtCredits.setText("");
-        this.cmbCarrerId.setValue(null);
 
     }
 
@@ -148,8 +148,7 @@ public class NewCourseController implements Initializable {
         //Para cargar un combobox
         DoublyLinkList tempCareers = new DoublyLinkList();
         tempCareers = Util.Utility.getListCareer();
-        String temporal = "";
-        this.cmbCarrerId.setValue(null);
+        String temporal = "";       
         try {
             for (int i = 1; i <= tempCareers.size(); i++) {
                 Career c = (Career) tempCareers.getNode(i).getData();
@@ -159,23 +158,29 @@ public class NewCourseController implements Initializable {
         } catch (ListException ex) {
             Logger.getLogger(NewStudentController.class.getName()).log(Level.SEVERE, null, ex);
         }
+        this.cmbCarrerId.setValue(temporal);
     }
 
     @FXML
     private void btnAdd(ActionEvent event) throws ListException {
+        if(this.cmbCarrerId.getValue().equals(null)){
+            System.out.println("Entro al if");
+           callAlert("alert", "Error", "Choose a carreer to add the course");
+        }else{ 
+            System.out.println("Entro al else");
         int i = 0;
         String x = "";
-        while (!("-").contains("" + this.cmbCarrerId.getValue().charAt(i))) {
-            x += this.cmbCarrerId.getValue().charAt(i);
-            i++;
-        }
-        Course crse = new Course(this.txtId.getText(), this.txtName.getText(), Integer.parseInt(this.txtCredits.getText()), Integer.parseInt(x));
-
-        if (!Util.Utility.setListCourse(crse)) {
-            callAlert("alert", "Error", "The data of the new course matches \n with an already existent course \n Please check your entries");
-        } else {
-            this.btnClean(event);
-            this.btnAdd.setDisable(true);
+            while (!("-").contains("" + this.cmbCarrerId.getValue().charAt(i))) {
+                x += this.cmbCarrerId.getValue().charAt(i);
+                i++;
+            }
+                Course crse = new Course(this.txtId.getText(), this.txtName.getText(), Integer.parseInt(this.txtCredits.getText()), Integer.parseInt(x));
+                if (!Util.Utility.setListCourse(crse)) {
+                    callAlert("alert", "Error", "The data of the new course matches \n with an already existent course \n Please check your entries");
+                } else {
+                    this.btnClean(event);
+                    this.btnAdd.setDisable(true);
+                }  
         }
     }
 

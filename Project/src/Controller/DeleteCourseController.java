@@ -110,25 +110,25 @@ public class DeleteCourseController implements Initializable {
         tempCourses = Util.Utility.getListCourse();
         String temporal = "";
         
+        if(!Util.Utility.getListCourse().isEmpty()){
         try {
             for (int i = 1; i <= tempCourses.size(); i++) {
                 Course c = (Course)tempCourses.getNode(i).getData();
-                System.out.println(c.getCareerId() + "/" + careerID);
                 if(c.getCareerId()==careerID){
                     temporal = c.getId()+"-"+c.getName();
-                    System.out.println(temporal);
                     this.cmbAvailableCourses.getItems().add(temporal);
                 }
                         }
         } catch (ListException ex) {
             Logger.getLogger(NewStudentController.class.getName()).log(Level.SEVERE, null, ex);
+        }}else{
+             callAlert("alert", "Error 404", "There are no courses registered");
         }
     }
 
     @FXML
     private void btnShowCourses(ActionEvent event) {
         int x = Integer.parseInt(Util.Utility.getIDofString(this.cmbCareer.getValue()));
-        System.out.println(x);
         this.cmbAvailableCourses.getItems().clear();
         loadComboBoxCourses(x);
         this.cmbAvailableCourses.setVisible(true);
@@ -141,7 +141,6 @@ public class DeleteCourseController implements Initializable {
     @FXML
     private void btnDelete(ActionEvent event) {
         try{
-        this.sendablecourseID = Util.Utility.getIDofString(this.cmbAvailableCourses.getValue());
         clean();
         this.txtConfirmation.setVisible(true);
         this.txtConfirmation.setText("Do you want to delete the course '" + this.cmbAvailableCourses.getValue() + "'?");
@@ -157,11 +156,12 @@ public class DeleteCourseController implements Initializable {
          CircularLinkList listTodelete = Util.Utility.getListCourse();
          CircularLinkList listToSend = new CircularLinkList();
         try {
-            for (int i = 1; i < listTodelete.size(); i++) {
+            for (int i = listTodelete.indexOf(listTodelete.getFirst()); i <= listTodelete.size(); i++) {
                 Course f = (Course)listTodelete.getNode(i).data;
-                System.out.println("Sendable course: " + sendablecourseID);
-                if(!sendablecourseID.equals(f.getId())){
-                    System.out.println(f);
+                String sample = f.getId();
+                System.out.println(i + "Vuelta: " + Util.Utility.getIDofString(this.cmbAvailableCourses.getValue()));
+                System.out.println("f.getID" + sample);
+                if(!Util.Utility.getIDofString(this.cmbAvailableCourses.getValue()).equals(sample)){
                     listToSend.add(f);
                 }
             }
@@ -169,7 +169,6 @@ public class DeleteCourseController implements Initializable {
         } catch (ListException ex) {
             callAlert("alert", "Error", "We couldn't delete the course");
         }
-         
          callAlert("alert", "The course has been deleted", "The course selected \n has been deleted from the files");
          clean();
          this.txtCareer.setVisible(true);
