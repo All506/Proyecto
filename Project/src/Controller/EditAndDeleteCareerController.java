@@ -23,6 +23,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextArea;
+import javafx.scene.input.KeyEvent;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javax.xml.parsers.ParserConfigurationException;
@@ -58,8 +59,31 @@ public class EditAndDeleteCareerController implements Initializable {
         this.loadComboBoxCareers();
         this.btnDelete.setVisible(false);
         this.btnEdit.setVisible(false);
+        
+        //Mask Description
+        maskText(txtDescription);
     }
 
+        public void maskText(TextArea txtArea) {
+        txtArea.setOnKeyTyped((KeyEvent event) -> {
+            if (!"0123456789".contains(event.getCharacter()) == false) {
+                event.consume();
+            }
+            if (event.getCharacter().trim().length() == 0) {
+                if (txtArea.getText().length() == 6) {
+                    txtArea.setText(txtArea.getText().substring(0, 5));
+                    txtArea.positionCaret(txtArea.getText().length());
+                }
+            } else {
+
+                if (txtArea.getText().length() == 4) {
+                    txtArea.positionCaret(txtArea.getText().length());
+                }
+
+            }
+        });
+    }
+    
     @FXML
     private void btnDelete(ActionEvent event) throws ListException {
         String[] valueSelected = cmbCareers.getValue().split("-");
