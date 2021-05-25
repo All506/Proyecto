@@ -242,9 +242,13 @@ public class CircularLinkList implements List {
     public String toString() {
         String result = "Circular Linked List\n";
         Node aux = first;//el aux es apra moverme por la lita hasta el ultimo elemento
+        if(!isEmpty()){
         while (aux != last) {
             result += aux.data + "\n";
             aux = aux.next;
+        }
+        }else{
+            System.out.println("Lista Vacia");
         }
         return result += aux.data;
     }
