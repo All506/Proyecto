@@ -22,7 +22,7 @@
          <font>
             <Font size="15.0" />
          </font></Text>
-      <ComboBox fx:id="cmbCarrers" layoutX="268.0" layoutY="251.0" prefWidth="150.0" />
+      <ComboBox fx:id="cmbCarrers" layoutX="268.0" layoutY="251.0" onAction="#cmbCarrers" prefWidth="150.0" />
       <Button fx:id="btnClean" layoutX="311.0" layoutY="323.0" mnemonicParsing="false" onAction="#btnClean" text="CLEAN">
          <font>
             <Font size="15.0" />

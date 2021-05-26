@@ -36,7 +36,6 @@ import org.xml.sax.SAXException;
  *
  * @author Alán
  */
-
 public class EditAndDeleteCareerController implements Initializable {
 
     @FXML
@@ -50,7 +49,6 @@ public class EditAndDeleteCareerController implements Initializable {
     @FXML
     private TextArea txtDescription;
 
-
     /**
      * Initializes the controller class.
      */
@@ -59,12 +57,12 @@ public class EditAndDeleteCareerController implements Initializable {
         this.loadComboBoxCareers();
         this.btnDelete.setVisible(false);
         this.btnEdit.setVisible(false);
-        
+
         //Mask Description
         maskText(txtDescription);
     }
 
-        public void maskText(TextArea txtArea) {
+    public void maskText(TextArea txtArea) {
         txtArea.setOnKeyTyped((KeyEvent event) -> {
             if (!"0123456789".contains(event.getCharacter()) == false) {
                 event.consume();
@@ -83,7 +81,7 @@ public class EditAndDeleteCareerController implements Initializable {
             }
         });
     }
-    
+
     @FXML
     private void btnDelete(ActionEvent event) throws ListException {
         String[] valueSelected = cmbCareers.getValue().split("-");

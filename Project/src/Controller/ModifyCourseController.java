@@ -6,10 +6,10 @@
 package Controller;
 
 import Domain.CircularLinkList;
-import Domain.DoublyLinkList;
 import Domain.ListException;
-import Objects.Career;
+import Domain.Node;
 import Objects.Course;
+import Objects.Student;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -24,6 +24,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
+import javafx.scene.input.KeyEvent;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
@@ -39,100 +40,166 @@ public class ModifyCourseController implements Initializable {
     @FXML
     private Button btnClean;
     @FXML
+    private TextField txtID;
+    @FXML
     private TextField txtName;
     @FXML
     private TextField txtCredits;
     @FXML
     private Button btnModify;
-    private ComboBox<String> cmbCourseId;
-    @FXML
-    private TextField txtID;
+
+    CircularLinkList tempCourse = new CircularLinkList();
 
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        loadComboBoxCareer();
-        loadComboBoxCarriers();
-        this.btnModify.setDisable(true);
+        try {
+            //Carga la lista 
+            tempCourse = Util.Utility.getListCourse();
+
+            //Llena combox con la carrera
+            for (int i = 1; i <= tempCourse.size(); i++) {
+                Course course = (Course) tempCourse.getNode(i).getData();
+                cmbCarrers.getItems().add(course.getCareerId() + "-" + course.getId() + "-" + course.getName());
+            }
+
+        } catch (Exception e) {
+        }
+        //Mask ID
+        maskID(txtID);
+
+        //Mask Name
+        maskText(txtName);
+
+        //Mask Credits
+        maskCredits(txtCredits);
     }
 
-    public void loadComboBoxCarriers() {
-        //Para cargar un combobox
-        CircularLinkList tempLCourse = new CircularLinkList();
-        tempLCourse = Util.Utility.getListCourse();
-        String temporal = "";
+    public void maskID(TextField txtId) {
+        txtId.setOnKeyTyped((KeyEvent event) -> {
+            if (event.getCharacter().trim().length() == 0) {
+                if (txtId.getText().length() == 6) {
+                    txtId.setText(txtId.getText().substring(0, 5));
+                    txtId.positionCaret(txtId.getText().length());
+                }
+            } else {
+                if (txtId.getText().length() == 0 || txtId.getText().length() == 1) {
+                    if (!"0123456789".contains(event.getCharacter()) == false) {
+                        event.consume();
+                    }
+                }
+                if (txtId.getText().length() >= 2) {
+                    if ("0123456789".contains(event.getCharacter()) == false) {
+                        event.consume();
+                    }
+                }
+                if (txtId.getText().length() == 6) {
+                    event.consume();
+                    txtId.positionCaret(txtId.getText().length());
+                }
 
-        try {
-            for (int i = 1; i <= tempLCourse.size(); i++) {
-                Course c = (Course) tempLCourse.getNode(i).getData();
-                temporal = c.getId() + "-" + c.getName();
-                this.cmbCourseId.getItems().add(temporal);
             }
-        } catch (ListException ex) {
-            Logger.getLogger(NewStudentController.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        this.cmbCourseId.setValue(temporal);
+        });
     }
 
-    public void loadComboBoxCareer() {
-        //Para cargar un combobox
-        DoublyLinkList tempCareers = new DoublyLinkList();
-        tempCareers = Util.Utility.getListCareer();
-        String temporal = "";
-
-        try {
-            for (int i = 1; i <= tempCareers.size(); i++) {
-                Career c = (Career) tempCareers.getNode(i).getData();
-                temporal = c.getId() + "-" + c.getDescription();
-                this.cmbCarrers.getItems().add(temporal);
+    public void maskCredits(TextField txtCredits) {
+        txtCredits.setOnKeyTyped((KeyEvent event) -> {
+            if ("0123456789".contains(event.getCharacter()) == false) {
+                event.consume();
             }
-        } catch (ListException ex) {
-            Logger.getLogger(NewStudentController.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        this.cmbCarrers.setValue(temporal);
+            if (event.getCharacter().trim().length() == 0) {
+                if (txtCredits.getText().length() == 6) {
+                    txtCredits.setText(txtCredits.getText().substring(0, 5));
+                    txtCredits.positionCaret(txtCredits.getText().length());
+                }
+            } else {
+
+                if (txtCredits.getText().length() == 2) {
+                    event.consume();
+                    txtCredits.positionCaret(txtCredits.getText().length());
+                }
+
+            }
+        });
+    }
+
+    public void maskText(TextField txtField) {
+        txtField.setOnKeyTyped((KeyEvent event) -> {
+            if (!"0123456789".contains(event.getCharacter()) == false) {
+                event.consume();
+            }
+            if (event.getCharacter().trim().length() == 0) {
+                if (txtField.getText().length() == 6) {
+                    txtField.setText(txtField.getText().substring(0, 5));
+                    txtField.positionCaret(txtField.getText().length());
+                }
+            } else {
+
+                if (txtField.getText().length() == 4) {
+                    txtField.positionCaret(txtField.getText().length());
+                }
+
+            }
+        });
     }
 
     @FXML
     private void btnClean(ActionEvent event) {
+        txtID.setText("");
         txtName.setText("");
         txtCredits.setText("");
+        cmbCarrers.setValue("");
     }
 
     @FXML
     private void btnModify(ActionEvent event) {
         try {
-            String[] courseSelected = cmbCourseId.getValue().split("-");
-            Course tempCourse = new Course(courseSelected[0], courseSelected[1], 0, 0);
-            Util.Utility.getListCourse().remove(tempCourse);
-            String[] careerSelected = cmbCarrers.getValue().split("-");
-            tempCourse = new Course(courseSelected[0], courseSelected[1], Integer.valueOf(txtCredits.getText()), Integer.valueOf(careerSelected[0]));
-            Util.Utility.getListCourse().add(tempCourse);
-            callAlert("notification", "Succesfully modified", "Course has been modified");
-            btnClean(event);
-            loadComboBoxCareer();
-            loadComboBoxCarriers();
-            this.btnModify.setDisable(true);
-        } catch (ListException ex) {
-            Logger.getLogger(ModifyCourseController.class.getName()).log(Level.SEVERE, null, ex);
-        }
+            String[] valueSelected = cmbCarrers.getValue().split("-");
+            if (!txtName.equals("") && !txtID.equals("") && !txtCredits.equals("")) {
+                Course course = new Course(txtID.getText(), txtName.getText(), Integer.parseInt(txtCredits.getText()), Integer.parseInt(valueSelected[0]));
+                Util.Utility.getListCourse().remove(course); //Se elimina el nodo de la lista
+                Util.Utility.getListCareer().add(course); //Se vuelve a añadir el nodo en la lista con la nueva información
+                callAlert("notification", "Course Edited", "Course has been edited sucessfully");
+            }
+        } catch (Exception e) {
 
+        }
     }
 
-    private void cmbCourseId(ActionEvent event) {
-        try {
-            String[] temporal = this.cmbCourseId.getValue().split("-");
-            Course tempCourse = new Course(temporal[0], temporal[1], 0, 0);
-            if (Util.Utility.getListCourse().contains(tempCourse)) {
-                tempCourse = (Course) Util.Utility.getListCourse().getNode(Util.Utility.getListCourse().indexOf(tempCourse)).data;
-                this.txtName.setText(tempCourse.getName());
-                this.txtCredits.setText(String.valueOf(tempCourse.getCredits()));
-            }
-        } catch (ListException ex) {
-            Logger.getLogger(ModifyCourseController.class.getName()).log(Level.SEVERE, null, ex);
+    @FXML
+    private void cmbCarrers(ActionEvent event) throws ListException {
+        btnModify.setVisible(true);
+        Course tempCourse1 = new Course();
+        String[] valueSelected = cmbCarrers.getValue().split("-");
+        tempCourse1.setId(valueSelected[1]);
+        tempCourse1.setName(valueSelected[2]);
+        if (tempCourse.contains(tempCourse1)) {
+            tempCourse1 = look4Course(tempCourse1);
+            this.txtID.setText(tempCourse1.getId());
+            this.txtName.setText(tempCourse1.getName());
+            this.txtCredits.setText(String.valueOf(tempCourse1.getCredits()));
+
         }
-        this.btnModify.setDisable(false);
+    }
+
+    private Course look4Course(Course temp) throws ListException {
+        //Busca la información de un curso en la lista y devuelve al curso
+        if (!tempCourse.isEmpty()) { //Si la lista esta vacia
+            Node aux = tempCourse.getNode(1);
+            while (aux != null) { //Va a analizar incluso el primer elemento para ver si es igual al objeto
+                Course s = (Course) aux.data;
+                if (s.getName().equalsIgnoreCase(temp.getName())) {
+                    return (Course) aux.data;
+                } else {
+                    aux = aux.next;
+                }
+
+            }
+
+        }
+        return null;
     }
 
     private void callAlert(String fxmlName, String title, String text) {
@@ -154,4 +221,5 @@ public class ModifyCourseController implements Initializable {
             Logger.getLogger(LogInController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-}
+
+}//end class
