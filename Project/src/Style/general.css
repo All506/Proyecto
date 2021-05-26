@@ -29,7 +29,7 @@ COLOR GIRS CLARO: #adadad*/
 }
 
 .text-field:focused {
-    -fx-background-color: #adadad;
+    -fx-background-color: #7A7A7A;
     -fx-text-fill: #000000;
     -fx-pref-height: 0px;
     -fx-translate-y: 0px;    
@@ -38,28 +38,30 @@ COLOR GIRS CLARO: #adadad*/
 
 .text-field{
     -fx-font: 12px "Lucida Fax";
-    -fx-background-color: #1AB723;
-    -fx-text-fill: black;
+    -fx-background-color: #4387E3;
+    -fx-text-fill: white;
     -fx-pref-height: 0px;
     -fx-translate-y: 0px; 
     -fx-alignment: CENTER;
-    -fx-prompt-text-fill: #7C7C7C;
+    -fx-prompt-text-fill: #E1E6F2;
 
 }
 
 .button{
     -fx-font: 15px "Lucida Fax";
     -fx-alignment: CENTER;
-    -fx-border-radius: 3px;
-    -fx-background-color: #02CB3C;
-    -fx-text-fill: black;
+    -fx-background-color: #26991C;
+    -fx-text-fill: #F3DE00;
     -fx-font-size:7;
 }
 
 .button:hover {
-    -fx-background-color: #02F548;
+    -fx-background-color: #247B05;
 }
 
+.text{
+    -fx-font: 15px "Franklin Gothic Medium";
+}
 
 .label{
     -fx-text-fill: #CECECE;
@@ -68,7 +70,7 @@ COLOR GIRS CLARO: #adadad*/
 .combo-box-base{
     -fx-pref-height: 0px;
     -fx-translate-y: 0px;
-    -fx-background-color: #02CB3C;
+    -fx-background-color: #4387E3;
     -fx-font: 12px "Lucida Fax";
 }
 .combo-box-base:hover{
@@ -94,6 +96,16 @@ COLOR GIRS CLARO: #adadad*/
     -fx-background-color: #303030;
     -fx-padding: 5;
     -fx-halignment: center;
+}
+
+
+.table-row-cell:hover{
+
+    -fx-background-color: #79B486;
+}
+
+.table-row-cell:selected{
+    -fx-background-color: #116323;
 }
 
 .text{

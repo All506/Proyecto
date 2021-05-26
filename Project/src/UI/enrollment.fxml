@@ -5,40 +5,88 @@
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane id="AnchorPane" prefHeight="350.0" prefWidth="650.0" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.EnrollmentController">
+<AnchorPane id="AnchorPane" prefHeight="382.0" prefWidth="650.0" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.EnrollmentController">
     <stylesheets>
         <URL value="@/Style/general.css" />
     </stylesheets>
    <children>
-      <Text layoutX="229.0" layoutY="20.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Enrollment menu" textAlignment="CENTER" wrappingWidth="140.5367431640625" />
-      <Text fx:id="txt" layoutX="51.0" layoutY="45.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Datos del estudiante" />
-      <Text layoutX="77.0" layoutY="78.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Student ID" textAlignment="CENTER" />
-      <Text layoutX="78.0" layoutY="114.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Last name" textAlignment="CENTER" />
-      <Text layoutX="76.0" layoutY="149.0" strokeType="OUTSIDE" strokeWidth="0.0" text="First Name" textAlignment="CENTER" />
-      <Text layoutX="75.0" layoutY="186.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Personal ID" textAlignment="CENTER" />
-      <TextField fx:id="txfStudentID" editable="false" layoutX="168.0" layoutY="61.0" />
-      <TextField fx:id="txfLastName" editable="false" layoutX="168.0" layoutY="97.0" />
-      <TextField fx:id="txfFirstName" editable="false" layoutX="168.0" layoutY="132.0" />
-      <TextField fx:id="txfPersID" editable="false" layoutX="168.0" layoutY="166.0" />
-      <Text layoutX="83.0" layoutY="219.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Birthday" textAlignment="CENTER" />
-      <TextField fx:id="txfBirthday" editable="false" layoutX="168.0" layoutY="202.0" />
-      <Text layoutX="66.0" layoutY="253.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Phone number" textAlignment="CENTER" />
-      <TextField fx:id="txfPhoneNumber" editable="false" layoutX="168.0" layoutY="236.0" />
-      <Text layoutX="90.0" layoutY="287.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Email" textAlignment="CENTER" />
-      <Text layoutX="83.0" layoutY="321.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Address" textAlignment="CENTER" />
-      <TextField fx:id="txfEmail" editable="false" layoutX="168.0" layoutY="270.0" />
-      <TextField fx:id="txfAddress" editable="false" layoutX="168.0" layoutY="304.0" />
-      <Text layoutX="450.0" layoutY="53.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Carrer" />
-      <TextField fx:id="txfCarrer" editable="false" layoutX="396.0" layoutY="58.0" />
-      <Text layoutX="449.0" layoutY="102.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Period" />
-      <ComboBox fx:id="cmbPeriod" layoutX="396.0" layoutY="109.0" onAction="#loadComboboxSchedules" prefWidth="150.0" promptText="Periods" />
-      <ComboBox fx:id="cmbCourse" layoutX="395.0" layoutY="163.0" onAction="#loadComboboxSchedules" prefWidth="150.0" promptText="Courses" />
-      <Text layoutX="450.0" layoutY="157.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Course" />
-      <ComboBox fx:id="cmbSchedule" layoutX="396.0" layoutY="220.0" prefWidth="150.0" promptText="Schedules" />
-      <Text layoutX="447.0" layoutY="208.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Schedule" />
-      <Button fx:id="btnEnroll" layoutX="396.0" layoutY="297.0" mnemonicParsing="false" onAction="#btnEnroll" text="Enroll" />
-      <Button fx:id="btnCancel" layoutX="495.0" layoutY="297.0" mnemonicParsing="false" onAction="#btnCancel" text="Cancel" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#303030" height="325.0" layoutX="50.0" layoutY="43.0" stroke="TRANSPARENT" strokeType="INSIDE" width="327.0" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#424242" height="325.0" layoutX="377.0" layoutY="43.0" stroke="TRANSPARENT" strokeType="INSIDE" width="229.0" />
+      <Text fill="#00ae23" layoutX="234.0" layoutY="29.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Enrollment menu" textAlignment="CENTER" wrappingWidth="212.5367431640625">
+         <font>
+            <Font name="Lucida Bright" size="22.0" />
+         </font></Text>
+      <Text fx:id="txt" fill="WHITE" layoutX="139.0" layoutY="71.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Student's Data">
+         <font>
+            <Font name="Lucida Bright Demibold Italic" size="18.0" />
+         </font></Text>
+      <Text fill="WHITE" layoutX="100.0" layoutY="99.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Student ID" textAlignment="CENTER">
+         <font>
+            <Font name="Franklin Gothic Book Italic" size="16.0" />
+         </font></Text>
+      <Text fill="WHITE" layoutX="101.0" layoutY="135.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Last name" textAlignment="CENTER">
+         <font>
+            <Font name="Franklin Gothic Book Italic" size="16.0" />
+         </font></Text>
+      <Text fill="WHITE" layoutX="99.0" layoutY="170.0" strokeType="OUTSIDE" strokeWidth="0.0" text="First Name" textAlignment="CENTER">
+         <font>
+            <Font name="Franklin Gothic Book Italic" size="16.0" />
+         </font></Text>
+      <Text fill="WHITE" layoutX="98.0" layoutY="207.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Personal ID" textAlignment="CENTER">
+         <font>
+            <Font name="Franklin Gothic Book Italic" size="16.0" />
+         </font></Text>
+      <TextField fx:id="txfStudentID" editable="false" layoutX="191.0" layoutY="82.0" />
+      <TextField fx:id="txfLastName" editable="false" layoutX="191.0" layoutY="118.0" />
+      <TextField fx:id="txfFirstName" editable="false" layoutX="191.0" layoutY="153.0" />
+      <TextField fx:id="txfPersID" editable="false" layoutX="191.0" layoutY="187.0" />
+      <Text fill="WHITE" layoutX="116.0" layoutY="240.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Birthday" textAlignment="CENTER">
+         <font>
+            <Font name="Franklin Gothic Book Italic" size="16.0" />
+         </font></Text>
+      <TextField fx:id="txfBirthday" editable="false" layoutX="191.0" layoutY="223.0" />
+      <Text fill="WHITE" layoutX="70.0" layoutY="274.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Phone number" textAlignment="CENTER">
+         <font>
+            <Font name="Franklin Gothic Book Italic" size="16.0" />
+         </font></Text>
+      <TextField fx:id="txfPhoneNumber" editable="false" layoutX="191.0" layoutY="257.0" />
+      <Text fill="WHITE" layoutX="129.0" layoutY="308.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Email" textAlignment="CENTER">
+         <font>
+            <Font name="Franklin Gothic Book Italic" size="16.0" />
+         </font></Text>
+      <Text fill="WHITE" layoutX="112.0" layoutY="342.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Address" textAlignment="CENTER">
+         <font>
+            <Font name="Franklin Gothic Book Italic" size="16.0" />
+         </font></Text>
+      <TextField fx:id="txfEmail" editable="false" layoutX="191.0" layoutY="291.0" />
+      <TextField fx:id="txfAddress" editable="false" layoutX="191.0" layoutY="325.0" />
+      <Text fill="WHITE" layoutX="463.0" layoutY="81.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Carrer">
+         <font>
+            <Font name="Lucida Fax Demibold Italic" size="18.0" />
+         </font></Text>
+      <TextField fx:id="txfCarrer" editable="false" layoutX="420.0" layoutY="90.0" />
+      <Text fill="WHITE" layoutX="461.0" layoutY="145.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Period">
+         <font>
+            <Font name="Lucida Fax Demibold Italic" size="18.0" />
+         </font></Text>
+      <ComboBox fx:id="cmbPeriod" layoutX="420.0" layoutY="155.0" onAction="#loadComboboxSchedules" prefWidth="150.0" promptText="Periods" />
+      <ComboBox fx:id="cmbCourse" layoutX="420.0" layoutY="214.0" onAction="#loadComboboxSchedules" prefWidth="150.0" promptText="Courses" />
+      <Text fill="WHITE" layoutX="458.0" layoutY="206.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Course">
+         <font>
+            <Font name="Lucida Fax Demibold Italic" size="18.0" />
+         </font></Text>
+      <ComboBox fx:id="cmbSchedule" layoutX="420.0" layoutY="278.0" prefWidth="150.0" promptText="Schedules" />
+      <Text fill="WHITE" layoutX="453.0" layoutY="269.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Schedule">
+         <font>
+            <Font name="Lucida Fax Demibold Italic" size="18.0" />
+         </font></Text>
+      <Button fx:id="btnEnroll" layoutX="420.0" layoutY="325.0" mnemonicParsing="false" onAction="#btnEnroll" prefHeight="25.0" prefWidth="72.0" text="Enroll" />
+      <Button fx:id="btnCancel" layoutX="499.0" layoutY="325.0" mnemonicParsing="false" onAction="#btnCancel" prefHeight="25.0" prefWidth="72.0" text="Cancel" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#00ae23" height="325.0" layoutX="361.0" layoutY="43.0" stroke="TRANSPARENT" strokeType="INSIDE" width="32.0" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#1f93ff00" height="26.0" layoutX="240.0" layoutY="8.0" stroke="#00ae23" strokeType="INSIDE" width="200.0" />
    </children>
 </AnchorPane>
