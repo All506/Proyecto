@@ -380,6 +380,21 @@ public class Utility {
         }
         return list;
     }
+    
+    public static Course getCourseByID(String id) throws ListException {
+        
+        if (!lCourse.isEmpty()) {
+            for (int i = 1; i <= lCourse.size(); i++) {
+                Course c = (Course) lCourse.getNode(i).data;
+                if ((c.getId() + "").equals(id)) {
+                    
+                    return c;
+
+                }
+            }
+        }
+        return null;
+    }
 
     public static TimeTable getScheduleByCourseID(String id, String period) throws ListException {
 
@@ -403,12 +418,30 @@ public class Utility {
         for (int i = 1; i <= lSchedule.size(); i++) {
             TimeTable t = (TimeTable) lSchedule.getNode(i).data;
             if (((t.getID() + "").equals(id))) {
-                System.out.println(t.toString());
+                
                 return true;
             }
         }
 
         return false;
+    }
+
+    public static SinglyLinkList getEnrollmentOfStudentId() throws ListException {
+        
+     SinglyLinkList list = new SinglyLinkList();
+     if(!lEnrollment.isEmpty()){
+         for (int i = 1; i <= lEnrollment.size(); i++) {
+            Enrollment e = (Enrollment) lEnrollment.getNode(i).data;
+            
+            if (((e.getStudentID()+ "").equals(userStudent.getStudentID()))) {
+                list.add(e);
+            }
+                
+         }
+     }
+     
+     
+     return list;
     }
 
 }
