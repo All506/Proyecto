@@ -7,9 +7,9 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 
-<AnchorPane id="AnchorPane" prefHeight="407.0" prefWidth="742.0" stylesheets="@../Style/general.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.MenuController">
+<AnchorPane id="AnchorPane" prefHeight="407.0" prefWidth="656.0" stylesheets="@../Style/general.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.MenuController">
    <children>
-      <MenuBar layoutX="6.0" layoutY="-6.0" prefHeight="38.0" prefWidth="746.0" stylesheets="@../Style/menuBar.css">
+      <MenuBar layoutY="-6.0" prefHeight="39.0" prefWidth="709.0" stylesheets="@../Style/menuBar.css">
         <menus>
             <Menu mnemonicParsing="false" text="Enrollment">
               <items>
@@ -56,6 +56,6 @@
             <Blend />
          </effect>
       </MenuBar>
-      <BorderPane fx:id="bpMenu" layoutX="43.0" layoutY="33.0" prefHeight="372.0" prefWidth="666.0" />
+      <BorderPane fx:id="bpMenu" layoutX="27.0" layoutY="33.0" prefHeight="372.0" prefWidth="666.0" />
    </children>
 </AnchorPane>

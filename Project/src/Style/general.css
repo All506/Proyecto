@@ -30,25 +30,36 @@ COLOR GIRS CLARO: #adadad*/
 
 .text-field:focused {
     -fx-background-color: #adadad;
-    -fx-text-fill: black;
+    -fx-text-fill: #000000;
     -fx-pref-height: 0px;
     -fx-translate-y: 0px;    
 }
 
 
 .text-field{
-    -fx-background-color: white;
+    -fx-font: 12px "Lucida Fax";
+    -fx-background-color: #1AB723;
     -fx-text-fill: black;
     -fx-pref-height: 0px;
-    -fx-translate-y: 0px;   
+    -fx-translate-y: 0px; 
+    -fx-alignment: CENTER;
+    -fx-prompt-text-fill: #7C7C7C;
 
 }
 
 .button{
-    -fx-background-color: #8ab85f;
+    -fx-font: 15px "Lucida Fax";
+    -fx-alignment: CENTER;
+    -fx-border-radius: 3px;
+    -fx-background-color: #02CB3C;
     -fx-text-fill: black;
-    -fx-font-size:15;
+    -fx-font-size:7;
 }
+
+.button:hover {
+    -fx-background-color: #02F548;
+}
+
 
 .label{
     -fx-text-fill: #CECECE;
@@ -56,7 +67,13 @@ COLOR GIRS CLARO: #adadad*/
 
 .combo-box-base{
     -fx-pref-height: 0px;
-    -fx-translate-y: 0px;  
+    -fx-translate-y: 0px;
+    -fx-background-color: #02CB3C;
+    -fx-font: 12px "Lucida Fax";
+}
+.combo-box-base:hover{
+    -fx-background-color: #adadad;
+    -fx-text-fill: #000000;
 }
 
 .text-area.content{
@@ -71,8 +88,15 @@ COLOR GIRS CLARO: #adadad*/
     -fx-translate-y: 0px;    
 }
 
+.table-view {
+    -fx-base:  #424242;
+    -fx-control-inner-background: #424242;
+    -fx-background-color: #303030;
+    -fx-padding: 5;
+    -fx-halignment: center;
+}
+
 .text{
     -fx-font-size:15;
-    -fx-text-fill: #adadad;
-    
+    -fx-text-fill: #adadad;   
 }
