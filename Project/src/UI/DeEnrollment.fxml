@@ -5,41 +5,85 @@
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane id="AnchorPane" prefHeight="350.0" prefWidth="650.0" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.DeEnrollmentController">
+<AnchorPane id="AnchorPane" prefHeight="424.0" prefWidth="691.0" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.DeEnrollmentController">
     <stylesheets>
         <URL value="@/Style/general.css" />
     </stylesheets>
    <children>
-      <Text layoutX="192.0" layoutY="27.0" strokeType="OUTSIDE" strokeWidth="0.0" text="De-Enrollment menu" textAlignment="CENTER" wrappingWidth="140.5367431640625" />
-      <Text fx:id="txt" layoutX="14.0" layoutY="52.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Datos del estudiante" />
-      <Text layoutX="40.0" layoutY="85.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Student ID" textAlignment="CENTER" />
-      <Text layoutX="41.0" layoutY="121.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Last name" textAlignment="CENTER" />
-      <Text layoutX="39.0" layoutY="156.0" strokeType="OUTSIDE" strokeWidth="0.0" text="First Name" textAlignment="CENTER" />
-      <Text layoutX="38.0" layoutY="193.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Personal ID" textAlignment="CENTER" />
-      <TextField fx:id="txfStudentID" editable="false" layoutX="131.0" layoutY="68.0" />
-      <TextField fx:id="txfLastName" editable="false" layoutX="131.0" layoutY="104.0" />
-      <TextField fx:id="txfFirstName" editable="false" layoutX="131.0" layoutY="139.0" />
-      <TextField fx:id="txfPersID" editable="false" layoutX="131.0" layoutY="173.0" />
-      <Text layoutX="46.0" layoutY="226.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Birthday" textAlignment="CENTER" />
-      <TextField fx:id="txfBirthday" editable="false" layoutX="131.0" layoutY="209.0" />
-      <Text layoutX="29.0" layoutY="260.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Phone number" textAlignment="CENTER" />
-      <TextField fx:id="txfPhoneNumber" editable="false" layoutX="131.0" layoutY="243.0" />
-      <Text layoutX="53.0" layoutY="294.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Email" textAlignment="CENTER" />
-      <Text layoutX="46.0" layoutY="328.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Address" textAlignment="CENTER" />
-      <TextField fx:id="txfEmail" editable="false" layoutX="131.0" layoutY="277.0" />
-      <TextField fx:id="txfAddress" editable="false" layoutX="131.0" layoutY="311.0" />
-      <Text layoutX="429.0" layoutY="58.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Carrer" />
-      <TextField fx:id="txfCarrer" editable="false" layoutX="375.0" layoutY="63.0" />
-      <TableView fx:id="tblCourses" layoutX="359.0" layoutY="131.0" prefHeight="185.0" prefWidth="332.0">
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#1f93ff00" height="40.0" layoutX="204.0" layoutY="20.0" stroke="#00ae23" strokeType="INSIDE" width="273.0" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#424242" height="257.0" layoutX="342.0" layoutY="65.0" stroke="#1fbd0000" strokeType="INSIDE" width="329.0" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#424242" height="257.0" layoutX="3.0" layoutY="65.0" stroke="#1fbd0000" strokeType="INSIDE" width="329.0" />
+      <Text fill="#00ae23" layoutX="198.0" layoutY="48.0" strokeType="OUTSIDE" strokeWidth="0.0" text="De-Enrollment menu" textAlignment="CENTER" wrappingWidth="285.6109619140625">
+         <font>
+            <Font name="Lucida Bright" size="25.0" />
+         </font></Text>
+      <Text fx:id="txt" fill="WHITE" layoutX="84.0" layoutY="97.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Student's data">
+         <font>
+            <Font name="Lucida Bright Demibold Italic" size="24.0" />
+         </font></Text>
+      <Text fill="WHITE" layoutX="49.0" layoutY="125.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Student ID" textAlignment="CENTER">
+         <font>
+            <Font name="Franklin Gothic Book Italic" size="16.0" />
+         </font></Text>
+      <Text fill="WHITE" layoutX="49.0" layoutY="175.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Last name" textAlignment="CENTER">
+         <font>
+            <Font name="Franklin Gothic Book Italic" size="16.0" />
+         </font></Text>
+      <Text fill="WHITE" layoutX="48.0" layoutY="224.0" strokeType="OUTSIDE" strokeWidth="0.0" text="First Name" textAlignment="CENTER">
+         <font>
+            <Font name="Franklin Gothic Book Italic" size="16.0" />
+         </font></Text>
+      <Text fill="WHITE" layoutX="46.0" layoutY="277.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Personal ID" textAlignment="CENTER">
+         <font>
+            <Font name="Franklin Gothic Book Italic" size="16.0" />
+         </font></Text>
+      <TextField fx:id="txfStudentID" editable="false" layoutX="15.0" layoutY="132.0" />
+      <TextField fx:id="txfLastName" editable="false" layoutX="14.0" layoutY="181.0" />
+      <TextField fx:id="txfFirstName" editable="false" layoutX="13.0" layoutY="230.0" />
+      <TextField fx:id="txfPersID" editable="false" layoutX="13.0" layoutY="281.0" />
+      <Text fill="WHITE" layoutX="216.0" layoutY="125.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Birthday" textAlignment="CENTER">
+         <font>
+            <Font name="Franklin Gothic Book Italic" size="16.0" />
+         </font></Text>
+      <TextField fx:id="txfBirthday" editable="false" layoutX="173.0" layoutY="132.0" />
+      <Text fill="WHITE" layoutX="194.0" layoutY="175.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Phone number" textAlignment="CENTER">
+         <font>
+            <Font name="Franklin Gothic Book Italic" size="16.0" />
+         </font></Text>
+      <TextField fx:id="txfPhoneNumber" editable="false" layoutX="173.0" layoutY="181.0" />
+      <Text fill="WHITE" layoutX="226.0" layoutY="224.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Email" textAlignment="CENTER">
+         <font>
+            <Font name="Franklin Gothic Book Italic" size="16.0" />
+         </font></Text>
+      <Text fill="WHITE" layoutX="219.0" layoutY="275.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Address" textAlignment="CENTER">
+         <font>
+            <Font name="Franklin Gothic Book Italic" size="16.0" />
+         </font></Text>
+      <TextField fx:id="txfEmail" editable="false" layoutX="173.0" layoutY="230.0" />
+      <TextField fx:id="txfAddress" editable="false" layoutX="173.0" layoutY="279.0" />
+      <Text fill="WHITE" layoutX="475.0" layoutY="89.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Carrer">
+         <font>
+            <Font name="Lucida Bright Demibold Italic" size="18.0" />
+         </font></Text>
+      <TextField fx:id="txfCarrer" editable="false" layoutX="408.0" layoutY="100.0" prefHeight="25.0" prefWidth="189.0" />
+      <TableView fx:id="tblCourses" layoutX="348.0" layoutY="157.0" prefHeight="159.0" prefWidth="320.0">
         <columns>
-          <TableColumn fx:id="colID" prefWidth="89.5999755859375" text="ID Curso" />
-          <TableColumn fx:id="colDescription" prefWidth="149.60003662109375" text="Descripcion" />
-            <TableColumn fx:id="colSchedule" prefWidth="87.99993896484375" text="Horario" />
+          <TableColumn fx:id="colID" prefWidth="84.0" text="ID Curso" />
+          <TableColumn fx:id="colDescription" prefWidth="149.0" text="Descripcion" />
+            <TableColumn fx:id="colSchedule" prefWidth="85.0" text="Horario" />
         </columns>
       </TableView>
-      <Text layoutX="380.0" layoutY="120.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Cursos Matriculados" wrappingWidth="162.65509033203125" />
-      <Text layoutX="382.0" layoutY="341.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Double click on a course to de-enroll" textAlignment="CENTER" wrappingWidth="285.6109619140625" />
+      <Text fill="WHITE" layoutX="429.0" layoutY="149.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Enrolled Courses" wrappingWidth="155.30078125">
+         <font>
+            <Font name="Lucida Bright Demibold Italic" size="18.0" />
+         </font></Text>
+      <Text fill="#8eb200" layoutX="355.0" layoutY="339.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Double click on a course to de-enroll" textAlignment="CENTER" wrappingWidth="285.6109619140625">
+         <font>
+            <Font name="Consolas" size="12.0" />
+         </font></Text>
    </children>
 </AnchorPane>

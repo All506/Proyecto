@@ -25,7 +25,7 @@
       </Label>
       <TextField fx:id="txtUser" layoutX="221.0" layoutY="212.0" prefHeight="26.0" prefWidth="181.0" promptText="Insert your username" />
       <PasswordField fx:id="txtPassword" layoutX="220.0" layoutY="273.0" prefHeight="37.0" prefWidth="181.0" promptText="Insert your password" />
-      <Button fx:id="btnLogIn" layoutX="279.0" layoutY="328.0" mnemonicParsing="false" onAction="#btnLogIn" text="Log In">
+      <Button fx:id="btnLogIn" layoutX="268.0" layoutY="327.0" mnemonicParsing="false" onAction="#btnLogIn" prefHeight="29.0" prefWidth="85.0" text="Log In">
          <font>
             <Font size="14.0" />
          </font>

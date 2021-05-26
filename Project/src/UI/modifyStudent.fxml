@@ -5,73 +5,80 @@
 <?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.shape.Line?>
+<?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
 <AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" stylesheets="@../Style/general.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.EditStudentController">
    <children>
-      <Line endX="499.0" layoutX="101.0" layoutY="54.0" startX="-100.0" stroke="WHITE" />
-      <Text fill="WHITE" layoutX="205.0" layoutY="44.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Edit Student">
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#475065" height="190.0" layoutX="91.0" layoutY="131.0" stroke="#db747400" strokeType="INSIDE" width="500.0" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#475065" height="47.0" layoutX="91.0" layoutY="76.0" stroke="#db747400" strokeType="INSIDE" width="500.0" />
+      <Text fill="WHITE" layoutX="103.0" layoutY="105.0" strokeType="OUTSIDE" strokeWidth="0.0" text="StudentID:">
          <font>
-            <Font name="System Bold" size="36.0" />
+            <Font name="Franklin Gothic Book Italic" size="18.0" />
          </font>
       </Text>
-      <Text fill="#00bb2d" layoutX="29.0" layoutY="112.0" strokeType="OUTSIDE" strokeWidth="0.0" text="StudentID">
+      <Text fill="WHITE" layoutX="116.0" layoutY="167.0" strokeType="OUTSIDE" strokeWidth="0.0" text="CareerID">
          <font>
-            <Font size="18.0" />
+            <Font name="Franklin Gothic Book Italic" size="18.0" />
          </font>
       </Text>
-      <Text fill="#00bb2d" layoutX="28.0" layoutY="152.0" strokeType="OUTSIDE" strokeWidth="0.0" text="CareerID">
+      <Text fill="WHITE" layoutX="167.0" layoutY="209.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ID">
          <font>
-            <Font size="18.0" />
+            <Font name="Franklin Gothic Book Italic" size="18.0" />
          </font>
       </Text>
-      <Text fill="#00bb2d" layoutX="79.0" layoutY="191.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ID">
+      <Text fill="WHITE" layoutX="112.0" layoutY="252.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Lastname">
          <font>
-            <Font size="18.0" />
+            <Font name="Franklin Gothic Book Italic" size="18.0" />
          </font>
       </Text>
-      <Text fill="#00bb2d" layoutX="29.0" layoutY="232.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Lastname">
+      <Text fill="WHITE" layoutX="111.0" layoutY="293.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Firstname">
          <font>
-            <Font size="18.0" />
+            <Font name="Franklin Gothic Book Italic" size="18.0" />
          </font>
       </Text>
-      <Text fill="#00bb2d" layoutX="28.0" layoutY="278.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Firstname">
+      <Text fill="WHITE" layoutX="349.0" layoutY="168.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Phone N.">
          <font>
-            <Font size="18.0" />
+            <Font name="Franklin Gothic Book Italic" size="18.0" />
          </font>
       </Text>
-      <Text fill="#00bb2d" layoutX="300.0" layoutY="149.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Phone Number">
+      <Text fill="WHITE" layoutX="373.0" layoutY="212.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Email">
          <font>
-            <Font size="18.0" />
+            <Font name="Franklin Gothic Book Italic" size="18.0" />
          </font>
       </Text>
-      <Text fill="#00bb2d" layoutX="300.0" layoutY="189.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Email">
+      <Text fill="WHITE" layoutX="352.0" layoutY="253.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Address">
          <font>
-            <Font size="18.0" />
+            <Font name="Franklin Gothic Book Italic" size="18.0" />
          </font>
       </Text>
-      <Text fill="#00bb2d" layoutX="300.0" layoutY="227.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Address">
+      <Text fill="WHITE" layoutX="350.0" layoutY="294.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Birthday">
          <font>
-            <Font size="18.0" />
+            <Font name="Franklin Gothic Book Italic" size="18.0" />
          </font>
       </Text>
-      <Text fill="#00bb2d" layoutX="300.0" layoutY="265.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Birthday">
+      <TextField fx:id="txtPhoneNumber" layoutX="423.0" layoutY="150.0" />
+      <ComboBox fx:id="cmbCareerID" layoutX="192.0" layoutY="148.0" prefWidth="150.0" />
+      <TextField fx:id="txtEmail" layoutX="423.0" layoutY="194.0" />
+      <TextField fx:id="txtId" layoutX="192.0" layoutY="194.0" />
+      <TextField fx:id="txtAddress" layoutX="422.0" layoutY="235.0" prefHeight="70.0" prefWidth="150.0" />
+      <TextField fx:id="txtLastname" layoutX="192.0" layoutY="235.0" />
+      <DatePicker fx:id="dpBirthday" layoutX="423.0" layoutY="276.0" prefHeight="25.0" prefWidth="149.0" />
+      <TextField fx:id="txtFirstname" layoutX="192.0" layoutY="276.0" />
+      <Button fx:id="btnModify" layoutX="519.0" layoutY="87.0" mnemonicParsing="false" onAction="#btnModify" prefHeight="26.0" prefWidth="62.0" text="EDIT" />
+      <Button fx:id="btnClean" layoutX="309.0" layoutY="332.0" mnemonicParsing="false" onAction="#btnClean" prefHeight="23.0" prefWidth="62.0" text="CLEAN" />
+      <ComboBox fx:id="cmbId" layoutX="195.0" layoutY="87.0" onAction="#cmbId" prefHeight="26.0" prefWidth="319.0" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#1f93ff00" height="29.0" layoutX="198.0" layoutY="13.0" stroke="#00ae23" strokeType="INSIDE" width="285.0" />
+      <Text fill="#00ae23" layoutX="207.0" layoutY="36.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Modify Student's data">
          <font>
-            <Font size="18.0" />
+            <Font name="Lucida Bright" size="25.0" />
          </font>
       </Text>
-      <TextField fx:id="txtPhoneNumber" layoutX="431.0" layoutY="130.0" />
-      <ComboBox fx:id="cmbCareerID" layoutX="115.0" layoutY="132.0" prefWidth="150.0" />
-      <TextField fx:id="txtEmail" layoutX="431.0" layoutY="169.0" />
-      <TextField fx:id="txtId" layoutX="114.0" layoutY="172.0" />
-      <TextField fx:id="txtAddress" layoutX="431.0" layoutY="209.0" prefHeight="70.0" prefWidth="150.0" />
-      <TextField fx:id="txtLastname" layoutX="114.0" layoutY="212.0" />
-      <DatePicker fx:id="dpBirthday" layoutX="431.0" layoutY="245.0" prefHeight="25.0" prefWidth="149.0" />
-      <TextField fx:id="txtFirstname" layoutX="114.0" layoutY="259.0" />
-      <Button fx:id="btnModify" layoutX="210.0" layoutY="329.0" mnemonicParsing="false" onAction="#btnModify" prefHeight="40.0" prefWidth="86.0" text="EDIT" />
-      <Button fx:id="btnClean" layoutX="310.0" layoutY="329.0" mnemonicParsing="false" onAction="#btnClean" prefHeight="40.0" prefWidth="80.0" text="CLEAN" />
-      <ComboBox fx:id="cmbId" layoutX="115.0" layoutY="92.0" onAction="#cmbId" prefHeight="25.0" prefWidth="464.0" />
+      <Text fill="#ffd400" layoutX="243.0" layoutY="67.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Choose a student to modify">
+         <font>
+            <Font name="Lucida Bright" size="15.0" />
+         </font>
+      </Text>
    </children>
 </AnchorPane>
