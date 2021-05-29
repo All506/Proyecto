@@ -71,10 +71,10 @@
             <Font name="Lucida Bright Demibold Italic" size="18.0" />
          </font></Text>
       <TextField fx:id="txfCarrer" editable="false" layoutX="408.0" layoutY="100.0" prefHeight="25.0" prefWidth="189.0" />
-      <TableView fx:id="tblCourses" layoutX="348.0" layoutY="157.0" prefHeight="159.0" prefWidth="320.0">
+      <TableView fx:id="tblCourses" editable="true" layoutX="348.0" layoutY="157.0" prefHeight="159.0" prefWidth="320.0">
         <columns>
           <TableColumn fx:id="colID" prefWidth="84.0" text="ID Curso" />
-          <TableColumn fx:id="colDescription" prefWidth="149.0" text="Descripcion" />
+          <TableColumn fx:id="colDescription" editable="false" prefWidth="149.0" text="Descripcion" />
             <TableColumn fx:id="colSchedule" prefWidth="85.0" text="Horario" />
         </columns>
       </TableView>
@@ -86,6 +86,6 @@
          <font>
             <Font name="Consolas" size="12.0" />
          </font></Text>
-      <Button fx:id="btnDeEnroll" layoutX="58.0" layoutY="357.0" mnemonicParsing="false" onAction="#btnDeEnroll" prefHeight="26.0" prefWidth="565.0" text="De-Enroll" />
+      <Button fx:id="btnDeEnroll" layoutX="58.0" layoutY="329.0" mnemonicParsing="false" onAction="#btnDeEnroll" prefHeight="26.0" prefWidth="565.0" text="De-Enroll" visible="false" />
    </children>
 </AnchorPane>

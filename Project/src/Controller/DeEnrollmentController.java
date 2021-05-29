@@ -94,8 +94,9 @@ public class DeEnrollmentController implements Initializable {
     
         
         colID.setOnEditStart(data -> {
-           
             
+          btnDeEnroll.setVisible(true);
+          btnDeEnroll.setText("De-enroll course: "+data.getOldValue());
             
         });
         
