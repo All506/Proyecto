@@ -20,8 +20,10 @@ import javafx.beans.property.ReadOnlyStringWrapper;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableColumn.CellDataFeatures;
 import javafx.scene.control.TableView;
@@ -66,6 +68,8 @@ public class DeEnrollmentController implements Initializable {
     private TableColumn<List<String>, String> colDescription;
     @FXML
     private TableColumn<List<String>, String> colSchedule;
+    @FXML
+    private Button btnDeEnroll;
     /**
      * Initializes the controller class.
      */
@@ -88,6 +92,12 @@ public class DeEnrollmentController implements Initializable {
             Logger.getLogger(EnrollmentController.class.getName()).log(Level.SEVERE, null, ex);
         }
     
+        
+        colID.setOnEditStart(data -> {
+           
+            
+            
+        });
         
     
     }
@@ -141,6 +151,10 @@ public class DeEnrollmentController implements Initializable {
        
         
     return data;
+    }
+
+    @FXML
+    private void btnDeEnroll(ActionEvent event) {
     }
     
  }    
