@@ -99,7 +99,7 @@ public class EditAndDeleteCareerController implements Initializable {
         }
         System.out.println(Util.Utility.getListCareer().toString());
         //Arreglar
-//        loadComboBoxCareers();
+        loadComboBoxCareers();
     }
 
     private boolean lookCourse(String career) throws ListException {
