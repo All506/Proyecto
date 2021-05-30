@@ -77,7 +77,7 @@ public class DeEnrollment {
 
     @Override
     public String toString() {
-        return "DeEnrollment{" + "id=" + id + ", date=" + date + ", studentID=" + studentID + ", courseID=" + courseID + ", schedule=" + schedule + '}';
+        return "DeEnrollment{" + "id=" + id + ", date=" + date + ", studentID=" + studentID + ", courseID=" + courseID + ", schedule=" + schedule + ", remark=" + remark + '}';
     }
     
     public String[] dataName(){
