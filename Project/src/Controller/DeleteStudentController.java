@@ -5,9 +5,12 @@
  */
 package Controller;
 
+import Domain.CircularDoublyLinkList;
 import Domain.ListException;
 import Domain.Node;
 import Domain.SinglyLinkList;
+import Objects.Course;
+import Objects.Enrollment;
 import Objects.Student;
 import XML.FileXML;
 import java.io.IOException;
@@ -39,7 +42,7 @@ import org.xml.sax.SAXException;
  * @author Alán
  */
 public class DeleteStudentController implements Initializable {
-
+    
     @FXML
     private TextField txtPhoneNumber;
     @FXML
@@ -61,7 +64,7 @@ public class DeleteStudentController implements Initializable {
     private Button btnClean;
     @FXML
     private ComboBox<String> cmbId;
-
+    
     SinglyLinkList students = new SinglyLinkList();
     @FXML
     private Button btnDelete;
@@ -74,18 +77,18 @@ public class DeleteStudentController implements Initializable {
         try {
             this.btnDelete.setVisible(false);
             students = Util.Utility.getListStudents();
-
+            
             for (int i = 1; i <= students.size(); i++) {
                 Student s = (Student) students.getNode(i).getData();
                 cmbId.getItems().add(s.getStudentID());
             }
             cmbCareerID.setValue(1);
-
+            
         } catch (ListException ex) {
             Logger.getLogger(EditStudentController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-
+    
     @FXML
     private void btnClean(ActionEvent event) {
         txtPhoneNumber.setText("");
@@ -96,7 +99,7 @@ public class DeleteStudentController implements Initializable {
         txtFirstName.setText("");
         btnDelete.setVisible(false);
     }
-
+    
     @FXML
     private void cmbId(ActionEvent event) throws ListException {
         btnDelete.setVisible(true);
@@ -114,25 +117,43 @@ public class DeleteStudentController implements Initializable {
             this.dpBirthday.setValue(localDate);
         }
     }
-
+    
     @FXML
     private void btnDelete(ActionEvent event) throws ListException {
+        
+        FileXML fXML = new FileXML();
+        //Convertir Date a LocalDate
+        java.util.Date d = java.sql.Date.valueOf(dpBirthday.getValue());
+        //Se elmina y luego se anhade
 
-            FileXML fXML = new FileXML();
-            //Convertir Date a LocalDate
-            java.util.Date d = java.sql.Date.valueOf(dpBirthday.getValue());
-            //Se elmina y luego se anhade
-
-            Student std = new Student(Integer.parseInt(txtId.getText()), this.cmbCareerID.getValue(),
-                    String.valueOf(this.cmbId.getValue()), this.txtLastName.getText(), this.txtFirstName.getText(),
-                    this.txtPhoneNumber.getText(), this.txtEmail.getText(), this.txtAddress.getText(), d);
-            Util.Utility.deleteNodeLStudent(std);
+        Student std = new Student(Integer.parseInt(txtId.getText()), this.cmbCareerID.getValue(),
+                String.valueOf(this.cmbId.getValue()), this.txtLastName.getText(), this.txtFirstName.getText(),
+                this.txtPhoneNumber.getText(), this.txtEmail.getText(), this.txtAddress.getText(), d);
+        
+        if (lookEnrollment(std.getStudentID())) {
+            Util.Utility.getListStudents().remove(std);
             callAlert("notification", "Notification", "Student has been deleted");
-            btnClean(event);
-            reloadCombo();
-
+        } else {
+            callAlert("alert", "Student Not Deleted", "Student cannot been deleted");
+        }
+        
+        btnClean(event);
+        reloadCombo();
+        
     }
-
+    
+    private boolean lookEnrollment(String studentID) throws ListException {
+        boolean condition = true;
+        CircularDoublyLinkList list = Util.Utility.getListEnrollment();
+        for (int i = 1; i <= list.size(); i++) {
+            Enrollment enrollment = (Enrollment) list.getNode(i).data;
+            if (enrollment.getStudentID().equalsIgnoreCase(studentID)) {
+                condition = false;
+            }
+        }
+        return condition;
+    }
+    
     private Student look4student(Student temp) throws ListException {
         //Busca la información de un estudiante en la lista y devuelve al estudiante
         if (!students.isEmpty()) { //Si la lista esta vacia
@@ -144,13 +165,13 @@ public class DeleteStudentController implements Initializable {
                 } else {
                     aux = aux.next;
                 }
-
+                
             }
-
+            
         }
         return null;
     }
-
+    
     private void callAlert(String fxmlName, String title, String text) {
         //Se llama la alerta
         try {
@@ -170,12 +191,18 @@ public class DeleteStudentController implements Initializable {
             Logger.getLogger(LogInController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-
+    
     private void reloadCombo() throws ListException {
+        //Reinicia valores del combo box
+        for (int i = 0; i <= cmbId.getItems().size(); i++) {
+            this.cmbId.getItems().clear();
+        }
+        
         students = Util.Utility.getListStudents(); //Se recarga la lista de estudiantes
         for (int i = 1; i <= students.size(); i++) {
             Student s = (Student) students.getNode(i).getData();
             cmbId.getItems().add(s.getStudentID());
         }
     }
+    
 }
