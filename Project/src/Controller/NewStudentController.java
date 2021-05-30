@@ -10,6 +10,7 @@ import Domain.DoublyLinkList;
 import Domain.ListException;
 import Domain.SinglyLinkList;
 import Objects.Student;
+import Util.Mail;
 import java.io.IOException;
 import static java.lang.Double.parseDouble;
 import java.net.URL;
@@ -182,7 +183,7 @@ public class NewStudentController implements Initializable {
     }
         
     @FXML
-    private void btnAdd(ActionEvent event) {
+    private void btnAdd(ActionEvent event){
         
         try {
             id = Integer.parseInt(txtID.getText());
@@ -196,6 +197,12 @@ public class NewStudentController implements Initializable {
             try {
                 if (Util.Utility.emailChecker(txtEmail.getText())) {
                     if (Util.Utility.setListStudent(std)) {
+                        try {
+                            Util.Mail.enviarConGMail(std.getEmail(), std.data(), "register");//Recibe el correo del estudiante,  la infor de estudiante y el motivo.
+                        } catch (Exception e) {
+                            System.out.println(e);
+                        }
+                        
                         callAlert("notification", "Notification", "User has been registered");
                         System.out.println("La lista en util \n" + Util.Utility.getListStudents().toString());
                         btnClean(event);
