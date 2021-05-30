@@ -106,13 +106,13 @@ public class DoublyLinkList implements List {
             //CASO 2. EL ELEMENTO A SUPRIMIR ESTA EN CUALQUIER OTRA POSICION
             Node prev = first; //esto es para dejar rastro, apunta al anterior de aux
             Node aux = first.next;
-
-            while (aux.next != null && !Util.Utility.equals(aux.data, element)) {
+            System.out.println("Hola");
+            while (aux != null && !Util.Utility.equals(aux.data, element)) {
                 prev = aux; //un nodo atras de aux
                 aux = aux.next;
             }
             //sale del while cuando alcanza null o cuando encuentra el elemento a suprimir
-            if (aux.next != null && Util.Utility.equals(aux.data, element)) {
+            if (aux != null && Util.Utility.equals(aux.data, element)) {
                 //desenlazo el nodo
                 prev.next = aux.next;
             }

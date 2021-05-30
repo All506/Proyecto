@@ -5,9 +5,13 @@
  */
 package Controller;
 
+import Domain.CircularLinkList;
 import Objects.Career;
 import Domain.DoublyLinkList;
 import Domain.ListException;
+import Domain.SinglyLinkList;
+import Objects.Course;
+import Objects.Student;
 import XML.FileXML;
 import java.io.IOException;
 import java.net.URL;
@@ -85,20 +89,55 @@ public class EditAndDeleteCareerController implements Initializable {
     @FXML
     private void btnDelete(ActionEvent event) throws ListException {
         String[] valueSelected = cmbCareers.getValue().split("-");
-        Career c = new Career(Integer.parseInt(valueSelected[0]), "");
-        Util.Utility.getListCareer().remove(c); //Se elimina la carrera de la correspondiente lista
-        callAlert("notification", "Career Deleted", "Career has been deleted");
+        Career c = new Career(Integer.parseInt(valueSelected[0]), valueSelected[1]);
+        if (lookCourse(valueSelected[0]) && lookStudent(valueSelected[0])) {//Verifica con el id de la carrera si un estudiante o un curso ya tiene reigstrado una carrera
+            Util.Utility.getListCareer().remove(c); //Se elimina la carrera de la correspondiente lista
+            callAlert("notification", "Career Deleted", "Career has been deleted");
+        } else {
+            callAlert("alert", "Career Not Deleted", "Career cannot been deleted");
+        }
         System.out.println(Util.Utility.getListCareer().toString());
-        //loadComboBoxCareers();
+        //Arreglar
+//        loadComboBoxCareers();
+    }
+
+    private boolean lookCourse(String career) throws ListException {
+        boolean condition = true;
+        CircularLinkList lCourse = Util.Utility.getListCourse();
+        for (int i = 1; i <= lCourse.size(); i++) {
+            Course course = (Course) lCourse.getNode(i).data;
+            if (course.getCareerId() == Integer.parseInt(career)) {
+                condition = false;
+            }
+        }
+        return condition;
+    }
+
+    private boolean lookStudent(String career) throws ListException {
+        boolean condition = true;
+        SinglyLinkList lStudent = Util.Utility.getListStudents();
+        for (int i = 1; i <= lStudent.size(); i++) {
+            Student student = (Student) lStudent.getNode(i).data;
+            if (student.getCareerID() == Integer.parseInt(career)) {
+                condition = false;
+            }
+        }
+        return condition;
     }
 
     @FXML
     private void btnEdit(ActionEvent event) throws ListException {
         String[] valueSelected = cmbCareers.getValue().split("-");
-        Career career = new Career(Integer.parseInt(valueSelected[0]), txtDescription.getText());
-        Util.Utility.getListCareer().remove(career); //Se elimina el nodo de la lista
-        Util.Utility.getListCareer().add(career); //Se vuelve a añadir el nodo en la lista con la nueva información
-        callAlert("notification", "Career Edited", "Career has been edited sucessfully");
+         Career career = new Career(Integer.parseInt(valueSelected[0]), valueSelected[1]);
+        if (!txtDescription.getText().equals("")) {
+            Util.Utility.getListCareer().remove(career); //Se elimina el nodo de la lista
+            Career careerNew = new Career(Integer.parseInt(valueSelected[0]), txtDescription.getText());
+            careerNew.setId(Integer.parseInt(valueSelected[0]));
+            Util.Utility.getListCareer().add(careerNew); //Se vuelve a añadir el nodo en la lista con la nueva información 
+            callAlert("notification", "Career Edited", "Career has been edited sucessfully");
+        }else{
+            callAlert("alert", "Career Not Edited", "Career cannot been edited");
+        }
     }
 
     @FXML
@@ -170,4 +209,5 @@ public class EditAndDeleteCareerController implements Initializable {
         this.btnDelete.setVisible(false);
         this.btnEdit.setVisible(false);
     }
-}
+
+}//end class
