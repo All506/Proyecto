@@ -7,6 +7,7 @@ package Controller;
 
 import Domain.ListException;
 import Domain.SinglyLinkList;
+import Objects.DeEnrollment;
 import Objects.Enrollment;
 import Objects.Student;
 import java.net.URL;
@@ -15,7 +16,6 @@ import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javafx.beans.property.ReadOnlyObjectWrapper;
 import javafx.beans.property.ReadOnlyStringWrapper;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -30,6 +30,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.text.Text;
 import javafx.util.Callback;
+
 
 /**
  * FXML Controller class
@@ -70,6 +71,8 @@ public class DeEnrollmentController implements Initializable {
     private TableColumn<List<String>, String> colSchedule;
     @FXML
     private Button btnDeEnroll;
+    
+    Enrollment enroll;
     /**
      * Initializes the controller class.
      */
@@ -95,12 +98,30 @@ public class DeEnrollmentController implements Initializable {
         
         colID.setOnEditStart(data -> {
             
-          btnDeEnroll.setVisible(true);
-          btnDeEnroll.setText("De-enroll course: "+data.getOldValue());
+            try {
+                enroll = getScheduleByCourseID(data.getOldValue());
+                
+                btnDeEnroll.setVisible(true);
+                btnDeEnroll.setText("De-enroll course: "+Util.Utility.getCourseByID(data.getOldValue()).getName()+"   -   Schedule: "+enroll.getSchedule());
+            } catch (ListException ex) {
+                Logger.getLogger(DeEnrollmentController.class.getName()).log(Level.SEVERE, null, ex);
+            }
             
         });
         
     
+    }
+    
+    public Enrollment getScheduleByCourseID(String courseId) throws ListException{
+    
+        SinglyLinkList list = Util.Utility.getEnrollmentOfStudentId();
+        for (int i = 1; i <= list.size(); i++) {
+            Enrollment e =(Enrollment) list.getNode(i).data;
+            if(e.getCourseID().equals(courseId)){
+            return e;
+            }    
+        }
+    return null;
     }
       
     public void loadTable() throws ListException{
@@ -155,7 +176,15 @@ public class DeEnrollmentController implements Initializable {
     }
 
     @FXML
-    private void btnDeEnroll(ActionEvent event) {
+    private void btnDeEnroll(ActionEvent event) throws ListException {
+        
+        java.util.Date d = java.sql.Date.valueOf(java.time.LocalDate.now());
+        int temp = Util.Utility.getLastDeEnroll();
+        DeEnrollment newDeEnroll = new DeEnrollment(temp+1, d, enroll.getStudentID(), enroll.getCourseID(), enroll.getSchedule(),"Remark");
+        System.out.println("El enroll a registrar es: " + newDeEnroll.toString());
+        Util.Utility.setListDeEnrollment(newDeEnroll);
+        Util.Utility.removeEnrollment(newDeEnroll);
+            
     }
     
  }    

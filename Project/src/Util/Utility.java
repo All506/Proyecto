@@ -14,6 +14,7 @@ import Domain.DoublyLinkList;
 import Domain.ListException;
 import Domain.SinglyLinkList;
 import Objects.Course;
+import Objects.DeEnrollment;
 import Objects.Enrollment;
 import Objects.Security;
 import Objects.Student;
@@ -44,7 +45,10 @@ public class Utility {
     private static CircularLinkList lCourse = new CircularLinkList();
     private static CircularLinkList lSecurity = new CircularLinkList();
     private static CircularDoublyLinkList lEnrollment = new CircularDoublyLinkList();
+    private static CircularDoublyLinkList lDeEnrollment = new CircularDoublyLinkList();
+    
     private static int lastEnroll;
+    private static int lastDeEnroll;
     private static boolean kindUser = false; //True if user, false if Student
     private static Student userStudent = null;
 
@@ -72,14 +76,25 @@ public class Utility {
     public static CircularDoublyLinkList getListEnrollment() {
         return lEnrollment;
     }
+    private static CircularDoublyLinkList getListDeEnrollment() {
+        return lDeEnrollment;
+    }
 
     public static int getLastEnroll() {
         return lastEnroll;
     }
     
+    public static int getLastDeEnroll() {
+         return lastDeEnroll;
+    }
+    
 
     public static void setLastEnroll(int lastEnroll) {
         Util.Utility.lastEnroll = lastEnroll;
+    }
+    
+     private static void setLastDeEnroll(int lastDeEnroll) {
+        Util.Utility.lastDeEnroll = lastDeEnroll;
     }
     
     public static boolean isKindUser() {
@@ -217,6 +232,27 @@ public class Utility {
         return flag;
     }
 
+    public static boolean setListDeEnrollment(DeEnrollment deEnr) throws ListException {
+        
+       boolean flag = false;
+        int temp = Util.Utility.getLastDeEnroll();
+        if (Utility.lDeEnrollment.isEmpty()) {
+            Util.Utility.setLastDeEnroll(temp++);
+            Utility.lDeEnrollment.add(deEnr);
+            flag = true;
+        } else {
+            if (!lDeEnrollment.contains(deEnr)) {
+                Util.Utility.setLastDeEnroll(temp++);
+                lDeEnrollment.add(deEnr);
+                flag = true;
+            } else {
+                flag = false;
+            }
+        }
+        return flag; 
+        
+    }
+    
     //UTILIDAD 
     public static int random() {
         return 1 + (int) Math.floor(Math.random() * 99);
@@ -265,7 +301,7 @@ public class Utility {
             case "career":
                 Career car1 = (Career) a;
                 Career car2 = (Career) b;
-                return car1.getDescription().compareTo(car2.getDescription()) == 0;
+                return car1.getDescription().equalsIgnoreCase(car2.getDescription());
             case "course":
                 Course cour1 = (Course) a;
                 Course cour2 = (Course) b;
@@ -443,5 +479,26 @@ public class Utility {
      
      return list;
     }
+
+    public static boolean removeEnrollment(DeEnrollment dE) throws ListException {
+        CircularDoublyLinkList newLEnrollment = new CircularDoublyLinkList();
+        CircularDoublyLinkList oldLEnrollment = lEnrollment;
+        boolean flag = false;
+        
+        for (int i = 1; i <=oldLEnrollment.size() ; i++) {
+            Enrollment e = (Enrollment)oldLEnrollment.getNode(i).data;
+            if(e.getCourseID().equals(dE.getCourseID())&&e.getStudentID().equals(dE.getStudentID())&&e.getSchedule().equals(dE.getSchedule())){
+                System.out.println("Enroll borrado"+e.toString());
+                flag = true;
+            }else{
+               newLEnrollment.add(e);
+            }
+        }
+        Utility.lEnrollment = newLEnrollment;
+        
+        return flag;
+    }
+
+    
 
 }
