@@ -118,11 +118,10 @@ public class FilePDF {
         parrafo.add("\n\nRegistered Students\n\n");
         document.add(parrafo);
 
-        Paragraph parrafo1 = new Paragraph();
         try {
             for (int i = 1; i <= list.size(); i++) {
+                Paragraph parrafo1 = new Paragraph();
                 Student student = (Student) list.getNode(i).data;
-                parrafo1.add("\n----------------------------------------");
                 parrafo1.add("\nIdentification: " + String.valueOf(student.getId()));
                 parrafo1.add("\nStudent ID: " + student.getStudentID());
                 parrafo1.add("\nLast Name: " + student.getLastname());
@@ -138,7 +137,6 @@ public class FilePDF {
 
         } catch (Exception e) {
         }
-
 
         //Importante cerrar el pdf
         document.close();
@@ -188,7 +186,4 @@ public class FilePDF {
         document.close();
     }
 
-    
-    
-    
 }//end class
