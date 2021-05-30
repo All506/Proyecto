@@ -4,6 +4,7 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
@@ -12,23 +13,29 @@
         <URL value="@/Style/general.css" />
     </stylesheets>
    <children>
-      <ComboBox fx:id="cmbCareer" layoutX="307.0" layoutY="68.0" onMouseClicked="#cmbAvailableCourses" prefHeight="25.0" prefWidth="178.0" promptText="Carrera" />
-      <Text fx:id="txtCareer" layoutX="109.0" layoutY="85.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Seleccione la carrera" wrappingWidth="159.375">
+      <ComboBox fx:id="cmbCareer" layoutX="307.0" layoutY="72.0" onMouseClicked="#cmbAvailableCourses" prefHeight="25.0" prefWidth="178.0" promptText="Carrera" />
+      <Text fx:id="txtCareer" fill="WHITE" layoutX="109.0" layoutY="91.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Choose your career" wrappingWidth="178.0">
          <font>
-            <Font size="17.0" />
+            <Font name="Franklin Gothic Book" size="20.0" />
          </font></Text>
-      <ComboBox fx:id="cmbAvailableCourses" layoutX="307.0" layoutY="115.0" onMouseClicked="#AvailableCoursesOnMouseClicked" prefHeight="25.0" prefWidth="178.0" promptText="Cursos disponibles" visible="false" />
-      <Text fx:id="txtCourse" layoutX="109.0" layoutY="131.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Seleccione el curso" visible="false" wrappingWidth="159.375">
-         <font>
-            <Font size="17.0" />
-         </font></Text>
-      <Text fx:id="txtConfirmation" layoutX="131.0" layoutY="148.0" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER" visible="false" wrappingWidth="351.375">
+      <ComboBox fx:id="cmbAvailableCourses" layoutX="307.0" layoutY="119.0" onMouseClicked="#AvailableCoursesOnMouseClicked" prefHeight="25.0" prefWidth="178.0" promptText="Available Courses" visible="false" />
+      <Text fx:id="txtCourse" fill="WHITE" layoutX="109.0" layoutY="141.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Choose the course" visible="false" wrappingWidth="178.0">
          <font>
             <Font size="20.0" />
          </font></Text>
-      <Button fx:id="btnDelete" layoutX="307.0" layoutY="149.0" mnemonicParsing="false" onAction="#btnDelete" prefHeight="25.0" prefWidth="178.0" text="Delete" visible="false" />
-      <Button fx:id="btnConfirm" layoutX="232.0" layoutY="191.0" mnemonicParsing="false" onAction="#btnConfirm" prefHeight="25.0" prefWidth="150.0" text="Confirm" visible="false" />
-      <Button fx:id="btnShowCourses" layoutX="490.0" layoutY="67.0" mnemonicParsing="false" onAction="#btnShowCourses" prefHeight="25.0" prefWidth="82.0" text="Buscar" />
-      <Button fx:id="btnCancelThat" layoutX="232.0" layoutY="226.0" mnemonicParsing="false" onAction="#btnCancelThat" prefHeight="25.0" prefWidth="150.0" text="Cancelar" visible="false" />
+      <Text fx:id="txtConfirmation" fill="WHITE" layoutX="131.0" layoutY="152.0" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER" visible="false" wrappingWidth="351.375">
+         <font>
+            <Font name="Franklin Gothic Book" size="20.0" />
+         </font></Text>
+      <Button fx:id="btnDelete" layoutX="307.0" layoutY="153.0" mnemonicParsing="false" onAction="#btnDelete" prefHeight="25.0" prefWidth="178.0" text="Delete" visible="false" />
+      <Button fx:id="btnConfirm" layoutX="232.0" layoutY="195.0" mnemonicParsing="false" onAction="#btnConfirm" prefHeight="25.0" prefWidth="150.0" text="Confirm" visible="false" />
+      <Button fx:id="btnShowCourses" layoutX="490.0" layoutY="71.0" mnemonicParsing="false" onAction="#btnShowCourses" prefHeight="25.0" prefWidth="82.0" text="Buscar" />
+      <Button fx:id="btnCancelThat" layoutX="232.0" layoutY="230.0" mnemonicParsing="false" onAction="#btnCancelThat" prefHeight="25.0" prefWidth="150.0" text="Cancelar" visible="false" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#1f93ff00" height="29.0" layoutX="230.0" layoutY="28.0" stroke="#00ae23" strokeType="INSIDE" width="216.0" />
+      <Text fill="#00ae23" layoutX="240.0" layoutY="51.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Delete a Student">
+         <font>
+            <Font name="Lucida Bright" size="25.0" />
+         </font>
+      </Text>
    </children>
 </AnchorPane>

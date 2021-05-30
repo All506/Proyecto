@@ -13,7 +13,7 @@
         <URL value="@/Style/general.css" />
     </stylesheets>
    <children>
-      <TableView fx:id="tableStudents" layoutX="46.0" layoutY="65.0" prefHeight="280.0" prefWidth="552.0">
+      <TableView fx:id="tableStudents" layoutX="46.0" layoutY="75.0" prefHeight="280.0" prefWidth="552.0">
         <columns>
           <TableColumn fx:id="colId" text="ID" />
             <TableColumn fx:id="colStudentID" prefWidth="90.0" text="StudentID" />
@@ -26,8 +26,8 @@
             <TableColumn fx:id="colBirthday" prefWidth="112.0" text="Birthday" />
         </columns>
       </TableView>
-      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#1f93ff00" height="29.0" layoutX="142.0" layoutY="29.0" stroke="#00ae23" strokeType="INSIDE" width="361.0" />
-      <Text fill="#00ae23" layoutX="151.0" layoutY="51.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Showing registered students">
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#1f93ff00" height="29.0" layoutX="142.0" layoutY="35.0" stroke="#00ae23" strokeType="INSIDE" width="361.0" />
+      <Text fill="#00ae23" layoutX="151.0" layoutY="57.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Showing registered students">
          <font>
             <Font name="Lucida Bright" size="25.0" />
          </font>

@@ -4,45 +4,51 @@
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.shape.Line?>
+<?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
 <AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" stylesheets="@../Style/general.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.NewCourseController">
    <children>
-      <Text fill="WHITE" layoutX="188.0" layoutY="139.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Course ID">
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#475065" height="231.0" layoutX="158.0" layoutY="103.0" stroke="#db747400" strokeType="INSIDE" width="384.0" />
+      <Text fill="WHITE" layoutX="230.0" layoutY="143.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Course ID">
          <font>
             <Font size="15.0" />
          </font></Text>
-      <Text fill="WHITE" layoutX="209.0" layoutY="185.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Name">
+      <Text fill="WHITE" layoutX="251.0" layoutY="183.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Name">
          <font>
             <Font size="15.0" />
          </font></Text>
-      <Text fill="WHITE" layoutX="205.0" layoutY="226.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Credits">
+      <Text fill="WHITE" layoutX="247.0" layoutY="224.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Credits">
          <font>
             <Font size="15.0" />
          </font></Text>
-      <ComboBox fx:id="cmbCarrerId" layoutX="263.0" layoutY="251.0" prefHeight="29.0" prefWidth="149.0" promptText="Carrera" />
-      <Button fx:id="btnClean" layoutX="314.0" layoutY="327.0" mnemonicParsing="false" onAction="#btnClean" prefHeight="31.0" prefWidth="77.0" text="CLEAN">
+      <ComboBox fx:id="cmbCarrerId" layoutX="305.0" layoutY="247.0" prefHeight="29.0" prefWidth="149.0" promptText="Carrera" />
+      <Button fx:id="btnClean" layoutX="304.0" layoutY="282.0" mnemonicParsing="false" onAction="#btnClean" prefHeight="31.0" prefWidth="73.0" text="CLEAN">
          <font>
             <Font size="15.0" />
          </font></Button>
-      <Button fx:id="btnAdd" layoutX="235.0" layoutY="327.0" mnemonicParsing="false" onAction="#btnAdd" prefHeight="31.0" prefWidth="65.0" text="ADD">
+      <Button fx:id="btnAdd" layoutX="380.0" layoutY="282.0" mnemonicParsing="false" onAction="#btnAdd" prefHeight="31.0" prefWidth="73.0" text="ADD">
          <font>
             <Font size="15.0" />
          </font></Button>
-      <TextField fx:id="txtId" layoutX="263.0" layoutY="121.0" onKeyReleased="#keyPressed" />
-      <TextField fx:id="txtName" layoutX="263.0" layoutY="167.0" onKeyReleased="#keyPressed" />
-      <TextField fx:id="txtCredits" layoutX="263.0" layoutY="208.0" onKeyReleased="#keyPressed" />
-      <Text fill="WHITE" layoutX="190.0" layoutY="272.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Carrer ID">
+      <TextField fx:id="txtId" layoutX="305.0" layoutY="125.0" onKeyReleased="#keyPressed" prefHeight="23.0" prefWidth="149.0" />
+      <TextField fx:id="txtName" layoutX="305.0" layoutY="165.0" onKeyReleased="#keyPressed" prefHeight="23.0" prefWidth="149.0" />
+      <TextField fx:id="txtCredits" layoutX="305.0" layoutY="206.0" onKeyReleased="#keyPressed" prefHeight="23.0" prefWidth="149.0" />
+      <Text fill="WHITE" layoutX="232.0" layoutY="268.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Carrer ID">
          <font>
             <Font size="15.0" />
          </font>
       </Text>
-      <Line endX="499.0" layoutX="101.0" layoutY="67.0" startX="-100.0" stroke="WHITE" />
-      <Text fill="#00bb2d" layoutX="244.0" layoutY="50.0" strokeType="OUTSIDE" strokeWidth="0.0" text="New Course">
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#1f93ff00" height="29.0" layoutX="228.0" layoutY="39.0" stroke="#00ae23" strokeType="INSIDE" width="239.0" />
+      <Text fill="#00ae23" layoutX="237.0" layoutY="62.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Add a new Course">
          <font>
-            <Font name="System Bold" size="25.0" />
+            <Font name="Lucida Bright" size="25.0" />
+         </font>
+      </Text>
+      <Text fill="#ffd400" layoutX="176.0" layoutY="90.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Fill the course info and select a career to add it">
+         <font>
+            <Font name="Lucida Bright" size="15.0" />
          </font>
       </Text>
    </children>

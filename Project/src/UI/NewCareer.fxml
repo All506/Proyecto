@@ -1,35 +1,40 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.shape.Line?>
+<?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
 <AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" styleClass="mainFxmlClass" stylesheets="@../Style/menuBar.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.NewCareerController">
    <children>
-      <Line endX="499.0" layoutX="101.0" layoutY="69.0" startX="-100.0" stroke="WHITE" />
-      <Text fill="#00bb2d" layoutX="246.0" layoutY="50.0" strokeType="OUTSIDE" strokeWidth="0.0" text="New Career">
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#475065" height="192.0" layoutX="93.0" layoutY="110.0" stroke="#db747400" strokeType="INSIDE" width="465.0" />
+      <TextField fx:id="txtCareerId" layoutX="287.0" layoutY="188.0" prefHeight="25.0" prefWidth="249.0" />
+      <TextArea fx:id="txtDescription" layoutX="286.0" layoutY="134.0" prefHeight="37.0" prefWidth="249.0" />
+      <Button fx:id="btnAdd" layoutX="287.0" layoutY="215.0" mnemonicParsing="false" onAction="#btnAdd" prefHeight="25.0" prefWidth="249.0" text="ADD NEW CAREER" />
+      <Button fx:id="btnClean" layoutX="286.0" layoutY="257.0" mnemonicParsing="false" onAction="#btnClean" prefHeight="25.0" prefWidth="249.0" text="CLEAN" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#1f93ff00" height="29.0" layoutX="209.0" layoutY="30.0" stroke="#00ae23" strokeType="INSIDE" width="249.0" />
+      <Text fill="#00ae23" layoutX="218.0" layoutY="53.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Add a new Career">
          <font>
-            <Font name="System Bold" size="20.0" />
+            <Font name="Lucida Bright" size="25.0" />
          </font>
       </Text>
-      <Label layoutX="128.0" layoutY="83.0" text="CareerID" textFill="#00bb2d">
+      <Text fill="WHITE" layoutX="131.0" layoutY="206.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Generated ID:">
          <font>
-            <Font size="15.0" />
+            <Font name="Franklin Gothic Book" size="18.0" />
          </font>
-      </Label>
-      <TextField fx:id="txtCareerId" layoutX="205.0" layoutY="81.0" prefHeight="25.0" prefWidth="268.0" />
-      <Label layoutX="258.0" layoutY="116.0" text="Description" textFill="#00bb2d">
+      </Text>
+      <Text fill="WHITE" layoutX="133.0" layoutY="158.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Career name:">
          <font>
-            <Font size="15.0" />
+            <Font name="Franklin Gothic Book" size="18.0" />
          </font>
-      </Label>
-      <TextArea fx:id="txtDescription" layoutX="123.0" layoutY="151.0" prefHeight="169.0" prefWidth="355.0" />
-      <Button fx:id="btnAdd" layoutX="242.0" layoutY="338.0" mnemonicParsing="false" onAction="#btnAdd" text="ADD" />
-      <Button fx:id="btnClean" layoutX="300.0" layoutY="338.0" mnemonicParsing="false" onAction="#btnClean" text="CLEAN" />
+      </Text>
+      <Text fill="#ffd400" layoutX="179.0" layoutY="94.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Please enter the new Career name above">
+         <font>
+            <Font name="Lucida Bright" size="15.0" />
+         </font>
+      </Text>
    </children>
 </AnchorPane>
