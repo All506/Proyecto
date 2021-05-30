@@ -130,7 +130,7 @@ public class FilePDF {
                 parrafo1.add("\nPhone Number: " + student.getPhoneNumber());
                 parrafo1.add("\nEmail: " + student.getEmail());
                 parrafo1.add("\nAddress: " + student.getAddress());
-                parrafo1.add("\nCareer: " + student.getCareerID());
+                parrafo1.add("\nCareer: " + Util.Utility.getCarrerByID(String.valueOf(student.getCareerID())).getDescription());
                 parrafo1.add("\n----------------------------------------");
                 document.add(parrafo1);
             }
@@ -175,7 +175,7 @@ public class FilePDF {
                 table.addCell(String.valueOf(course.getId()));
                 table.addCell(course.getName());
                 table.addCell(String.valueOf(course.getCredits()));
-                table.addCell(String.valueOf(course.getCareerId()));
+                table.addCell( Util.Utility.getCarrerByID(String.valueOf(course.getCareerId())).getDescription());
             }
             document.add(table);//Agrega la tabla al documento
 
@@ -185,5 +185,7 @@ public class FilePDF {
         //Importante cerrar el pdf
         document.close();
     }
+
+    
 
 }//end class

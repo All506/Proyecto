@@ -580,12 +580,12 @@ public class MenuController implements Initializable {
     private void reportCareer(ActionEvent event) {
         String pdfName = "Report Careers";
         FilePDF pdf = new FilePDF();
-//        pdf.deleteFile("ReportCareers");
         try {
             if (!pdf.exist(pdfName)) {
                 pdf.careerPDF(pdfName, Util.Utility.getListCareer());
             } else {
-                System.out.println("Ya existe");
+                pdf.deleteFile("Report Careers");
+                pdf.careerPDF(pdfName, Util.Utility.getListCareer());
             }
         } catch (Exception e) {
             System.out.println("Error: " + e);
@@ -600,7 +600,8 @@ public class MenuController implements Initializable {
             if (!pdf.exist(pdfName)) {
                 pdf.studentPDF(pdfName, Util.Utility.getListStudents());
             } else {
-                System.out.println("Ya existe");
+                pdf.deleteFile("Report Students");
+                pdf.studentPDF(pdfName, Util.Utility.getListStudents());
             }
         } catch (Exception e) {
             System.out.println("Error: " + e);
@@ -615,7 +616,8 @@ public class MenuController implements Initializable {
             if (!pdf.exist(pdfName)) {
                 pdf.coursePDF(pdfName, Util.Utility.getListCourse());
             } else {
-                System.out.println("Ya existe");
+                pdf.deleteFile("Report Courses");
+                pdf.coursePDF(pdfName, Util.Utility.getListCourse());
             }
         } catch (Exception e) {
             System.out.println("Error: " + e);
