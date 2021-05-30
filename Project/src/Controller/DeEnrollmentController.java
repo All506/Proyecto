@@ -10,6 +10,7 @@ import Domain.SinglyLinkList;
 import Objects.DeEnrollment;
 import Objects.Enrollment;
 import Objects.Student;
+import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
@@ -22,13 +23,21 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableColumn.CellDataFeatures;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
 import javafx.util.Callback;
 
 
@@ -73,11 +82,31 @@ public class DeEnrollmentController implements Initializable {
     private Button btnDeEnroll;
     
     Enrollment enroll;
+    @FXML
+    private Rectangle rectangle;
+    @FXML
+    private Text txtRemark;
+    @FXML
+    private TextArea txtArea;
+    @FXML
+    private Button btnConfirm;
+    @FXML
+    private Button btnCancel;
+    @FXML
+    private BorderPane bpRoot;
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        btnDeEnroll.setVisible(false);
+        rectangle.setVisible(false);
+        txtRemark.setVisible(false);
+        txtArea.setVisible(false);
+        btnConfirm.setVisible(false);
+        btnCancel.setVisible(false);
+        txtArea.setText("");
+        
         try {
             Student s= Util.Utility.getUserStudent();
             
@@ -178,14 +207,85 @@ public class DeEnrollmentController implements Initializable {
     @FXML
     private void btnDeEnroll(ActionEvent event) throws ListException {
         
+        rectangle.setVisible(true);
+        txtRemark.setVisible(true);
+        txtArea.setVisible(true);
+        btnConfirm.setVisible(true);
+        btnCancel.setVisible(true);
+        btnDeEnroll.setDisable(true);
+        
+//        java.util.Date d = java.sql.Date.valueOf(java.time.LocalDate.now());
+//        int temp = Util.Utility.getLastDeEnroll();
+//        DeEnrollment newDeEnroll = new DeEnrollment(temp+1, d, enroll.getStudentID(), enroll.getCourseID(), enroll.getSchedule(),"Remark");
+//        System.out.println("El enroll a registrar es: " + newDeEnroll.toString());
+//        Util.Utility.setListDeEnrollment(newDeEnroll);
+//        Util.Utility.removeEnrollment(newDeEnroll);
+            
+    }
+
+    @FXML
+    private void btnConfirm(ActionEvent event) throws ListException {
+        if(!txtArea.getText().equalsIgnoreCase("")){
         java.util.Date d = java.sql.Date.valueOf(java.time.LocalDate.now());
         int temp = Util.Utility.getLastDeEnroll();
-        DeEnrollment newDeEnroll = new DeEnrollment(temp+1, d, enroll.getStudentID(), enroll.getCourseID(), enroll.getSchedule(),"Remark");
+        DeEnrollment newDeEnroll = new DeEnrollment(temp+1, d, enroll.getStudentID(), enroll.getCourseID(), enroll.getSchedule(),txtArea.getText());
         System.out.println("El enroll a registrar es: " + newDeEnroll.toString());
         Util.Utility.setListDeEnrollment(newDeEnroll);
         Util.Utility.removeEnrollment(newDeEnroll);
-            
+        btnCancel(event);
+        btnDeEnroll.setVisible(false);
+        loadPage("/UI/DeEnrollment");
+        callAlert("notification", "Notification", "Successfully de-enrolled course");
+        }else{
+        callAlert("alert", "Error", "Remark is a required field");
+        }
+        
     }
+
+    @FXML
+    private void btnCancel(ActionEvent event) {
+        
+        rectangle.setVisible(false);
+        txtRemark.setVisible(false);
+        txtArea.setVisible(false);
+        btnConfirm.setVisible(false);
+        btnCancel.setVisible(false);
+        txtArea.setText("");
+        btnDeEnroll.setDisable(false);
+        
+        
+    }
+    
+    private void callAlert(String fxmlName, String title, String text) {
+        //Se llama la alerta
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/UI/" + fxmlName + ".fxml"));
+            Parent root1;
+            root1 = (Parent) loader.load();
+            //Se llama al controller de la nueva ventana abierta
+            AlertController controller = loader.getController();
+            Stage stage = new Stage();
+            stage.initModality(Modality.APPLICATION_MODAL);
+            stage.setTitle("Alerta");
+            //Se le asigna la información a la controladora
+            controller.setText(title, text);
+            stage.setScene(new Scene(root1));
+            stage.show();
+        } catch (IOException ex) {
+            Logger.getLogger(LogInController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+     private void loadPage(String pageName) {
+        Parent root = null;
+        try {
+            root = FXMLLoader.load(getClass().getResource(pageName + ".fxml"));
+
+        } catch (IOException ex) {
+            Logger.getLogger(EnrollmentTableController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        bpRoot.setCenter(root);
+    } // Fin método Load Page
     
  }    
     
