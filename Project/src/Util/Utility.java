@@ -46,7 +46,7 @@ public class Utility {
     private static CircularLinkList lSecurity = new CircularLinkList();
     private static CircularDoublyLinkList lEnrollment = new CircularDoublyLinkList();
     private static CircularDoublyLinkList lDeEnrollment = new CircularDoublyLinkList();
-    
+
     private static int lastEnroll;
     private static int lastDeEnroll;
     private static boolean kindUser = false; //True if user, false if Student
@@ -76,27 +76,27 @@ public class Utility {
     public static CircularDoublyLinkList getListEnrollment() {
         return lEnrollment;
     }
-    private static CircularDoublyLinkList getListDeEnrollment() {
+
+    public static CircularDoublyLinkList getListDeEnrollment() {
         return lDeEnrollment;
     }
 
     public static int getLastEnroll() {
         return lastEnroll;
     }
-    
+
     public static int getLastDeEnroll() {
-         return lastDeEnroll;
+        return lastDeEnroll;
     }
-    
 
     public static void setLastEnroll(int lastEnroll) {
         Util.Utility.lastEnroll = lastEnroll;
     }
-    
-     private static void setLastDeEnroll(int lastDeEnroll) {
+
+    public static void setLastDeEnroll(int lastDeEnroll) {
         Util.Utility.lastDeEnroll = lastDeEnroll;
     }
-    
+
     public static boolean isKindUser() {
         return kindUser;
     }
@@ -233,8 +233,8 @@ public class Utility {
     }
 
     public static boolean setListDeEnrollment(DeEnrollment deEnr) throws ListException {
-        
-       boolean flag = false;
+
+        boolean flag = false;
         int temp = Util.Utility.getLastDeEnroll();
         if (Utility.lDeEnrollment.isEmpty()) {
             Util.Utility.setLastDeEnroll(temp++);
@@ -249,10 +249,10 @@ public class Utility {
                 flag = false;
             }
         }
-        return flag; 
-        
+        return flag;
+
     }
-    
+
     //UTILIDAD 
     public static int random() {
         return 1 + (int) Math.floor(Math.random() * 99);
@@ -315,9 +315,13 @@ public class Utility {
                 TimeTable sch2 = (TimeTable) b;
                 return sch1.getID().equals(sch2.getID()) && sch1.getPeriod().equals(sch2.getPeriod());
             case "enrollment":
-                Enrollment enr1 = (Enrollment)a;
-                Enrollment enr2 = (Enrollment)b;
+                Enrollment enr1 = (Enrollment) a;
+                Enrollment enr2 = (Enrollment) b;
                 return enr1.getStudentID().equalsIgnoreCase(enr2.getStudentID()) && enr1.getId() == enr2.getId();
+            case "deenrollment":
+                DeEnrollment der1 = (DeEnrollment)a;
+                DeEnrollment der2 = (DeEnrollment)b;
+                return der1.getId() == der2.getId();
         }
         return false; //En cualquier otro caso retorna un false
     }
@@ -344,8 +348,11 @@ public class Utility {
         if (a instanceof TimeTable && b instanceof TimeTable) {
             return "period";
         }
-        if (a instanceof Enrollment && b instanceof Enrollment){
+        if (a instanceof Enrollment && b instanceof Enrollment) {
             return "enrollment";
+        }
+        if (a instanceof DeEnrollment && b instanceof DeEnrollment){
+            return "deenrollment";
         }
 
         return "unknown";
@@ -416,14 +423,14 @@ public class Utility {
         }
         return list;
     }
-    
+
     public static Course getCourseByID(String id) throws ListException {
-        
+
         if (!lCourse.isEmpty()) {
             for (int i = 1; i <= lCourse.size(); i++) {
                 Course c = (Course) lCourse.getNode(i).data;
                 if ((c.getId() + "").equals(id)) {
-                    
+
                     return c;
 
                 }
@@ -454,7 +461,7 @@ public class Utility {
         for (int i = 1; i <= lSchedule.size(); i++) {
             TimeTable t = (TimeTable) lSchedule.getNode(i).data;
             if (((t.getID() + "").equals(id))) {
-                
+
                 return true;
             }
         }
@@ -463,42 +470,39 @@ public class Utility {
     }
 
     public static SinglyLinkList getEnrollmentOfStudentId() throws ListException {
-        
-     SinglyLinkList list = new SinglyLinkList();
-     if(!lEnrollment.isEmpty()){
-         for (int i = 1; i <= lEnrollment.size(); i++) {
-            Enrollment e = (Enrollment) lEnrollment.getNode(i).data;
-            
-            if (((e.getStudentID()+ "").equals(userStudent.getStudentID()))) {
-                list.add(e);
+
+        SinglyLinkList list = new SinglyLinkList();
+        if (!lEnrollment.isEmpty()) {
+            for (int i = 1; i <= lEnrollment.size(); i++) {
+                Enrollment e = (Enrollment) lEnrollment.getNode(i).data;
+
+                if (((e.getStudentID() + "").equals(userStudent.getStudentID()))) {
+                    list.add(e);
+                }
+
             }
-                
-         }
-     }
-     
-     
-     return list;
+        }
+
+        return list;
     }
 
     public static boolean removeEnrollment(DeEnrollment dE) throws ListException {
         CircularDoublyLinkList newLEnrollment = new CircularDoublyLinkList();
         CircularDoublyLinkList oldLEnrollment = lEnrollment;
         boolean flag = false;
-        
-        for (int i = 1; i <=oldLEnrollment.size() ; i++) {
-            Enrollment e = (Enrollment)oldLEnrollment.getNode(i).data;
-            if(e.getCourseID().equals(dE.getCourseID())&&e.getStudentID().equals(dE.getStudentID())&&e.getSchedule().equals(dE.getSchedule())){
-                System.out.println("Enroll borrado"+e.toString());
+
+        for (int i = 1; i <= oldLEnrollment.size(); i++) {
+            Enrollment e = (Enrollment) oldLEnrollment.getNode(i).data;
+            if (e.getCourseID().equals(dE.getCourseID()) && e.getStudentID().equals(dE.getStudentID()) && e.getSchedule().equals(dE.getSchedule())) {
+                System.out.println("Enroll borrado" + e.toString());
                 flag = true;
-            }else{
-               newLEnrollment.add(e);
+            } else {
+                newLEnrollment.add(e);
             }
         }
         Utility.lEnrollment = newLEnrollment;
-        
+
         return flag;
     }
-
-    
 
 }

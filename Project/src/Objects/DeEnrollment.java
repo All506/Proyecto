@@ -71,6 +71,16 @@ public class DeEnrollment {
         this.courseID = courseID;
     }
 
+    public String getRemark() {
+        return remark;
+    }
+
+    public void setRemark(String remark) {
+        this.remark = remark;
+    }
+    
+    
+
     public void setSchedule(String schedule) {
         this.schedule = schedule;
     }
@@ -81,13 +91,13 @@ public class DeEnrollment {
     }
     
     public String[] dataName(){
-        String[] data = {"id","date","studentId","courseId","schedule"};
+        String[] data = {"id","date","studentId","courseId","schedule","remark"};
         return data;
     }
     
     public String[] getData(){
         LocalDate dataFormat = LocalDate.parse(new SimpleDateFormat("yyyy-MM-dd").format(this.date));
-        String[] data = {String.valueOf(id),dataFormat.toString(),this.studentID, this.courseID, this.schedule};
+        String[] data = {String.valueOf(id),dataFormat.toString(),this.studentID, this.courseID, this.schedule,this.remark};
         return data;
     }
     

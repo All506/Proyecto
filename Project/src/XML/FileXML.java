@@ -11,6 +11,7 @@ import Objects.Career;
 import Domain.DoublyLinkList;
 import Domain.SinglyLinkList;
 import Objects.Course;
+import Objects.DeEnrollment;
 import Objects.Enrollment;
 import Objects.Security;
 import Objects.Student;
@@ -313,7 +314,7 @@ public class FileXML {
         return lSchedule;
     }
 
-    //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! Schedules  !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+    //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! Enrollment  !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
     public CircularDoublyLinkList readXMLtoEnrollmentList() {
 
         CircularDoublyLinkList lEnrollment = new CircularDoublyLinkList();
@@ -350,6 +351,46 @@ public class FileXML {
         return lEnrollment;
     }
     
+        //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! Enrollment  !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+    public CircularDoublyLinkList readXMLtoDeEnrollmentList() {
+
+        CircularDoublyLinkList lDeEnrollment = new CircularDoublyLinkList();
+
+        try {
+            File inputFile = new File("DeEnrollment.xml");
+            DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
+            DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
+            Document doc = dBuilder.parse(inputFile);
+            doc.getDocumentElement().normalize();
+
+            NodeList nList = doc.getElementsByTagName("DeEnrollment");
+
+            for (int indice = 0; indice < nList.getLength(); indice++) {
+                DeEnrollment deEnr = new DeEnrollment();
+                Node nNode = nList.item(indice);
+                if (nNode.getNodeType() == Node.ELEMENT_NODE) {
+                    Element eElement = (Element) nNode;
+                    deEnr.setId(Integer.parseInt(eElement.getAttribute("id")));
+                    //Seteo de la fecha
+                    DateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+                    java.util.Date d = java.sql.Date.valueOf(eElement.getElementsByTagName("date").item(0).getTextContent());
+                    deEnr.setDate(d);
+                    deEnr.setStudentID(eElement.getElementsByTagName("studentId").item(0).getTextContent());
+                    deEnr.setCourseID(eElement.getElementsByTagName("courseId").item(0).getTextContent());
+                    deEnr.setSchedule(eElement.getElementsByTagName("schedule").item(0).getTextContent());
+                    deEnr.setRemark(eElement.getElementsByTagName("remark").item(0).getTextContent());
+                }
+                lDeEnrollment.add(deEnr);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return lDeEnrollment;
+    }
+    
+    ///////////////////////////////////////////// LAST ID /////////////////////////////////////////////////////////////////////////////////////////////
+    
     public int getLastEnroll(){
         int contador = 0;
 
@@ -362,6 +403,33 @@ public class FileXML {
             doc.getDocumentElement().normalize();
 
             NodeList nList = doc.getElementsByTagName("Enrollments");
+            
+            
+            contador = nList.getLength();
+        } catch (ParserConfigurationException ex) {
+            Logger.getLogger(FileXML.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SAXException ex) {
+            Logger.getLogger(FileXML.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(FileXML.class.getName()).log(Level.SEVERE, null, ex);
+        }
+            
+        return contador;
+        
+    }
+    
+        public int getLastDeEnroll(){
+        int contador = 0;
+
+            File inputFile = new File("DeEnrollment.xml");
+            DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
+            DocumentBuilder dBuilder;
+        try {
+            dBuilder = dbFactory.newDocumentBuilder();
+            Document doc = dBuilder.parse(inputFile);
+            doc.getDocumentElement().normalize();
+
+            NodeList nList = doc.getElementsByTagName("DeEnrollment");
             
             
             contador = nList.getLength();

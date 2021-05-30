@@ -12,6 +12,7 @@ import Domain.DoublyLinkList;
 import Domain.ListException;
 import Domain.SinglyLinkList;
 import Objects.Course;
+import Objects.DeEnrollment;
 import Objects.Enrollment;
 import Objects.Security;
 import Objects.Student;
@@ -53,6 +54,7 @@ public class MenuController implements Initializable {
     private CircularDoublyLinkList lCourse;
     private SinglyLinkList lSchedules;
     private CircularDoublyLinkList lEnrollment;
+    private CircularDoublyLinkList lDeEnrollment;
 
     @FXML
     private BorderPane bpMenu;
@@ -258,6 +260,24 @@ public class MenuController implements Initializable {
             Util.Utility.setLastEnroll(0);
         }
 
+        //Carga los DeEnrollments
+        if (fXML.exist("DeEnrollment.xml")) {
+            lDeEnrollment = fXML.readXMLtoDeEnrollmentList();
+            try {
+                for (int i = 1; i <= lDeEnrollment.size(); i++) { //Se añaden los objetos del xml a util
+                    Util.Utility.setListDeEnrollment((DeEnrollment) lDeEnrollment.getNode(i).data);
+                }
+            } catch (ListException ex) {
+                Logger.getLogger(MenuController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            System.out.println("Lista en util \n " + Util.Utility.getListDeEnrollment().toString());
+
+            //Cargar el lastId de enrollments
+            Util.Utility.setLastDeEnroll(fXML.getLastDeEnroll());
+            System.out.println("El last id de enroll es: " + Util.Utility.getLastDeEnroll());
+        } else {
+            Util.Utility.setLastDeEnroll(0);
+        }
     }
 
     public void saveData() throws ListException {
@@ -329,6 +349,16 @@ public class MenuController implements Initializable {
             fXML.deleteFile("Enrollments");
             fXML.createXML("EnrollmentsXML", "Enrollments");
             writeEnrollments();
+        }
+
+        //Guarda datos de la lista de DeEnrollment en XML
+        if (!fXML.exist("DeEnrollment.xml")) { //Si el archivo no existe
+            fXML.createXML("DeEnrollmentXML", "DeEnrollment");
+            writeDeEnrollment();
+        } else {
+            fXML.deleteFile("DeEnrollment");
+            fXML.createXML("DeEnrollmentXML", "DeEnrollment");
+            writeDeEnrollment();
         }
     }
 
@@ -472,6 +502,30 @@ public class MenuController implements Initializable {
                 Enrollment enr = (Enrollment) lEnrollment.getNode(i).data;
                 try {
                     fXML.writeXML("Enrollments.xml", "Enrollments", enr.dataName(), enr.getData());
+                } catch (TransformerException ex) {
+                    Logger.getLogger(MenuController.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (SAXException ex) {
+                    Logger.getLogger(MenuController.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (IOException ex) {
+                    Logger.getLogger(MenuController.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        }
+    }
+
+    public void writeDeEnrollment() throws ListException {
+        FileXML fXML = new FileXML();
+
+        if (Util.Utility.getListDeEnrollment().isEmpty()) {
+            if (fXML.exist("DeEnrollment.xml")) {
+                fXML.deleteFile("DeEnrollment.");
+            }
+        } else {
+            CircularDoublyLinkList listDeEnrollment = Util.Utility.getListDeEnrollment();
+            for (int i = 1; i <= listDeEnrollment.size(); i++) {
+                DeEnrollment enr = (DeEnrollment) listDeEnrollment.getNode(i).data;
+                try {
+                    fXML.writeXML("DeEnrollment.xml", "DeEnrollment", enr.dataName(), enr.getData());
                 } catch (TransformerException ex) {
                     Logger.getLogger(MenuController.class.getName()).log(Level.SEVERE, null, ex);
                 } catch (SAXException ex) {
