@@ -9,9 +9,12 @@ import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.geometry.Pos;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.text.Font;
+import javafx.scene.text.TextAlignment;
 
 /**
  * FXML Controller class
@@ -33,6 +36,8 @@ public class AlertController implements Initializable {
     
     public void setText(String header, String text){
        txtHeader.setText(header);
+       txtHeader.setTextAlignment(TextAlignment.CENTER);
+       txtBody.setTextAlignment(TextAlignment.CENTER);
        txtBody.setText(text);
     }
     

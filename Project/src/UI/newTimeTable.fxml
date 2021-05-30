@@ -13,7 +13,7 @@
    <children>
       <Line endX="-100.0" endY="55.0" layoutX="182.0" layoutY="106.0" startX="-100.0" stroke="#fcfcfc" />
       <Line endX="-100.0" endY="55.0" layoutX="649.0" layoutY="106.0" startX="-100.0" stroke="#fcfcfc" />
-      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#6569dc" height="150.0" layoutX="54.0" layoutY="159.0" stroke="WHITE" strokeType="INSIDE" width="534.0" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#444565" height="150.0" layoutX="54.0" layoutY="159.0" stroke="WHITE" strokeType="INSIDE" width="534.0" />
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#475065" height="107.0" layoutX="124.0" layoutY="52.0" stroke="WHITE" strokeType="INSIDE" width="384.0" />
       <ComboBox fx:id="cmbCourses" layoutX="278.0" layoutY="74.0" onAction="#cmbPeriodAction" prefHeight="30.0" prefWidth="208.0" />
       <Spinner fx:id="spnDay1" layoutX="184.0" layoutY="195.0" prefHeight="26.0" prefWidth="122.0" />

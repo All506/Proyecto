@@ -64,7 +64,7 @@
          </font></Text>
       <TextField fx:id="txfEmail" editable="false" layoutX="191.0" layoutY="291.0" />
       <TextField fx:id="txfAddress" editable="false" layoutX="191.0" layoutY="325.0" />
-      <Text fill="WHITE" layoutX="463.0" layoutY="81.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Carrer">
+      <Text fill="WHITE" layoutX="463.0" layoutY="81.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Career">
          <font>
             <Font name="Lucida Fax Demibold Italic" size="18.0" />
          </font></Text>

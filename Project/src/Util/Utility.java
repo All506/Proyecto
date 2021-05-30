@@ -305,7 +305,7 @@ public class Utility {
             case "course":
                 Course cour1 = (Course) a;
                 Course cour2 = (Course) b;
-                return cour1.getId().equalsIgnoreCase(cour2.getId()) && cour1.getName().equalsIgnoreCase(cour2.getName());
+                return cour1.getId().equalsIgnoreCase(cour2.getId());
             case "security":
                 Security sec1 = (Security) a;
                 Security sec2 = (Security) b;

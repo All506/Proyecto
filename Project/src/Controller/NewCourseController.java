@@ -164,10 +164,8 @@ public class NewCourseController implements Initializable {
     @FXML
     private void btnAdd(ActionEvent event) throws ListException {
         if(this.cmbCarrerId.getValue().equals(null)){
-            System.out.println("Entro al if");
            callAlert("alert", "Error", "Choose a carreer to add the course");
         }else{ 
-            System.out.println("Entro al else");
         int i = 0;
         String x = "";
             while (!("-").contains("" + this.cmbCarrerId.getValue().charAt(i))) {
@@ -175,7 +173,7 @@ public class NewCourseController implements Initializable {
                 i++;
             }
                 Course crse = new Course(this.txtId.getText(), this.txtName.getText(), Integer.parseInt(this.txtCredits.getText()), Integer.parseInt(x));
-                if (!Util.Utility.setListCourse(crse)) {
+                if (Util.Utility.setListCourse(crse)==false) {
                     callAlert("alert", "Error", "The data of the new course matches \n with an already existent course \n Please check your entries");
                 } else {
                     this.btnClean(event);

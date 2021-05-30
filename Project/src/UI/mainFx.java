@@ -12,6 +12,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.image.Image;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 
@@ -30,6 +31,7 @@ public class mainFx extends Application {
         Parent root = FXMLLoader.load(getClass().getResource("LogIn.fxml"));
         Scene scene = new Scene(root);
         stage.setScene(scene);
+        stage.getIcons().add(new Image("/Resources/eMatriculaLogo.png"));
         stage.setTitle("LogIn");
         stage.setResizable(false);
         stage.show();

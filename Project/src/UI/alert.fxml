@@ -10,10 +10,10 @@
    <children>
       <ImageView fx:id="imgView" fitHeight="149.0" fitWidth="154.0" layoutX="14.0" layoutY="18.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../Resources/alert.png" />
+            <Image url="@../Resources/nopeG.gif" />
          </image>
       </ImageView>
-      <Label fx:id="txtHeader" layoutX="268.0" layoutY="13.0" text="HEADER" textFill="WHITE">
+      <Label fx:id="txtHeader" layoutX="191.0" layoutY="13.0" prefHeight="18.0" prefWidth="246.0" text="HEADER" textAlignment="CENTER" textFill="WHITE">
          <font>
             <Font name="System Bold" size="20.0" />
          </font>

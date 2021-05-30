@@ -32,7 +32,7 @@
       <Button fx:id="btnShowCourses" layoutX="490.0" layoutY="71.0" mnemonicParsing="false" onAction="#btnShowCourses" prefHeight="25.0" prefWidth="82.0" text="Buscar" />
       <Button fx:id="btnCancelThat" layoutX="232.0" layoutY="230.0" mnemonicParsing="false" onAction="#btnCancelThat" prefHeight="25.0" prefWidth="150.0" text="Cancelar" visible="false" />
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#1f93ff00" height="29.0" layoutX="230.0" layoutY="28.0" stroke="#00ae23" strokeType="INSIDE" width="216.0" />
-      <Text fill="#00ae23" layoutX="240.0" layoutY="51.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Delete a Student">
+      <Text fill="#00ae23" layoutX="242.0" layoutY="51.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Delete a Course">
          <font>
             <Font name="Lucida Bright" size="25.0" />
          </font>

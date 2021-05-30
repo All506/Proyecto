@@ -10,17 +10,17 @@
    <children>
       <ImageView fx:id="imgView" fitHeight="116.0" fitWidth="131.0" layoutX="22.0" layoutY="35.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../Resources/check.png" />
+            <Image url="@../Resources/checkG.gif" />
          </image>
       </ImageView>
-      <Label fx:id="txtHeader" layoutX="268.0" layoutY="13.0" text="HEADER" textFill="#9dff5c">
+      <Label fx:id="txtHeader" layoutX="205.0" layoutY="23.0" prefHeight="18.0" prefWidth="222.0" text="HEADER" textAlignment="CENTER" textFill="#eeff5e">
          <font>
-            <Font name="System Bold" size="20.0" />
+            <Font name="Franklin Gothic Book" size="20.0" />
          </font>
       </Label>
       <Label fx:id="txtBody" layoutX="176.0" layoutY="43.0" prefHeight="116.0" prefWidth="277.0" text="Label" textAlignment="CENTER" textFill="WHITE">
          <font>
-            <Font size="15.0" />
+            <Font name="Franklin Gothic Book" size="18.0" />
          </font>
       </Label>
    </children>
