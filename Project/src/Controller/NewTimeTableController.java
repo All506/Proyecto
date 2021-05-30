@@ -5,6 +5,7 @@
  */
 package Controller;
 //Security{user=302740270, password=C07872}
+import Domain.CircularDoublyLinkList;
 import Domain.CircularLinkList;
 import Domain.ListException;
 import Domain.SinglyLinkList;
@@ -75,7 +76,7 @@ public class NewTimeTableController implements Initializable {
 
        public void loadComboBoxCourses(){
         //Para cargar un combobox
-        CircularLinkList tempCourses = new CircularLinkList();
+        CircularDoublyLinkList tempCourses = new CircularDoublyLinkList();
         tempCourses = Util.Utility.getListCourse();
         String temporal = "";
         
@@ -271,7 +272,7 @@ public class NewTimeTableController implements Initializable {
 
     @FXML//Valida que el horario no tenga un horario ya definido.
     private void cmbPeriodAction(ActionEvent event) throws ListException {
-        CircularLinkList s = Util.Utility.getListCourse();
+        CircularDoublyLinkList s = Util.Utility.getListCourse();
         SinglyLinkList sch = Util.Utility.getListSchedule();
         Course find=null;
         btnValidSave.setText("Validate and save");

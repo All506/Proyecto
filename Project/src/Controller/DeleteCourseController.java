@@ -5,6 +5,7 @@
  */
 package Controller;
 
+import Domain.CircularDoublyLinkList;
 import Domain.CircularLinkList;
 import Domain.DoublyLinkList;
 import Domain.ListException;
@@ -106,7 +107,7 @@ public class DeleteCourseController implements Initializable {
     }
     
     public void loadComboBoxCourses(int careerID){
-        CircularLinkList tempCourses = new CircularLinkList();
+        CircularDoublyLinkList tempCourses = new CircularDoublyLinkList();
         tempCourses = Util.Utility.getListCourse();
         String temporal = "";
         
@@ -153,8 +154,8 @@ public class DeleteCourseController implements Initializable {
     
      @FXML
     private void btnConfirm(ActionEvent event) {
-         CircularLinkList listTodelete = Util.Utility.getListCourse();
-         CircularLinkList listToSend = new CircularLinkList();
+         CircularDoublyLinkList listTodelete = Util.Utility.getListCourse();
+         CircularDoublyLinkList listToSend = new CircularDoublyLinkList();
         try {
             for (int i = listTodelete.indexOf(listTodelete.getFirst()); i <= listTodelete.size(); i++) {
                 Course f = (Course)listTodelete.getNode(i).data;

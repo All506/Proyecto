@@ -248,9 +248,9 @@ public class FileXML {
     }
 
     //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! Course  !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-    public CircularLinkList readXMLtoCourseList() {
+    public CircularDoublyLinkList readXMLtoCourseList() {
 
-        CircularLinkList lCourse = new CircularLinkList();
+        CircularDoublyLinkList lCourse = new CircularDoublyLinkList();
 
         try {
             File inputFile = new File("Courses.xml");

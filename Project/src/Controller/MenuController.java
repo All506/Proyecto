@@ -16,6 +16,7 @@ import Objects.Enrollment;
 import Objects.Security;
 import Objects.Student;
 import Objects.TimeTable;
+import PDF.FilePDF;
 import Security.AES;
 import XML.FileXML;
 import java.io.IOException;
@@ -49,7 +50,7 @@ public class MenuController implements Initializable {
     private SinglyLinkList lStudents;
     private DoublyLinkList lCareers;
     private CircularLinkList lSecurity;
-    private CircularLinkList lCourse;
+    private CircularDoublyLinkList lCourse;
     private SinglyLinkList lSchedules;
     private CircularDoublyLinkList lEnrollment;
 
@@ -97,6 +98,14 @@ public class MenuController implements Initializable {
     private MenuItem mnEnrollment;
     @FXML
     private MenuItem mnDeEnrollment;
+    @FXML
+    private Menu menuReports;
+    @FXML
+    private MenuItem reportCareer;
+    @FXML
+    private MenuItem reportStudent;
+    @FXML
+    private MenuItem reportCourses;
 
     /**
      * Initializes the controller class.
@@ -229,7 +238,7 @@ public class MenuController implements Initializable {
             }
             System.out.println("Lista en util \n " + Util.Utility.getListCourse().toString());
         }
-        
+
         //Carga los Enrollments
         if (fXML.exist("Enrollments.xml")) {
             lEnrollment = fXML.readXMLtoEnrollmentList();
@@ -241,15 +250,13 @@ public class MenuController implements Initializable {
                 Logger.getLogger(MenuController.class.getName()).log(Level.SEVERE, null, ex);
             }
             System.out.println("Lista en util \n " + Util.Utility.getListEnrollment().toString());
-            
+
             //Cargar el lastId de enrollments
-        Util.Utility.setLastEnroll(fXML.getLastEnroll());
-        System.out.println("El last id de enroll es: " + Util.Utility.getLastEnroll());
+            Util.Utility.setLastEnroll(fXML.getLastEnroll());
+            System.out.println("El last id de enroll es: " + Util.Utility.getLastEnroll());
         } else {
             Util.Utility.setLastEnroll(0);
         }
-        
-        
 
     }
 
@@ -568,4 +575,51 @@ public class MenuController implements Initializable {
             Logger.getLogger(LogInController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-}
+
+    @FXML
+    private void reportCareer(ActionEvent event) {
+        String pdfName = "Report Careers";
+        FilePDF pdf = new FilePDF();
+//        pdf.deleteFile("ReportCareers");
+        try {
+            if (!pdf.exist(pdfName)) {
+                pdf.careerPDF(pdfName, Util.Utility.getListCareer());
+            } else {
+                System.out.println("Ya existe");
+            }
+        } catch (Exception e) {
+            System.out.println("Error: " + e);
+        }
+    }
+
+    @FXML
+    private void reportStudent(ActionEvent event) {
+        String pdfName = "Report Students";
+        FilePDF pdf = new FilePDF();
+        try {
+            if (!pdf.exist(pdfName)) {
+                pdf.studentPDF(pdfName, Util.Utility.getListStudents());
+            } else {
+                System.out.println("Ya existe");
+            }
+        } catch (Exception e) {
+            System.out.println("Error: " + e);
+        }
+    }
+
+    @FXML
+    private void reportCourses(ActionEvent event) {
+        String pdfName = "Report Courses";
+        FilePDF pdf = new FilePDF();
+        try {
+            if (!pdf.exist(pdfName)) {
+                pdf.coursePDF(pdfName, Util.Utility.getListCourse());
+            } else {
+                System.out.println("Ya existe");
+            }
+        } catch (Exception e) {
+            System.out.println("Error: " + e);
+        }
+    }
+
+}//end class

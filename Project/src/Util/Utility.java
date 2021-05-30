@@ -42,7 +42,7 @@ public class Utility {
     private static SinglyLinkList lStudent = new SinglyLinkList();
     private static SinglyLinkList lSchedule = new SinglyLinkList();
     private static DoublyLinkList lCareer = new DoublyLinkList();
-    private static CircularLinkList lCourse = new CircularLinkList();
+    private static CircularDoublyLinkList lCourse = new CircularDoublyLinkList();
     private static CircularLinkList lSecurity = new CircularLinkList();
     private static CircularDoublyLinkList lEnrollment = new CircularDoublyLinkList();
     private static CircularDoublyLinkList lDeEnrollment = new CircularDoublyLinkList();
@@ -65,7 +65,7 @@ public class Utility {
         return lCareer;
     }
 
-    public static CircularLinkList getListCourse() {
+    public static CircularDoublyLinkList getListCourse() {
         return lCourse;
     }
 
@@ -445,7 +445,7 @@ public class Utility {
         return null;
     }
 
-    public static void replaceListCourse(CircularLinkList listToSend) {
+    public static void replaceListCourse(CircularDoublyLinkList listToSend) {
         lCourse = listToSend;
     }
 

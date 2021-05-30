@@ -45,6 +45,13 @@
                 <MenuItem fx:id="btnNewSchedule" mnemonicParsing="false" onAction="#btnNewSchedule" text="Add Schedule" />
               </items>
             </Menu>
+            <Menu fx:id="menuReports" mnemonicParsing="false" text="Reports">
+               <items>
+                  <MenuItem fx:id="reportCareer" mnemonicParsing="false" onAction="#reportCareer" text="Report Careers" />
+                  <MenuItem fx:id="reportStudent" mnemonicParsing="false" onAction="#reportStudent" text="Report Students" />
+                  <MenuItem fx:id="reportCourses" mnemonicParsing="false" onAction="#reportCourses" text="Report Courses" />
+               </items>
+            </Menu>
             <Menu fx:id="menuUser" mnemonicParsing="false" text="User">
               <items>
                   <MenuItem fx:id="btnNewUser" mnemonicParsing="false" onAction="#btnNewUser" text="New User" />

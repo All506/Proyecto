@@ -5,6 +5,7 @@
  */
 package Controller;
 
+import Domain.CircularDoublyLinkList;
 import Domain.CircularLinkList;
 import Domain.ListException;
 import Domain.Node;
@@ -48,7 +49,7 @@ public class ModifyCourseController implements Initializable {
     @FXML
     private Button btnModify;
 
-    CircularLinkList tempCourse = new CircularLinkList();
+    CircularDoublyLinkList tempCourse = new CircularDoublyLinkList();
 
     /**
      * Initializes the controller class.

@@ -5,6 +5,7 @@
  */
 package Controller;
 
+import Domain.CircularDoublyLinkList;
 import Domain.CircularLinkList;
 import Objects.Career;
 import Domain.DoublyLinkList;
@@ -103,7 +104,7 @@ public class EditAndDeleteCareerController implements Initializable {
 
     private boolean lookCourse(String career) throws ListException {
         boolean condition = true;
-        CircularLinkList lCourse = Util.Utility.getListCourse();
+        CircularDoublyLinkList lCourse = Util.Utility.getListCourse();
         for (int i = 1; i <= lCourse.size(); i++) {
             Course course = (Course) lCourse.getNode(i).data;
             if (course.getCareerId() == Integer.parseInt(career)) {
