@@ -175,13 +175,26 @@ public class NewTimeTableController implements Initializable {
       //--------------------------------------------------
       
       public void loadComboBoxPeriod(){
+          
+        java.util.Date d = java.sql.Date.valueOf(java.time.LocalDate.now());
         //Para cargar un combobox
-            for (int i = 2021; i <= 2021; i++) {
-                this.cmbPeriod.getItems().add("1-"+i);
-                this.cmbPeriod.getItems().add("2-"+i);
-                this.cmbPeriod.getItems().add("3-"+i);
-            }
-        cmbPeriod.setValue("1-2020");
+        String period = "";
+        
+        switch((int)d.getMonth()){
+            case 1: case 2: case 3: case 0:
+                period+=1;
+                break;
+            case 4: case 5: case 6: case 7:
+                period+=2;
+                break;
+            case 8: case 9: case 10: case 11:
+                period+=3;
+                break;
+        }
+        period+="-"+(d.getYear()+1900);
+        this.cmbPeriod.getItems().add(period);
+
+        
         cmbPeriod.getSelectionModel().select("Period");
     }
 

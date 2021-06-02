@@ -213,13 +213,6 @@ public class DeEnrollmentController implements Initializable {
         btnConfirm.setVisible(true);
         btnCancel.setVisible(true);
         btnDeEnroll.setDisable(true);
-        
-//        java.util.Date d = java.sql.Date.valueOf(java.time.LocalDate.now());
-//        int temp = Util.Utility.getLastDeEnroll();
-//        DeEnrollment newDeEnroll = new DeEnrollment(temp+1, d, enroll.getStudentID(), enroll.getCourseID(), enroll.getSchedule(),"Remark");
-//        System.out.println("El enroll a registrar es: " + newDeEnroll.toString());
-//        Util.Utility.setListDeEnrollment(newDeEnroll);
-//        Util.Utility.removeEnrollment(newDeEnroll);
             
     }
 
