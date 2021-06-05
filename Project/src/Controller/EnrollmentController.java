@@ -198,6 +198,10 @@ public class EnrollmentController implements Initializable {
 
     @FXML
     private void btnCancel(ActionEvent event) {
+        if(Util.Utility.isKindUser())
+         loadPage("/UI/enrollmentTable");
+        else
+         loadPage("/UI/menu");
     }
 
     @FXML

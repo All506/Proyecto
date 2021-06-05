@@ -541,11 +541,12 @@ public class MenuController implements Initializable {
 
     private void configMenu() {
         if (!Util.Utility.isKindUser()) {
-            this.menuCareer.setDisable(true);
-            this.menuStudent.setDisable(true);
-            this.menuUser.setDisable(true);
-            this.menuCourse.setDisable(true);
-            this.menuSchedules.setDisable(true);
+            this.menuCareer.setVisible(false);
+            this.menuStudent.setVisible(false);
+            this.btnNewUser.setDisable(true);
+            this.btnNewUser.setVisible(false);
+            this.menuCourse.setVisible(false);
+            this.menuSchedules.setVisible(false);
         }
     }
 
