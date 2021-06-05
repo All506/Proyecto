@@ -198,7 +198,7 @@ public class NewStudentController implements Initializable {
                 if (Util.Utility.emailChecker(txtEmail.getText())) {
                     if (Util.Utility.setListStudent(std)) {
                         try {
-                            Util.Mail.enviarConGMail(std.getEmail(), std.data(), "register");//Recibe el correo del estudiante,  la infor de estudiante y el motivo.
+                            Util.Mail.registerEmail(std.getEmail(), std.data());//Recibe el correo del estudiante,  la infor de estudiante y el motivo.
                         } catch (Exception e) {
                             System.out.println(e);
                         }

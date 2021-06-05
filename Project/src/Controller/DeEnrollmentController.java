@@ -97,6 +97,9 @@ public class DeEnrollmentController implements Initializable {
     /**
      * Initializes the controller class.
      */
+    
+    String course;
+    
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         btnDeEnroll.setVisible(false);
@@ -128,10 +131,12 @@ public class DeEnrollmentController implements Initializable {
         colID.setOnEditStart(data -> {
             
             try {
+                course = "";
                 enroll = getScheduleByCourseID(data.getOldValue());
                 
                 btnDeEnroll.setVisible(true);
                 btnDeEnroll.setText("De-enroll course: "+Util.Utility.getCourseByID(data.getOldValue()).getName()+"   -   Schedule: "+enroll.getSchedule());
+                course = Util.Utility.getCourseByID(data.getOldValue()).getName()+" - Schedule: "+enroll.getSchedule();
             } catch (ListException ex) {
                 Logger.getLogger(DeEnrollmentController.class.getName()).log(Level.SEVERE, null, ex);
             }
