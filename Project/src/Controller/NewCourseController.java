@@ -188,6 +188,7 @@ public class NewCourseController implements Initializable {
                 } else {
                     this.btnClean(event);
                     this.btnAdd.setDisable(true);
+                    callAlert("notification", "Success!", "The course was added successfully!");
                 }  
         }
     }
