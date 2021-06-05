@@ -34,6 +34,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
+import javafx.scene.control.Tooltip;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.stage.Modality;
@@ -78,10 +79,12 @@ public class NewStudentController implements Initializable {
     @FXML
     private Button btnClean;
     
+    
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         students = new SinglyLinkList();
         String temporal = "";
+        
         //Para cargar un combobox
         this.loadComboBoxCareers();
 
@@ -99,6 +102,19 @@ public class NewStudentController implements Initializable {
         maskText(txtFirstname);
         maskText(txtAddress);
         
+        //ToolTips
+        Tooltip t = new Tooltip("Format: X-XXXX-XXXX");
+        this.txtID.setTooltip(t);
+        Tooltip t2 = new Tooltip("Format: XXXX-XXXX");
+        this.txtPhoneNumber.setTooltip(t2);
+        Tooltip t3 = new Tooltip("Enter the city you come from");
+        this.txtAddress.setTooltip(t3);
+        Tooltip t4 = new Tooltip("Example: helloworld@netbeans.com");
+        this.txtEmail.setTooltip(t4);
+        Tooltip t5 = new Tooltip("Example: C00648");
+        this.txtStudentID.setTooltip(t5);
+        Tooltip t6 = new Tooltip("Choose or write down your birthday");
+        this.dpBirthday.setTooltip(t6);
     }
     
     public void maskText(TextField txtField) {

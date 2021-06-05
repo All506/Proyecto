@@ -25,6 +25,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
+import javafx.scene.control.Tooltip;
 import javafx.scene.input.KeyEvent;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -54,6 +55,15 @@ public class NewCourseController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        
+        Tooltip t1 = new Tooltip("Example: IF3001");
+        this.txtId.setTooltip(t1);
+        Tooltip t2 = new Tooltip("Enter the number of credits of the new course");
+        this.txtCredits.setTooltip(t2);
+        Tooltip t3 = new Tooltip("Enter the name of the new course");
+        this.txtName.setTooltip(t3);
+        
+        
         // TODO
         loadComboBoxCourse();
         this.btnAdd.setDisable(true);

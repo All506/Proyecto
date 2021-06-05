@@ -21,6 +21,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.control.Tooltip;
 import javafx.scene.input.KeyEvent;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -44,6 +45,8 @@ public class NewCareerController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        Tooltip t1 = new Tooltip("Enter the name of the new career");
+        this.txtDescription.setTooltip(t1);
         txtCareerId.setEditable(false);
         txtCareerId.setText(String.valueOf(Objects.Career.consecutivo));
         
