@@ -537,6 +537,9 @@ public class MenuController implements Initializable {
         } catch (ListException ex) {
             Logger.getLogger(MenuController.class.getName()).log(Level.SEVERE, null, ex);
         }
+        
+        
+        
     }
 
     private void configMenu() {

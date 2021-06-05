@@ -513,7 +513,6 @@ public class Utility {
         } else {
         for (int i = 1; i <= list.size(); i++) {
            Enrollment e = (Enrollment)list.getNode(i).data;
-            System.out.println(getPeriodOfStringDate(enr.getDate())+"--"+getPeriodOfStringDate(e.getDate()));
             if (enr.getStudentID().equalsIgnoreCase(e.getStudentID())&&enr.getCourseID().equalsIgnoreCase(e.getCourseID())&&getPeriodOfStringDate(enr.getDate()).equalsIgnoreCase(getPeriodOfStringDate(e.getDate()))) {
                 return true; 
             }

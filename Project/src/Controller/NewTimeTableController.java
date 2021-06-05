@@ -6,7 +6,6 @@
 package Controller;
 //Security{user=302740270, password=C07872}
 import Domain.CircularDoublyLinkList;
-import Domain.CircularLinkList;
 import Domain.ListException;
 import Domain.SinglyLinkList;
 import Objects.Course;
@@ -73,7 +72,8 @@ public class NewTimeTableController implements Initializable {
     }    
     
     
-
+      //- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -  - -
+      //Description:Carga el combobox de cursos con todos los diponibles
        public void loadComboBoxCourses(){
         //Para cargar un combobox
         CircularDoublyLinkList tempCourses = new CircularDoublyLinkList();
@@ -94,6 +94,8 @@ public class NewTimeTableController implements Initializable {
         cmbCourses.getSelectionModel().select("Courses");
     }
 
+      //- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -  - -
+      //Description:Carga el combobox de dias, con los 6 dias habiles para matricular.
       public void loadSpinnerDays(){
       
       ObservableList<String> days = FXCollections.observableArrayList(
@@ -114,6 +116,8 @@ public class NewTimeTableController implements Initializable {
       
       } 
       
+      //- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -  - -
+      //Description:Carga el combobox start con las horas de inicio habiles para un curso 
       public void loadSpinnerStart(){
       
       ObservableList<Integer> start = FXCollections.observableArrayList(
@@ -149,7 +153,8 @@ public class NewTimeTableController implements Initializable {
        spnEnd2.setValueFactory(valueFactory4);
       
       }
-      //-------------------------------------------------------------------
+      //- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -  - -
+      //Description:carga el spinner ending con las horas de finalización habiles para un curso 
       public void loadSpinnerEnding(){
       
       ObservableList<Integer> ending = FXCollections.observableArrayList();
@@ -172,8 +177,8 @@ public class NewTimeTableController implements Initializable {
                new SpinnerValueFactory.ListSpinnerValueFactory<Integer>(ending);
        spnEnd2.setValueFactory(valueFactory);
       }
-      //--------------------------------------------------
-      
+      //- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -  - -
+      //Description:Carga el combobox period con el periodo respectivo a la fecha actual. 
       public void loadComboBoxPeriod(){
           
         java.util.Date d = java.sql.Date.valueOf(java.time.LocalDate.now());
@@ -197,7 +202,9 @@ public class NewTimeTableController implements Initializable {
         
         cmbPeriod.getSelectionModel().select("Period");
     }
-
+      
+    //- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -  - -
+    //Description:Resetea el valor de los combobox 
     @FXML
     private void btnClean(ActionEvent event) {
         cmbCourses.getSelectionModel().select("Courses");
@@ -206,6 +213,8 @@ public class NewTimeTableController implements Initializable {
         this.loadSpinnerStart(); 
     }
 
+    //- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -  - -
+    //Description:
     @FXML
     private void btnValidSave(ActionEvent event) throws ListException {
         
@@ -239,6 +248,9 @@ public class NewTimeTableController implements Initializable {
         
     }
 
+    
+    //- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -  - -
+      //Description:
     @FXML
     private void spn2MouseClicked(MouseEvent event) {
         loadSpinnerEnding2();
@@ -249,6 +261,9 @@ public class NewTimeTableController implements Initializable {
         loadSpinnerEnding();
     }
 
+    
+    //- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -  - -
+      //Description:
     private Boolean scheduleClash(int i1, int f1, int i2, int f2) {
         String h1="";      
         for (int j = i1; j < f1; j++) {
@@ -263,6 +278,8 @@ public class NewTimeTableController implements Initializable {
         return false;
     }
 
+    //- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -  - -
+      //Description:
     private void callAlert(String fxmlName, String title, String text) {
         //Se llama la alerta
         try {
@@ -283,7 +300,9 @@ public class NewTimeTableController implements Initializable {
         }
     }
 
-    @FXML//Valida que el horario no tenga un horario ya definido.
+    //- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -  - -
+    //Description:Valida que el horario no tenga un horario ya definido.
+    @FXML
     private void cmbPeriodAction(ActionEvent event) throws ListException {
         CircularDoublyLinkList s = Util.Utility.getListCourse();
         SinglyLinkList sch = Util.Utility.getListSchedule();
@@ -314,9 +333,5 @@ public class NewTimeTableController implements Initializable {
      }
    
     }
-
-   
-
-    
-    
+ 
 }
