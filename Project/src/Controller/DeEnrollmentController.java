@@ -97,7 +97,7 @@ public class DeEnrollmentController implements Initializable {
     /**
      * Initializes the controller class.
      */
-    
+    Student temp;
     String course;
     
     @Override
@@ -112,7 +112,7 @@ public class DeEnrollmentController implements Initializable {
         
         try {
             Student s= Util.Utility.getUserStudent();
-            
+            temp =s;
             txfStudentID.setText(s.getStudentID());
             txfPersID.setText(""+s.getId());
             txfFirstName.setText(s.getFirstname());
@@ -222,11 +222,12 @@ public class DeEnrollmentController implements Initializable {
     }
 
     @FXML
-    private void btnConfirm(ActionEvent event) throws ListException {
+    private void btnConfirm(ActionEvent event) throws ListException, Exception {
         if(!txtArea.getText().equalsIgnoreCase("")){
         java.util.Date d = java.sql.Date.valueOf(java.time.LocalDate.now());
         int temp = Util.Utility.getLastDeEnroll();
         DeEnrollment newDeEnroll = new DeEnrollment(temp+1, d, enroll.getStudentID(), enroll.getCourseID(), enroll.getSchedule(),txtArea.getText());
+        Util.Mail.deEnrollmentEmail(txfEmail.getText(), this.temp.data(), txtRemark.getText(), course);
         System.out.println("El enroll a registrar es: " + newDeEnroll.toString());
         Util.Utility.setListDeEnrollment(newDeEnroll);
         Util.Utility.removeEnrollment(newDeEnroll);
@@ -237,7 +238,7 @@ public class DeEnrollmentController implements Initializable {
         }else{
         callAlert("alert", "Error", "Remark is a required field");
         }
-        
+        course = "";
     }
 
     @FXML
