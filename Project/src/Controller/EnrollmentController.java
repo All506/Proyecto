@@ -11,6 +11,7 @@ import Objects.Course;
 import Objects.Enrollment;
 import Objects.Student;
 import Objects.TimeTable;
+import java.io.IOException;
 import java.net.URL;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
@@ -21,11 +22,18 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.text.Text;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
 
 /**
  * FXML Controller class
@@ -65,6 +73,8 @@ public class EnrollmentController implements Initializable {
     private Button btnEnroll;
     @FXML
     private Button btnCancel;
+    @FXML
+    private BorderPane bpRoot;
 
     /**
      * Initializes the controller class.
@@ -155,15 +165,25 @@ public class EnrollmentController implements Initializable {
 
     @FXML
     private void btnEnroll(ActionEvent event) {
+    if(cmbCourse.getValue().equalsIgnoreCase("Courses")||cmbPeriod.getValue().equalsIgnoreCase("Period")||cmbSchedule.getValue().equalsIgnoreCase("Schedule")){ 
+    
+        callAlert("alert", "¡Incomplete data!", "You must select a period, a schedule and a period");
+        
+    }else{  
         try {
             java.util.Date d = java.sql.Date.valueOf(java.time.LocalDate.now());
             int temp = Util.Utility.getLastEnroll();
             String[] courseId = cmbCourse.getValue().split("-");
             Enrollment newEnroll = new Enrollment(temp+1, d, this.txfStudentID.getText(), courseId[0], cmbSchedule.getValue());
             Util.Utility.setListEnrollment(newEnroll);
+            callAlert("notification", "Notification", "Enrollment completed successfully");
+            loadPage("/UI/enrollmentTable");
+            
         } catch (ListException ex) {
             Logger.getLogger(EnrollmentController.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }
+        
     }
 
     @FXML
@@ -179,4 +199,34 @@ public class EnrollmentController implements Initializable {
 
     }
 
+    private void callAlert(String fxmlName, String title, String text) {
+        //Se llama la alerta
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/UI/" + fxmlName + ".fxml"));
+            Parent root1;
+            root1 = (Parent) loader.load();
+            //Se llama al controller de la nueva ventana abierta
+            AlertController controller = loader.getController();
+            Stage stage = new Stage();
+            stage.initModality(Modality.APPLICATION_MODAL);
+            stage.setTitle("Alerta");
+            //Se le asigna la información a la controladora
+            controller.setText(title, text);
+            stage.setScene(new Scene(root1));
+            stage.show();
+        } catch (IOException ex) {
+            Logger.getLogger(LogInController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+     private void loadPage(String pageName) {
+        Parent root = null;
+        try {
+            root = FXMLLoader.load(getClass().getResource(pageName + ".fxml"));
+
+        } catch (IOException ex) {
+            Logger.getLogger(EnrollmentTableController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        bpRoot.setCenter(root);
+    } // Fin método Load Page
 }
