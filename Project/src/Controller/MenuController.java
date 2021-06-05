@@ -197,7 +197,6 @@ public class MenuController implements Initializable {
             } catch (ListException ex) {
                 Logger.getLogger(MenuController.class.getName()).log(Level.SEVERE, null, ex);
             }
-            System.out.println("Lista en util \n " + Util.Utility.getListCareer().toString());
         }
 
         //Carga y desencripta los cursos
@@ -210,7 +209,6 @@ public class MenuController implements Initializable {
             } catch (ListException ex) {
                 Logger.getLogger(MenuController.class.getName()).log(Level.SEVERE, null, ex);
             }
-            System.out.println("Lista en util \n " + Util.Utility.getListCourse().toString());
         }
 
         //Carga y desencripta los cursos
@@ -225,7 +223,6 @@ public class MenuController implements Initializable {
             } catch (ListException ex) {
                 Logger.getLogger(MenuController.class.getName()).log(Level.SEVERE, null, ex);
             }
-            System.out.println("Lista en util \n " + Util.Utility.getListSchedule().toString());
         }
 
         //Carga los cursos
@@ -238,7 +235,6 @@ public class MenuController implements Initializable {
             } catch (ListException ex) {
                 Logger.getLogger(MenuController.class.getName()).log(Level.SEVERE, null, ex);
             }
-            System.out.println("Lista en util \n " + Util.Utility.getListCourse().toString());
         }
 
         //Carga los Enrollments
@@ -251,11 +247,10 @@ public class MenuController implements Initializable {
             } catch (ListException ex) {
                 Logger.getLogger(MenuController.class.getName()).log(Level.SEVERE, null, ex);
             }
-            System.out.println("Lista en util \n " + Util.Utility.getListEnrollment().toString());
+
 
             //Cargar el lastId de enrollments
             Util.Utility.setLastEnroll(fXML.getLastEnroll());
-            System.out.println("El last id de enroll es: " + Util.Utility.getLastEnroll());
         } else {
             Util.Utility.setLastEnroll(0);
         }
@@ -270,11 +265,9 @@ public class MenuController implements Initializable {
             } catch (ListException ex) {
                 Logger.getLogger(MenuController.class.getName()).log(Level.SEVERE, null, ex);
             }
-            System.out.println("Lista en util \n " + Util.Utility.getListDeEnrollment().toString());
 
             //Cargar el lastId de enrollments
             Util.Utility.setLastDeEnroll(fXML.getLastDeEnroll());
-            System.out.println("El last id de enroll es: " + Util.Utility.getLastDeEnroll());
         } else {
             Util.Utility.setLastDeEnroll(0);
         }
@@ -426,7 +419,7 @@ public class MenuController implements Initializable {
                 Security sec = (Security) lSecurity.getNode(i).data;
                 //Se encripta la información y se guarda
                 Security encSec = new Security(encrypt.encrypt(sec.getUser(), "Proyecto"), encrypt.encrypt(sec.getPassword(), "Proyecto"));
-                System.out.println("Encriptado: " + encSec.toString());
+
                 try {
                     fXML.writeXML("Security.xml", "User", encSec.dataName(), encSec.data());
                 } catch (TransformerException ex) {
@@ -539,7 +532,6 @@ public class MenuController implements Initializable {
 
     @FXML
     private void btnLogOut(ActionEvent event) {
-        System.out.println("Clic en logout");
         try {
             saveData(); //Se almacena la información de las listas en XMLs
         } catch (ListException ex) {

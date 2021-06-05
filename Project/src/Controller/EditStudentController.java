@@ -202,7 +202,6 @@ public class EditStudentController implements Initializable {
             if (Util.Utility.emailChecker(txtEmail.getText())) {//Check the correct email
                 Util.Utility.getListStudents().remove(std);
                 Util.Utility.setListStudent(std);
-                System.out.println("Lista Util " + Util.Utility.getListStudents().toString());
                 
                 callAlert("notification", "Notification", "The Student was update");
             } else {

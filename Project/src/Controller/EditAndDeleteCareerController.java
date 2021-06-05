@@ -97,7 +97,6 @@ public class EditAndDeleteCareerController implements Initializable {
         } else {
             callAlert("alert", "Career Not Deleted", "Career cannot been deleted");
         }
-        System.out.println(Util.Utility.getListCareer().toString());
         //Arreglar
         loadComboBoxCareers();
     }
@@ -176,7 +175,6 @@ public class EditAndDeleteCareerController implements Initializable {
     @FXML
     private void cmbCareers(ActionEvent event) throws ListException {
         String[] valueSelected = cmbCareers.getValue().split("-");
-        System.out.println("valorseleccionado id " + valueSelected[0]);
         Career c = new Career(Integer.parseInt(valueSelected[0]), valueSelected[1]);
         int temp = Util.Utility.getListCareer().indexOf(c); //Se obtiene el nodo de la carrera en la lista
         c = (Career) Util.Utility.getListCareer().getNode(temp).data;

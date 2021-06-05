@@ -78,7 +78,6 @@ public class NewCareerController implements Initializable {
         Career car = new Career(Integer.parseInt(txtCareerId.getText()),txtDescription.getText());
         if (Util.Utility.setListCareer(car)){
             callAlert("notification","Notification","Career has been saved");
-            System.out.println(Util.Utility.getListCareer().toString());
         } else {
             callAlert("alert","Error","Description is already in registered");
         }

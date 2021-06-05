@@ -56,7 +56,6 @@ public class NewUserController implements Initializable {
             Security sec = new Security(txtUser.getText(),txtPassword.getText());
             Util.Utility.setListSecurity(sec);
             callAlert("notification","New user has been added","New User has been registered");
-            System.out.println(Util.Utility.getListSecurity().toString());
         }
     }
 

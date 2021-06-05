@@ -160,9 +160,7 @@ public class EnrollmentController implements Initializable {
             int temp = Util.Utility.getLastEnroll();
             String[] courseId = cmbCourse.getValue().split("-");
             Enrollment newEnroll = new Enrollment(temp+1, d, this.txfStudentID.getText(), courseId[0], cmbSchedule.getValue());
-            System.out.println("El enroll a registrar es: " + newEnroll.toString());
             Util.Utility.setListEnrollment(newEnroll);
-            System.out.println(Util.Utility.getListEnrollment().toString());
         } catch (ListException ex) {
             Logger.getLogger(EnrollmentController.class.getName()).log(Level.SEVERE, null, ex);
         }

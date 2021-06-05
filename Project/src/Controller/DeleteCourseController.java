@@ -160,8 +160,6 @@ public class DeleteCourseController implements Initializable {
             for (int i = listTodelete.indexOf(listTodelete.getFirst()); i <= listTodelete.size(); i++) {
                 Course f = (Course)listTodelete.getNode(i).data;
                 String sample = f.getId();
-                System.out.println(i + "Vuelta: " + Util.Utility.getIDofString(this.cmbAvailableCourses.getValue()));
-                System.out.println("f.getID" + sample);
                 if(!Util.Utility.getIDofString(this.cmbAvailableCourses.getValue()).equals(sample)){
                     listToSend.add(f);
                 }

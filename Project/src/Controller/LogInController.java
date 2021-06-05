@@ -71,7 +71,6 @@ public class LogInController implements Initializable {
             } catch (ListException ex) {
                 Logger.getLogger(MenuController.class.getName()).log(Level.SEVERE, null, ex);
             }
-            System.out.println("Lista en util \n " + Util.Utility.getListSecurity().toString());
         }
 
         //Se carga la lista desde el xml
@@ -86,7 +85,6 @@ public class LogInController implements Initializable {
             } catch (ListException ex) {
                 Logger.getLogger(MenuController.class.getName()).log(Level.SEVERE, null, ex);
             }
-            System.out.println("La lista de estudiantes es \n" + lStudentsPass.toString());
         }
     }
 
