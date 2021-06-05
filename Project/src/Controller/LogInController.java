@@ -87,6 +87,7 @@ public class LogInController implements Initializable {
                 Logger.getLogger(MenuController.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
+        
     }
 
     @FXML

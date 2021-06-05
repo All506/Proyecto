@@ -19,20 +19,24 @@ import Objects.Student;
 import Objects.TimeTable;
 import PDF.FilePDF;
 import Security.AES;
+import UI.mainFx;
 import XML.FileXML;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuItem;
+import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Modality;
@@ -108,6 +112,8 @@ public class MenuController implements Initializable {
     private MenuItem reportStudent;
     @FXML
     private MenuItem reportCourses;
+    @FXML
+    private Button btnIgnore;
 
     /**
      * Initializes the controller class.
@@ -531,14 +537,19 @@ public class MenuController implements Initializable {
     }
 
     @FXML
-    private void btnLogOut(ActionEvent event) {
+    private void btnLogOut(ActionEvent event) throws IOException, Exception {
         try {
             saveData(); //Se almacena la información de las listas en XMLs
         } catch (ListException ex) {
             Logger.getLogger(MenuController.class.getName()).log(Level.SEVERE, null, ex);
         }
         
-        loadPage("/UI/LogIn");
+        
+        //--------------------------------------------------------------------------------
+        Stage stage = (Stage)this.btnIgnore.getScene().getWindow();
+        mainFx m = new mainFx();
+        m.start(stage);
+        //--------------------------------------------------------------------------------
         
     }
 
@@ -602,7 +613,11 @@ public class MenuController implements Initializable {
         } else if (Util.Utility.getCoursesByCarrerID("" + (Util.Utility.getUserStudent().getCareerID())).isEmpty()) {
             callAlert("alert", "Attention!", "You do not have enrolled courses");
         } else {
-            loadPage("/UI/DeEnrollment");
+            if(!Util.Utility.getEnrollmentOfStudentId().isEmpty()){
+                loadPage("/UI/DeEnrollment");
+            }else{
+                callAlert("alert", "Attention!", "You do not have enrolled courses");
+            }
         }
     }
 

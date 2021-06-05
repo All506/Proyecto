@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Menu?>
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuItem?>
@@ -63,6 +64,9 @@
             <Blend />
          </effect>
       </MenuBar>
-      <BorderPane fx:id="bpMenu" layoutX="27.0" layoutY="33.0" prefHeight="372.0" prefWidth="666.0" />
+      <BorderPane fx:id="bpMenu" layoutX="27.0" layoutY="33.0" prefHeight="372.0" prefWidth="666.0">
+         <bottom>
+            <Button fx:id="btnIgnore" disable="true" mnemonicParsing="false" text="Ignorar No borrar " visible="false" BorderPane.alignment="CENTER" />
+         </bottom></BorderPane>
    </children>
 </AnchorPane>
