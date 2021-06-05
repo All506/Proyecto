@@ -538,7 +538,7 @@ public class MenuController implements Initializable {
             Logger.getLogger(MenuController.class.getName()).log(Level.SEVERE, null, ex);
         }
         
-        
+        loadPage("/UI/LogIn");
         
     }
 
