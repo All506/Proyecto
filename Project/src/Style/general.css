@@ -32,7 +32,7 @@ COLOR GIRS CLARO: #adadad*/
     -fx-background-color: #7A7A7A;
     -fx-text-fill: #000000;
     -fx-pref-height: 0px;
-    -fx-translate-y: 0px;    
+
 }
 
 
@@ -41,7 +41,6 @@ COLOR GIRS CLARO: #adadad*/
     -fx-background-color: #4387E3;
     -fx-text-fill: white;
     -fx-pref-height: 0px;
-    -fx-translate-y: 0px; 
     -fx-alignment: CENTER;
     -fx-prompt-text-fill: #E1E6F2;
 

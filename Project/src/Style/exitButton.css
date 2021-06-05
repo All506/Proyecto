@@ -1,0 +1,21 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 5 jun. 2021, 14:56:42
+    Author     : <Sebastián Navarro Martínez (C05510)>
+*/
+
+.button{
+    -fx-font: 15px "Lucida Fax";
+    -fx-alignment: CENTER;
+    -fx-background-color: #830101;
+    -fx-text-fill: #F3DE00;
+    -fx-font-size:7;
+}
+
+.button:hover {
+    -fx-background-color: #580000;
+}

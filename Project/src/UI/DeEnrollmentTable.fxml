@@ -5,17 +5,19 @@
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
 <BorderPane fx:id="bpRoot" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.DeEnrollmentTableController">
-   <center>
-      <AnchorPane id="AnchorPane" prefHeight="360.0" prefWidth="650.0" styleClass="mainFxmlClass">
+   <bottom>
+      <AnchorPane id="AnchorPane" prefHeight="360.0" prefWidth="650.0" styleClass="mainFxmlClass" BorderPane.alignment="CENTER">
           <stylesheets>
               <URL value="@/Style/general.css" />
           </stylesheets>
          <children>
-            <TableView fx:id="tblStudents" editable="true" layoutX="70.0" layoutY="38.0" prefHeight="308.0" prefWidth="528.0">
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#1f93ff00" height="30.0" layoutX="196.0" layoutY="14.0" stroke="#00ae23" strokeType="INSIDE" width="271.0" />
+            <TableView fx:id="tblStudents" editable="true" layoutX="70.0" layoutY="53.0" prefHeight="280.0" prefWidth="528.0">
               <columns>
                 <TableColumn fx:id="colStudID" prefWidth="83.99999809265137" text="Student ID" />
                 <TableColumn fx:id="colLastName" prefWidth="162.39997100830078" text="Last Name" />
@@ -23,11 +25,16 @@
                   <TableColumn fx:id="colPersID" prefWidth="143.99990844726562" text="Personal ID" />
               </columns>
             </TableView>
-            <Text fill="#c9cd00" layoutX="182.0" layoutY="30.0" strokeType="OUTSIDE" strokeWidth="0.0" text="[Double click on a student to DE-ENROLL]" textAlignment="CENTER" wrappingWidth="303.114501953125">
+            <Text fill="#c9cd00" layoutX="182.0" layoutY="346.0" strokeType="OUTSIDE" strokeWidth="0.0" text="[Double click on a student to DE-ENROLL]" textAlignment="CENTER" wrappingWidth="303.114501953125">
                <font>
                   <Font name="Consolas" size="12.0" />
                </font></Text>
+            <Text fill="#00ae23" layoutX="191.0" layoutY="38.0" strokeType="OUTSIDE" strokeWidth="0.0" text="De-Enrollment Table" textAlignment="CENTER" wrappingWidth="285.6109619140625">
+               <font>
+                  <Font name="Lucida Bright" size="25.0" />
+               </font>
+            </Text>
          </children>
       </AnchorPane>
-   </center>
+   </bottom>
 </BorderPane>

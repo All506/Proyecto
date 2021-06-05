@@ -1,14 +1,14 @@
 .menu-bar {
-    -fx-background-color: #434343;
-    -fx-border-width: 1.0;
-
+    -fx-background-color: #545454;
+    -fx-border-width: 0.6;
+    -fx-alignment: CENTER;
 }
 .menu-bar .label {
-    -fx-font-size: 14.0 pt;
+
+    -fx-font-size: 15 pt;
     -fx-text-fill: white;
     -fx-font-weight: bold; 
     -fx-padding: 5.0px;
-
 }
 .menu-bar .menu-button:hover, .menu-bar .menu-button:focused, .menu-bar .menu-button:showing {
     -fx-background: #48A539;
@@ -17,20 +17,19 @@
 }
 
 .menu-bar .menu-item:hover{
-    -fx-background: #2FA322;
+    -fx-background: #0B5577;
     -fx-text-fill: white;
     -fx-opacity: 0.95;
-    
 }
 
 .menu-item {
     -fx-padding: 0.0em 0.0em 0.0em 0.0em;
     -fx-text-fill: black;
-    -fx-background: #ADADAD ;
+    -fx-background: #0B7738;
 }
 .menu-item .label{
     -fx-font-size: 14.0 pt;
-    -fx-text-fill: #474747;
+    -fx-text-fill: white;
 }
 .menu-item .label:hover{
     -fx-font-size: 14.0 pt;
@@ -39,8 +38,8 @@
 }
 .context-menu {
     -fx-skin: "com.sun.javafx.scene.control.skin.ContextMenuSkin";
-    -fx-background-color:#DBDBDB;
+    -fx-background-color:#0B7738;
+    -fx-text-fill: white;
     -fx-border-width: 0.2px;
     -fx-border-color: black;
 }
-

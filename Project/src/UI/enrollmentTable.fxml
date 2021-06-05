@@ -5,6 +5,7 @@
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
@@ -15,7 +16,7 @@
               <URL value="@/Style/general.css" />
           </stylesheets>
          <children>
-            <TableView fx:id="tblStudents" editable="true" layoutX="70.0" layoutY="38.0" prefHeight="308.0" prefWidth="528.0">
+            <TableView fx:id="tblStudents" editable="true" layoutX="70.0" layoutY="53.0" prefHeight="274.0" prefWidth="528.0">
               <columns>
                 <TableColumn fx:id="colStudID" prefWidth="83.99999809265137" text="Student ID" />
                 <TableColumn fx:id="colLastName" prefWidth="162.39997100830078" text="Last Name" />
@@ -23,10 +24,16 @@
                   <TableColumn fx:id="colPersID" prefWidth="143.99990844726562" text="Personal ID" />
               </columns>
             </TableView>
-            <Text fill="#bbe100" layoutX="182.0" layoutY="27.0" strokeType="OUTSIDE" strokeWidth="0.0" text="[Double click on a student to enroll]" textAlignment="CENTER" wrappingWidth="303.114501953125">
+            <Text fill="#bbe100" layoutX="182.0" layoutY="342.0" strokeType="OUTSIDE" strokeWidth="0.0" text="[Double click on a student to enroll]" textAlignment="CENTER" wrappingWidth="303.114501953125">
                <font>
                   <Font name="Consolas" size="12.0" />
                </font></Text>
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#1f93ff00" height="30.0" layoutX="212.0" layoutY="14.0" stroke="#00ae23" strokeType="INSIDE" width="229.0" />
+            <Text fill="#00ae23" layoutX="182.0" layoutY="38.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Enrollment Table" textAlignment="CENTER" wrappingWidth="285.6109619140625">
+               <font>
+                  <Font name="Lucida Bright" size="25.0" />
+               </font>
+            </Text>
          </children>
       </AnchorPane>
    </center>

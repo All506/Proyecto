@@ -28,6 +28,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.paint.Color;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
@@ -50,7 +51,7 @@ public class LogInController implements Initializable {
     private SinglyLinkList lStudents = new SinglyLinkList();
     private CircularLinkList lStudentsPass = new CircularLinkList();
     @FXML
-    private Label labelForImage;
+    private Button btnExit;
 
     /**
      * Initializes the controller class.
@@ -163,4 +164,9 @@ public class LogInController implements Initializable {
         }
     }
 
+    @FXML
+    private void btnExit(ActionEvent event) {
+        Stage stage = (Stage) this.btnExit.getScene().getWindow();
+        stage.close();
+    }
 }
