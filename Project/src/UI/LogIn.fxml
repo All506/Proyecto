@@ -25,7 +25,7 @@
       </Label>
       <TextField fx:id="txtUser" layoutX="230.0" layoutY="209.0" prefHeight="26.0" prefWidth="181.0" promptText="Insert your username" />
       <PasswordField fx:id="txtPassword" layoutX="229.0" layoutY="270.0" prefHeight="37.0" prefWidth="181.0" promptText="Insert your password" />
-      <Button fx:id="btnLogIn" layoutX="279.0" layoutY="321.0" mnemonicParsing="false" onAction="#btnLogIn" prefHeight="29.0" prefWidth="85.0" text="Log In">
+      <Button fx:id="btnLogIn" layoutX="233.0" layoutY="323.0" mnemonicParsing="false" onAction="#btnLogIn" prefHeight="29.0" prefWidth="85.0" text="Log In">
          <font>
             <Font size="14.0" />
          </font>
@@ -45,7 +45,7 @@
             <Image url="@../Resources/eMatriculaLogo.png" />
          </image>
       </ImageView>
-      <Button fx:id="btnExit" layoutX="279.0" layoutY="356.0" mnemonicParsing="false" onAction="#btnExit" prefHeight="29.0" prefWidth="85.0" stylesheets="@../Style/exitButton.css" text="Exit" textFill="#7c0000">
+      <Button fx:id="btnExit" layoutX="320.0" layoutY="323.0" mnemonicParsing="false" onAction="#btnExit" prefHeight="29.0" prefWidth="85.0" stylesheets="@../Style/exitButton.css" text="Exit" textFill="#7c0000">
          <font>
             <Font size="14.0" />
          </font>
