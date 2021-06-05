@@ -505,4 +505,38 @@ public class Utility {
         return flag;
     }
 
+     public static boolean enrollmentExists(Enrollment enr) throws ListException {
+        boolean flag = false;
+        CircularDoublyLinkList list = getListEnrollment();
+          if (list.isEmpty()) {
+            flag = false;
+        } else {
+        for (int i = 1; i <= list.size(); i++) {
+           Enrollment e = (Enrollment)list.getNode(i).data;
+            System.out.println(getPeriodOfStringDate(enr.getDate())+"--"+getPeriodOfStringDate(e.getDate()));
+            if (enr.getStudentID().equalsIgnoreCase(e.getStudentID())&&enr.getCourseID().equalsIgnoreCase(e.getCourseID())&&getPeriodOfStringDate(enr.getDate()).equalsIgnoreCase(getPeriodOfStringDate(e.getDate()))) {
+                return true; 
+            }
+             
+        }
+        
+        }
+        return flag;
+    }
+    public static String getPeriodOfStringDate(Date d) { 
+        String period = "";
+        switch((int)d.getMonth()){
+            case 1: case 2: case 3: case 0:
+                period+=1;
+                break;
+            case 4: case 5: case 6: case 7:
+                period+=2;
+                break;
+            case 8: case 9: case 10: case 11:
+                period+=3;
+                break;
+        }
+        return period+="-"+(d.getYear()+1900);
+    
+    }
 }

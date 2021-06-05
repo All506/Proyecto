@@ -135,10 +135,10 @@ public class EnrollmentController implements Initializable {
             cmbSchedule.getItems().add(t.getSchedule2());
 
 //        cmbPeriod.setValue("1-2020");
-            cmbSchedule.getSelectionModel().select("Schedule");
+            cmbSchedule.getSelectionModel().select("Schedules");
         } else {
             cmbSchedule.getItems().add("Not defined");
-            cmbSchedule.getSelectionModel().select("Schedule");
+            cmbSchedule.getSelectionModel().select("Schedules");
         }
     }
 
@@ -146,7 +146,6 @@ public class EnrollmentController implements Initializable {
         java.util.Date d = java.sql.Date.valueOf(java.time.LocalDate.now());
         //Para cargar un combobox
         String period = "";
-        
         switch((int)d.getMonth()){
             case 1: case 2: case 3: case 0:
                 period+=1;
@@ -164,24 +163,35 @@ public class EnrollmentController implements Initializable {
     }
 
     @FXML
-    private void btnEnroll(ActionEvent event) {
-    if(cmbCourse.getValue().equalsIgnoreCase("Courses")||cmbPeriod.getValue().equalsIgnoreCase("Period")||cmbSchedule.getValue().equalsIgnoreCase("Schedule")){ 
+    private void btnEnroll(ActionEvent event) throws ListException {
+    if(cmbCourse.getValue().equalsIgnoreCase("Courses")||cmbPeriod.getValue().equalsIgnoreCase("Period")||cmbSchedule.getValue().equalsIgnoreCase("Schedules")){ 
     
         callAlert("alert", "¡Incomplete data!", "You must select a period, a schedule and a period");
         
-    }else{  
-        try {
-            java.util.Date d = java.sql.Date.valueOf(java.time.LocalDate.now());
-            int temp = Util.Utility.getLastEnroll();
-            String[] courseId = cmbCourse.getValue().split("-");
-            Enrollment newEnroll = new Enrollment(temp+1, d, this.txfStudentID.getText(), courseId[0], cmbSchedule.getValue());
-            Util.Utility.setListEnrollment(newEnroll);
-            callAlert("notification", "Notification", "Enrollment completed successfully");
-            loadPage("/UI/enrollmentTable");
-            
-        } catch (ListException ex) {
-            Logger.getLogger(EnrollmentController.class.getName()).log(Level.SEVERE, null, ex);
-        }
+    }else{
+        java.util.Date d = java.sql.Date.valueOf(java.time.LocalDate.now());
+        int temp = Util.Utility.getLastEnroll();
+        String[] courseId = cmbCourse.getValue().split("-");
+        Enrollment newEnroll = new Enrollment(temp+1, d, this.txfStudentID.getText(), courseId[0], cmbSchedule.getValue());
+                
+        if(Util.Utility.enrollmentExists(newEnroll)){
+            callAlert("alert", "¡Could not enroll!", "The student already has \nthis course enrolled.");
+        }else{
+        
+            try {
+//                java.util.Date d = java.sql.Date.valueOf(java.time.LocalDate.now());
+//                int temp = Util.Utility.getLastEnroll();
+//                String[] courseId = cmbCourse.getValue().split("-");
+//                Enrollment newEnroll = new Enrollment(temp+1, d, this.txfStudentID.getText(), courseId[0], cmbSchedule.getValue());
+                Util.Utility.setListEnrollment(newEnroll);
+                callAlert("notification", "Notification", "Enrollment completed successfully");
+                loadPage("/UI/enrollmentTable");
+
+            } catch (ListException ex) {
+                Logger.getLogger(EnrollmentController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        
+      }
     }
         
     }
