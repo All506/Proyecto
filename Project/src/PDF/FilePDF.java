@@ -10,7 +10,9 @@ import Domain.DoublyLinkList;
 import Domain.SinglyLinkList;
 import Objects.Career;
 import Objects.Course;
+import Objects.Enrollment;
 import Objects.Student;
+import Objects.TimeTable;
 import com.itextpdf.text.BadElementException;
 import com.itextpdf.text.BaseColor;
 import com.itextpdf.text.Chunk;
@@ -28,6 +30,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.net.URISyntaxException;
 import java.nio.file.Files;
+import static java.nio.file.Files.list;
 import java.nio.file.Paths;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -162,22 +165,66 @@ public class FilePDF {
         parrafo.add("\n\nRegistered Courses\n\n");
         document.add(parrafo);
 
-        //Tabla
-        PdfPTable table = new PdfPTable(4);//Columnas y nombres
-        table.addCell("Identification");
-        table.addCell("Name");
-        table.addCell("Credits");
-        table.addCell("Career ID");
+        java.util.Date d = java.sql.Date.valueOf(java.time.LocalDate.now());
 
         try {
             for (int i = 1; i <= list.size(); i++) {
+                Paragraph parrafo1 = new Paragraph();
+                TimeTable temp = new TimeTable();
                 Course course = (Course) list.getNode(i).data;
-                table.addCell(String.valueOf(course.getId()));
-                table.addCell(course.getName());
-                table.addCell(String.valueOf(course.getCredits()));
-                table.addCell( Util.Utility.getCarrerByID(String.valueOf(course.getCareerId())).getDescription());
+                System.out.println(course.toString());
+                parrafo1.add("\nIdentification: " + String.valueOf(course.getId()));
+                parrafo1.add("\nName: " + course.getName());
+                parrafo1.add("\nCredits: " + String.valueOf(course.getCredits()));
+                parrafo1.add("\nCareer ID: " + Util.Utility.getCarrerByID(String.valueOf(course.getCareerId())).getDescription());
+                temp = Util.Utility.getScheduleByCourseID(course.getId(), Util.Utility.getPeriodOfStringDate(d));
+                if (temp != null) {
+                    parrafo1.add("\nShedules: " + temp.toString());
+                } else {
+                    parrafo1.add("\nNo Shedule Defined...");
+                }
+                parrafo1.add("\n----------------------------------------");
+                document.add(parrafo1);
             }
-            document.add(table);//Agrega la tabla al documento
+
+        } catch (Exception e) {
+        }
+
+        //Importante cerrar el pdf
+        document.close();
+    }
+
+    public void enrollmentPDF(String fileName, CircularDoublyLinkList list) throws FileNotFoundException, DocumentException, BadElementException, URISyntaxException, IOException {
+        FileOutputStream file = new FileOutputStream(fileName + ".pdf");
+        Document document = new Document();
+        PdfWriter.getInstance(document, file);
+
+        //Instancia para poder hacer la img, importante poner la imagen en la carpeta img
+        Image header = Image.getInstance("src/img/logo-ucr.png");
+        header.scaleToFit(150, 250);
+        header.setAlignment(Chunk.ALIGN_CENTER);
+        //Se abre el documento para poder escribir en el
+        document.open();
+        document.add(header);//Se agrega la img
+
+        Paragraph parrafo = new Paragraph();
+        parrafo.setAlignment(Paragraph.ALIGN_CENTER);
+        parrafo.setFont(FontFactory.getFont("Tahoma", 18, Font.BOLD, BaseColor.BLACK));
+        parrafo.add("\n\nRegistered Enrollments \n\n");
+        document.add(parrafo);
+        
+        try {
+            for (int i = 1; i <= list.size(); i++) {
+                Paragraph parrafo1 = new Paragraph();
+                Enrollment enrollment = (Enrollment) list.getNode(i).data;
+                parrafo1.add("\nIdentification: " + enrollment.getId());
+                parrafo1.add("\nDate: " + enrollment.getDate());
+                parrafo1.add("\nStudent Id: " + enrollment.getStudentID());
+                parrafo1.add("\nCourse Id: " + enrollment.getCourseID());
+                parrafo1.add("\nShedule: " + enrollment.getSchedule());
+                parrafo1.add("\n----------------------------------------");
+                document.add(parrafo1);
+            }
 
         } catch (Exception e) {
         }
@@ -187,5 +234,5 @@ public class FilePDF {
     }
 
     
-
+    
 }//end class

@@ -10,14 +10,13 @@ package Objects;
  * @author Luis Gabriel, Sebastián y Alina
  */
 public class TimeTable {
-    
-    
+
     //Atributes
     private String ID;
     private String period;
     private String schedule1;
     private String schedule2;
-    
+
     //Constructor
     public TimeTable(String ID, String period, String schedule1, String schedule2) {
         this.ID = ID;
@@ -25,7 +24,10 @@ public class TimeTable {
         this.schedule1 = schedule1;
         this.schedule2 = schedule2;
     }
-    
+
+    public TimeTable() {
+    }
+
     //Setters and getters
     public String getID() {
         return ID;
@@ -34,9 +36,8 @@ public class TimeTable {
     public void setID(String ID) {
         this.ID = ID;
     }
-    
-    //- - - - - - - - - - - -- - - - - - - -- - -- - - - -- - -
 
+    //- - - - - - - - - - - -- - - - - - - -- - -- - - - -- - -
     public String getPeriod() {
         return period;
     }
@@ -44,9 +45,8 @@ public class TimeTable {
     public void setPeriod(String period) {
         this.period = period;
     }
-    
-    //- - - - - - - - - - - -- - - - - - - -- - -- - - - -- - -
 
+    //- - - - - - - - - - - -- - - - - - - -- - -- - - - -- - -
     public String getSchedule1() {
         return schedule1;
     }
@@ -56,8 +56,6 @@ public class TimeTable {
     }
 
     //- - - - - - - - - - - -- - - - - - - -- - -- - - - -- - -
-
-    
     public String getSchedule2() {
         return schedule2;
     }
@@ -67,23 +65,19 @@ public class TimeTable {
     }
 
     //- - - - - - - - - - - -- - - - - - - -- - -- - - - -- - -
-
     @Override
     public String toString() {
-        return "TimeTable{" + "ID=" + ID + ", period=" + period + ", schedule1=" + schedule1 + ", schedule2=" + schedule2 + '}';
+        return "Shedule 1: "+ schedule1 + " , Shedule 2: " + schedule2;
     }
-    
-    
-    public String[] dataName(){
-        String[] dataName = {"id","period","schedule1","schedule2"};
+
+    public String[] dataName() {
+        String[] dataName = {"id", "period", "schedule1", "schedule2"};
         return dataName;
     }
-    
-    public String[] data(){
-        String [] data = {this.getID(),this.getPeriod(),this.schedule1,this.schedule2};
+
+    public String[] data() {
+        String[] data = {this.getID(), this.getPeriod(), this.schedule1, this.schedule2};
         return data;
     }
-    
+
 }
-
-

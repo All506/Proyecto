@@ -114,6 +114,10 @@ public class MenuController implements Initializable {
     private MenuItem reportCourses;
     @FXML
     private Button btnIgnore;
+    @FXML
+    private MenuItem reportEnrollment;
+    @FXML
+    private MenuItem reportDeEnrollment;
 
     /**
      * Initializes the controller class.
@@ -253,7 +257,6 @@ public class MenuController implements Initializable {
             } catch (ListException ex) {
                 Logger.getLogger(MenuController.class.getName()).log(Level.SEVERE, null, ex);
             }
-
 
             //Cargar el lastId de enrollments
             Util.Utility.setLastEnroll(fXML.getLastEnroll());
@@ -540,17 +543,17 @@ public class MenuController implements Initializable {
     private void btnLogOut(ActionEvent event) throws IOException, Exception {
         try {
             saveData(); //Se almacena la información de las listas en XMLs
+            deletePDF(); //Elimina los pdf creados para que no haya ningun malentendido con los datos
         } catch (ListException ex) {
             Logger.getLogger(MenuController.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
-        
+
         //--------------------------------------------------------------------------------
-        Stage stage = (Stage)this.btnIgnore.getScene().getWindow();
+        Stage stage = (Stage) this.btnIgnore.getScene().getWindow();
         mainFx m = new mainFx();
         m.start(stage);
         //--------------------------------------------------------------------------------
-        
+
     }
 
     private void configMenu() {
@@ -613,9 +616,9 @@ public class MenuController implements Initializable {
         } else if (Util.Utility.getCoursesByCarrerID("" + (Util.Utility.getUserStudent().getCareerID())).isEmpty()) {
             callAlert("alert", "Attention!", "You do not have enrolled courses");
         } else {
-            if(!Util.Utility.getEnrollmentOfStudentId().isEmpty()){
+            if (!Util.Utility.getEnrollmentOfStudentId().isEmpty()) {
                 loadPage("/UI/DeEnrollment");
-            }else{
+            } else {
                 callAlert("alert", "Attention!", "You do not have enrolled courses");
             }
         }
@@ -683,6 +686,61 @@ public class MenuController implements Initializable {
             } else {
                 pdf.deleteFile("Report Courses");
                 pdf.coursePDF(pdfName, Util.Utility.getListCourse());
+            }
+        } catch (Exception e) {
+            System.out.println("Error: " + e);
+        }
+    }
+
+    @FXML
+    private void reportEnrollment(ActionEvent event) {
+        String pdfName = "Report Enrollments";
+        FilePDF pdf = new FilePDF();
+        try {
+            if (!pdf.exist(pdfName)) {
+                pdf.enrollmentPDF(pdfName, Util.Utility.getListEnrollment());
+            } else {
+                pdf.deleteFile("Report Enrollments");
+                pdf.enrollmentPDF(pdfName, Util.Utility.getListEnrollment());
+            }
+        } catch (Exception e) {
+            System.out.println("Error: " + e);
+        }
+    }
+
+    @FXML
+    private void reportDeEnrollment(ActionEvent event) {
+        String pdfName = "Report DeEnrollments";
+        FilePDF pdf = new FilePDF();
+        try {
+            if (!pdf.exist(pdfName)) {
+//                pdf.coursePDF(pdfName, Util.Utility.getListCourse());
+            } else {
+                pdf.deleteFile("Report DeEnrollments");
+//                pdf.coursePDF(pdfName, Util.Utility.getListCourse());
+            }
+        } catch (Exception e) {
+            System.out.println("Error: " + e);
+        }
+    }
+
+    private void deletePDF() {
+        FilePDF pdf = new FilePDF();
+        try {
+            if (pdf.exist("Report Students")) {
+                pdf.deleteFile("Report Students");
+            }
+            if (pdf.exist("Report Careers")) {
+                pdf.deleteFile("Report Careers");
+            }
+            if (pdf.exist("Report Courses")) {
+                pdf.deleteFile("Report Courses");
+            }
+            if (pdf.exist("Report Enrollments")) {
+                pdf.deleteFile("Report Enrollments");
+            }
+            if (pdf.exist("Report DeEnrollments")) {
+                pdf.deleteFile("Report DeEnrollments");
             }
         } catch (Exception e) {
             System.out.println("Error: " + e);

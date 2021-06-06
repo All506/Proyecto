@@ -51,6 +51,8 @@
                   <MenuItem fx:id="reportCareer" mnemonicParsing="false" onAction="#reportCareer" text="Report Careers" />
                   <MenuItem fx:id="reportStudent" mnemonicParsing="false" onAction="#reportStudent" text="Report Students" />
                   <MenuItem fx:id="reportCourses" mnemonicParsing="false" onAction="#reportCourses" text="Report Courses" />
+                  <MenuItem fx:id="reportEnrollment" mnemonicParsing="false" onAction="#reportEnrollment" text="Report Enrollment" />
+                  <MenuItem fx:id="reportDeEnrollment" mnemonicParsing="false" onAction="#reportDeEnrollment" text="Report DeEnrollment" />
                </items>
             </Menu>
             <Menu fx:id="menuUser" mnemonicParsing="false" text="User">
