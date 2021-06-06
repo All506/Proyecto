@@ -7,6 +7,7 @@ package Controller;
 
 import Domain.ListException;
 import Domain.SinglyLinkList;
+import Objects.Career;
 import Objects.Student;
 import java.io.IOException;
 import java.net.URL;
@@ -36,7 +37,7 @@ public class ShowStudentController implements Initializable {
     @FXML
     private TableColumn<Student, Integer> colId;
     @FXML
-    private TableColumn<Student, Integer> colCareerId;
+    private TableColumn<Student, String> colCareerId;
     @FXML
     private TableColumn<Student, String> colFirstName;
     @FXML
@@ -76,7 +77,8 @@ public class ShowStudentController implements Initializable {
                     std = new Student((Student) students.getNode(i).getData());
                     tableStudents.getItems().add(std);
                     this.colId.setCellValueFactory(new PropertyValueFactory<>("id"));
-                    this.colCareerId.setCellValueFactory(new PropertyValueFactory<>("careerID"));
+                    Career career = Util.Utility.getCarrerByID(String.valueOf(std.getCareerID()));
+                    this.colCareerId.setCellValueFactory(c -> new SimpleStringProperty(career.getDescription()));
                     this.colStudentID.setCellValueFactory(new PropertyValueFactory<>("studentID"));
                     this.colLastName.setCellValueFactory(new PropertyValueFactory<>("lastname"));
                     this.colFirstName.setCellValueFactory(new PropertyValueFactory<>("firstname"));

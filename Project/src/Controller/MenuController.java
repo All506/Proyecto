@@ -251,8 +251,10 @@ public class MenuController implements Initializable {
         if (fXML.exist("Enrollments.xml")) {
             lEnrollment = fXML.readXMLtoEnrollmentList();
             try {
-                for (int i = 1; i <= lEnrollment.size(); i++) { //Se añaden los objetos del xml a util
-                    Util.Utility.setListEnrollment((Enrollment) lEnrollment.getNode(i).data);
+                if (!lEnrollment.isEmpty()) {
+                    for (int i = 1; i <= lEnrollment.size(); i++) { //Se añaden los objetos del xml a util
+                        Util.Utility.setListEnrollment((Enrollment) lEnrollment.getNode(i).data);
+                    }
                 }
             } catch (ListException ex) {
                 Logger.getLogger(MenuController.class.getName()).log(Level.SEVERE, null, ex);
@@ -268,8 +270,10 @@ public class MenuController implements Initializable {
         if (fXML.exist("DeEnrollment.xml")) {
             lDeEnrollment = fXML.readXMLtoDeEnrollmentList();
             try {
-                for (int i = 1; i <= lDeEnrollment.size(); i++) { //Se añaden los objetos del xml a util
-                    Util.Utility.setListDeEnrollment((DeEnrollment) lDeEnrollment.getNode(i).data);
+                if (!lDeEnrollment.isEmpty()) {
+                    for (int i = 1; i <= lDeEnrollment.size(); i++) { //Se añaden los objetos del xml a util
+                        Util.Utility.setListDeEnrollment((DeEnrollment) lDeEnrollment.getNode(i).data);
+                    }
                 }
             } catch (ListException ex) {
                 Logger.getLogger(MenuController.class.getName()).log(Level.SEVERE, null, ex);
