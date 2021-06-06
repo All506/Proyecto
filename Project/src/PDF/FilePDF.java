@@ -194,6 +194,7 @@ public class FilePDF {
         document.close();
     }
 
+    //Genera el pdf y escribe lo que queremos
     public void enrollmentPDF(String fileName, CircularDoublyLinkList list) throws FileNotFoundException, DocumentException, BadElementException, URISyntaxException, IOException {
         FileOutputStream file = new FileOutputStream(fileName + ".pdf");
         Document document = new Document();
@@ -233,6 +234,44 @@ public class FilePDF {
         document.close();
     }
 
-    
+    //Genera el pdf para cuando una estudiante ingresa al sistema
+    public void enrollmentStudentPDF(String fileName, Student student) throws FileNotFoundException, DocumentException, BadElementException, URISyntaxException, IOException {
+        FileOutputStream file = new FileOutputStream(fileName + ".pdf");
+        Document document = new Document();
+        PdfWriter.getInstance(document, file);
+
+        //Instancia para poder hacer la img, importante poner la imagen en la carpeta img
+        Image header = Image.getInstance("src/img/logo-ucr.png");
+        header.scaleToFit(150, 250);
+        header.setAlignment(Chunk.ALIGN_CENTER);
+        //Se abre el documento para poder escribir en el
+        document.open();
+        document.add(header);//Se agrega la img
+
+        Paragraph parrafo = new Paragraph();
+        parrafo.setAlignment(Paragraph.ALIGN_CENTER);
+        parrafo.setFont(FontFactory.getFont("Tahoma", 18, Font.BOLD, BaseColor.BLACK));
+        parrafo.add("\n\n Enrollment Student \n\n");
+        document.add(parrafo);
+        
+        try {
+            
+//                Paragraph parrafo1 = new Paragraph();
+//                Enrollment enrollment = (Enrollment) list.getNode(i).data;
+//                parrafo1.add("\nIdentification: " + enrollment.getId());
+//                parrafo1.add("\nDate: " + enrollment.getDate());
+//                parrafo1.add("\nStudent Id: " + enrollment.getStudentID());
+//                parrafo1.add("\nCourse Id: " + enrollment.getCourseID());
+//                parrafo1.add("\nShedule: " + enrollment.getSchedule());
+//                parrafo1.add("\n----------------------------------------");
+//                document.add(parrafo1);
+            
+
+        } catch (Exception e) {
+        }
+
+        //Importante cerrar el pdf
+        document.close();
+    }
     
 }//end class
