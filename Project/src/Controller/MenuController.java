@@ -556,14 +556,15 @@ public class MenuController implements Initializable {
 
     }
 
-    private void configMenu() {
-        if (!Util.Utility.isKindUser()) {
+    private void configMenu() { //Para ocultar los botones del menu Controller
+        if (!Util.Utility.isKindUser()) { //Si el usuario es falso, quien entró es un estudiante
             this.menuCareer.setVisible(false);
             this.menuStudent.setVisible(false);
             this.btnNewUser.setDisable(true);
             this.btnNewUser.setVisible(false);
             this.menuCourse.setVisible(false);
             this.menuSchedules.setVisible(false);
+            this.reportStudent.setVisible(false);
         }
     }
 
