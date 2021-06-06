@@ -255,7 +255,7 @@ public class MenuController implements Initializable {
                     for (int i = 1; i <= lEnrollment.size(); i++) { //Se añaden los objetos del xml a util
                         Util.Utility.setListEnrollment((Enrollment) lEnrollment.getNode(i).data);
                     }
-                }
+                } 
             } catch (ListException ex) {
                 Logger.getLogger(MenuController.class.getName()).log(Level.SEVERE, null, ex);
             }
