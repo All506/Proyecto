@@ -731,7 +731,7 @@ public class MenuController implements Initializable {
         }
     }
 
-    private void deletePDF() {
+    public void deletePDF() {
         FilePDF pdf = new FilePDF();
         try {
             if (pdf.exist("Report Students")) {
