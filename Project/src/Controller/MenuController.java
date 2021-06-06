@@ -540,7 +540,7 @@ public class MenuController implements Initializable {
     }
 
     @FXML
-    private void btnLogOut(ActionEvent event) throws IOException, Exception {
+    public void btnLogOut(ActionEvent event) throws IOException, Exception {
         try {
             saveData(); //Se almacena la información de las listas en XMLs
             deletePDF(); //Elimina los pdf creados para que no haya ningun malentendido con los datos
@@ -564,6 +564,8 @@ public class MenuController implements Initializable {
             this.btnNewUser.setVisible(false);
             this.menuCourse.setVisible(false);
             this.menuSchedules.setVisible(false);
+            this.reportCareer.setVisible(false);
+            this.reportCourses.setVisible(false);
             this.reportStudent.setVisible(false);
         }
     }
