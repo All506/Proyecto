@@ -64,30 +64,37 @@ public class LogInController implements Initializable {
         //Se carga la lista desde el xml
         if (fXML.exist("Security.xml")) {
             lSecurity = fXML.readXMLtoSecurityList();
-            lSecurity.add(new Security("admin", "prueba")); //Usuario de pruebas en caso de que xml no exista
-            try {
-                for (int i = 1; i <= lSecurity.size(); i++) { //Se añaden los objetos del xml a util
-                    Util.Utility.setListSecurity((Security) lSecurity.getNode(i).data);
+            
+            if (!lSecurity.isEmpty()) {
+                try {
+                    for (int i = 1; i <= lSecurity.size(); i++) { //Se añaden los objetos del xml a util
+                        Util.Utility.setListSecurity((Security) lSecurity.getNode(i).data);
+                    }
+                } catch (ListException ex) {
+                    Logger.getLogger(MenuController.class.getName()).log(Level.SEVERE, null, ex);
                 }
-            } catch (ListException ex) {
-                Logger.getLogger(MenuController.class.getName()).log(Level.SEVERE, null, ex);
             }
+            lSecurity.add(new Security("admin", "prueba")); //Usuario de pruebas en caso de que xml no exista
+
         }
 
         //Se carga la lista desde el xml
         if (fXML.exist("Students.xml")) {
             lStudents = fXML.readXMLtoStudentList("Students");
-            try {
-                for (int i = 1; i <= lStudents.size(); i++) { //Se añaden los objetos del xml a util
-                    Student std = (Student) lStudents.getNode(i).data;
-                    Security sec = new Security(String.valueOf(std.getId()), std.getStudentID());
-                    this.lStudentsPass.add(sec);
+            if (!lStudents.isEmpty()) {
+                try {
+                    for (int i = 1; i <= lStudents.size(); i++) { //Se añaden los objetos del xml a util
+                        Student std = (Student) lStudents.getNode(i).data;
+                        Security sec = new Security(String.valueOf(std.getId()), std.getStudentID());
+                        this.lStudentsPass.add(sec);
+                    }
+                } catch (ListException ex) {
+                    Logger.getLogger(MenuController.class.getName()).log(Level.SEVERE, null, ex);
                 }
-            } catch (ListException ex) {
-                Logger.getLogger(MenuController.class.getName()).log(Level.SEVERE, null, ex);
             }
+
         }
-        
+
     }
 
     @FXML
@@ -119,7 +126,7 @@ public class LogInController implements Initializable {
             } else {
                 if (this.lStudentsPass.contains(logUser)) {
                     callMenu("menu");
-                    Util.Utility.setKindUser(false,logUser.getUser());
+                    Util.Utility.setKindUser(false, logUser.getUser());
                 } else {
                     callAlert("alert", "Error", "User and Password is not registered. \n Try with something else");
                 }
@@ -133,11 +140,11 @@ public class LogInController implements Initializable {
         Stage stage = (Stage) this.txtUser.getScene().getWindow();
         stage.close();
         //Se abre el nuevo stage
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/UI/"+fxmlName+".fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/UI/" + fxmlName + ".fxml"));
         Parent root1;
         root1 = (Parent) loader.load();
         //Se llama al controller de la nueva ventana abierta
-        Parent root = FXMLLoader.load(getClass().getResource("/UI/"+fxmlName+".fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("/UI/" + fxmlName + ".fxml"));
         Scene scene = new Scene(root);
         stage.setScene(scene);
         stage.setTitle("Main Menu");

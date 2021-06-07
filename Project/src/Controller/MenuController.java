@@ -190,79 +190,115 @@ public class MenuController implements Initializable {
         FileXML fXML = new FileXML();
         if (fXML.exist("Students.xml")) {
             lStudents = fXML.readXMLtoStudentList("Students");
-            try {
-                for (int i = 1; i <= lStudents.size(); i++) {
-                    Util.Utility.setListStudent((Student) lStudents.getNode(i).data);
+
+            if (!lStudents.isEmpty()) {
+                try {
+                    for (int i = 1; i <= lStudents.size() - 1; i++) {
+                        Util.Utility.setListStudent((Student) lStudents.getNode(i).data);
+                    }
+                } catch (ListException ex) {
+                    Logger.getLogger(MenuController.class.getName()).log(Level.SEVERE, null, ex);
+
+                    try {
+                        for (int i = 1; i <= lStudents.size(); i++) {
+                            Util.Utility.setListStudent((Student) lStudents.getNode(i).data);
 //                    System.out.println(lStudents.getNode(i).data.toString());
+
+                        }
+                    } catch (ListException ex1) {
+                        Logger.getLogger(MenuController.class.getName()).log(Level.SEVERE, null, ex1);
+                    }
+
                 }
-            } catch (ListException ex) {
-                Logger.getLogger(MenuController.class.getName()).log(Level.SEVERE, null, ex);
+
             }
         }
 
         //Se carga la lista de carreras
         if (fXML.exist("Careers.xml")) {
             lCareers = fXML.readXMLtoCareertList();
-            try {
-                for (int i = 1; i <= lCareers.size(); i++) { //Se añaden los objetos del xml a util
-                    Util.Utility.setListCareer((Career) lCareers.getNode(i).data);
+            if (!lCareers.isEmpty()) {
+                try {
+                    for (int i = 1; i <= lCareers.size() - 1; i++) { //Se añaden los objetos del xml a util
+                        Util.Utility.setListCareer((Career) lCareers.getNode(i).data);
+                    }
+                } catch (ListException ex) {
+                    Logger.getLogger(MenuController.class.getName()).log(Level.SEVERE, null, ex);
                 }
-            } catch (ListException ex) {
-                Logger.getLogger(MenuController.class.getName()).log(Level.SEVERE, null, ex);
             }
+
         }
 
         //Carga y desencripta los cursos
         if (fXML.exist("Courses.xml")) {
             lCourse = fXML.readXMLtoCourseList();
-            try {
-                for (int i = 1; i <= lCourse.size(); i++) { //Se añaden los objetos del xml a util
-                    Util.Utility.setListCourse((Course) lCourse.getNode(i).data);
+            if (!lCourse.isEmpty()) {
+                try {
+                    for (int i = 1; i <= lCourse.size() - 1; i++) { //Se añaden los objetos del xml a util
+                        Util.Utility.setListCourse((Course) lCourse.getNode(i).data);
+                    }
+                } catch (ListException ex) {
+                    Logger.getLogger(MenuController.class.getName()).log(Level.SEVERE, null, ex);
                 }
-            } catch (ListException ex) {
-                Logger.getLogger(MenuController.class.getName()).log(Level.SEVERE, null, ex);
             }
+
         }
 
         //Carga y desencripta los cursos
         if (fXML.exist("Schedules.xml")) {
             lSchedules = fXML.readXMLtoScheduleList();
+            if (!lSchedules.isEmpty()) {
+                try {
 
-            try {
-
-                for (int i = 1; i <= lSchedules.size(); i++) { //Se añaden los objetos del xml a util
-                    Util.Utility.setListSchedule((TimeTable) lSchedules.getNode(i).data);
+                    for (int i = 1; i <= lSchedules.size() - 1; i++) { //Se añaden los objetos del xml a util
+                        Util.Utility.setListSchedule((TimeTable) lSchedules.getNode(i).data);
+                    }
+                } catch (ListException ex) {
+                    Logger.getLogger(MenuController.class.getName()).log(Level.SEVERE, null, ex);
                 }
-            } catch (ListException ex) {
-                Logger.getLogger(MenuController.class.getName()).log(Level.SEVERE, null, ex);
             }
+
         }
 
         //Carga los cursos
         if (fXML.exist("Courses.xml")) {
             lCourse = fXML.readXMLtoCourseList();
-            try {
-                for (int i = 1; i <= lCourse.size(); i++) { //Se añaden los objetos del xml a util
-                    Util.Utility.setListCourse((Course) lCourse.getNode(i).data);
+            if (!lCourse.isEmpty()) {
+                try {
+                    for (int i = 1; i <= lCourse.size(); i++) { //Se añaden los objetos del xml a util
+                        Util.Utility.setListCourse((Course) lCourse.getNode(i).data);
+                    }
+                } catch (ListException ex) {
+                    Logger.getLogger(MenuController.class.getName()).log(Level.SEVERE, null, ex);
                 }
-            } catch (ListException ex) {
-                Logger.getLogger(MenuController.class.getName()).log(Level.SEVERE, null, ex);
             }
+
         }
 
         //Carga los Enrollments
         if (fXML.exist("Enrollments.xml")) {
             lEnrollment = fXML.readXMLtoEnrollmentList();
-            try {
+
+            if (!lEnrollment.isEmpty()) {
+                try {
+                    for (int i = 1; i <= lEnrollment.size() - 1; i++) { //Se añaden los objetos del xml a util
+                        Util.Utility.setListEnrollment((Enrollment) lEnrollment.getNode(i).data);
+                    }
+                } catch (ListException ex) {
+                    Logger.getLogger(MenuController.class.getName()).log(Level.SEVERE, null, ex);
+                }
+
+                try {
                     for (int i = 1; i <= lEnrollment.size(); i++) { //Se añaden los objetos del xml a util
                         Util.Utility.setListEnrollment((Enrollment) lEnrollment.getNode(i).data);
                     }
-            } catch (ListException ex) {
-                Logger.getLogger(MenuController.class.getName()).log(Level.SEVERE, null, ex);
-            }
+                } catch (ListException ex) {
+                    Logger.getLogger(MenuController.class.getName()).log(Level.SEVERE, null, ex);
+                }
 
-            //Cargar el lastId de enrollments
-            Util.Utility.setLastEnroll(fXML.getLastEnroll());
+                //Cargar el lastId de enrollments
+                Util.Utility.setLastEnroll(fXML.getLastEnroll());
+            }
         } else {
             Util.Utility.setLastEnroll(0);
         }
@@ -270,19 +306,23 @@ public class MenuController implements Initializable {
         //Carga los DeEnrollments
         if (fXML.exist("DeEnrollment.xml")) {
             lDeEnrollment = fXML.readXMLtoDeEnrollmentList();
-            try {
-                    for (int i = 1; i <= lDeEnrollment.size(); i++) { //Se añaden los objetos del xml a util
+
+            if (!lDeEnrollment.isEmpty()) {
+                try {
+                    for (int i = 1; i <= lDeEnrollment.size() - 1; i++) { //Se añaden los objetos del xml a util
                         Util.Utility.setListDeEnrollment((DeEnrollment) lDeEnrollment.getNode(i).data);
                     }
-            } catch (ListException ex) {
-                Logger.getLogger(MenuController.class.getName()).log(Level.SEVERE, null, ex);
-            }
+                } catch (ListException ex) {
+                    Logger.getLogger(MenuController.class.getName()).log(Level.SEVERE, null, ex);
+                }
 
-            //Cargar el lastId de enrollments
-            Util.Utility.setLastDeEnroll(fXML.getLastDeEnroll());
+                //Cargar el lastId de enrollments
+                Util.Utility.setLastDeEnroll(fXML.getLastDeEnroll());
+            }
         } else {
             Util.Utility.setLastDeEnroll(0);
         }
+
     }
 
     public void saveData() throws ListException {
@@ -299,71 +339,101 @@ public class MenuController implements Initializable {
         //Guardar datos de los estudiantes
         if (!fXML.exist("Students.xml")) { //Si el archivo no existe
             fXML.createXML("StudentsXML", "Students");
-            writeStudents();
+            if (!Util.Utility.getListStudents().isEmpty()) {
+                writeStudents();
+            }
         } else {
             fXML.deleteFile("Students");
             fXML.createXML("StudentsXML", "Students");
-            writeStudents();
+            if (!Util.Utility.getListStudents().isEmpty()) {
+                writeStudents();
+            }
         }
 
         //Guardar datos de las carreras
         if (!fXML.exist("Careers.xml")) { //Si el archivo no existe
             fXML.createXML("CareersXML", "Careers");
-            writeCareers();
+            if (!Util.Utility.getListCareer().isEmpty()) {
+                writeCareers();
+            }
         } else {
             fXML.deleteFile("Careers");
             fXML.createXML("CareersXML", "Careers");
-            writeCareers();
+            if (!Util.Utility.getListCareer().isEmpty()) {
+                writeCareers();
+            }
         }
 
         //Guardar datos encriptados en XML de User
         if (!fXML.exist("Security.xml")) { //Si el archivo no existe
             fXML.createXML("SecurityXML", "Security");
-            writeSecurity();
+            if (!Util.Utility.getListSecurity().isEmpty()) {
+                writeSecurity();
+            }
         } else {
             fXML.deleteFile("Security");
             fXML.createXML("SecurityXML", "Security");
-            writeSecurity();
+            if (!Util.Utility.getListSecurity().isEmpty()) {
+                writeSecurity();
+            }
         }
 
         //Guarda datos de la lista de cursos en XML
         if (!fXML.exist("Courses.xml")) { //Si el archivo no existe
             fXML.createXML("CoursesXML", "Courses");
-            writeCourses();
+            if (!Util.Utility.getListCourse().isEmpty()) {
+                writeCourses();
+            }
         } else {
             fXML.deleteFile("Courses");
             fXML.createXML("CoursesXML", "Courses");
-            writeCourses();
+            if (!Util.Utility.getListCourse().isEmpty()) {
+                writeCourses();
+            }
         }
 
         //Guarda datos de la lista de horarios en XML
         if (!fXML.exist("Schedules.xml")) { //Si el archivo no existe
             fXML.createXML("SchedulesXML", "Schedules");
-            writeSchedules();
+            if (!Util.Utility.getListSchedule().isEmpty()) {
+                writeSchedules();
+            }
         } else {
             fXML.deleteFile("Schedules");
             fXML.createXML("SchedulesXML", "Schedules");
-            writeSchedules();
+            if (!Util.Utility.getListSchedule().isEmpty()) {
+                writeSchedules();
+            }
         }
 
         //Guarda datos de la lista de Enrollment en XML
         if (!fXML.exist("Enrollments.xml")) { //Si el archivo no existe
             fXML.createXML("EnrollmentsXML", "Enrollments");
-            writeEnrollments();
+            if (!Util.Utility.getListEnrollment().isEmpty()) {
+                writeEnrollments();
+            }
         } else {
             fXML.deleteFile("Enrollments");
             fXML.createXML("EnrollmentsXML", "Enrollments");
-            writeEnrollments();
+            if (!Util.Utility.getListEnrollment().isEmpty()) {
+                writeEnrollments();
+            }
+
         }
 
         //Guarda datos de la lista de DeEnrollment en XML
         if (!fXML.exist("DeEnrollment.xml")) { //Si el archivo no existe
             fXML.createXML("DeEnrollmentXML", "DeEnrollment");
-            writeDeEnrollment();
+            if (!Util.Utility.getListDeEnrollment().isEmpty()) {
+                writeDeEnrollment();
+            }
+
         } else {
             fXML.deleteFile("DeEnrollment");
             fXML.createXML("DeEnrollmentXML", "DeEnrollment");
-            writeDeEnrollment();
+            if (!Util.Utility.getListDeEnrollment().isEmpty()) {
+                writeDeEnrollment();
+            }
         }
     }
 
@@ -517,15 +587,16 @@ public class MenuController implements Initializable {
             }
         }
     }
-
+ 
     public void writeDeEnrollment() throws ListException {
         FileXML fXML = new FileXML();
 
         if (Util.Utility.getListDeEnrollment().isEmpty()) {
             if (fXML.exist("DeEnrollment.xml")) {
-                fXML.deleteFile("DeEnrollment.");
+                fXML.deleteFile("DeEnrollment");
             }
         } else {
+
             CircularDoublyLinkList listDeEnrollment = Util.Utility.getListDeEnrollment();
             for (int i = 1; i <= listDeEnrollment.size(); i++) {
                 DeEnrollment enr = (DeEnrollment) listDeEnrollment.getNode(i).data;
@@ -539,6 +610,7 @@ public class MenuController implements Initializable {
                     Logger.getLogger(MenuController.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
+
         }
     }
 
@@ -715,14 +787,14 @@ public class MenuController implements Initializable {
                 }
 
             } else {//Student
-                
+
                 if (!pdf.exist(pdfStudent)) {
                     //pdf.enrollmentPDF(pdfStudent, Util.Utility.getListEnrollment());
                 } else {
                     pdf.deleteFile("Report Student");
                     pdf.enrollmentPDF(pdfStudent, Util.Utility.getListEnrollment());
                 }
-                
+
             }
 
         } catch (DocumentException | IOException | URISyntaxException e) {
