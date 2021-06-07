@@ -177,12 +177,12 @@ public class EnrollmentController implements Initializable {
         if(Util.Utility.enrollmentExists(newEnroll)){
             callAlert("alert", "¡Could not enroll!", "The student already has \nthis course enrolled.");
         }else{
-        
+            if(Util.Utility.scheuleClash(newEnroll.getSchedule())){
+                
+                callAlert("alert", "¡Could not enroll!", "The chosen schedule collides\nwith the schedule of another\nenrolled course");
+                
+            }else{
             try {
-//                java.util.Date d = java.sql.Date.valueOf(java.time.LocalDate.now());
-//                int temp = Util.Utility.getLastEnroll();
-//                String[] courseId = cmbCourse.getValue().split("-");
-//                Enrollment newEnroll = new Enrollment(temp+1, d, this.txfStudentID.getText(), courseId[0], cmbSchedule.getValue());
                 Util.Utility.setListEnrollment(newEnroll);
                 callAlert("notification", "Notification", "Enrollment completed successfully");
                 loadPage("/UI/enrollmentTable");
@@ -190,7 +190,7 @@ public class EnrollmentController implements Initializable {
             } catch (ListException ex) {
                 Logger.getLogger(EnrollmentController.class.getName()).log(Level.SEVERE, null, ex);
             }
-        
+            }
       }
     }
         

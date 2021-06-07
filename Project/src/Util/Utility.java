@@ -538,4 +538,36 @@ public class Utility {
         return period+="-"+(d.getYear()+1900);
     
     }
+    
+    public static Boolean scheuleClash(String schedule) throws ListException { 
+       SinglyLinkList list = getEnrollmentOfStudentId();
+       if(!list.isEmpty()){
+        for (int i = 1; i <= list.size(); i++){
+            Enrollment enr =(Enrollment)list.getNode(i).data;
+            String h1="";  
+            String d1=enr.getSchedule().substring(0, 3);
+            String d2=schedule.substring(0, 3);
+            int i1 = Integer.parseInt(enr.getSchedule().substring(4, 6));
+            int f1 = Integer.parseInt(enr.getSchedule().substring(7, 9));
+            int i2 = Integer.parseInt(schedule.substring(4, 6));
+            int f2 = Integer.parseInt(schedule.substring(7, 9));
+            
+            for (int j = i1; j < f1; j++) {
+                h1+=j;
+            }
+
+            for (int k = i2; k < f2; k++) {
+                if(h1.contains(""+k)&&d1.equalsIgnoreCase(d2)){  
+                    return true;
+                }
+            }
+            
+          }
+       }
+      
+        return false;
+        
+    }
+    
 }
+
