@@ -10,6 +10,7 @@ import Domain.DoublyLinkList;
 import Domain.SinglyLinkList;
 import Objects.Career;
 import Objects.Course;
+import Objects.DeEnrollment;
 import Objects.Enrollment;
 import Objects.Student;
 import Objects.TimeTable;
@@ -221,7 +222,7 @@ public class FilePDF {
                 parrafo1.add("\nIdentification: " + enrollment.getId());
                 parrafo1.add("\nDate: " + enrollment.getDate());
                 parrafo1.add("\nStudent Id: " + enrollment.getStudentID());
-                parrafo1.add("\nCourse Id: " + enrollment.getCourseID());
+                parrafo1.add("\nCourse Id: " + enrollment.getCourseID()+ " - " + Util.Utility.getCourseByID(enrollment.getCourseID()));
                 parrafo1.add("\nShedule: " + enrollment.getSchedule());
                 parrafo1.add("\n----------------------------------------");
                 document.add(parrafo1);
@@ -234,6 +235,47 @@ public class FilePDF {
         document.close();
     }
 
+    //Genera el pdf y escribe lo que queremos
+    public void DeEnrollmentPDF(String fileName, CircularDoublyLinkList list) throws FileNotFoundException, DocumentException, BadElementException, URISyntaxException, IOException {
+        FileOutputStream file = new FileOutputStream(fileName + ".pdf");
+        Document document = new Document();
+        PdfWriter.getInstance(document, file);
+
+        //Instancia para poder hacer la img, importante poner la imagen en la carpeta img
+        Image header = Image.getInstance("src/img/logo-ucr.png");
+        header.scaleToFit(150, 250);
+        header.setAlignment(Chunk.ALIGN_CENTER);
+        //Se abre el documento para poder escribir en el
+        document.open();
+        document.add(header);//Se agrega la img
+
+        Paragraph parrafo = new Paragraph();
+        parrafo.setAlignment(Paragraph.ALIGN_CENTER);
+        parrafo.setFont(FontFactory.getFont("Tahoma", 18, Font.BOLD, BaseColor.BLACK));
+        parrafo.add("\n\nRegistered DeEnrollments \n\n");
+        document.add(parrafo);
+        
+        try {
+            for (int i = 1; i <= list.size(); i++) {
+                Paragraph parrafo1 = new Paragraph();
+                DeEnrollment deEnrollment = (DeEnrollment) list.getNode(i).data;
+                parrafo1.add("\nIdentification: " + deEnrollment.getId());
+                parrafo1.add("\nDate: " + deEnrollment.getDate());
+                parrafo1.add("\nStudent Id: " + deEnrollment.getStudentID());
+                parrafo1.add("\nCourse Id: " + deEnrollment.getCourseID() + " - " + Util.Utility.getCourseByID(deEnrollment.getCourseID()));
+                parrafo1.add("\nShedule: " + deEnrollment.getSchedule());
+                parrafo1.add("\nRemark: " + deEnrollment.getRemark());
+                parrafo1.add("\n----------------------------------------");
+                document.add(parrafo1);
+            }
+
+        } catch (Exception e) {
+        }
+
+        //Importante cerrar el pdf
+        document.close();
+    }
+    
     //Genera el pdf para cuando una estudiante ingresa al sistema
     public void enrollmentStudentPDF(String fileName, Student student) throws FileNotFoundException, DocumentException, BadElementException, URISyntaxException, IOException {
         FileOutputStream file = new FileOutputStream(fileName + ".pdf");

@@ -61,23 +61,22 @@ public class mainFx extends Application {
     public void start(Stage stage) throws Exception {
         // stage.initStyle(StageStyle.UTILITY);
 
-        stage.setOnCloseRequest(new EventHandler<WindowEvent>() {
-            @Override
-            public void handle(WindowEvent event) {
-
-                try {
-                    event.consume();
-                    Controller.MenuController menu = new Controller.MenuController();
-                    menu.saveData();
-                    menu.deletePDF();
-                    callAlert("notification","Notificación","La información ha sido actualizada uwu\nHasta luego");
-                    stage.close();
-                } catch (ListException ex) {
-                    Logger.getLogger(mainFx.class.getName()).log(Level.SEVERE, null, ex);
-                }
-            }
-        });
-
+//        stage.setOnCloseRequest(new EventHandler<WindowEvent>() {
+//            @Override
+//            public void handle(WindowEvent event) {
+//
+//                try {
+//                    event.consume();
+//                    Controller.MenuController menu = new Controller.MenuController();
+//                    menu.saveData();
+//                    menu.deletePDF();
+//                    callAlert("notification","Notificación","La información ha sido actualizada uwu\nHasta luego");
+//                    stage.close();
+//                } catch (ListException ex) {
+//                    Logger.getLogger(mainFx.class.getName()).log(Level.SEVERE, null, ex);
+//                }
+//            }
+//        });
         Parent root = FXMLLoader.load(getClass().getResource("LogIn.fxml"));
 
         Scene scene = new Scene(root);

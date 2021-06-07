@@ -71,23 +71,23 @@ public class ShowStudentController implements Initializable {
             callAlert("alert", "Error", "There are no registered students");
         } else {
             try {
-                Student std = new Student((Student) students.getNode(1).getData());
-
+                //Student std = new Student((Student) students.getNode(1).getData());
                 for (int i = 1; i <= students.size(); i++) {
-                    std = new Student((Student) students.getNode(i).getData());
+                    Student std = new Student((Student) students.getNode(i).getData());
                     tableStudents.getItems().add(std);
+                }
                     this.colId.setCellValueFactory(new PropertyValueFactory<>("id"));
-                    Career career = Util.Utility.getCarrerByID(String.valueOf(std.getCareerID()));
-                    this.colCareerId.setCellValueFactory(c -> new SimpleStringProperty(career.getDescription()));
+//                    Career career = Util.Utility.getCarrerByID(String.valueOf(std.getCareerID()));
+                    this.colCareerId.setCellValueFactory(new PropertyValueFactory<>("careerID"));
                     this.colStudentID.setCellValueFactory(new PropertyValueFactory<>("studentID"));
                     this.colLastName.setCellValueFactory(new PropertyValueFactory<>("lastname"));
                     this.colFirstName.setCellValueFactory(new PropertyValueFactory<>("firstname"));
                     this.colPhoneNumber.setCellValueFactory(new PropertyValueFactory<>("phoneNumber"));
                     this.colEmail.setCellValueFactory(new PropertyValueFactory<>("email"));
                     this.colAddress.setCellValueFactory(new PropertyValueFactory<>("address"));
-                    String date = Util.Utility.dateFormat(std.getBirthday2());
-                    this.colBirthday.setCellValueFactory(c -> new SimpleStringProperty(date));
-                }
+//                    String date = Util.Utility.dateFormat(std.getBirthday());
+                    this.colBirthday.setCellValueFactory(new PropertyValueFactory<>("birthday"));
+//                }
             } catch (ListException ex) {
                 Logger.getLogger(ShowStudentController.class.getName()).log(Level.SEVERE, null, ex);
             }

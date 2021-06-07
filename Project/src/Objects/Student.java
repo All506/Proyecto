@@ -1,8 +1,11 @@
 package Objects;
 
+import Domain.ListException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class Student {
 
@@ -114,7 +117,14 @@ public class Student {
 
     @Override
     public String toString() {
-        return "[id=" + id + ", careerID=" + careerID + ", studentID=" + studentID + ", lastname=" + lastname + ", firstname=" + firstname + ", phoneNumber=" + phoneNumber + ", email=" + email + ", address=" + address + ", birthday=" + birthday + ']';
+        String result = "";
+        try {
+            LocalDate date = LocalDate.parse(new SimpleDateFormat("yyyy-MM-dd").format(this.getBirthday()));
+            result += "[id=" + id + ", careerID=" + Util.Utility.getCarrerByID(careerID + "").getDescription() + ", studentID=" + studentID + ", lastname=" + lastname + ", firstname=" + firstname + ", phoneNumber=" + phoneNumber + ", email=" + email + ", address=" + address + ", birthday=" + date.toString() + ']';
+        } catch (ListException ex) {
+            Logger.getLogger(Student.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return result;
     }
 
     public String[] dataName() {

@@ -21,7 +21,9 @@ import PDF.FilePDF;
 import Security.AES;
 import UI.mainFx;
 import XML.FileXML;
+import com.itextpdf.text.DocumentException;
 import java.io.IOException;
+import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
@@ -191,6 +193,7 @@ public class MenuController implements Initializable {
             try {
                 for (int i = 1; i <= lStudents.size(); i++) {
                     Util.Utility.setListStudent((Student) lStudents.getNode(i).data);
+//                    System.out.println(lStudents.getNode(i).data.toString());
                 }
             } catch (ListException ex) {
                 Logger.getLogger(MenuController.class.getName()).log(Level.SEVERE, null, ex);
@@ -251,11 +254,9 @@ public class MenuController implements Initializable {
         if (fXML.exist("Enrollments.xml")) {
             lEnrollment = fXML.readXMLtoEnrollmentList();
             try {
-                if (!lEnrollment.isEmpty()) {
                     for (int i = 1; i <= lEnrollment.size(); i++) { //Se añaden los objetos del xml a util
                         Util.Utility.setListEnrollment((Enrollment) lEnrollment.getNode(i).data);
                     }
-                } 
             } catch (ListException ex) {
                 Logger.getLogger(MenuController.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -270,11 +271,9 @@ public class MenuController implements Initializable {
         if (fXML.exist("DeEnrollment.xml")) {
             lDeEnrollment = fXML.readXMLtoDeEnrollmentList();
             try {
-                if (!lDeEnrollment.isEmpty()) {
                     for (int i = 1; i <= lDeEnrollment.size(); i++) { //Se añaden los objetos del xml a util
                         Util.Utility.setListDeEnrollment((DeEnrollment) lDeEnrollment.getNode(i).data);
                     }
-                }
             } catch (ListException ex) {
                 Logger.getLogger(MenuController.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -701,16 +700,32 @@ public class MenuController implements Initializable {
 
     @FXML
     private void reportEnrollment(ActionEvent event) {
-        String pdfName = "Report Enrollments";
+        String pdfStudents = "Report Enrollments";
+        String pdfStudent = "Report Student";
         FilePDF pdf = new FilePDF();
+        boolean kindUser = Util.Utility.isKindUser();
         try {
-            if (!pdf.exist(pdfName)) {
-                pdf.enrollmentPDF(pdfName, Util.Utility.getListEnrollment());
-            } else {
-                pdf.deleteFile("Report Enrollments");
-                pdf.enrollmentPDF(pdfName, Util.Utility.getListEnrollment());
+            if (kindUser) {//Admin
+
+                if (!pdf.exist(pdfStudents)) {
+                    pdf.enrollmentPDF(pdfStudents, Util.Utility.getListEnrollment());
+                } else {
+                    pdf.deleteFile("Report Enrollments");
+                    pdf.enrollmentPDF(pdfStudents, Util.Utility.getListEnrollment());
+                }
+
+            } else {//Student
+                
+                if (!pdf.exist(pdfStudent)) {
+                    //pdf.enrollmentPDF(pdfStudent, Util.Utility.getListEnrollment());
+                } else {
+                    pdf.deleteFile("Report Student");
+                    pdf.enrollmentPDF(pdfStudent, Util.Utility.getListEnrollment());
+                }
+                
             }
-        } catch (Exception e) {
+
+        } catch (DocumentException | IOException | URISyntaxException e) {
             System.out.println("Error: " + e);
         }
     }
@@ -721,12 +736,12 @@ public class MenuController implements Initializable {
         FilePDF pdf = new FilePDF();
         try {
             if (!pdf.exist(pdfName)) {
-//                pdf.coursePDF(pdfName, Util.Utility.getListCourse());
+                pdf.DeEnrollmentPDF(pdfName, Util.Utility.getListDeEnrollment());
             } else {
                 pdf.deleteFile("Report DeEnrollments");
-//                pdf.coursePDF(pdfName, Util.Utility.getListCourse());
+                pdf.DeEnrollmentPDF(pdfName, Util.Utility.getListDeEnrollment());
             }
-        } catch (Exception e) {
+        } catch (DocumentException | IOException | URISyntaxException e) {
             System.out.println("Error: " + e);
         }
     }
