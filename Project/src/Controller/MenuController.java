@@ -773,7 +773,7 @@ public class MenuController implements Initializable {
     @FXML
     private void reportEnrollment(ActionEvent event) {
         String pdfStudents = "Report Enrollments";
-        String pdfStudent = "Report Student";
+        String pdfStudent = "Report Enrollment Student";
         FilePDF pdf = new FilePDF();
         boolean kindUser = Util.Utility.isKindUser();
         try {
@@ -789,10 +789,10 @@ public class MenuController implements Initializable {
             } else {//Student
 
                 if (!pdf.exist(pdfStudent)) {
-                    //pdf.enrollmentPDF(pdfStudent, Util.Utility.getListEnrollment());
+                    pdf.enrollmentStudentPDF(pdfStudent, Util.Utility.getListEnrollment(), Util.Utility.getUserStudent());
                 } else {
-                    pdf.deleteFile("Report Student");
-                    pdf.enrollmentPDF(pdfStudent, Util.Utility.getListEnrollment());
+                    pdf.deleteFile("Report Enrollment Student");
+                    pdf.enrollmentStudentPDF(pdfStudent, Util.Utility.getListEnrollment(), Util.Utility.getUserStudent());
                 }
 
             }
@@ -805,13 +805,28 @@ public class MenuController implements Initializable {
     @FXML
     private void reportDeEnrollment(ActionEvent event) {
         String pdfName = "Report DeEnrollments";
+        String pdfStudent = "Report DeEnrollment Student";
         FilePDF pdf = new FilePDF();
+        boolean kindUser = Util.Utility.isKindUser();
         try {
-            if (!pdf.exist(pdfName)) {
-                pdf.DeEnrollmentPDF(pdfName, Util.Utility.getListDeEnrollment());
-            } else {
-                pdf.deleteFile("Report DeEnrollments");
-                pdf.DeEnrollmentPDF(pdfName, Util.Utility.getListDeEnrollment());
+            if (kindUser) {//Admin
+                
+                if (!pdf.exist(pdfName)) {
+                    pdf.deEnrollmentPDF(pdfName, Util.Utility.getListDeEnrollment());
+                } else {
+                    pdf.deleteFile("Report DeEnrollments");
+                    pdf.deEnrollmentPDF(pdfName, Util.Utility.getListDeEnrollment());
+                }
+                
+            } else {//Student
+
+                if (!pdf.exist(pdfStudent)) {
+                    pdf.deEnrollmentStudentPDF(pdfStudent, Util.Utility.getListDeEnrollment(), Util.Utility.getUserStudent());
+                } else {
+                    pdf.deleteFile("Report DeEnrollments Student");
+                    pdf.deEnrollmentStudentPDF(pdfStudent, Util.Utility.getListDeEnrollment(), Util.Utility.getUserStudent());
+                }
+                
             }
         } catch (DocumentException | IOException | URISyntaxException e) {
             System.out.println("Error: " + e);
@@ -836,9 +851,15 @@ public class MenuController implements Initializable {
             if (pdf.exist("Report DeEnrollments")) {
                 pdf.deleteFile("Report DeEnrollments");
             }
+            if (pdf.exist("Report Enrollment Student")) {
+                pdf.deleteFile("Report Enrollment Student");
+            }
+            if (pdf.exist("Report DeEnrollment Student")) {
+                pdf.deleteFile("Report DeEnrollment Student");
+            }
         } catch (Exception e) {
             System.out.println("Error: " + e);
         }
     }
-
+    
 }//end class
