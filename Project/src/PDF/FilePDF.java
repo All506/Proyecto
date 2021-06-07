@@ -317,7 +317,7 @@ public class FilePDF {
         document.close();
     }
 
-    //Genera el pdf de matricula para cuando una estudiante ingresa al sistema
+    //Genera el pdf de matricula, AL ESTUDIANTE QUE INGRESA AL SISTEMA
     public void deEnrollmentStudentPDF(String fileName, CircularDoublyLinkList list, Student student) throws FileNotFoundException, DocumentException, BadElementException, URISyntaxException, IOException {
         FileOutputStream file = new FileOutputStream(fileName + ".pdf");
         Document document = new Document();

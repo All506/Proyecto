@@ -68,13 +68,11 @@ public class mainFx extends Application {
 
                 event.consume();
                 Util.SaveData save = new Util.SaveData();
-                MenuController menu = new MenuController();
                 try {
                     save.saveData();
                 } catch (ListException ex) {
                     Logger.getLogger(mainFx.class.getName()).log(Level.SEVERE, null, ex);
                 }
-                menu.deletePDF();
                 callAlert("notification","Notificación","La información ha sido actualizada uwu\nHasta luego");
                 stage.close();
             }
