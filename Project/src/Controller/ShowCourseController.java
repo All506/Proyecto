@@ -49,10 +49,11 @@ public class ShowCourseController implements Initializable {
     private TableColumn<Course, String> colCourseName;
     @FXML
     private TableColumn<Course, Integer> colCourseCredits;
-    
+
     private ObservableList<Course> cursos;
     @FXML
     private Button btnSearch;
+
     /**
      * Initializes the controller class.
      */
@@ -60,20 +61,19 @@ public class ShowCourseController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
         loadComboBoxCourse();
-        this.cmbCareerList.setValue(null);
-    }    
-    
-    public void loadComboBoxCourse(){
+    }
+
+    public void loadComboBoxCourse() {
         //Para cargar un combobox
         DoublyLinkList tempCareers = new DoublyLinkList();
         tempCareers = Util.Utility.getListCareer();
         String temporal = "";
         try {
             for (int i = 1; i <= tempCareers.size(); i++) {
-                Career c = (Career)tempCareers.getNode(i).getData(); 
-                temporal = c.getId()+"-"+c.getDescription();
+                Career c = (Career) tempCareers.getNode(i).getData();
+                temporal = c.getId() + "-" + c.getDescription();
                 this.cmbCareerList.getItems().add(temporal);
-                        }
+            }
         } catch (ListException ex) {
             Logger.getLogger(NewStudentController.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -82,9 +82,9 @@ public class ShowCourseController implements Initializable {
 
     @FXML
     private void cmbCareerList(ActionEvent event) {
-        
+
     }
-    
+
     private void callAlert(String fxmlName, String title, String text) {
         //Se llama la alerta
         try {
@@ -103,30 +103,39 @@ public class ShowCourseController implements Initializable {
         } catch (IOException ex) {
             Logger.getLogger(LogInController.class.getName()).log(Level.SEVERE, null, ex);
         }
-    }  
+    }
 
     @FXML
     private void btnSearch(ActionEvent event) {
-            cursos = FXCollections.observableArrayList();
-            // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
-            this.colCourseId.setCellValueFactory(new PropertyValueFactory("id"));
-            this.colCourseName.setCellValueFactory(new PropertyValueFactory("name"));
-            this.colCourseCredits.setCellValueFactory(new PropertyValueFactory("credits"));
-            // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
-            try { 
 
-               for (int i = 1; i <= Util.Utility.getListCourse().size(); i++) {
-                   Course x = (Course)Util.Utility.getListCourse().getNode(i).data;
-                   String idCareerCut = Util.Utility.getIDofString(this.cmbCareerList.getValue().toString());
-                   if(x.getCareerId()==Integer.parseInt(idCareerCut)){
-                       cursos.add(x);
-                       this.tblCoursesDisplay.setItems(cursos);
-                   }else{
-                       this.tblCoursesDisplay.setItems(null);
-                   }
+        cursos = FXCollections.observableArrayList();
+        // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+        this.colCourseId.setCellValueFactory(new PropertyValueFactory("id"));
+        this.colCourseName.setCellValueFactory(new PropertyValueFactory("name"));
+        this.colCourseCredits.setCellValueFactory(new PropertyValueFactory("credits"));
+        // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+        try {
+            if (Util.Utility.getListCourse().size() == 0) {
+                callAlert("alert", "Error 404", "No courses found in any career");
+                this.btnSearch.setVisible(false);
+                this.tblCoursesDisplay.setVisible(false);
+            } else {
+                for (int i = 1; i < Util.Utility.getListCourse().size()+1; i++) {
+                    Course c = (Course) Util.Utility.getListCourse().getNode(i).data;
+                    if (c.getCareerId() == Integer.parseInt(Util.Utility.getIDofString(this.cmbCareerList.getValue()))) {
+                        cursos.add(c);
+                    }
                 }
-            } catch (ListException ex) {
-                callAlert("alert", "Error 404", "There are no courses to show"); 
-            }  
+                if(cursos.isEmpty()){
+                    this.tblCoursesDisplay.setItems(null);
+                    callAlert("alert", "Not found", "No courses to show");
+                }else{
+                    this.tblCoursesDisplay.setItems(cursos);
+                }
+            }
+        } catch (ListException ex) {
+            System.out.println("Error in show course controller, LINE 120");
+        }
+
     }
 }
