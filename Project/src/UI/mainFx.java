@@ -62,7 +62,7 @@ public class mainFx extends Application {
     public void start(Stage stage) throws Exception {
         // stage.initStyle(StageStyle.UTILITY);
 
-        stage.setOnCloseRequest(new EventHandler<WindowEvent>() {
+       /* stage.setOnCloseRequest(new EventHandler<WindowEvent>() {
             @Override
             public void handle(WindowEvent event) {
 
@@ -76,7 +76,7 @@ public class mainFx extends Application {
                 callAlert("notification","Notificación","La información ha sido actualizada uwu\nHasta luego");
                 stage.close();
             }
-        });
+        });*/
 
         Parent root = FXMLLoader.load(getClass().getResource("LogIn.fxml"));
 
