@@ -252,6 +252,12 @@ public class Utility {
         return flag;
 
     }
+    
+    public static int getCareerByCourse(String courseId) throws ListException{
+        Course c = Utility.getCourseByID(courseId);
+        System.out.println(c.toString());
+        return c.getCareerId();
+    }
 
     //UTILIDAD 
     public static int random() {

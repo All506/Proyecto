@@ -63,7 +63,7 @@ public class ModifyCourseController implements Initializable {
             //Llena combox con la carrera
             for (int i = 1; i <= tempCourse.size(); i++) {
                 Course course = (Course) tempCourse.getNode(i).getData();
-                cmbCarrers.getItems().add(course.getCareerId() + "-" + course.getId() + "-" + course.getName());
+                cmbCarrers.getItems().add(course.getId() + "-" + course.getName());
             }
 
         } catch (Exception e) {
@@ -157,15 +157,18 @@ public class ModifyCourseController implements Initializable {
     @FXML
     private void btnModify(ActionEvent event) {
         try {
+            int saveCareerId;
             String[] valueSelected = cmbCarrers.getValue().split("-");
-            if (!txtName.equals("") && !txtID.equals("") && !txtCredits.equals("")) {
-                Course course = new Course(txtID.getText(), txtName.getText(), Integer.parseInt(txtCredits.getText()), Integer.parseInt(valueSelected[0]));
+            if (!txtName.equals("") && !txtID.equals("") && !txtCredits.equals("")){
+                Course course = new Course(valueSelected[0], txtName.getText(), Integer.parseInt(txtCredits.getText()), Util.Utility.getCareerByCourse(valueSelected[0]));
+                saveCareerId = course.getCareerId();
                 Util.Utility.getListCourse().remove(course); //Se elimina el nodo de la lista
-                Util.Utility.getListCareer().add(course); //Se vuelve a añadir el nodo en la lista con la nueva información
+                course = new Course(txtID.getText(), txtName.getText(), Integer.parseInt(txtCredits.getText()), saveCareerId);
+                Util.Utility.getListCourse().add(course); //Se vuelve a añadir el nodo en la lista con la nueva información
                 callAlert("notification", "Course Edited", "Course has been edited sucessfully");
             }
         } catch (Exception e) {
-
+            Logger.getLogger(LogInController.class.getName()).log(Level.SEVERE, null, e);
         }
     }
 
@@ -174,8 +177,8 @@ public class ModifyCourseController implements Initializable {
         btnModify.setVisible(true);
         Course tempCourse1 = new Course();
         String[] valueSelected = cmbCarrers.getValue().split("-");
-        tempCourse1.setId(valueSelected[1]);
-        tempCourse1.setName(valueSelected[2]);
+        tempCourse1.setId(valueSelected[0]);
+        tempCourse1.setName(valueSelected[1]);
         if (tempCourse.contains(tempCourse1)) {
             tempCourse1 = look4Course(tempCourse1);
             this.txtID.setText(tempCourse1.getId());
