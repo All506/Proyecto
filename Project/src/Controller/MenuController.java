@@ -193,7 +193,7 @@ public class MenuController implements Initializable {
 
             if (!lStudents.isEmpty()) {
                 try {
-                    for (int i = 1; i <= lStudents.size() - 1; i++) {
+                    for (int i = 1; i <= lStudents.size(); i++) {
                         Util.Utility.setListStudent((Student) lStudents.getNode(i).data);
                     }
                 } catch (ListException ex) {
@@ -219,7 +219,7 @@ public class MenuController implements Initializable {
             lCareers = fXML.readXMLtoCareertList();
             if (!lCareers.isEmpty()) {
                 try {
-                    for (int i = 1; i <= lCareers.size() - 1; i++) { //Se añaden los objetos del xml a util
+                    for (int i = 1; i <= lCareers.size(); i++) { //Se añaden los objetos del xml a util
                         Util.Utility.setListCareer((Career) lCareers.getNode(i).data);
                     }
                 } catch (ListException ex) {
@@ -234,7 +234,7 @@ public class MenuController implements Initializable {
             lCourse = fXML.readXMLtoCourseList();
             if (!lCourse.isEmpty()) {
                 try {
-                    for (int i = 1; i <= lCourse.size() - 1; i++) { //Se añaden los objetos del xml a util
+                    for (int i = 1; i <= lCourse.size(); i++) { //Se añaden los objetos del xml a util
                         Util.Utility.setListCourse((Course) lCourse.getNode(i).data);
                     }
                 } catch (ListException ex) {
@@ -250,7 +250,7 @@ public class MenuController implements Initializable {
             if (!lSchedules.isEmpty()) {
                 try {
 
-                    for (int i = 1; i <= lSchedules.size() - 1; i++) { //Se añaden los objetos del xml a util
+                    for (int i = 1; i <= lSchedules.size(); i++) { //Se añaden los objetos del xml a util
                         Util.Utility.setListSchedule((TimeTable) lSchedules.getNode(i).data);
                     }
                 } catch (ListException ex) {
@@ -281,7 +281,7 @@ public class MenuController implements Initializable {
 
             if (!lEnrollment.isEmpty()) {
                 try {
-                    for (int i = 1; i <= lEnrollment.size() - 1; i++) { //Se añaden los objetos del xml a util
+                    for (int i = 1; i <= lEnrollment.size(); i++) { //Se añaden los objetos del xml a util
                         Util.Utility.setListEnrollment((Enrollment) lEnrollment.getNode(i).data);
                     }
                 } catch (ListException ex) {
@@ -309,7 +309,7 @@ public class MenuController implements Initializable {
 
             if (!lDeEnrollment.isEmpty()) {
                 try {
-                    for (int i = 1; i <= lDeEnrollment.size() - 1; i++) { //Se añaden los objetos del xml a util
+                    for (int i = 1; i <= lDeEnrollment.size(); i++) { //Se añaden los objetos del xml a util
                         Util.Utility.setListDeEnrollment((DeEnrollment) lDeEnrollment.getNode(i).data);
                     }
                 } catch (ListException ex) {

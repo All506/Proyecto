@@ -55,10 +55,10 @@ public class ShowCareersController implements Initializable {
             try {
                 //Se cargan los datos
                 lCareer = Util.Utility.getListCareer();
-                Career car = new Career((Career) lCareer.getNode(1).getData());
+                Career car = (Career) lCareer.getNode(1).getData();
 
                 for (int i = 1; i <= lCareer.size(); i++) {
-                    car = new Career((Career) lCareer.getNode(i).getData());
+                    car =(Career) lCareer.getNode(i).getData();
                     tblCareers.getItems().add(car);
                     this.colCareerdId.setCellValueFactory(new PropertyValueFactory<>("id"));
                     this.colDescription.setCellValueFactory(new PropertyValueFactory<>("description"));
