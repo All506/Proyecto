@@ -7,22 +7,18 @@ package UI;
 
 import Controller.AlertController;
 import Controller.LogInController;
-import Controller.MenuController;
-import Domain.ListException;
 import java.io.IOException;
+import java.util.Optional;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.application.Application;
-import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.image.Image;
-import javafx.scene.layout.StackPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
@@ -57,26 +53,29 @@ public class mainFx extends Application {
             Logger.getLogger(LogInController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
+
     @Override
     public void start(Stage stage) throws Exception {
-//         stage.initStyle(StageStyle.UTILITY);
+        
+        stage.initStyle(StageStyle.UTILITY);
 
-            stage.setOnCloseRequest(new EventHandler<WindowEvent>() {
-                @Override
-                public void handle(WindowEvent event) {
+        stage.setOnCloseRequest(new EventHandler<WindowEvent>() {
+            @Override
+            public void handle(WindowEvent event) {
 
-                    event.consume();
-                    Util.SaveData save = new Util.SaveData();
-                    try {
-                        save.saveData();
-                    } catch (ListException ex) {
-                        Logger.getLogger(mainFx.class.getName()).log(Level.SEVERE, null, ex);
-                    }
-                    callAlert("notification","Notificación","La información ha sido actualizada uwu\nHasta luego");
+                event.consume();
+                Alert dialog = new Alert(Alert.AlertType.CONFIRMATION);
+                dialog.setTitle("Are you sure?");
+                dialog.setHeaderText(null);
+                dialog.initStyle(StageStyle.UTILITY);
+                dialog.setContentText("After closing, all information not saved will be deleted.  \n Remenber to Log Out in order to save all data");
+                Optional<ButtonType> result = dialog.showAndWait();
+                if (result.get() == ButtonType.OK) {
                     stage.close();
                 }
-            });
+
+            }
+        });
 
         Parent root = FXMLLoader.load(getClass().getResource("LogIn.fxml"));
 
