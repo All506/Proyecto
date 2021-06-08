@@ -325,15 +325,11 @@ public class MenuController implements Initializable {
 
     }
 
-    
-
     @FXML
     public void btnLogOut(ActionEvent event) throws IOException, Exception {
-        
-            Util.SaveData save = new Util.SaveData(); //Se almacena la información de las listas en XMLs
-            save.saveData();
-            deletePDF(); //Elimina los pdf creados para que no haya ningun malentendido con los datos
-
+        deletePDF(); //Elimina los pdf creados para que no haya ningun malentendido con los datos
+        Util.SaveData save = new Util.SaveData(); //Se almacena la información de las listas en XMLs
+        save.saveData();
 
         //--------------------------------------------------------------------------------
         Stage stage = (Stage) this.btnIgnore.getScene().getWindow();
@@ -522,14 +518,14 @@ public class MenuController implements Initializable {
         boolean kindUser = Util.Utility.isKindUser();
         try {
             if (kindUser) {//Admin
-                
+
                 if (!pdf.exist(pdfName)) {
                     pdf.deEnrollmentPDF(pdfName, Util.Utility.getListDeEnrollment());
                 } else {
                     pdf.deleteFile("Report DeEnrollments");
                     pdf.deEnrollmentPDF(pdfName, Util.Utility.getListDeEnrollment());
                 }
-                
+
             } else {//Student
 
                 if (!pdf.exist(pdfStudent)) {
@@ -538,7 +534,7 @@ public class MenuController implements Initializable {
                     pdf.deleteFile("Report DeEnrollments Student");
                     pdf.deEnrollmentStudentPDF(pdfStudent, Util.Utility.getListDeEnrollment(), Util.Utility.getUserStudent());
                 }
-                
+
             }
         } catch (DocumentException | IOException | URISyntaxException e) {
             System.out.println("Error: " + e);
@@ -547,6 +543,7 @@ public class MenuController implements Initializable {
 
     public void deletePDF() {
         FilePDF pdf = new FilePDF();
+        System.out.println("borra los pdf");
         try {
             if (pdf.exist("Report Students")) {
                 pdf.deleteFile("Report Students");
@@ -573,5 +570,5 @@ public class MenuController implements Initializable {
             System.out.println("Error: " + e);
         }
     }
-    
+
 }//end class

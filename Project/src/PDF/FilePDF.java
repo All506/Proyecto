@@ -56,7 +56,7 @@ public class FilePDF {
 
     //Exist?
     public Boolean exist(String file) {
-        File archive = new File(file);
+        File archive = new File(file + ".pdf");
         if (archive.exists()) {
             return true;
         }
