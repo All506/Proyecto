@@ -35,7 +35,7 @@ import javafx.stage.Stage;
 /**
  * FXML Controller class
  *
- * @author LuisGa
+ * @author Sebastián Navarro Martínez
  */
 public class ShowCourseController implements Initializable {
 
@@ -71,7 +71,7 @@ public class ShowCourseController implements Initializable {
         try {
             for (int i = 1; i <= tempCareers.size(); i++) {
                 Career c = (Career) tempCareers.getNode(i).getData();
-                temporal = c.getId() + "-" + c.getDescription();
+                temporal = c.getDescription();
                 this.cmbCareerList.getItems().add(temporal);
             }
         } catch (ListException ex) {
@@ -136,6 +136,5 @@ public class ShowCourseController implements Initializable {
         } catch (ListException ex) {
             System.out.println("Error in show course controller, LINE 120");
         }
-
     }
 }
