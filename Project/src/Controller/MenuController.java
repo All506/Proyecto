@@ -146,7 +146,11 @@ public class MenuController implements Initializable {
 
     @FXML
     private void mnNewStudent(ActionEvent event) {
+        if(Util.Utility.getListCareer().isEmpty()){
+        callAlert("alert", "Attention!", "There are no careers defined yet.");
+        }else{
         loadPage("/UI/newStudent");
+        }
     }
 
     @FXML
@@ -375,7 +379,11 @@ public class MenuController implements Initializable {
 
     @FXML
     private void mnNewCourse(ActionEvent event) {
+        if(Util.Utility.getListCareer().isEmpty()){
+        callAlert("alert", "Attention!", "There are no careers defined yet.");
+        }else{
         loadPage("/UI/newCourse");
+        }
     }
 
     @FXML

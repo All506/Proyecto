@@ -235,12 +235,18 @@ public class NewTimeTableController implements Initializable {
                 callAlert("alert", "¡Incomplete data!", "You must select a course and a period");
                 
             }else{
-                
+//                if(btnValidSave.getText().equalsIgnoreCase("Validate and update")){
+//                    System.out.println("88");
+//                    Util.Utility.getListSchedule().remove(new TimeTable(Util.Utility.getIDofString(cmbCourses.getValue()),"", "", ""));
+//                }
                 TimeTable t = new TimeTable(Util.Utility.getIDofString(cmbCourses.getValue()),
                         cmbPeriod.getValue(),
                         spnDay1.getValue().substring(0, 3)+" "+Util.Utility.hourFormat(spnStart1.getValue())+"-"+Util.Utility.hourFormat(spnEnd1.getValue()), 
                         spnDay2.getValue().substring(0, 3)+" "+Util.Utility.hourFormat(spnStart2.getValue())+"-"+Util.Utility.hourFormat(spnEnd2.getValue()));
-
+              
+                if(btnValidSave.getText().equalsIgnoreCase("Validate and update"))
+                    Util.Utility.getListSchedule().remove(t);
+                
                 Util.Utility.setListSchedule(t);
                 btnClean(event);
                 callAlert("notification", "Notification", "Schedule has been saved");

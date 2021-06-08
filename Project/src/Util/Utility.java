@@ -328,6 +328,10 @@ public class Utility {
                 DeEnrollment der1 = (DeEnrollment)a;
                 DeEnrollment der2 = (DeEnrollment)b;
                 return der1.getId() == der2.getId();
+            case "timetable":
+                TimeTable t1 = (TimeTable)a;
+                TimeTable t2 = (TimeTable)b;
+                return t1.getID().equalsIgnoreCase(t2.getID());    
         }
         return false; //En cualquier otro caso retorna un false
     }
@@ -359,6 +363,9 @@ public class Utility {
         }
         if (a instanceof DeEnrollment && b instanceof DeEnrollment){
             return "deenrollment";
+        }
+        if (a instanceof TimeTable && b instanceof TimeTable){
+            return "timetable";
         }
 
         return "unknown";
