@@ -125,8 +125,8 @@ public class LogInController implements Initializable {
                 callMenu("menu");
             } else {
                 if (this.lStudentsPass.contains(logUser)) {
-                    callMenu("menu");
                     Util.Utility.setKindUser(false, logUser.getUser());
+                    callMenu("menu");
                 } else {
                     callAlert("alert", "Error", "User and Password is not registered. \n Try with something else");
                 }
