@@ -120,7 +120,7 @@ public class ShowCourseController implements Initializable {
                 this.btnSearch.setVisible(false);
                 this.tblCoursesDisplay.setVisible(false);
             } else {
-                for (int i = 1; i < Util.Utility.getListCourse().size()+1; i++) {
+                for (int i = 1; i <= Util.Utility.getListCourse().size(); i++) {
                     Course c = (Course) Util.Utility.getListCourse().getNode(i).data;
                     if (c.getCareerId() == Integer.parseInt(Util.Utility.getIDofString(this.cmbCareerList.getValue()))) {
                         cursos.add(c);
