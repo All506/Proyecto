@@ -79,7 +79,7 @@ public class NewTimeTableController implements Initializable {
         CircularDoublyLinkList tempCourses = new CircularDoublyLinkList();
         tempCourses = Util.Utility.getListCourse();
         String temporal = "";
-        
+        if(!tempCourses.isEmpty()){
         try {
             for (int i = 1; i <= tempCourses.size(); i++) {
                 Course c = (Course)tempCourses.getNode(i).getData(); 
@@ -88,6 +88,7 @@ public class NewTimeTableController implements Initializable {
                         }
         } catch (ListException ex) {
             Logger.getLogger(NewStudentController.class.getName()).log(Level.SEVERE, null, ex);
+        }
         }
         
         cmbCourses.setValue(temporal);

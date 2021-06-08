@@ -120,11 +120,11 @@ public class LogInController implements Initializable {
             //!!!!VERIFICAR SI USUARIO EXISTE ETC
             //Se obtiene el stage actual y se cierra
             Security logUser = new Security(txtUser.getText(), txtPassword.getText());
-            if (lSecurity.contains(logUser)) { //La persona registrada es un Usuario
+            if (!lSecurity.isEmpty() && lSecurity.contains(logUser)) { //La persona registrada es un Usuario
                 Util.Utility.setKindUser(true);
                 callMenu("menu");
             } else {
-                if (this.lStudentsPass.contains(logUser)) {
+                if (!lStudentsPass.isEmpty()&&this.lStudentsPass.contains(logUser)) {
                     Util.Utility.setKindUser(false, logUser.getUser());
                     callMenu("menu");
                 } else {

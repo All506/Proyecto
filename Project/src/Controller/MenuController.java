@@ -151,18 +151,30 @@ public class MenuController implements Initializable {
 
     @FXML
     private void btnModifyStudent(ActionEvent event) {
+        if(Util.Utility.getListStudents().isEmpty()){
+        callAlert("alert", "Attention!", "There are no students registered yet.");
+        }else{
         loadPage("/UI/modifyStudent");
+        }
     }
 
     @FXML
     private void btnShowStudents(ActionEvent event) {
+        if(Util.Utility.getListStudents().isEmpty()){
+        callAlert("alert", "Attention!", "There are no students registered yet.");
+        }else{
         this.bpMenu.setCenter(null);
         loadPage("/UI/showStudent");
+        }
     }
 
     @FXML
     private void btnDeleteStudent(ActionEvent event) {
+        if(Util.Utility.getListStudents().isEmpty()){
+        callAlert("alert", "Attention!", "There are no students registered yet.");
+        }else{
         loadPage("/UI/deleteStudent");
+        }
     }
 
     @FXML
@@ -172,12 +184,20 @@ public class MenuController implements Initializable {
 
     @FXML
     private void btnShowCareers(ActionEvent event) {
+        if(Util.Utility.getListCareer().isEmpty()){
+        callAlert("alert", "Attention!", "There are no careers defined yet.");
+        }else{
         loadPage("/UI/showCareers");
+        }
     }
 
     @FXML
     private void btnDeleteOrEditCareer(ActionEvent event) {
+        if(Util.Utility.getListCareer().isEmpty()){
+        callAlert("alert", "Attention!", "There are no careers defined yet.");
+        }else{
         loadPage("/UI/EditAndDeleteCareer");
+        }
     }
 
     //Se podría llamar al inicio y final
@@ -360,22 +380,38 @@ public class MenuController implements Initializable {
 
     @FXML
     private void btnModifyCourse(ActionEvent event) {
+        if(Util.Utility.getListCourse().isEmpty()){
+        callAlert("alert", "Attention!", "There are no courses defined yet.");
+        }else{
         loadPage("/UI/modifyCourse");
+        }
     }
 
     @FXML
     private void btnDeleteCourse(ActionEvent event) {
+        if(Util.Utility.getListCourse().isEmpty()){
+        callAlert("alert", "Attention!", "There are no courses defined yet.");
+        }else{
         loadPage("/UI/deleteCourse");
+        }
     }
 
     @FXML
     private void btnShowCourse(ActionEvent event) {
+        if(Util.Utility.getListCourse().isEmpty()){
+        callAlert("alert", "Attention!", "There are no courses defined yet.");
+        }else{
         loadPage("/UI/showCourse");
+        }
     }
 
     @FXML
     private void btnNewSchedule(ActionEvent event) {
+        if(Util.Utility.getListCourse().isEmpty()){
+        callAlert("alert", "Attention!", "There are no courses defined yet.");
+        }else{
         loadPage("/UI/newTimeTable");
+        }
     }
 
     @FXML
