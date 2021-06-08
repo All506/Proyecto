@@ -60,23 +60,23 @@ public class mainFx extends Application {
     
     @Override
     public void start(Stage stage) throws Exception {
-        // stage.initStyle(StageStyle.UTILITY);
+//         stage.initStyle(StageStyle.UTILITY);
 
-       /* stage.setOnCloseRequest(new EventHandler<WindowEvent>() {
-            @Override
-            public void handle(WindowEvent event) {
+            stage.setOnCloseRequest(new EventHandler<WindowEvent>() {
+                @Override
+                public void handle(WindowEvent event) {
 
-                event.consume();
-                Util.SaveData save = new Util.SaveData();
-                try {
-                    save.saveData();
-                } catch (ListException ex) {
-                    Logger.getLogger(mainFx.class.getName()).log(Level.SEVERE, null, ex);
+                    event.consume();
+                    Util.SaveData save = new Util.SaveData();
+                    try {
+                        save.saveData();
+                    } catch (ListException ex) {
+                        Logger.getLogger(mainFx.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                    callAlert("notification","Notificación","La información ha sido actualizada uwu\nHasta luego");
+                    stage.close();
                 }
-                callAlert("notification","Notificación","La información ha sido actualizada uwu\nHasta luego");
-                stage.close();
-            }
-        });*/
+            });
 
         Parent root = FXMLLoader.load(getClass().getResource("LogIn.fxml"));
 

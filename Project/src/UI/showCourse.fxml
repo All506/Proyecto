@@ -15,11 +15,6 @@
         <URL value="@/Style/general.css" />
     </stylesheets>
    <children>
-      <Text fill="WHITE" layoutX="96.0" layoutY="79.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Choose a career" wrappingWidth="181.13671875">
-         <font>
-            <Font name="Franklin Gothic Book" size="19.0" />
-         </font>
-      </Text>
       <ComboBox fx:id="cmbCareerList" layoutX="272.0" layoutY="60.0" onAction="#cmbCareerList" prefHeight="25.0" prefWidth="211.0" promptText="Career" />
       <TableView fx:id="tblCoursesDisplay" layoutX="96.0" layoutY="97.0" prefHeight="276.0" prefWidth="444.0">
         <columns>
@@ -35,5 +30,6 @@
             <Font name="Lucida Bright" size="25.0" />
          </font>
       </Text>
+      <Text fx:id="txtIdCareer" layoutX="96.0" layoutY="77.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" visible="false" />
    </children>
 </AnchorPane>

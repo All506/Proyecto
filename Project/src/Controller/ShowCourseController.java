@@ -29,6 +29,7 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.text.Text;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
@@ -53,6 +54,8 @@ public class ShowCourseController implements Initializable {
     private ObservableList<Course> cursos;
     @FXML
     private Button btnSearch;
+    @FXML
+    private Text txtIdCareer;
 
     /**
      * Initializes the controller class.
@@ -71,7 +74,7 @@ public class ShowCourseController implements Initializable {
         try {
             for (int i = 1; i <= tempCareers.size(); i++) {
                 Career c = (Career) tempCareers.getNode(i).getData();
-                temporal = c.getDescription();
+                temporal = c.getId()+"-"+c.getDescription();
                 this.cmbCareerList.getItems().add(temporal);
             }
         } catch (ListException ex) {
