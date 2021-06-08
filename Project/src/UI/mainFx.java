@@ -57,7 +57,7 @@ public class mainFx extends Application {
     @Override
     public void start(Stage stage) throws Exception {
         
-        stage.initStyle(StageStyle.UTILITY);
+        //stage.initStyle(StageStyle.UTILITY);
 
         stage.setOnCloseRequest(new EventHandler<WindowEvent>() {
             @Override
@@ -68,7 +68,7 @@ public class mainFx extends Application {
                 dialog.setTitle("Are you sure?");
                 dialog.setHeaderText(null);
                 dialog.initStyle(StageStyle.UTILITY);
-                dialog.setContentText("After closing, all information not saved will be deleted.  \n Remenber to Log Out in order to save all data");
+                dialog.setContentText("After closing, all information not saved will be deleted.  \n Remember to Log Out in order to save all data");
                 Optional<ButtonType> result = dialog.showAndWait();
                 if (result.get() == ButtonType.OK) {
                     stage.close();
