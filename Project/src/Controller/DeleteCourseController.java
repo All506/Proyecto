@@ -11,6 +11,7 @@ import Domain.DoublyLinkList;
 import Domain.ListException;
 import Objects.Career;
 import Objects.Course;
+import Objects.Enrollment;
 import Objects.Student;
 import XML.FileXML;
 import java.io.IOException;
@@ -61,7 +62,7 @@ public class DeleteCourseController implements Initializable {
     private Button btnCancelThat;
     @FXML
     private BorderPane bpRoot;
-    
+
     /**
      * Initializes the controller class.
      */
@@ -69,17 +70,15 @@ public class DeleteCourseController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
         loadComboBoxCareers();
-        
-    }    
+
+    }
 
     @FXML
     private void cmbAvailableCourses(MouseEvent event) {
         this.btnShowCourses.setDisable(false);
     }
 
-    
-    
-    public void clean(){
+    public void clean() {
         this.txtCareer.setVisible(false);
         this.txtConfirmation.setVisible(false);
         this.txtCourse.setVisible(false);
@@ -90,43 +89,44 @@ public class DeleteCourseController implements Initializable {
         this.btnShowCourses.setVisible(false);
         this.btnCancelThat.setVisible(false);
     }
-    
-    public void loadComboBoxCareers(){
+
+    public void loadComboBoxCareers() {
         //Para cargar un combobox
         DoublyLinkList tempCareers = new DoublyLinkList();
         tempCareers = Util.Utility.getListCareer();
         String temporal = "";
-        
+
         try {
             for (int i = 1; i <= tempCareers.size(); i++) {
-                Career c = (Career)tempCareers.getNode(i).getData(); 
-                temporal = c.getId()+"-"+c.getDescription();
+                Career c = (Career) tempCareers.getNode(i).getData();
+                temporal = c.getId() + "-" + c.getDescription();
                 this.cmbCareer.getItems().add(temporal);
-                        }
+            }
         } catch (ListException ex) {
             Logger.getLogger(NewStudentController.class.getName()).log(Level.SEVERE, null, ex);
         }
         this.cmbCareer.setValue(null);
     }
-    
-    public void loadComboBoxCourses(int careerID){
+
+    public void loadComboBoxCourses(int careerID) {
         CircularDoublyLinkList tempCourses = new CircularDoublyLinkList();
         tempCourses = Util.Utility.getListCourse();
         String temporal = "";
-        
-        if(!Util.Utility.getListCourse().isEmpty()){
-        try {
-            for (int i = 1; i <= tempCourses.size(); i++) {
-                Course c = (Course)tempCourses.getNode(i).getData();
-                if(c.getCareerId()==careerID){
-                    temporal = c.getId()+"-"+c.getName();
-                    this.cmbAvailableCourses.getItems().add(temporal);
+
+        if (!Util.Utility.getListCourse().isEmpty()) {
+            try {
+                for (int i = 1; i <= tempCourses.size(); i++) {
+                    Course c = (Course) tempCourses.getNode(i).getData();
+                    if (c.getCareerId() == careerID) {
+                        temporal = c.getId() + "-" + c.getName();
+                        this.cmbAvailableCourses.getItems().add(temporal);
+                    }
                 }
-                        }
-        } catch (ListException ex) {
-            Logger.getLogger(NewStudentController.class.getName()).log(Level.SEVERE, null, ex);
-        }}else{
-             callAlert("alert", "Error 404", "There are no courses registered");
+            } catch (ListException ex) {
+                Logger.getLogger(NewStudentController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        } else {
+            callAlert("alert", "Error 404", "There are no courses registered");
         }
     }
 
@@ -136,54 +136,79 @@ public class DeleteCourseController implements Initializable {
         this.cmbAvailableCourses.getItems().clear();
         loadComboBoxCourses(x);
         this.cmbAvailableCourses.setVisible(true);
-        this.txtCourse.setVisible(true); 
+        this.txtCourse.setVisible(true);
         this.btnDelete.setDisable(true);
         this.btnDelete.setVisible(true);
         this.btnShowCourses.setDisable(true);
     }
-    
+
     @FXML
     private void btnDelete(ActionEvent event) {
-        try{
-        clean();
-        this.txtConfirmation.setVisible(true);
-        this.txtConfirmation.setText("Do you want to delete the course '" + this.cmbAvailableCourses.getValue() + "'?");
-        this.btnConfirm.setVisible(true);
-        this.btnCancelThat.setVisible(true);
-        }catch(NullPointerException npe){
+        try {
+            clean();
+            this.txtConfirmation.setVisible(true);
+            this.txtConfirmation.setText("Do you want to delete the course '" + this.cmbAvailableCourses.getValue() + "'?");
+            this.btnConfirm.setVisible(true);
+            this.btnCancelThat.setVisible(true);
+        } catch (NullPointerException npe) {
             callAlert("alert", "No courses selected", "Choose a course to delete!");
         }
     }
-    
-     @FXML
-    private void btnConfirm(ActionEvent event) {
-         CircularDoublyLinkList listTodelete = Util.Utility.getListCourse();
-         CircularDoublyLinkList listToSend = new CircularDoublyLinkList();
-        try {
-            for (int i = listTodelete.indexOf(listTodelete.getFirst()); i <= listTodelete.size(); i++) {
-                Course f = (Course)listTodelete.getNode(i).data;
-                String sample = f.getId();
-                if(!Util.Utility.getIDofString(this.cmbAvailableCourses.getValue()).equals(sample)){
-                    listToSend.add(f);
+
+    @FXML
+    private void btnConfirm(ActionEvent event) throws ListException {
+        String[] courseId = this.cmbAvailableCourses.getValue().split("-");
+        if (condition(courseId[0])) {
+            CircularDoublyLinkList listTodelete = Util.Utility.getListCourse();
+            CircularDoublyLinkList listToSend = new CircularDoublyLinkList();
+            try {
+                for (int i = listTodelete.indexOf(listTodelete.getFirst()); i <= listTodelete.size(); i++) {
+                    Course f = (Course) listTodelete.getNode(i).data;
+                    String sample = f.getId();
+                    if (!Util.Utility.getIDofString(this.cmbAvailableCourses.getValue()).equals(sample)) {
+                        listToSend.add(f);
+                    }
                 }
+                Util.Utility.replaceListCourse(listToSend);
+            } catch (ListException ex) {
+                callAlert("alert", "Error", "We couldn't delete the course");
             }
-            Util.Utility.replaceListCourse(listToSend);
-        } catch (ListException ex) {
-            callAlert("alert", "Error", "We couldn't delete the course");
-        }
-         
-         if(Util.Utility.getListCourse().isEmpty())
+
+            if (Util.Utility.getListCourse().isEmpty()) {
                 bpRoot.setCenter(null);
-         
-         callAlert("alert", "The course has been deleted", "The course selected \n has been deleted from the files");
-         clean();
-         this.txtCareer.setVisible(true);
-         this.cmbCareer.setValue(null);
-         this.cmbAvailableCourses.setValue(null);
-         this.btnShowCourses.setVisible(true);
-         this.cmbCareer.setVisible(true);          
+            }
+            callAlert("alert", "The course has been deleted", "The course selected \n has been deleted from the files");
+
+        } else {
+            callAlert("alert", "The course cannot been deleted", "The course selected \n cannot been deleted from the files");
+        }
+
+        clean();
+        this.txtCareer.setVisible(true);
+        this.cmbCareer.setValue(null);
+        this.cmbAvailableCourses.setValue(null);
+        this.btnShowCourses.setVisible(true);
+        this.cmbCareer.setVisible(true);
     }
-    
+
+    private boolean condition(String courseId) throws ListException {
+        boolean condition = true;
+
+        CircularDoublyLinkList list = Util.Utility.getListEnrollment();
+        if (list.isEmpty()) {
+            return condition;
+        }
+
+        for (int i = 1; i <= list.size(); i++) {
+            Enrollment enrollment = (Enrollment) list.getNode(i).data;
+            if (enrollment.getCourseID().equalsIgnoreCase(courseId)) {
+                condition = false;
+            }
+        }
+
+        return condition;
+    }
+
     private void callAlert(String fxmlName, String title, String text) {
         //Se llama la alerta
         try {
@@ -202,7 +227,7 @@ public class DeleteCourseController implements Initializable {
         } catch (IOException ex) {
             Logger.getLogger(LogInController.class.getName()).log(Level.SEVERE, null, ex);
         }
-    }   
+    }
 
     @FXML
     private void btnCancelThat(ActionEvent event) {
@@ -217,4 +242,5 @@ public class DeleteCourseController implements Initializable {
     private void AvailableCoursesOnMouseClicked(MouseEvent event) {
         this.btnDelete.setDisable(false);
     }
+
 }
