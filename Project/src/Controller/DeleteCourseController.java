@@ -27,6 +27,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.text.Text;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -58,6 +59,8 @@ public class DeleteCourseController implements Initializable {
     String sendablecourseID = "";
     @FXML
     private Button btnCancelThat;
+    @FXML
+    private BorderPane bpRoot;
     
     /**
      * Initializes the controller class.
@@ -168,6 +171,10 @@ public class DeleteCourseController implements Initializable {
         } catch (ListException ex) {
             callAlert("alert", "Error", "We couldn't delete the course");
         }
+         
+         if(Util.Utility.getListCourse().isEmpty())
+                bpRoot.setCenter(null);
+         
          callAlert("alert", "The course has been deleted", "The course selected \n has been deleted from the files");
          clean();
          this.txtCareer.setVisible(true);

@@ -29,6 +29,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextArea;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.layout.BorderPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javax.xml.parsers.ParserConfigurationException;
@@ -53,6 +54,8 @@ public class EditAndDeleteCareerController implements Initializable {
     private ComboBox<String> cmbCareers;
     @FXML
     private TextArea txtDescription;
+    @FXML
+    private BorderPane bpRoot;
 
     /**
      * Initializes the controller class.
@@ -62,7 +65,7 @@ public class EditAndDeleteCareerController implements Initializable {
         this.loadComboBoxCareers();
         this.btnDelete.setVisible(false);
         this.btnEdit.setVisible(false);
-
+        txtDescription.setText("");
         //Mask Description
         maskText(txtDescription);
     }
@@ -89,21 +92,33 @@ public class EditAndDeleteCareerController implements Initializable {
 
     @FXML
     private void btnDelete(ActionEvent event) throws ListException {
-        String[] valueSelected = cmbCareers.getValue().split("-");
-        Career c = new Career(Integer.parseInt(valueSelected[0]), valueSelected[1]);
-        if (lookCourse(valueSelected[0]) && lookStudent(valueSelected[0])) {//Verifica con el id de la carrera si un estudiante o un curso ya tiene reigstrado una carrera
-            Util.Utility.getListCareer().remove(c); //Se elimina la carrera de la correspondiente lista
-            callAlert("notification", "Career Deleted", "Career has been deleted");
-        } else {
-            callAlert("alert", "Career Not Deleted", "Career cannot been deleted");
+        if(cmbCareers.getValue()!=null){
+            String[] valueSelected = cmbCareers.getValue().split("-");
+            Career c = new Career(Integer.parseInt(valueSelected[0]), valueSelected[1]);
+            if (lookCourse(valueSelected[0]) && lookStudent(valueSelected[0])) {//Verifica con el id de la carrera si un estudiante o un curso ya tiene reigstrado una carrera
+                Util.Utility.getListCareer().remove(c); //Se elimina la carrera de la correspondiente lista
+                if(Util.Utility.getListCareer().isEmpty())
+                    bpRoot.setCenter(null);
+
+                callAlert("notification", "Career Deleted", "Career has been deleted");
+                
+                loadComboBoxCareers();
+                txtDescription.setText("");
+            } else {
+                callAlert("alert", "Career Not Deleted", "Career cannot been deleted");
+                
+            }
+            
+            
+        }else{
+            callAlert("alert", "Attention", "You must provide valid data.");
         }
-        //Arreglar
-        loadComboBoxCareers();
     }
 
     private boolean lookCourse(String career) throws ListException {
         boolean condition = true;
         CircularDoublyLinkList lCourse = Util.Utility.getListCourse();
+        if(!lCourse.isEmpty())
         for (int i = 1; i <= lCourse.size(); i++) {
             Course course = (Course) lCourse.getNode(i).data;
             if (course.getCareerId() == Integer.parseInt(career)) {
@@ -116,6 +131,7 @@ public class EditAndDeleteCareerController implements Initializable {
     private boolean lookStudent(String career) throws ListException {
         boolean condition = true;
         SinglyLinkList lStudent = Util.Utility.getListStudents();
+        if(!lStudent.isEmpty())
         for (int i = 1; i <= lStudent.size(); i++) {
             Student student = (Student) lStudent.getNode(i).data;
             if (student.getCareerID() == Integer.parseInt(career)) {
@@ -143,6 +159,7 @@ public class EditAndDeleteCareerController implements Initializable {
     @FXML
     private void btnClean(ActionEvent event) {
         loadComboBoxCareers();
+        txtDescription.setText("");
         this.btnDelete.setVisible(false);
         this.btnEdit.setVisible(false);
     }
@@ -174,6 +191,7 @@ public class EditAndDeleteCareerController implements Initializable {
 
     @FXML
     private void cmbCareers(ActionEvent event) throws ListException {
+        if(cmbCareers.getValue()!=null){
         String[] valueSelected = cmbCareers.getValue().split("-");
         Career c = new Career(Integer.parseInt(valueSelected[0]), valueSelected[1]);
         int temp = Util.Utility.getListCareer().indexOf(c); //Se obtiene el nodo de la carrera en la lista
@@ -181,6 +199,7 @@ public class EditAndDeleteCareerController implements Initializable {
         this.txtDescription.setText(c.getDescription());
         this.btnDelete.setVisible(true);
         this.btnEdit.setVisible(true);
+        }
     }
 
     private void callAlert(String fxmlName, String title, String text) {

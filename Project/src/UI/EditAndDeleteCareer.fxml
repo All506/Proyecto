@@ -5,53 +5,59 @@
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.EditAndDeleteCareerController">
-    <stylesheets>
-        <URL value="@/Style/general.css" />
-    </stylesheets>
-   <children>
-      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#475065" height="248.0" layoutX="82.0" layoutY="91.0" stroke="#db747400" strokeType="INSIDE" width="472.0" />
-      <ComboBox fx:id="cmbCareers" layoutX="114.0" layoutY="141.0" onAction="#cmbCareers" prefHeight="25.0" prefWidth="409.0" />
-      <TextArea fx:id="txtDescription" layoutX="183.0" layoutY="215.0" prefHeight="38.0" prefWidth="271.0" />
-      <Button fx:id="btnDelete" layoutX="215.0" layoutY="288.0" mnemonicParsing="false" onAction="#btnDelete" prefHeight="29.0" prefWidth="69.0" text="DELETE">
-         <font>
-            <Font size="15.0" />
-         </font>
-      </Button>
-      <Button fx:id="btnEdit" layoutX="368.0" layoutY="288.0" mnemonicParsing="false" onAction="#btnEdit" prefHeight="31.0" prefWidth="69.0" text="EDIT">
-         <font>
-            <Font size="15.0" />
-         </font>
-      </Button>
-      <Button fx:id="btnClean" layoutX="292.0" layoutY="288.0" mnemonicParsing="false" onAction="#btnClean" prefHeight="31.0" prefWidth="69.0" text="CLEAN">
-         <font>
-            <Font size="15.0" />
-         </font>
-      </Button>
-      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#1f93ff00" height="29.0" layoutX="182.0" layoutY="26.0" stroke="#00ae23" strokeType="INSIDE" width="287.0" />
-      <Text fill="#00ae23" layoutX="191.0" layoutY="49.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Edit or delete a Career">
-         <font>
-            <Font name="Lucida Bright" size="25.0" />
-         </font>
-      </Text>
-      <Text fill="WHITE" layoutX="208.0" layoutY="203.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Edit the career's name here:" wrappingWidth="220.6455078125">
-         <font>
-            <Font name="Franklin Gothic Book" size="18.0" />
-         </font>
-      </Text>
-      <Text fill="WHITE" layoutX="183.0" layoutY="126.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Choose a career to manipulate it" wrappingWidth="287.0">
-         <font>
-            <Font name="Franklin Gothic Book" size="18.0" />
-         </font>
-      </Text>
-      <Text fill="#ffd400" layoutX="165.0" layoutY="77.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Here you can either edit or delete a career">
-         <font>
-            <Font name="Lucida Bright" size="15.0" />
-         </font>
-      </Text>
-   </children>
-</AnchorPane>
+
+<BorderPane fx:id="bpRoot" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.EditAndDeleteCareerController">
+   <center>
+      <AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" styleClass="mainFxmlClass">
+          <stylesheets>
+              <URL value="@/Style/general.css" />
+          </stylesheets>
+         <children>
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#475065" height="248.0" layoutX="82.0" layoutY="91.0" stroke="#db747400" strokeType="INSIDE" width="472.0" />
+            <ComboBox fx:id="cmbCareers" layoutX="114.0" layoutY="141.0" onAction="#cmbCareers" prefHeight="25.0" prefWidth="409.0" />
+            <TextArea fx:id="txtDescription" layoutX="183.0" layoutY="215.0" prefHeight="38.0" prefWidth="271.0" />
+            <Button fx:id="btnDelete" layoutX="215.0" layoutY="288.0" mnemonicParsing="false" onAction="#btnDelete" prefHeight="29.0" prefWidth="69.0" text="DELETE">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </Button>
+            <Button fx:id="btnEdit" layoutX="368.0" layoutY="288.0" mnemonicParsing="false" onAction="#btnEdit" prefHeight="31.0" prefWidth="69.0" text="EDIT">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </Button>
+            <Button fx:id="btnClean" layoutX="292.0" layoutY="288.0" mnemonicParsing="false" onAction="#btnClean" prefHeight="31.0" prefWidth="69.0" text="CLEAN">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </Button>
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#1f93ff00" height="29.0" layoutX="182.0" layoutY="26.0" stroke="#00ae23" strokeType="INSIDE" width="287.0" />
+            <Text fill="#00ae23" layoutX="191.0" layoutY="49.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Edit or delete a Career">
+               <font>
+                  <Font name="Lucida Bright" size="25.0" />
+               </font>
+            </Text>
+            <Text fill="WHITE" layoutX="208.0" layoutY="203.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Edit the career's name here:" wrappingWidth="220.6455078125">
+               <font>
+                  <Font name="Franklin Gothic Book" size="18.0" />
+               </font>
+            </Text>
+            <Text fill="WHITE" layoutX="183.0" layoutY="126.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Choose a career to manipulate it" wrappingWidth="287.0">
+               <font>
+                  <Font name="Franklin Gothic Book" size="18.0" />
+               </font>
+            </Text>
+            <Text fill="#ffd400" layoutX="165.0" layoutY="77.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Here you can either edit or delete a career">
+               <font>
+                  <Font name="Lucida Bright" size="15.0" />
+               </font>
+            </Text>
+         </children>
+      </AnchorPane>
+   </center>
+</BorderPane>
