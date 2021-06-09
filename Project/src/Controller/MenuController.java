@@ -485,9 +485,10 @@ public class MenuController implements Initializable {
                 pdf.deleteFile("Report Careers");
                 pdf.careerPDF(pdfName, Util.Utility.getListCareer());
             }
-        } catch (Exception e) {
+        } catch (DocumentException | IOException | URISyntaxException e) {
             System.out.println("Error: " + e);
         }
+        callAlert("notification", "Notification", "Report Careers has been create");
     }
 
     @FXML
@@ -501,9 +502,10 @@ public class MenuController implements Initializable {
                 pdf.deleteFile("Report Students");
                 pdf.studentPDF(pdfName, Util.Utility.getListStudents());
             }
-        } catch (Exception e) {
+        } catch (DocumentException | IOException | URISyntaxException e) {
             System.out.println("Error: " + e);
         }
+        callAlert("notification", "Notification", "Report Students has been create");
     }
 
     @FXML
@@ -517,9 +519,10 @@ public class MenuController implements Initializable {
                 pdf.deleteFile("Report Courses");
                 pdf.coursePDF(pdfName, Util.Utility.getListCourse());
             }
-        } catch (Exception e) {
+        } catch (DocumentException | IOException | URISyntaxException e) {
             System.out.println("Error: " + e);
         }
+        callAlert("notification", "Notification", "Report Courses has been create");
     }
 
     @FXML
@@ -538,6 +541,8 @@ public class MenuController implements Initializable {
                     pdf.enrollmentPDF(pdfStudents, Util.Utility.getListEnrollment());
                 }
 
+                callAlert("notification", "Notification", "Report Enrollments has been create");
+
             } else {//Student
 
                 if (!pdf.exist(pdfStudent)) {
@@ -546,6 +551,7 @@ public class MenuController implements Initializable {
                     pdf.deleteFile("Report Enrollment Student");
                     pdf.enrollmentStudentPDF(pdfStudent, Util.Utility.getListEnrollment(), Util.Utility.getUserStudent());
                 }
+                callAlert("notification", "Notification", "Report Student Enrollment has been create");
 
             }
 
@@ -569,6 +575,7 @@ public class MenuController implements Initializable {
                     pdf.deleteFile("Report DeEnrollments");
                     pdf.deEnrollmentPDF(pdfName, Util.Utility.getListDeEnrollment());
                 }
+                callAlert("notification", "Notification", "Report DeEnrollment has been create");
 
             } else {//Student
 
@@ -578,6 +585,7 @@ public class MenuController implements Initializable {
                     pdf.deleteFile("Report DeEnrollments Student");
                     pdf.deEnrollmentStudentPDF(pdfStudent, Util.Utility.getListDeEnrollment(), Util.Utility.getUserStudent());
                 }
+                callAlert("notification", "Notification", "Report Student DeEnrollment has been create");
 
             }
         } catch (DocumentException | IOException | URISyntaxException e) {
@@ -587,7 +595,6 @@ public class MenuController implements Initializable {
 
     public void deletePDF() {
         FilePDF pdf = new FilePDF();
-        System.out.println("borra los pdf");
         try {
             if (pdf.exist("Report Students")) {
                 pdf.deleteFile("Report Students");
