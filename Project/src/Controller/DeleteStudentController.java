@@ -30,6 +30,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.BorderPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javax.xml.parsers.ParserConfigurationException;
@@ -68,6 +69,8 @@ public class DeleteStudentController implements Initializable {
     SinglyLinkList students = new SinglyLinkList();
     @FXML
     private Button btnDelete;
+    @FXML
+    private BorderPane bpRoot;
 
     /**
      * Initializes the controller class.
@@ -90,7 +93,8 @@ public class DeleteStudentController implements Initializable {
     }
     
     @FXML
-    private void btnClean(ActionEvent event) {
+    private void btnClean(ActionEvent event) throws ListException {
+        reloadCombo();
         txtPhoneNumber.setText("");
         txtEmail.setText("");
         txtId.setText("");
@@ -102,26 +106,29 @@ public class DeleteStudentController implements Initializable {
     
     @FXML
     private void cmbId(ActionEvent event) throws ListException {
-        btnDelete.setVisible(true);
-        Student temp = new Student(0, 0, cmbId.getValue().toString(), "", "", "", "", "", null);
-        if (students.contains(temp)) {
-            temp = look4student(temp);
-            this.txtAddress.setText(temp.getAddress());
-            this.txtEmail.setText(temp.getEmail());
-            this.txtFirstName.setText(temp.getFirstname());
-            this.txtLastName.setText(temp.getLastname());
-            this.txtPhoneNumber.setText(temp.getPhoneNumber());
-            this.txtId.setText(String.valueOf(temp.getId()));
-            //Convertir Date a LocalDate
-            LocalDate localDate = LocalDate.parse(new SimpleDateFormat("yyyy-MM-dd").format(temp.getBirthday()));
-            this.dpBirthday.setValue(localDate);
+        
+        if(cmbId.getValue()!=null){
+       
+            btnDelete.setVisible(true);
+            Student temp = new Student(0, 0, cmbId.getValue().toString(), "", "", "", "", "", null);
+            if (students.contains(temp)) {
+                temp = look4student(temp);
+                this.txtAddress.setText(temp.getAddress());
+                this.txtEmail.setText(temp.getEmail());
+                this.txtFirstName.setText(temp.getFirstname());
+                this.txtLastName.setText(temp.getLastname());
+                this.txtPhoneNumber.setText(temp.getPhoneNumber());
+                this.txtId.setText(String.valueOf(temp.getId()));
+                //Convertir Date a LocalDate
+                LocalDate localDate = LocalDate.parse(new SimpleDateFormat("yyyy-MM-dd").format(temp.getBirthday()));
+                this.dpBirthday.setValue(localDate);
+            }
         }
     }
     
     @FXML
-    private void btnDelete(ActionEvent event) throws ListException {
+    private void btnDelete(ActionEvent event) throws ListException, IOException {
         
-        FileXML fXML = new FileXML();
         //Convertir Date a LocalDate
         java.util.Date d = java.sql.Date.valueOf(dpBirthday.getValue());
         //Se elmina y luego se anhade
@@ -132,19 +139,30 @@ public class DeleteStudentController implements Initializable {
         
         if (lookEnrollment(std.getStudentID())) {
             Util.Utility.getListStudents().remove(std);
+            if(Util.Utility.getListStudents().isEmpty()){
+                bpRoot.setCenter(null);
+            }
             callAlert("notification", "Notification", "Student has been deleted");
+            students = Util.Utility.getListStudents();
         } else {
             callAlert("alert", "Student Not Deleted", "Student cannot been deleted");
         }
         
         btnClean(event);
-        reloadCombo();
+        if(!Util.Utility.getListStudents().isEmpty()){
+            reloadCombo();
+        }
         
     }
     
     private boolean lookEnrollment(String studentID) throws ListException {
         boolean condition = true;
+        
         CircularDoublyLinkList list = Util.Utility.getListEnrollment();
+        if(list.isEmpty()){
+            return condition;
+        }
+        
         for (int i = 1; i <= list.size(); i++) {
             Enrollment enrollment = (Enrollment) list.getNode(i).data;
             if (enrollment.getStudentID().equalsIgnoreCase(studentID)) {
@@ -199,6 +217,7 @@ public class DeleteStudentController implements Initializable {
         }
         
         students = Util.Utility.getListStudents(); //Se recarga la lista de estudiantes
+        if(!students.isEmpty())
         for (int i = 1; i <= students.size(); i++) {
             Student s = (Student) students.getNode(i).getData();
             cmbId.getItems().add(s.getStudentID());
