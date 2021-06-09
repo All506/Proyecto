@@ -219,8 +219,7 @@ public class NewStudentController implements Initializable {
                             System.out.println(e);
                         }
                         
-                        callAlert("notification", "Notification", "User has been registered");
-                        System.out.println("La lista en util \n" + Util.Utility.getListStudents().toString());
+                        callAlert("notification", "Notification", "User has been registered");                        
                         btnClean(event);
                     } else {
                         callAlert("alert", "Error", "User already exist");
