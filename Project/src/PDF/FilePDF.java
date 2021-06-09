@@ -168,14 +168,14 @@ public class FilePDF {
         document.add(parrafo);
 
         java.util.Date d = java.sql.Date.valueOf(java.time.LocalDate.now());
-        
+
         try {
             for (int i = 1; i <= list.size(); i++) {
                 TimeTable temp = new TimeTable();
                 Paragraph parrafo1 = new Paragraph();
-                
+
                 Course course = (Course) list.getNode(i).data;
-                
+
                 parrafo1.add("\nIdentification: " + String.valueOf(course.getId()));
                 parrafo1.add("\nName: " + course.getName());
                 parrafo1.add("\nCredits: " + String.valueOf(course.getCredits()));
@@ -225,7 +225,7 @@ public class FilePDF {
                 parrafo1.add("\nIdentification: " + enrollment.getId());
                 parrafo1.add("\nDate: " + enrollment.getDate());
                 parrafo1.add("\nStudent Id: " + enrollment.getStudentID());
-                parrafo1.add("\nCourse Id: " + enrollment.getCourseID());
+                parrafo1.add("\nCourse Id: " + enrollment.getCourseID() + " - " + Util.Utility.getCourseByID(enrollment.getCourseID()).getName());
                 parrafo1.add("\nShedule: " + enrollment.getSchedule());
                 parrafo1.add("\n----------------------------------------");
                 document.add(parrafo1);
@@ -264,7 +264,7 @@ public class FilePDF {
                 parrafo1.add("\nIdentification: " + deEnrollment.getId());
                 parrafo1.add("\nDate: " + deEnrollment.getDate());
                 parrafo1.add("\nStudent Id: " + deEnrollment.getStudentID());
-                parrafo1.add("\nCourse Id: " + deEnrollment.getCourseID());
+                parrafo1.add("\nCourse Id: " + deEnrollment.getCourseID() + " - " + Util.Utility.getCourseByID(deEnrollment.getCourseID()).getName());
                 parrafo1.add("\nShedule: " + deEnrollment.getSchedule());
                 parrafo1.add("\nRemark: " + deEnrollment.getRemark());
                 parrafo1.add("\n----------------------------------------");
@@ -300,12 +300,12 @@ public class FilePDF {
         try {
             for (int i = 1; i <= list.size(); i++) {
                 Enrollment enrollment = (Enrollment) list.getNode(i).data;
-                if (enrollment.getStudentID().equalsIgnoreCase(student.getStudentID())) {
+                if (enrollment.getStudentID().equals(student.getStudentID())) {
                     Paragraph parrafo1 = new Paragraph();
                     parrafo1.add("\nIdentification: " + enrollment.getId());
                     parrafo1.add("\nDate: " + enrollment.getDate());
                     parrafo1.add("\nStudent Id: " + enrollment.getStudentID());
-                    parrafo1.add("\nCourse Id: " + enrollment.getCourseID());
+                    parrafo1.add("\nCourse Id: " + enrollment.getCourseID() + " - " + Util.Utility.getCourseByID(enrollment.getCourseID()).getName());
                     parrafo1.add("\nShedule: " + enrollment.getSchedule());
                     parrafo1.add("\n----------------------------------------");
                     document.add(parrafo1);
@@ -340,14 +340,13 @@ public class FilePDF {
         document.add(parrafo);
         try {
             for (int i = 1; i <= list.size(); i++) {
-                Enrollment enrollment = (Enrollment) list.getNode(i).data;
-                if (enrollment.getStudentID().equalsIgnoreCase(student.getStudentID())) {
+                DeEnrollment deEnrollment = (DeEnrollment) list.getNode(i).data;
+                if (deEnrollment.getStudentID().equals(student.getStudentID())) {
                     Paragraph parrafo1 = new Paragraph();
-                    DeEnrollment deEnrollment = (DeEnrollment) list.getNode(i).data;
                     parrafo1.add("\nIdentification: " + deEnrollment.getId());
                     parrafo1.add("\nDate: " + deEnrollment.getDate());
                     parrafo1.add("\nStudent Id: " + deEnrollment.getStudentID());
-                    parrafo1.add("\nCourse Id: " + deEnrollment.getCourseID());
+                    parrafo1.add("\nCourse Id: " + deEnrollment.getCourseID() + " - " + Util.Utility.getCourseByID(deEnrollment.getCourseID()).getName());
                     parrafo1.add("\nShedule: " + deEnrollment.getSchedule());
                     parrafo1.add("\nRemark: " + deEnrollment.getRemark());
                     parrafo1.add("\n----------------------------------------");
