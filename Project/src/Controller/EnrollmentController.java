@@ -76,6 +76,8 @@ public class EnrollmentController implements Initializable {
     @FXML
     private BorderPane bpRoot;
 
+    Student temp;
+    
     /**
      * Initializes the controller class.
      */
@@ -83,7 +85,7 @@ public class EnrollmentController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         try {
             Student s = Util.Utility.getUserStudent();
-
+            temp = s;
             txfStudentID.setText(s.getStudentID());
             txfPersID.setText("" + s.getId());
             txfFirstName.setText(s.getFirstname());
@@ -163,7 +165,7 @@ public class EnrollmentController implements Initializable {
     }
 
     @FXML
-    private void btnEnroll(ActionEvent event) throws ListException {
+    private void btnEnroll(ActionEvent event) throws ListException, Exception {
     if(cmbCourse.getValue().equalsIgnoreCase("Courses")||cmbPeriod.getValue().equalsIgnoreCase("Period")||cmbSchedule.getValue().equalsIgnoreCase("Schedules")){ 
     
         callAlert("alert", "¡Incomplete data!", "You must select a period, a schedule and a period");
@@ -184,6 +186,9 @@ public class EnrollmentController implements Initializable {
             }else{
             try {
                 Util.Utility.setListEnrollment(newEnroll);
+                String course = "Period:" + cmbPeriod.getValue() + " / Course:" + this.cmbCourse.getValue() + " / Credits:" + Util.Utility.getCourseByID(courseId[0]).getCredits()
+                        + " / Shedule:" + this.cmbSchedule.getValue();
+                Util.Mail.enrollmentEmail(this.txfEmail.getText(), this.temp.data(), course);
                 callAlert("notification", "Notification", "Enrollment completed successfully");
                 loadPage("/UI/enrollmentTable");
 

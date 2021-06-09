@@ -139,38 +139,38 @@ public class MenuController implements Initializable {
 
     @FXML
     private void mnNewStudent(ActionEvent event) {
-        if(Util.Utility.getListCareer().isEmpty()){
-        callAlert("alert", "Attention!", "There are no careers defined yet.");
-        }else{
-        loadPage("/UI/newStudent");
+        if (Util.Utility.getListCareer().isEmpty()) {
+            callAlert("alert", "Attention!", "There are no careers defined yet.");
+        } else {
+            loadPage("/UI/newStudent");
         }
     }
 
     @FXML
     private void btnModifyStudent(ActionEvent event) {
-        if(Util.Utility.getListStudents().isEmpty()){
-        callAlert("alert", "Attention!", "There are no students registered yet.");
-        }else{
-        loadPage("/UI/modifyStudent");
+        if (Util.Utility.getListStudents().isEmpty()) {
+            callAlert("alert", "Attention!", "There are no students registered yet.");
+        } else {
+            loadPage("/UI/modifyStudent");
         }
     }
 
     @FXML
     private void btnShowStudents(ActionEvent event) {
-        if(Util.Utility.getListStudents().isEmpty()){
-        callAlert("alert", "Attention!", "There are no students registered yet.");
-        }else{
-        this.bpMenu.setCenter(null);
-        loadPage("/UI/showStudent");
+        if (Util.Utility.getListStudents().isEmpty()) {
+            callAlert("alert", "Attention!", "There are no students registered yet.");
+        } else {
+            this.bpMenu.setCenter(null);
+            loadPage("/UI/showStudent");
         }
     }
 
     @FXML
     private void btnDeleteStudent(ActionEvent event) {
-        if(Util.Utility.getListStudents().isEmpty()){
-        callAlert("alert", "Attention!", "There are no students registered yet.");
-        }else{
-        loadPage("/UI/deleteStudent");
+        if (Util.Utility.getListStudents().isEmpty()) {
+            callAlert("alert", "Attention!", "There are no students registered yet.");
+        } else {
+            loadPage("/UI/deleteStudent");
         }
     }
 
@@ -181,19 +181,19 @@ public class MenuController implements Initializable {
 
     @FXML
     private void btnShowCareers(ActionEvent event) {
-        if(Util.Utility.getListCareer().isEmpty()){
-        callAlert("alert", "Attention!", "There are no careers defined yet.");
-        }else{
-        loadPage("/UI/showCareers");
+        if (Util.Utility.getListCareer().isEmpty()) {
+            callAlert("alert", "Attention!", "There are no careers defined yet.");
+        } else {
+            loadPage("/UI/showCareers");
         }
     }
 
     @FXML
     private void btnDeleteOrEditCareer(ActionEvent event) {
-        if(Util.Utility.getListCareer().isEmpty()){
-        callAlert("alert", "Attention!", "There are no careers defined yet.");
-        }else{
-        loadPage("/UI/EditAndDeleteCareer");
+        if (Util.Utility.getListCareer().isEmpty()) {
+            callAlert("alert", "Attention!", "There are no careers defined yet.");
+        } else {
+            loadPage("/UI/EditAndDeleteCareer");
         }
     }
 
@@ -372,46 +372,46 @@ public class MenuController implements Initializable {
 
     @FXML
     private void mnNewCourse(ActionEvent event) {
-        if(Util.Utility.getListCareer().isEmpty()){
-        callAlert("alert", "Attention!", "There are no careers defined yet.");
-        }else{
-        loadPage("/UI/newCourse");
+        if (Util.Utility.getListCareer().isEmpty()) {
+            callAlert("alert", "Attention!", "There are no careers defined yet.");
+        } else {
+            loadPage("/UI/newCourse");
         }
     }
 
     @FXML
     private void btnModifyCourse(ActionEvent event) {
-        if(Util.Utility.getListCourse().isEmpty()){
-        callAlert("alert", "Attention!", "There are no courses defined yet.");
-        }else{
-        loadPage("/UI/modifyCourse");
+        if (Util.Utility.getListCourse().isEmpty()) {
+            callAlert("alert", "Attention!", "There are no courses defined yet.");
+        } else {
+            loadPage("/UI/modifyCourse");
         }
     }
 
     @FXML
     private void btnDeleteCourse(ActionEvent event) {
-        if(Util.Utility.getListCourse().isEmpty()){
-        callAlert("alert", "Attention!", "There are no courses defined yet.");
-        }else{
-        loadPage("/UI/deleteCourse");
+        if (Util.Utility.getListCourse().isEmpty()) {
+            callAlert("alert", "Attention!", "There are no courses defined yet.");
+        } else {
+            loadPage("/UI/deleteCourse");
         }
     }
 
     @FXML
     private void btnShowCourse(ActionEvent event) {
-        if(Util.Utility.getListCourse().isEmpty()){
-        callAlert("alert", "Attention!", "There are no courses defined yet.");
-        }else{
-        loadPage("/UI/showCourse");
+        if (Util.Utility.getListCourse().isEmpty()) {
+            callAlert("alert", "Attention!", "There are no courses defined yet.");
+        } else {
+            loadPage("/UI/showCourse");
         }
     }
 
     @FXML
     private void btnNewSchedule(ActionEvent event) {
-        if(Util.Utility.getListCourse().isEmpty()){
-        callAlert("alert", "Attention!", "There are no courses defined yet.");
-        }else{
-        loadPage("/UI/newTimeTable");
+        if (Util.Utility.getListCourse().isEmpty()) {
+            callAlert("alert", "Attention!", "There are no courses defined yet.");
+        } else {
+            loadPage("/UI/newTimeTable");
         }
     }
 
@@ -469,9 +469,9 @@ public class MenuController implements Initializable {
 
     @FXML
     private void reportCareer(ActionEvent event) {
-        if(Util.Utility.getListCareer().isEmpty()){
-        callAlert("alert", "Attention!", "There are no careers registered yet.");
-        }else{
+        if (Util.Utility.getListCareer().isEmpty()) {
+            callAlert("alert", "Attention!", "There are no careers registered yet.");
+        } else {
             String pdfName = "Report Careers";
             FilePDF pdf = new FilePDF();
             try {
@@ -490,9 +490,9 @@ public class MenuController implements Initializable {
 
     @FXML
     private void reportStudent(ActionEvent event) {
-        if(Util.Utility.getListStudents().isEmpty()){
-        callAlert("alert", "Attention!", "There are no students registered yet.");
-        }else{
+        if (Util.Utility.getListStudents().isEmpty()) {
+            callAlert("alert", "Attention!", "There are no students registered yet.");
+        } else {
             String pdfName = "Report Students";
             FilePDF pdf = new FilePDF();
             try {
@@ -511,9 +511,9 @@ public class MenuController implements Initializable {
 
     @FXML
     private void reportCourses(ActionEvent event) {
-        if(Util.Utility.getListCourse().isEmpty()){
-        callAlert("alert", "Attention!", "There are no courses registered yet.");
-        }else{
+        if (Util.Utility.getListCourse().isEmpty()) {
+            callAlert("alert", "Attention!", "There are no courses registered yet.");
+        } else {
             String pdfName = "Report Courses";
             FilePDF pdf = new FilePDF();
             try {
@@ -532,10 +532,10 @@ public class MenuController implements Initializable {
 
     @FXML
     private void reportEnrollment(ActionEvent event) {
-        if(Util.Utility.getListEnrollment().isEmpty()){
-        callAlert("alert", "Attention!", "There are no enrollments registered yet.");
-        }else{
-        
+        if (Util.Utility.getListEnrollment().isEmpty()) {
+            callAlert("alert", "Attention!", "There are no enrollments registered yet.");
+        } else {
+
             String pdfStudents = "Report Enrollments";
             String pdfStudent = "Report Enrollment Student";
             FilePDF pdf = new FilePDF();
@@ -572,9 +572,9 @@ public class MenuController implements Initializable {
 
     @FXML
     private void reportDeEnrollment(ActionEvent event) {
-        if(Util.Utility.getListDeEnrollment().isEmpty()){
-        callAlert("alert", "Attention!", "There are no De-enrollments\nregistered yet.");
-        }else{
+        if (Util.Utility.getListDeEnrollment().isEmpty()) {
+            callAlert("alert", "Attention!", "There are no De-enrollments\nregistered yet.");
+        } else {
 
             String pdfName = "Report DeEnrollments";
             String pdfStudent = "Report DeEnrollment Student";
