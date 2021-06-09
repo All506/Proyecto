@@ -168,13 +168,14 @@ public class FilePDF {
         document.add(parrafo);
 
         java.util.Date d = java.sql.Date.valueOf(java.time.LocalDate.now());
-
+        
         try {
             for (int i = 1; i <= list.size(); i++) {
-                Paragraph parrafo1 = new Paragraph();
                 TimeTable temp = new TimeTable();
+                Paragraph parrafo1 = new Paragraph();
+                
                 Course course = (Course) list.getNode(i).data;
-                System.out.println(course.toString());
+                
                 parrafo1.add("\nIdentification: " + String.valueOf(course.getId()));
                 parrafo1.add("\nName: " + course.getName());
                 parrafo1.add("\nCredits: " + String.valueOf(course.getCredits()));
@@ -190,6 +191,7 @@ public class FilePDF {
             }
 
         } catch (ListException | DocumentException e) {
+            System.out.println(e);
         }
 
         //Importante cerrar el pdf
