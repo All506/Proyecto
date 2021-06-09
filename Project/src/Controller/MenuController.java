@@ -14,11 +14,9 @@ import Domain.SinglyLinkList;
 import Objects.Course;
 import Objects.DeEnrollment;
 import Objects.Enrollment;
-import Objects.Security;
 import Objects.Student;
 import Objects.TimeTable;
 import PDF.FilePDF;
-import Security.AES;
 import UI.mainFx;
 import XML.FileXML;
 import com.itextpdf.text.DocumentException;
@@ -28,7 +26,6 @@ import java.net.URL;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -38,13 +35,9 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuItem;
-import javafx.scene.image.Image;
-import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-import javax.xml.transform.TransformerException;
-import org.xml.sax.SAXException;
 
 /**
  * FXML Controller class
@@ -476,120 +469,142 @@ public class MenuController implements Initializable {
 
     @FXML
     private void reportCareer(ActionEvent event) {
-        String pdfName = "Report Careers";
-        FilePDF pdf = new FilePDF();
-        try {
-            if (!pdf.exist(pdfName)) {
-                pdf.careerPDF(pdfName, Util.Utility.getListCareer());
-            } else {
-                pdf.deleteFile("Report Careers");
-                pdf.careerPDF(pdfName, Util.Utility.getListCareer());
+        if(Util.Utility.getListCareer().isEmpty()){
+        callAlert("alert", "Attention!", "There are no careers registered yet.");
+        }else{
+            String pdfName = "Report Careers";
+            FilePDF pdf = new FilePDF();
+            try {
+                if (!pdf.exist(pdfName)) {
+                    pdf.careerPDF(pdfName, Util.Utility.getListCareer());
+                } else {
+                    pdf.deleteFile("Report Careers");
+                    pdf.careerPDF(pdfName, Util.Utility.getListCareer());
+                }
+            } catch (DocumentException | IOException | URISyntaxException e) {
+                System.out.println("Error: " + e);
             }
-        } catch (DocumentException | IOException | URISyntaxException e) {
-            System.out.println("Error: " + e);
+            callAlert("notification", "Notification", "Careers' report has been created");
         }
-        callAlert("notification", "Notification", "Report Careers has been create");
     }
 
     @FXML
     private void reportStudent(ActionEvent event) {
-        String pdfName = "Report Students";
-        FilePDF pdf = new FilePDF();
-        try {
-            if (!pdf.exist(pdfName)) {
-                pdf.studentPDF(pdfName, Util.Utility.getListStudents());
-            } else {
-                pdf.deleteFile("Report Students");
-                pdf.studentPDF(pdfName, Util.Utility.getListStudents());
+        if(Util.Utility.getListStudents().isEmpty()){
+        callAlert("alert", "Attention!", "There are no students registered yet.");
+        }else{
+            String pdfName = "Report Students";
+            FilePDF pdf = new FilePDF();
+            try {
+                if (!pdf.exist(pdfName)) {
+                    pdf.studentPDF(pdfName, Util.Utility.getListStudents());
+                } else {
+                    pdf.deleteFile("Report Students");
+                    pdf.studentPDF(pdfName, Util.Utility.getListStudents());
+                }
+            } catch (DocumentException | IOException | URISyntaxException e) {
+                System.out.println("Error: " + e);
             }
-        } catch (DocumentException | IOException | URISyntaxException e) {
-            System.out.println("Error: " + e);
+            callAlert("notification", "Notification", "Students' report has been created");
         }
-        callAlert("notification", "Notification", "Report Students has been create");
     }
 
     @FXML
     private void reportCourses(ActionEvent event) {
-        String pdfName = "Report Courses";
-        FilePDF pdf = new FilePDF();
-        try {
-            if (!pdf.exist(pdfName)) {
-                pdf.coursePDF(pdfName, Util.Utility.getListCourse());
-            } else {
-                pdf.deleteFile("Report Courses");
-                pdf.coursePDF(pdfName, Util.Utility.getListCourse());
+        if(Util.Utility.getListCourse().isEmpty()){
+        callAlert("alert", "Attention!", "There are no courses registered yet.");
+        }else{
+            String pdfName = "Report Courses";
+            FilePDF pdf = new FilePDF();
+            try {
+                if (!pdf.exist(pdfName)) {
+                    pdf.coursePDF(pdfName, Util.Utility.getListCourse());
+                } else {
+                    pdf.deleteFile("Report Courses");
+                    pdf.coursePDF(pdfName, Util.Utility.getListCourse());
+                }
+            } catch (DocumentException | IOException | URISyntaxException e) {
+                System.out.println("Error: " + e);
             }
-        } catch (DocumentException | IOException | URISyntaxException e) {
-            System.out.println("Error: " + e);
+            callAlert("notification", "Notification", "Courses' report has been created");
         }
-        callAlert("notification", "Notification", "Report Courses has been create");
     }
 
     @FXML
     private void reportEnrollment(ActionEvent event) {
-        String pdfStudents = "Report Enrollments";
-        String pdfStudent = "Report Enrollment Student";
-        FilePDF pdf = new FilePDF();
-        boolean kindUser = Util.Utility.isKindUser();
-        try {
-            if (kindUser) {//Admin
+        if(Util.Utility.getListEnrollment().isEmpty()){
+        callAlert("alert", "Attention!", "There are no enrollments registered yet.");
+        }else{
+        
+            String pdfStudents = "Report Enrollments";
+            String pdfStudent = "Report Enrollment Student";
+            FilePDF pdf = new FilePDF();
+            boolean kindUser = Util.Utility.isKindUser();
+            try {
+                if (kindUser) {//Admin
 
-                if (!pdf.exist(pdfStudents)) {
-                    pdf.enrollmentPDF(pdfStudents, Util.Utility.getListEnrollment());
-                } else {
-                    pdf.deleteFile("Report Enrollments");
-                    pdf.enrollmentPDF(pdfStudents, Util.Utility.getListEnrollment());
+                    if (!pdf.exist(pdfStudents)) {
+                        pdf.enrollmentPDF(pdfStudents, Util.Utility.getListEnrollment());
+                    } else {
+                        pdf.deleteFile("Report Enrollments");
+                        pdf.enrollmentPDF(pdfStudents, Util.Utility.getListEnrollment());
+                    }
+
+                    callAlert("notification", "Notification", "Report Enrollments has been create");
+
+                } else {//Student
+
+                    if (!pdf.exist(pdfStudent)) {
+                        pdf.enrollmentStudentPDF(pdfStudent, Util.Utility.getListEnrollment(), Util.Utility.getUserStudent());
+                    } else {
+                        pdf.deleteFile("Report Enrollment Student");
+                        pdf.enrollmentStudentPDF(pdfStudent, Util.Utility.getListEnrollment(), Util.Utility.getUserStudent());
+                    }
+                    callAlert("notification", "Notification", "Report Student Enrollment has been create");
+
                 }
 
-                callAlert("notification", "Notification", "Report Enrollments has been create");
-
-            } else {//Student
-
-                if (!pdf.exist(pdfStudent)) {
-                    pdf.enrollmentStudentPDF(pdfStudent, Util.Utility.getListEnrollment(), Util.Utility.getUserStudent());
-                } else {
-                    pdf.deleteFile("Report Enrollment Student");
-                    pdf.enrollmentStudentPDF(pdfStudent, Util.Utility.getListEnrollment(), Util.Utility.getUserStudent());
-                }
-                callAlert("notification", "Notification", "Report Student Enrollment has been create");
-
+            } catch (DocumentException | IOException | URISyntaxException e) {
+                System.out.println("Error: " + e);
             }
-
-        } catch (DocumentException | IOException | URISyntaxException e) {
-            System.out.println("Error: " + e);
         }
     }
 
     @FXML
     private void reportDeEnrollment(ActionEvent event) {
-        String pdfName = "Report DeEnrollments";
-        String pdfStudent = "Report DeEnrollment Student";
-        FilePDF pdf = new FilePDF();
-        boolean kindUser = Util.Utility.isKindUser();
-        try {
-            if (kindUser) {//Admin
+        if(Util.Utility.getListDeEnrollment().isEmpty()){
+        callAlert("alert", "Attention!", "There are no De-enrollments\nregistered yet.");
+        }else{
 
-                if (!pdf.exist(pdfName)) {
-                    pdf.deEnrollmentPDF(pdfName, Util.Utility.getListDeEnrollment());
-                } else {
-                    pdf.deleteFile("Report DeEnrollments");
-                    pdf.deEnrollmentPDF(pdfName, Util.Utility.getListDeEnrollment());
+            String pdfName = "Report DeEnrollments";
+            String pdfStudent = "Report DeEnrollment Student";
+            FilePDF pdf = new FilePDF();
+            boolean kindUser = Util.Utility.isKindUser();
+            try {
+                if (kindUser) {//Admin
+
+                    if (!pdf.exist(pdfName)) {
+                        pdf.deEnrollmentPDF(pdfName, Util.Utility.getListDeEnrollment());
+                    } else {
+                        pdf.deleteFile("Report DeEnrollments");
+                        pdf.deEnrollmentPDF(pdfName, Util.Utility.getListDeEnrollment());
+                    }
+                    callAlert("notification", "Notification", "DeEnrollments' report has been create");
+
+                } else {//Student
+
+                    if (!pdf.exist(pdfStudent)) {
+                        pdf.deEnrollmentStudentPDF(pdfStudent, Util.Utility.getListDeEnrollment(), Util.Utility.getUserStudent());
+                    } else {
+                        pdf.deleteFile("Report DeEnrollments Student");
+                        pdf.deEnrollmentStudentPDF(pdfStudent, Util.Utility.getListDeEnrollment(), Util.Utility.getUserStudent());
+                    }
+                    callAlert("notification", "Notification", "Student DeEnrollments' reports has been create");
+
                 }
-                callAlert("notification", "Notification", "Report DeEnrollment has been create");
-
-            } else {//Student
-
-                if (!pdf.exist(pdfStudent)) {
-                    pdf.deEnrollmentStudentPDF(pdfStudent, Util.Utility.getListDeEnrollment(), Util.Utility.getUserStudent());
-                } else {
-                    pdf.deleteFile("Report DeEnrollments Student");
-                    pdf.deEnrollmentStudentPDF(pdfStudent, Util.Utility.getListDeEnrollment(), Util.Utility.getUserStudent());
-                }
-                callAlert("notification", "Notification", "Report Student DeEnrollment has been create");
-
+            } catch (DocumentException | IOException | URISyntaxException e) {
+                System.out.println("Error: " + e);
             }
-        } catch (DocumentException | IOException | URISyntaxException e) {
-            System.out.println("Error: " + e);
         }
     }
 
