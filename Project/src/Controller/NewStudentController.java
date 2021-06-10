@@ -119,12 +119,11 @@ public class NewStudentController implements Initializable {
     
     public void maskText(TextField txtField) {
         txtField.setOnKeyTyped((KeyEvent event) -> {
-            if (!"0123456789".contains(event.getCharacter()) == false) {
+            if (!"0123456789".contains(event.getCharacter()) == false || !"".contains(event.getCharacter()) == false) {
                 event.consume();
             }
             if (event.getCharacter().trim().length() == 0) {
                 if (txtField.getText().length() == 6) {
-                    txtField.setText(txtField.getText().substring(0, 5));
                     txtField.positionCaret(txtField.getText().length());
                 }
             } else {
