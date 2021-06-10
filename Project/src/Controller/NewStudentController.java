@@ -163,13 +163,8 @@ public class NewStudentController implements Initializable {
                     txtID.positionCaret(txtID.getText().length());
                 }
             } else {
-                if (txtID.getText().length() == 10) {
+                if (txtID.getText().length() == 9) {
                     event.consume();
-                }
-                
-                if (txtID.getText().length() == 6) {
-                    txtID.setText(txtID.getText() + "0");
-                    txtID.positionCaret(txtID.getText().length());
                 }
             }
         });
