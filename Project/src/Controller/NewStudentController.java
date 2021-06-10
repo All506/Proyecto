@@ -100,7 +100,6 @@ public class NewStudentController implements Initializable {
         //Mask FirstNamen, LastName y Address
         maskText(txtLastname);
         maskText(txtFirstname);
-        maskText(txtAddress);
         
         //ToolTips
         Tooltip t = new Tooltip("Format: X-XXXX-XXXX");
@@ -140,7 +139,6 @@ public class NewStudentController implements Initializable {
         txtStudentID.setOnKeyTyped((KeyEvent event) -> {
             if (event.getCharacter().trim().length() == 0) {
                 if (txtStudentID.getText().length() == 6) {
-                    txtStudentID.setText(txtStudentID.getText().substring(0, 5));
                     txtStudentID.positionCaret(txtStudentID.getText().length());
                 }
             } else {
@@ -158,7 +156,6 @@ public class NewStudentController implements Initializable {
             }
             if (event.getCharacter().trim().length() == 0) {
                 if (txtID.getText().length() == 6) {
-                    txtID.setText(txtID.getText().substring(0, 5));
                     txtID.positionCaret(txtID.getText().length());
                 }
             } else {
