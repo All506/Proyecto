@@ -237,12 +237,12 @@ public class Utility {
         boolean flag = false;
         int temp = Util.Utility.getLastDeEnroll();
         if (Utility.lDeEnrollment.isEmpty()) {
-            Util.Utility.setLastDeEnroll(temp++);
+            Util.Utility.setLastDeEnroll(++temp);
             Utility.lDeEnrollment.add(deEnr);
             flag = true;
         } else {
             if (!lDeEnrollment.contains(deEnr)) {
-                Util.Utility.setLastDeEnroll(temp++);
+                Util.Utility.setLastDeEnroll(++temp);
                 lDeEnrollment.add(deEnr);
                 flag = true;
             } else {
