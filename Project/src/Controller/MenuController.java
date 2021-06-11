@@ -219,7 +219,7 @@ public class MenuController implements Initializable {
                     try {
                         for (int i = 1; i <= lStudents.size(); i++) {
                             Util.Utility.setListStudent((Student) lStudents.getNode(i).data);
-//                    System.out.println(lStudents.getNode(i).data.toString());
+
 
                         }
                     } catch (ListException ex1) {

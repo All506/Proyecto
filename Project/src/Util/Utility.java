@@ -255,7 +255,7 @@ public class Utility {
     
     public static int getCareerByCourse(String courseId) throws ListException{
         Course c = Utility.getCourseByID(courseId);
-        System.out.println(c.toString());
+        
         return c.getCareerId();
     }
 
@@ -522,7 +522,7 @@ public class Utility {
         for (int i = 1; i <= oldLEnrollment.size(); i++) {
             Enrollment e = (Enrollment) oldLEnrollment.getNode(i).data;
             if (e.getCourseID().equals(dE.getCourseID()) && e.getStudentID().equals(dE.getStudentID()) && e.getSchedule().equals(dE.getSchedule())) {
-                System.out.println("Enroll borrado" + e.toString());
+               
                 flag = true;
             } else {
                 newLEnrollment.add(e);

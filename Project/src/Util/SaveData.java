@@ -136,7 +136,7 @@ public class SaveData {
         }
 
 
-            System.out.println(Util.Utility.getListEnrollment().toString());
+           
 
         //Guarda datos de la lista de DeEnrollment en XML
         if (!fXML.exist("DeEnrollment.xml")) { //Si el archivo no existe
