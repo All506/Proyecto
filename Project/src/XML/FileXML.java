@@ -69,7 +69,7 @@ public class FileXML {
             StreamResult result = new StreamResult(new File(/*address + "\\" + */fileName + ".xml"));
             transformer.transform(source, result);
 
-            System.out.println("Archivo Creado");
+           
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -120,7 +120,7 @@ public class FileXML {
             StreamResult result = new StreamResult(new File(FileName));
             transformer.transform(source, result);
 
-            System.out.println("Registro Guardado");
+           
 
         } catch (ParserConfigurationException pce) {
 
@@ -204,7 +204,7 @@ public class FileXML {
                     car.setDescription(eElement.getElementsByTagName("description").item(0).getTextContent());
 
                 }
-                System.out.println("Nodo " + "i: " + car.toString());
+                
                 lCareer.add(car);
             }
         } catch (Exception e) {
