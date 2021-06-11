@@ -305,14 +305,6 @@ public class MenuController implements Initializable {
                     Logger.getLogger(MenuController.class.getName()).log(Level.SEVERE, null, ex);
                 }
 
-                try {
-                    for (int i = 1; i <= lEnrollment.size(); i++) { //Se añaden los objetos del xml a util
-                        Util.Utility.setListEnrollment((Enrollment) lEnrollment.getNode(i).data);
-                    }
-                } catch (ListException ex) {
-                    Logger.getLogger(MenuController.class.getName()).log(Level.SEVERE, null, ex);
-                }
-
                 //Cargar el lastId de enrollments
                 Util.Utility.setLastEnroll(fXML.getLastEnroll());
             }
@@ -347,7 +339,13 @@ public class MenuController implements Initializable {
         deletePDF(); //Elimina los pdf creados para que no haya ningun malentendido con los datos
         Util.SaveData save = new Util.SaveData(); //Se almacena la información de las listas en XMLs
         save.saveData();
-
+        Util.Utility.getListCourse().clear();
+        Util.Utility.getListSchedule().clear();
+        Util.Utility.getListEnrollment().clear();
+        Util.Utility.getListStudents().clear();
+        Util.Utility.getListSecurity().clear();
+        Util.Utility.getListDeEnrollment().clear();
+        Util.Utility.getListCareer().clear();
         //--------------------------------------------------------------------------------
         Stage stage = (Stage) this.btnIgnore.getScene().getWindow();
         mainFx m = new mainFx();
