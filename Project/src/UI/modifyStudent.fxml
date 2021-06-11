@@ -59,9 +59,8 @@
          </font>
       </Text>
       <TextField fx:id="txtPhoneNumber" layoutX="423.0" layoutY="150.0" />
-      <ComboBox fx:id="cmbCareerID" layoutX="192.0" layoutY="148.0" prefWidth="150.0" />
       <TextField fx:id="txtEmail" layoutX="423.0" layoutY="194.0" />
-      <TextField fx:id="txtId" layoutX="192.0" layoutY="194.0" />
+      <TextField fx:id="txtId" editable="false" layoutX="192.0" layoutY="194.0" />
       <TextField fx:id="txtAddress" layoutX="422.0" layoutY="235.0" prefHeight="70.0" prefWidth="150.0" />
       <TextField fx:id="txtLastname" layoutX="192.0" layoutY="235.0" />
       <DatePicker fx:id="dpBirthday" layoutX="423.0" layoutY="276.0" prefHeight="25.0" prefWidth="149.0" />
@@ -80,5 +79,6 @@
             <Font name="Lucida Bright" size="15.0" />
          </font>
       </Text>
+      <TextField fx:id="txtCareerId" editable="false" layoutX="192.0" layoutY="150.0" />
    </children>
 </AnchorPane>

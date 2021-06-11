@@ -5,24 +5,18 @@
  */
 package Controller;
 
-import static Controller.NewStudentController.maskID;
-import static Controller.NewStudentController.maskPhoneNumber;
-import static Controller.NewStudentController.maskStudentID;
 import Domain.ListException;
 import Domain.Node;
 import Domain.SinglyLinkList;
 import Objects.Student;
-import XML.FileXML;
 import java.io.IOException;
 import java.net.URL;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
-import java.util.Date;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -33,13 +27,9 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
-import javafx.scene.input.DragEvent;
 import javafx.scene.input.KeyEvent;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-import javax.xml.parsers.ParserConfigurationException;
-import javax.xml.transform.TransformerException;
-import org.xml.sax.SAXException;
 
 /**
  * FXML Controller class
@@ -50,8 +40,6 @@ public class EditStudentController implements Initializable {
 
     @FXML
     private TextField txtPhoneNumber;
-    @FXML
-    private ComboBox<Integer> cmbCareerID;
     @FXML
     private TextField txtEmail;
     private TextField txtStudentID;
@@ -73,6 +61,8 @@ public class EditStudentController implements Initializable {
     SinglyLinkList students = new SinglyLinkList();
     @FXML
     private TextField txtId;
+    @FXML
+    private TextField txtCareerId;
 
     /**
      * Initializes the controller class.
@@ -89,7 +79,6 @@ public class EditStudentController implements Initializable {
             //Mask FirstNamen, LastName y Address
             maskText(txtLastname);
             maskText(txtFirstname);
-            maskText(txtAddress);
 
             this.btnModify.setVisible(false);
             students = Util.Utility.getListStudents();
@@ -98,7 +87,6 @@ public class EditStudentController implements Initializable {
                 Student s = (Student) students.getNode(i).getData();
                 cmbId.getItems().add(s.getStudentID());
             }
-            cmbCareerID.setValue(1);
 
         } catch (ListException ex) {
             Logger.getLogger(EditStudentController.class.getName()).log(Level.SEVERE, null, ex);
@@ -108,12 +96,11 @@ public class EditStudentController implements Initializable {
 
     public void maskText(TextField txtField) {
         txtField.setOnKeyTyped((KeyEvent event) -> {
-            if (!"0123456789".contains(event.getCharacter()) == false) {
+            if (!"0123456789".contains(event.getCharacter()) == false || !"".contains(event.getCharacter()) == false) {
                 event.consume();
             }
             if (event.getCharacter().trim().length() == 0) {
                 if (txtField.getText().length() == 6) {
-                    txtField.setText(txtField.getText().substring(0, 5));
                     txtField.positionCaret(txtField.getText().length());
                 }
             } else {
@@ -130,7 +117,6 @@ public class EditStudentController implements Initializable {
         txtStudentID.setOnKeyTyped((KeyEvent event) -> {
             if (event.getCharacter().trim().length() == 0) {
                 if (txtStudentID.getText().length() == 6) {
-                    txtStudentID.setText(txtStudentID.getText().substring(0, 5));
                     txtStudentID.positionCaret(txtStudentID.getText().length());
                 }
             } else {
@@ -194,7 +180,7 @@ public class EditStudentController implements Initializable {
         java.util.Date d = java.sql.Date.valueOf(dpBirthday.getValue());
         //Se elmina y luego se anhade
 
-        Student std = new Student(Integer.parseInt(txtId.getText()), this.cmbCareerID.getValue(),
+        Student std = new Student(Integer.parseInt(txtId.getText()), Integer.parseInt(Util.Utility.getIDofString(this.txtCareerId.getText())),
                 String.valueOf(this.cmbId.getValue()), this.txtLastname.getText(), this.txtFirstname.getText(),
                 this.txtPhoneNumber.getText(), this.txtEmail.getText(), this.txtAddress.getText(), d);
 
@@ -241,6 +227,7 @@ public class EditStudentController implements Initializable {
             this.txtId.setText(String.valueOf(temp.getId()));
             //Convertir Date a LocalDate
             LocalDate localDate = LocalDate.parse(new SimpleDateFormat("yyyy-MM-dd").format(temp.getBirthday()));
+            this.txtCareerId.setText(temp.getCareerID()+"-"+Util.Utility.getCarrerByID(String.valueOf(temp.getCareerID())).getDescription());
             this.dpBirthday.setValue(localDate);
         }
     }

@@ -10,21 +10,13 @@ import Domain.DoublyLinkList;
 import Domain.ListException;
 import Domain.SinglyLinkList;
 import Objects.Student;
-import Util.Mail;
 import java.io.IOException;
-import static java.lang.Double.parseDouble;
 import java.net.URL;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
-import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
-import javafx.event.EventType;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -35,11 +27,9 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Tooltip;
-import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-import javax.swing.text.MaskFormatter;
 
 /**
  * FXML Controller class
@@ -173,7 +163,6 @@ public class NewStudentController implements Initializable {
             }
             if (event.getCharacter().trim().length() == 0) {
                 if (txtPhoneNumber.getText().length() == 6) {
-                    txtPhoneNumber.setText(txtPhoneNumber.getText().substring(0, 5));
                     txtPhoneNumber.positionCaret(txtPhoneNumber.getText().length());
                 }
             } else {
