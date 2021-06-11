@@ -68,7 +68,7 @@ public class mainFx extends Application {
                 dialog.setTitle("Are you sure?");
                 dialog.setHeaderText(null);
                 dialog.initStyle(StageStyle.UTILITY);
-                dialog.setContentText("After closing, all information not saved will be deleted.  \n Remember to Log Out in order to save all data");
+                dialog.setContentText("Last entries will not be saved if you close the program. \n (In order to keep changes please log out)\n Do you still want to exit?");
                 Optional<ButtonType> result = dialog.showAndWait();
                 if (result.get() == ButtonType.OK) {
                     stage.close();
