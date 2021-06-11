@@ -185,6 +185,7 @@ public class EnrollmentController implements Initializable {
                 
             }else{
             try {
+                System.out.println("");
                 System.out.println(Util.Utility.setListEnrollment(newEnroll));
                 String course = "Period:" + cmbPeriod.getValue() + " / Course:" + this.cmbCourse.getValue() + " / Credits:" + Util.Utility.getCourseByID(courseId[0]).getCredits()
                         + " / Shedule:" + this.cmbSchedule.getValue();
