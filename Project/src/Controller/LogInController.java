@@ -86,7 +86,9 @@ public class LogInController implements Initializable {
                     for (int i = 1; i <= lStudents.size(); i++) { //Se añaden los objetos del xml a util
                         Student std = (Student) lStudents.getNode(i).data;
                         Security sec = new Security(String.valueOf(std.getId()), std.getStudentID());
+                        Util.Utility.setListStudent(std);
                         this.lStudentsPass.add(sec);
+                        System.out.println(sec.toString());
                     }
                 } catch (ListException ex) {
                     Logger.getLogger(MenuController.class.getName()).log(Level.SEVERE, null, ex);
