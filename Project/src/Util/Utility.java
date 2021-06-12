@@ -402,9 +402,8 @@ public class Utility {
 
         for (int i = 1; i <= lStudent.size(); i++) {
             Student s = (Student) lStudent.getNode(i).data;
-            if ((s.getId() + "").equals(id)) {
+            if (String.valueOf(s.getId()).equals(id)) {
                 return s;
-
             }
         }
         return null;
