@@ -181,6 +181,24 @@ public class Utility {
         return flag;
     }
 
+    public static boolean setListCareer2(Career car) throws ListException {
+        boolean flag = false;
+        if (Utility.lCareer.isEmpty()) {
+            car.setId(car.getId());
+            Utility.lCareer.add(car);
+            flag = true;
+        } else {
+            if (!lCareer.contains(car)) {
+                car.setId(car.getId());
+                lCareer.add(car);
+                flag = true;
+            } else {
+                flag = false;
+            }
+        }
+        return flag;
+    }
+
     public static boolean setListCourse(Course cou) throws ListException {
         boolean flag = false;
         if (Utility.lCourse.isEmpty()) {
@@ -252,10 +270,10 @@ public class Utility {
         return flag;
 
     }
-    
-    public static int getCareerByCourse(String courseId) throws ListException{
+
+    public static int getCareerByCourse(String courseId) throws ListException {
         Course c = Utility.getCourseByID(courseId);
-        
+
         return c.getCareerId();
     }
 
@@ -325,13 +343,13 @@ public class Utility {
                 Enrollment enr2 = (Enrollment) b;
                 return enr1.getStudentID().equalsIgnoreCase(enr2.getStudentID()) && enr1.getId() == enr2.getId();
             case "deenrollment":
-                DeEnrollment der1 = (DeEnrollment)a;
-                DeEnrollment der2 = (DeEnrollment)b;
+                DeEnrollment der1 = (DeEnrollment) a;
+                DeEnrollment der2 = (DeEnrollment) b;
                 return der1.getId() == der2.getId();
             case "timetable":
-                TimeTable t1 = (TimeTable)a;
-                TimeTable t2 = (TimeTable)b;
-                return t1.getID().equalsIgnoreCase(t2.getID());    
+                TimeTable t1 = (TimeTable) a;
+                TimeTable t2 = (TimeTable) b;
+                return t1.getID().equalsIgnoreCase(t2.getID());
         }
         return false; //En cualquier otro caso retorna un false
     }
@@ -361,10 +379,10 @@ public class Utility {
         if (a instanceof Enrollment && b instanceof Enrollment) {
             return "enrollment";
         }
-        if (a instanceof DeEnrollment && b instanceof DeEnrollment){
+        if (a instanceof DeEnrollment && b instanceof DeEnrollment) {
             return "deenrollment";
         }
-        if (a instanceof TimeTable && b instanceof TimeTable){
+        if (a instanceof TimeTable && b instanceof TimeTable) {
             return "timetable";
         }
 
@@ -413,7 +431,7 @@ public class Utility {
 
         for (int i = 1; i <= lCareer.size(); i++) {
             Career c = (Career) lCareer.getNode(i).data;
-            if ((c.getId() + "").equals(id)) {
+            if (String.valueOf(c.getId()).equals(id)) {
                 return c;
 
             }
@@ -450,7 +468,7 @@ public class Utility {
         }
         return null;
     }
-    
+
 //    public static Course getCourseByDescription(String id) throws ListException {
 //
 //        if (!lCourse.isEmpty()) {
@@ -465,7 +483,6 @@ public class Utility {
 //        }
 //        return null;
 //    }
-
     public static TimeTable getScheduleByCourseID(String id, String period) throws ListException {
 
         for (int i = 1; i <= lSchedule.size(); i++) {
@@ -484,12 +501,13 @@ public class Utility {
     }
 
     public static boolean courseHasSchedule(String id) throws ListException {
-    if(!lSchedule.isEmpty())
-        for (int i = 1; i <= lSchedule.size(); i++) {
-            TimeTable t = (TimeTable) lSchedule.getNode(i).data;
-            if (((t.getID() + "").equals(id))) {
+        if (!lSchedule.isEmpty()) {
+            for (int i = 1; i <= lSchedule.size(); i++) {
+                TimeTable t = (TimeTable) lSchedule.getNode(i).data;
+                if (((t.getID() + "").equals(id))) {
 
-                return true;
+                    return true;
+                }
             }
         }
 
@@ -521,7 +539,7 @@ public class Utility {
         for (int i = 1; i <= oldLEnrollment.size(); i++) {
             Enrollment e = (Enrollment) oldLEnrollment.getNode(i).data;
             if (e.getCourseID().equals(dE.getCourseID()) && e.getStudentID().equals(dE.getStudentID()) && e.getSchedule().equals(dE.getSchedule())) {
-               
+
                 flag = true;
             } else {
                 newLEnrollment.add(e);
@@ -532,69 +550,78 @@ public class Utility {
         return flag;
     }
 
-     public static boolean enrollmentExists(Enrollment enr) throws ListException {
+    public static boolean enrollmentExists(Enrollment enr) throws ListException {
         boolean flag = false;
         CircularDoublyLinkList list = getListEnrollment();
-          if (list.isEmpty()) {
+        if (list.isEmpty()) {
             flag = false;
         } else {
-        for (int i = 1; i <= list.size(); i++) {
-           Enrollment e = (Enrollment)list.getNode(i).data;
-            if (enr.getStudentID().equalsIgnoreCase(e.getStudentID())&&enr.getCourseID().equalsIgnoreCase(e.getCourseID())&&getPeriodOfStringDate(enr.getDate()).equalsIgnoreCase(getPeriodOfStringDate(e.getDate()))) {
-                return true; 
+            for (int i = 1; i <= list.size(); i++) {
+                Enrollment e = (Enrollment) list.getNode(i).data;
+                if (enr.getStudentID().equalsIgnoreCase(e.getStudentID()) && enr.getCourseID().equalsIgnoreCase(e.getCourseID()) && getPeriodOfStringDate(enr.getDate()).equalsIgnoreCase(getPeriodOfStringDate(e.getDate()))) {
+                    return true;
+                }
+
             }
-             
-        }
-        
+
         }
         return flag;
     }
-    public static String getPeriodOfStringDate(Date d) { 
+
+    public static String getPeriodOfStringDate(Date d) {
         String period = "";
-        switch((int)d.getMonth()){
-            case 1: case 2: case 3: case 0:
-                period+=1;
+        switch ((int) d.getMonth()) {
+            case 1:
+            case 2:
+            case 3:
+            case 0:
+                period += 1;
                 break;
-            case 4: case 5: case 6: case 7:
-                period+=2;
+            case 4:
+            case 5:
+            case 6:
+            case 7:
+                period += 2;
                 break;
-            case 8: case 9: case 10: case 11:
-                period+=3;
+            case 8:
+            case 9:
+            case 10:
+            case 11:
+                period += 3;
                 break;
         }
-        return period+="-"+(d.getYear()+1900);
-    
-    }
-    
-    public static Boolean scheuleClash(String schedule) throws ListException { 
-       SinglyLinkList list = getEnrollmentOfStudentId();
-       if(!list.isEmpty()){
-        for (int i = 1; i <= list.size(); i++){
-            Enrollment enr =(Enrollment)list.getNode(i).data;
-            String h1="";  
-            String d1=enr.getSchedule().substring(0, 3);
-            String d2=schedule.substring(0, 3);
-            int i1 = Integer.parseInt(enr.getSchedule().substring(4, 6));
-            int f1 = Integer.parseInt(enr.getSchedule().substring(7, 9));
-            int i2 = Integer.parseInt(schedule.substring(4, 6));
-            int f2 = Integer.parseInt(schedule.substring(7, 9));
-            
-            for (int j = i1; j < f1; j++) {
-                h1+=j;
-            }
+        return period += "-" + (d.getYear() + 1900);
 
-            for (int k = i2; k < f2; k++) {
-                if(h1.contains(""+k)&&d1.equalsIgnoreCase(d2)){  
-                    return true;
+    }
+
+    public static Boolean scheuleClash(String schedule) throws ListException {
+        SinglyLinkList list = getEnrollmentOfStudentId();
+        if (!list.isEmpty()) {
+            for (int i = 1; i <= list.size(); i++) {
+                Enrollment enr = (Enrollment) list.getNode(i).data;
+                String h1 = "";
+                String d1 = enr.getSchedule().substring(0, 3);
+                String d2 = schedule.substring(0, 3);
+                int i1 = Integer.parseInt(enr.getSchedule().substring(4, 6));
+                int f1 = Integer.parseInt(enr.getSchedule().substring(7, 9));
+                int i2 = Integer.parseInt(schedule.substring(4, 6));
+                int f2 = Integer.parseInt(schedule.substring(7, 9));
+
+                for (int j = i1; j < f1; j++) {
+                    h1 += j;
                 }
-            }
-            
-          }
-       }
-      
-        return false;
-        
-    }
-    
-}
 
+                for (int k = i2; k < f2; k++) {
+                    if (h1.contains("" + k) && d1.equalsIgnoreCase(d2)) {
+                        return true;
+                    }
+                }
+
+            }
+        }
+
+        return false;
+
+    }
+
+}

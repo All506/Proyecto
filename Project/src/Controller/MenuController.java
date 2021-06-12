@@ -220,7 +220,6 @@ public class MenuController implements Initializable {
                         for (int i = 1; i <= lStudents.size(); i++) {
                             Util.Utility.setListStudent((Student) lStudents.getNode(i).data);
 
-
                         }
                     } catch (ListException ex1) {
                         Logger.getLogger(MenuController.class.getName()).log(Level.SEVERE, null, ex1);
@@ -237,13 +236,14 @@ public class MenuController implements Initializable {
             if (!lCareers.isEmpty()) {
                 try {
                     for (int i = 1; i <= lCareers.size(); i++) { //Se añaden los objetos del xml a util
-                        Util.Utility.setListCareer((Career) lCareers.getNode(i).data);
+                        Util.Utility.setListCareer2((Career) lCareers.getNode(i).data);
                     }
+                    Objects.Career.setConsecuntivo(lCareers.size() + 1);
                 } catch (ListException ex) {
                     Logger.getLogger(MenuController.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
-
+            Objects.Career.setConsecuntivo(0);
         }
 
         //Carga y desencripta los cursos
@@ -346,6 +346,7 @@ public class MenuController implements Initializable {
         Util.Utility.getListSecurity().clear();
         Util.Utility.getListDeEnrollment().clear();
         Util.Utility.getListCareer().clear();
+
         //--------------------------------------------------------------------------------
         Stage stage = (Stage) this.btnIgnore.getScene().getWindow();
         mainFx m = new mainFx();

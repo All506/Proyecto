@@ -95,7 +95,7 @@ public class EnrollmentController implements Initializable {
             txfEmail.setText(s.getEmail());
             txfPhoneNumber.setText(s.getPhoneNumber());
             loadComboBoxCourses("" + s.getCareerID());
-            txfCarrer.setText(Util.Utility.getCarrerByID("" + s.getCareerID()).getDescription());
+            txfCarrer.setText(Util.Utility.getCarrerByID(String.valueOf(s.getCareerID())).getDescription());
             loadComboBoxPeriod();
 //            loadComboBoxSchedule(Util.Utility.getIDofString(cmbCourse.getValue()), cmbPeriod.getValue());
 

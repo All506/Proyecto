@@ -20,6 +20,10 @@ public class Career {
         this.description = description;
     }
     
+    public static void setConsecuntivo(int size){
+        consecutivo = size;
+    }
+    
     public void setIDConsecutivo(){
         this.id = consecutivo;
         consecutivo++;

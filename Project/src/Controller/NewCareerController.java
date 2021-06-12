@@ -48,7 +48,11 @@ public class NewCareerController implements Initializable {
         Tooltip t1 = new Tooltip("Enter the name of the new career");
         this.txtDescription.setTooltip(t1);
         txtCareerId.setEditable(false);
-        txtCareerId.setText(String.valueOf(Objects.Career.consecutivo));
+        try {
+            txtCareerId.setText(String.valueOf(Util.Utility.getListCareer().size()+1));
+        } catch (ListException ex) {
+            Logger.getLogger(NewCareerController.class.getName()).log(Level.SEVERE, null, ex);
+        }
         
         //Mask for Description
         maskText(txtDescription);
@@ -87,7 +91,11 @@ public class NewCareerController implements Initializable {
         
         //Update the txtCareerID
         txtCareerId.setEditable(false);
-        txtCareerId.setText(String.valueOf(Objects.Career.consecutivo));
+        try {
+            txtCareerId.setText(String.valueOf(Util.Utility.getListCareer().size()+1));
+        } catch (ListException ex) {
+            Logger.getLogger(NewCareerController.class.getName()).log(Level.SEVERE, null, ex);
+        }
         txtDescription.setText("");
     }
 
