@@ -121,6 +121,7 @@ public class Student {
         try {
             LocalDate date = LocalDate.parse(new SimpleDateFormat("yyyy-MM-dd").format(this.getBirthday()));
             result += "[id=" + id + ", careerID=" + Util.Utility.getCarrerByID(careerID + "").getDescription() + ", studentID=" + studentID + ", lastname=" + lastname + ", firstname=" + firstname + ", phoneNumber=" + phoneNumber + ", email=" + email + ", address=" + address + ", birthday=" + date.toString() + ']';
+            result += "id" + id;
         } catch (ListException ex) {
             Logger.getLogger(Student.class.getName()).log(Level.SEVERE, null, ex);
         }
